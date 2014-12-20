@@ -97,7 +97,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialNa
 
     }
 ```
-Do not override <code>OnCreate</code> method! Use <code>init</code> method instead, it will be called from the Framework<br>
+Do not override <code>OnCreate</code> method! Use <code>init</code> method instead, it will be called from the library.<br>
 
 Your styles.xml
 ```xml
