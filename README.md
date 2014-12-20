@@ -97,7 +97,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialNa
 
     }
 ```
-Do not override <code>OnCreate</code> method! Use <code>init</code> method instead, it will be called from the library.<br>
+Do not override the <code>onCreate</code> method in the activity! Use <code>init</code> method instead, it will be called from the library.<br>
 
 Your styles.xml
 ```xml
@@ -114,8 +114,8 @@ Your styles.xml
 ```
 
 ### Import to your Project
-For now you musst Download the Library and add it as a module. But Maven Repo will come.
-See the gradle files in the Example for the settings.
+For now you musst download the library source code and add it as a module. But Maven Repo will come.
+See the gradle files in the example for the settings.
 
 
 ### Screenshots
