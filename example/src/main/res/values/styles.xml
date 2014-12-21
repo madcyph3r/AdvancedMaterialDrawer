@@ -1,0 +1,10 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="MyTheme" parent="MaterialNavigationDrawerTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@android:color/holo_blue_light</item>
+        <item name="colorAccent">#FFFFFF</item>
+    </style>
+
+</resources>
