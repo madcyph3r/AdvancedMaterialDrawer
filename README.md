@@ -16,7 +16,7 @@ It requires 11+ API and android support v7 (Toolbar)<br>
 - and some other options (max drawer width, closeOnHeadItemChange etc.)
 
 ### Example APK
-https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/example-release.apk
+https://github.com/madcyph3r/AdvancedMaterialDrawer/raw/master/example-release.apk
 
 ### Usage
 - For all options see the example (MainActivity)
