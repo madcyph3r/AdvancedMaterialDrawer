@@ -9,13 +9,14 @@ It requires 11+ API and android support v7 (Toolbar)<br>
 
 ### New Features
 - HeadItem change animation
-- Every headitem can has a own menu
-- Implement your own on click listener for every section
-- replace bitmap with drawable, so you can use other libs like textDrawable (reduce memory useage)
-- and other options
+- Every HeadTtem can has a own menu
+- Menu change animation
+- Implement your own on click listener for every section or use the given
+- replace bitmap with drawable, so you can use other libs like textDrawable nad memory reduce
+- and some other options (max drawer width, closeOnHeadItemChange etc.)
 
 ### Example APK
-- Download
+https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/example-release.apk
 
 ### Usage
 - For all options see the example (MainActivity)
