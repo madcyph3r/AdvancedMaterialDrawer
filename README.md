@@ -115,9 +115,59 @@ Your styles.xml
 ```
 
 ### Import to your Project
-For now you musst download the library source code and add it as a module. But Maven Repo will come.
-See the gradle files in the example for the settings.
+For now, you must download the library "materialDrawer.aar" from the directory example/libs and place it in your libs folder.
+Change your build.gradle file for your app. 
 
+Add this:
+```java
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.0'
+    //compile project(':materialDrawer')
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.easing:library:1.0.0@aar'
+    compile 'com.daimajia.androidanimations:library:1.1.3@aar'
+    compile(name:'materialDrawer', ext:'aar')
+}
+```
+
+And some changes in your AndroidManifest.xml file are necessary (see comments below)
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="de.madcyph3r.example" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/app_drawer_icon"
+        android:label="@string/app_name"
+        tools:replace="android:icon,android:theme" <!-- add this, is needed -->
+        android:theme="@style/MyTheme" >  <!-- change this to the style.xml name (see before) -->
+        <activity
+            android:name="de.madcyph3r.example.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="de.madcyph3r.example.Settings" >
+
+        </activity>
+    </application>
+
+</manifest>
+```
 
 ### Screenshots
 <img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_1.png" alt="screenshot" width="300px" height="auto" />
