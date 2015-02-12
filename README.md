@@ -138,7 +138,7 @@ dependencies {
 }
 ```
 
-And some changes in your AndroidManifest.xml file are necessary (see comments below)
+And some changes in your AndroidManifest.xml file are necessary (see comments below. If you copy the manifest file, please remove the comments.) For more information see the example.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
