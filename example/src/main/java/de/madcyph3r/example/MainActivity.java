@@ -70,6 +70,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialNa
 
         // add sections to the menu
         menu1.getSections().add(section1);
+        menu1.getSections().add(new MaterialDevisor());
         menu1.getSections().add(section2);
         menu1.getSections().add(section3);
         menu1.getSections().add(new MaterialDevisor());

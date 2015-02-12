@@ -19,9 +19,20 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.0'
-    compile project(':materialDrawer')
+    //compile project(':materialDrawer')
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.easing:library:1.0.0@aar'
+    compile 'com.daimajia.androidanimations:library:1.1.3@aar'
+    compile(name:'materialDrawer', ext:'aar')
 }
