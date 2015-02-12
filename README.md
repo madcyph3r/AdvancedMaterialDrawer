@@ -12,7 +12,7 @@ It requires 11+ API and android support v7 (Toolbar)<br>
 - Every HeadTtem can has a own menu
 - Menu change animation
 - Implement your own on click listener for every section or use the given
-- replace bitmap with drawable, so you can use other libs like textDrawable nad memory reduce
+- replace bitmap with drawable, so you can use other libs like textDrawable and memory reduce
 - and some other options (max drawer width, closeOnHeadItemChange etc.)
 
 ### Example APK
