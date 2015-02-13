@@ -574,18 +574,21 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     public void unSelectOldSection(MaterialSection section) {
-        currentSection.unSelect();
-        currentSection = section;
+        if(section != currentSection) {
+            currentSection.unSelect();
+            currentSection = section;
+        }
     }
 
     @Override
     public void onClick(MaterialSection section) {
-        unSelectOldSection(section);
+        if(section != currentSection) {
+            unSelectOldSection(section);
 
-        if (section.getTarget() == MaterialSection.TARGET_FRAGMENT) {
-            setFragment((Fragment) section.getTargetFragment(), section.getTitle(), false);
+            if (section.getTarget() == MaterialSection.TARGET_FRAGMENT) {
+                setFragment((Fragment) section.getTargetFragment(), section.getTitle(), false);
 
-            setStatusBarColor();
+                setStatusBarColor();
 //            if (section.hasSectionColor()) {
 //                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT)
 //                    this.statusBar.setImageDrawable(new ColorDrawable(darkenColor(section.getSectionColor())));
@@ -599,10 +602,10 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 //                    this.statusBar.setImageDrawable(new ColorDrawable(primaryColor));
 //                this.getToolbar().setBackgroundColor(primaryColor);
 //            }
-        } else {
-            this.startActivity(section.getTargetIntent());
+            } else {
+                this.startActivity(section.getTargetIntent());
+            }
         }
-
 //        for(int i = 0; i < currentMenu.getSections().size(); i++) {
 //            if(currentMenu.getSections().get(i) instanceof MaterialSection && currentSection != currentMenu.getSections().get(i)) {
 //                ((MaterialSection)currentMenu.getSections().get(i)).unSelect();

@@ -95,7 +95,6 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
             return true;
         }
 
-
         if( event.getAction() == MotionEvent.ACTION_UP) {
             isSelected = true;
             view.setBackgroundColor(colorSelected);
