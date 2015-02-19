@@ -7,15 +7,25 @@ android {
         minSdkVersion 11
         targetSdkVersion 21
         versionCode 1
-        versionName 'dev'
+        //versionName 'dev'
     }
     buildTypes {
+        debug {
+        }
+        release {
+        }
+    }
+    signingConfigs {
+        debug {
+        }
+    }
+    /*buildTypes {
         release {
             //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     productFlavors {
-    }
+    }*/
 }
 
 dependencies {

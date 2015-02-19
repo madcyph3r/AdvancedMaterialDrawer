@@ -685,6 +685,10 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         layout.closeDrawer(drawer);
     }
 
+    public void openDrawer() {
+        layout.openDrawer(drawer);
+    }
+
     // create sections
     public MaterialSection newSection(String title, Drawable icon, boolean bottom) {
         MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_FRAGMENT, bottom);
