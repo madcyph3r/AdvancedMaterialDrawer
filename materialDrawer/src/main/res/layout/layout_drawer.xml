@@ -23,6 +23,17 @@
             android:orientation="vertical" >
 
             <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/userSpace"
+                android:id="@+id/user_cover_switcher"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="false"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:scaleType="fitXY"/>
+      <!--      <ImageView
                 android:id="@+id/current_back_item_background_tmp"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/userSpace"
@@ -30,7 +41,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:src="#c6c6c6"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY" />-->
 
             <ImageView
                 android:id="@+id/current_back_item_background"
@@ -46,6 +57,7 @@
                 android:id="@+id/current_head_item_photo"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
+                android:scaleType="fitCenter"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="16dp"
@@ -55,6 +67,7 @@
                 android:id="@+id/second_head_item_photo"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:scaleType="fitCenter"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/photoMarginTop"
@@ -62,8 +75,9 @@
 
             <ImageView
                 android:id="@+id/third_head_item_photo"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:scaleType="fitCenter"
                 android:layout_alignTop="@+id/second_head_item_photo"
                 android:layout_toLeftOf="@+id/second_head_item_photo"
                 android:layout_toStartOf="@+id/second_head_item_photo"
@@ -120,6 +134,16 @@
                 android:layout_marginTop="@dimen/photoMarginTop"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp" />
+
+            <ImageButton
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:id="@+id/user_switcher"
+                android:background="@null"
+                android:layout_alignBottom="@+id/current_back_item_background"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="8dp" />
 
         </RelativeLayout>
     </ScrollView>

@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base application theme. -->
-    <style name="MaterialNavigationDrawerTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-    </style>
+    
+    <declare-styleable name="MaterialSection">
+        <attr name="sectionColorIcon" format="color" />
+        <attr name="sectionColorText" format="color" />
+        <attr name="sectionColorNotification" format="color" />
+        <attr name="sectionBackgroundColorPressed" format="color" />
+        <attr name="sectionBackgroundColorSelected" format="color" />
+        <attr name="sectionBackgroundColor" format="color" />
+    </declare-styleable>
 
-    <style name="MaterialNavigationDrawerTheme" parent="Theme.AppCompat.NoActionBar">
-        <!-- Customize your theme here. -->
-    </style>
+    <declare-styleable name="MaterialNavigationDrawer">
+        <attr name="rippleBackport" format="boolean" /><!-- supporto del ripple nelle versioni precedenti di android -->
+        <attr name="drawerType" format="integer" /><!-- Tipologia del drawer -->
+        <attr name="uniqueToolbarColor" format="boolean" /><!-- La toolbar non cambia mai di colore -->
+        <attr name="singleAccount" format="boolean" /><!-- utente singolo (senza pulsante di cambio) -->
+        <attr name="multipaneSupport" format="boolean" />
+        <attr name="drawerColor" format="color" /><!-- Colore del drawer -->
+        <attr name="sectionStyle" format="reference" />
+        <attr name="subheaderStyle" format="reference"/>
+        <attr name="accountStyle" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="MaterialSubheader">
+        <attr name="subheaderTitleColor" format="color"/>
+    </declare-styleable>
+    
+    <declare-styleable name="MaterialAccount">
+        <attr name="titleColor" format="color" />
+        <attr name="subtitleColor" format="color" />
+    </declare-styleable>
 
 </resources>

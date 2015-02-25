@@ -2,9 +2,12 @@ package de.madcyph3r.materialnavigationdrawer.menu;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,15 +16,11 @@ import android.widget.TextView;
 
 import de.madcyph3r.materialnavigationdrawer.R;
 
-/**
- * Navigation Drawer section with Material Design style
- *
- * Created by neokree on 08/11/14.
- */
 public class MaterialSection<Fragment> implements View.OnTouchListener {
 
-    public static final boolean TARGET_FRAGMENT = true;
-    public static final boolean TARGET_ACTIVITY = false;
+    public static final int TARGET_FRAGMENT = 0;
+    public static final int TARGET_ACTIVITY = 1;
+    public static final int TARGET_CLICK = 2;
 
     private int position;
     private View view;
@@ -30,15 +29,21 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
     private ImageView icon;
     private MaterialSectionListener listener;
     private boolean isSelected;
-    private boolean targetType;
-    private boolean sectionColor;
+    private int targetType;
+    private int sectionColor;
+    private boolean fillIconColor;
 
     private boolean bottom;
 
+    private boolean hasSectionColor;
+    private boolean hasColorDark;
     private int colorPressed;
     private int colorUnpressed;
     private int colorSelected;
     private int iconColor;
+    private int colorDark;
+    private int textColor;
+    private int notificationColor;
 
     private int numberNotifications;
 
@@ -47,18 +52,17 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
     private Fragment targetFragment;
     private Intent targetIntent;
 
-    public MaterialSection(Context ctx, boolean hasIcon, boolean target, boolean bottom ) {
+    public MaterialSection(Context ctx, boolean hasIcon, int target, boolean bottom) {
 
         this.bottom = bottom;
 
-        if(!hasIcon) {
-            view = LayoutInflater.from(ctx).inflate(R.layout.layout_material_section,null);
+        if (!hasIcon) {
+            view = LayoutInflater.from(ctx).inflate(R.layout.layout_material_section, null);
 
             text = (TextView) view.findViewById(R.id.section_text);
             notifications = (TextView) view.findViewById(R.id.section_notification);
-        }
-        else {
-            view = LayoutInflater.from(ctx).inflate(R.layout.layout_material_section_icon,null);
+        } else {
+            view = LayoutInflater.from(ctx).inflate(R.layout.layout_material_section_icon, null);
 
             text = (TextView) view.findViewById(R.id.section_text);
             icon = (ImageView) view.findViewById(R.id.section_icon);
@@ -68,26 +72,49 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
         view.setOnTouchListener(this);
 
 
-        colorPressed = Color.parseColor("#16000000");
+        Resources.Theme theme = ctx.getTheme();
+        TypedValue typedValue = new TypedValue();
+        theme.resolveAttribute(R.attr.sectionStyle, typedValue, true);
+        TypedArray values = theme.obtainStyledAttributes(typedValue.resourceId, R.styleable.MaterialSection);
+
+        colorPressed = values.getColor(R.styleable.MaterialSection_sectionBackgroundColorPressed, 0x16000000);
+        colorUnpressed = values.getColor(R.styleable.MaterialSection_sectionBackgroundColor, 0x00FFFFFF);
+        colorSelected = values.getColor(R.styleable.MaterialSection_sectionBackgroundColorSelected, 0x0A000000);
+
+        iconColor = values.getColor(R.styleable.MaterialSection_sectionColorIcon, 0x000);
+        textColor = values.getColor(R.styleable.MaterialSection_sectionColorText, 0x000);
+        notificationColor = values.getColor(R.styleable.MaterialSection_sectionColorNotification, 0x000);
+
+        // set text color into the view
+        if (textColor != 0x000) {
+            text.setTextColor(textColor);
+        }
+        if (notificationColor != 0x000) {
+            notifications.setTextColor(notificationColor);
+        }
+
+/*
+            colorPressed = Color.parseColor("#16000000");
         colorUnpressed = Color.parseColor("#00FFFFFF");
-        colorSelected = Color.parseColor("#0A000000");
-        iconColor = Color.rgb(98,98,98);
+        colorSelected = Color.parseColor("#0A000000");*/
+        //iconColor = Color.rgb(98, 98, 98);
         isSelected = false;
-        sectionColor = false;
+        hasSectionColor = false;
         targetType = target;
         numberNotifications = 0;
+        fillIconColor = true;
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
 
-        if(event.getAction() == MotionEvent.ACTION_DOWN) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
             view.setBackgroundColor(colorPressed);
             return true;
         }
 
-        if( event.getAction() == MotionEvent.ACTION_CANCEL) {
-            if(isSelected)
+        if (event.getAction() == MotionEvent.ACTION_CANCEL) {
+            if (isSelected)
                 view.setBackgroundColor(colorSelected);
             else
                 view.setBackgroundColor(colorUnpressed);
@@ -95,15 +122,15 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
             return true;
         }
 
-        if( event.getAction() == MotionEvent.ACTION_UP) {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
             isSelected = true;
             view.setBackgroundColor(colorSelected);
 
-            if (sectionColor) {
+            if (hasSectionColor) {
                 text.setTextColor(iconColor);
             }
 
-            if(listener != null)
+            if (listener != null)
                 listener.onClick(this);
 
             return true;
@@ -116,7 +143,7 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
         isSelected = true;
         view.setBackgroundColor(colorSelected);
 
-        if(sectionColor) {
+        if (hasSectionColor) {
             text.setTextColor(iconColor);
         }
     }
@@ -125,8 +152,8 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
         isSelected = false;
         view.setBackgroundColor(colorUnpressed);
 
-        if (sectionColor) {
-            text.setTextColor(Color.BLACK);
+        if (hasSectionColor) {
+            text.setTextColor(textColor);
         }
     }
 
@@ -157,14 +184,16 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
 
     public void setIcon(Drawable icon) {
         this.icon.setImageDrawable(icon);
-        this.icon.setColorFilter(iconColor);
+        if (fillIconColor)
+            this.icon.setColorFilter(iconColor);
     }
 
     public void setIcon(Bitmap icon) {
         this.icon.setImageBitmap(icon);
-        this.icon.setColorFilter(iconColor);
+        if (fillIconColor)
+            this.icon.setColorFilter(iconColor);
     }
-    
+
     public void setTarget(Fragment target) {
         this.targetFragment = target;
     }
@@ -173,7 +202,7 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
         this.targetIntent = intent;
     }
 
-    public boolean getTarget() {
+    public int getTarget() {
         return targetType;
     }
 
@@ -184,18 +213,38 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
     public Intent getTargetIntent() {
         return targetIntent;
     }
-    
+
+    public boolean hasSectionColorDark() {
+        return hasColorDark;
+    }
+
     public MaterialSection setSectionColor(int color) {
-        sectionColor = true;
+
+        sectionColor = color;
         iconColor = color;
-        if(icon != null)
-            this.icon.setColorFilter(color);
-        
+        if (icon != null)
+            icon.setColorFilter(sectionColor);
+
+        hasSectionColor = true;
+
+
         return this;
-}
+    }
+
+    public int getSectionColorDark() {
+        return colorDark;
+    }
+
+    public MaterialSection setSectionColor(int color, int colorDark) {
+        setSectionColor(color);
+        hasColorDark = true;
+        this.colorDark = colorDark;
+
+        return this;
+    }
 
     public boolean hasSectionColor() {
-        return sectionColor;
+        return hasSectionColor;
     }
 
     public int getSectionColor() {
@@ -204,6 +253,7 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
 
     /**
      * Set the number of notification for this section
+     *
      * @param notifications the number of notification active for this section
      * @return this section
      */
@@ -212,10 +262,10 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
 
         textNotification = String.valueOf(notifications);
 
-        if(notifications < 1) {
+        if (notifications < 1) {
             textNotification = "";
         }
-        if(notifications > 99) {
+        if (notifications > 99) {
             textNotification = "99+";
         }
 
@@ -235,5 +285,13 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
 
     public void setBottom(boolean bottom) {
         this.bottom = bottom;
+    }
+
+    public boolean isFillIconColor() {
+        return fillIconColor;
+    }
+
+    public void setFillIconColor(boolean fillIconColor) {
+        this.fillIconColor = fillIconColor;
     }
 }

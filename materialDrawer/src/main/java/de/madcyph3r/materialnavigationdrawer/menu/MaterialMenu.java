@@ -3,9 +3,6 @@ package de.madcyph3r.materialnavigationdrawer.menu;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by marc on 19.12.2014.
- */
 public class MaterialMenu {
 
     public static int SECTION = 0;
@@ -21,5 +18,9 @@ public class MaterialMenu {
 
     public void setSections(List<Object> sections) {
         this.sections = sections;
+    }
+
+    public void addSection(Object section) {
+        getSections().add(section);
     }
 }
