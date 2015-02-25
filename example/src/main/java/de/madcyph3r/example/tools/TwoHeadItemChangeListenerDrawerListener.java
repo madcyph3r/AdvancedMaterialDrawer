@@ -56,12 +56,14 @@ public class TwoHeadItemChangeListenerDrawerListener extends MaterialNavigationD
 
             @Override
             public void onDrawerStateChanged(int newState) {
-                Toast.makeText(drawer, "onStateChanged ("+newState+")", Toast.LENGTH_LONG).show();
+                //Toast.makeText(drawer, "onStateChanged ("+newState+")", Toast.LENGTH_LONG).show();
             }
         });
         // add head Item (menu will be loaded automatically)
         this.addHeadItem(getHeadItem1());
         this.addHeadItem(getHeadItem2());
+
+        this.setOnChangedListener(this);
     }
 
     private MaterialHeadItem getHeadItem1() {
