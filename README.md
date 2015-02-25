@@ -7,7 +7,7 @@ Based on neokree MaterialDrawer (https://github.com/neokree/MaterialNavigationDr
 Big thanks to neokree, without him this library would not be possible.
 
 It requires 10+ API and android support v7 (Toolbar)<br>
-[API](https://img.shields.io/badge/API-10%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=10)
+[![API](https://img.shields.io/badge/API-10%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=10)
 
 ### Different from neokree MaterialDrawer
 - Unlimit Head-Items (Accounts), (see first screenshot, it has 5 Head-Items)
