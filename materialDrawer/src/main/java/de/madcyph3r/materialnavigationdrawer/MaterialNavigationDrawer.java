@@ -619,7 +619,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         changeHeadItems(oldHeaditem, newFirstHeadItem);
 
         // load new first head item information
-        notifyAccountDataChangedSwitch();
+        notifyHeadItemDataChangedSwitch();
         loadMenu(true);
 
         if (headItemManager.get(0).isCloseDrawerOnChanged() && !deviceSupportMultiPane()) {
@@ -760,9 +760,9 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
             return false;
     }
 
-    private void recycleAccounts() {
-        for (MaterialHeadItem account : headItemManager) {
-            account.recycleDrawable();
+    private void recycleHeadItem() {
+        for (MaterialHeadItem headItem : headItemManager) {
+            headItem.recycleDrawable();
         }
     }
 
@@ -890,7 +890,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
             notifyHeadItemsDataChanged();
     }
 
-    private void notifyAccountDataChangedSwitch() {
+    private void notifyHeadItemDataChangedSwitch() {
         this.setFirstHeadItemPhoto(headItemManager.get(0).getPhoto());
         this.setDrawerBackground(headItemManager.get(0).getBackground());
         this.setHeadItemTitle(headItemManager.get(0).getTitle());
@@ -1256,12 +1256,16 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     @Override
+    public void onStart() {
+        super.onStart();  // Always call the superclass method first
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
-
         // recycle bitmaps
-        recycleAccounts();
-    }
+        recycleHeadItem();
+     }
 
     @Override
     public void onClick(MaterialSection section) {

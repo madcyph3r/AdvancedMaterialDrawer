@@ -125,6 +125,7 @@ public class MaterialHeadItem {
         this.resources = drawer.getResources();
 
         resizeBackground.execute(backgroundRessourceID);
+        //resizePhoto.execute(photo.getRes);
     }
 
     public MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, Drawable photo, int backgroundRessourceID, MaterialMenu menu) {
@@ -263,7 +264,7 @@ public class MaterialHeadItem {
 
     // own method
     public void recycleDrawable() {
-        Utils.recycleDrawable(photo);
+        //Utils.recycleDrawable(photo);
         Utils.recycleDrawable(background);
     }
 

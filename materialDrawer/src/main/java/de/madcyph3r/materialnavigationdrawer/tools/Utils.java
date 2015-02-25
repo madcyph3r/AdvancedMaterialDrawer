@@ -93,6 +93,7 @@ public class Utils {
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeResource(res, resId, options);
 
+
         // Calculate inSampleSize
         options.inSampleSize = calculateSize(options, reqWidth, reqHeight);
 
@@ -104,7 +105,11 @@ public class Utils {
     public static void recycleDrawable(Drawable drawable) {
         if (drawable instanceof BitmapDrawable) {
             BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-            bitmapDrawable.getBitmap().recycle();
+            if (bitmapDrawable.getBitmap() != null && !bitmapDrawable.getBitmap().isRecycled())
+            {
+                bitmapDrawable.getBitmap().recycle();
+                System.gc();
+            }
         }
     }
 
