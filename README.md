@@ -9,7 +9,7 @@ Big thanks to neokree, without him this library would not be possible.
 It requires 10+ API and android support v7 (Toolbar)<br>
 
 ### Different from neokree MaterialDrawer
-- Unlimit Head-Items (Accounts, see screenshot)
+- Unlimit Head-Items (Accounts), (see first screenshot, it has 5 Head-Items)
 - Every Head-Item can has his own menu
 - and many other things, like set yout own start fragment and so on
 
