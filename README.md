@@ -36,7 +36,7 @@ repositories {
 }
 
 dependencies {
-    compile(group: 'de.madcyph3r', name: 'materialDrawer', version: '1.0.2', ext: 'aar')
+    compile(group: 'de.madcyph3r', name: 'materialDrawer', version: '1.0.3', ext: 'aar')
 }
 ```
 
