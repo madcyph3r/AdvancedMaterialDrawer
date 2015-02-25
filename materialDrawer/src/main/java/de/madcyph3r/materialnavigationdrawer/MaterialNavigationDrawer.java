@@ -481,18 +481,18 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                             sectionList.get(headItemManager.get(0).getStartIndex()) instanceof MaterialSection) {
 
                         currentSection = (MaterialSection) sectionList.get(headItemManager.get(0).getStartIndex());
-                        if ((currentSection.getTarget() == MaterialSection.TARGET_ACTIVITY || currentSection.getTarget() == MaterialSection.TARGET_FRAGMENT)) {
+                        if ((/*currentSection.getTarget() == MaterialSection.TARGET_ACTIVITY || */currentSection.getTarget() == MaterialSection.TARGET_FRAGMENT)) {
                             currentSection.select();
                             setFragment((Fragment) currentSection.getTargetFragment(), currentSection.getTitle(), null, false);
                             changeToolbarColor(currentSection);
                         }
 
-                    } else if (headItemManager.get(0) == null || (headItemManager.get(0) != null && headItemManager.get(0).isLoadFragmentOnChanged() || fromStart)) {
+                    } else if (fromStart || headItemManager == null || headItemManager.get(0) == null || (headItemManager.get(0) != null && headItemManager.get(0).isLoadFragmentOnChanged())) {
                         // load first found fragment
                         for (int i = 0; i < sectionList.size(); i++) {
                             if (sectionList.get(i) instanceof MaterialSection) {
                                 currentSection = (MaterialSection) sectionList.get(i);
-                                if ((currentSection.getTarget() == MaterialSection.TARGET_ACTIVITY || currentSection.getTarget() == MaterialSection.TARGET_FRAGMENT)) {
+                                if ((/*currentSection.getTarget() == MaterialSection.TARGET_ACTIVITY ||*/ currentSection.getTarget() == MaterialSection.TARGET_FRAGMENT)) {
                                     //fragmentFound = true;
                                     currentSection.select();
                                     setFragment((Fragment) currentSection.getTargetFragment(), currentSection.getTitle(), null, false);
