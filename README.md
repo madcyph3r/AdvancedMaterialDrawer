@@ -17,7 +17,7 @@ Big thanks to neokree, without him this library would not be possible.
 ### Example APK (Version 1.0) 
 https://github.com/madcyph3r/AdvancedMaterialDrawer/raw/master/example-release.apk
 
-###  How to import (jCenter, comming soon)
+###  How to import (jCenter, coming soon)
 ```java
 repositories {
     jcenter()
@@ -27,7 +27,7 @@ dependencies {
     coming soon, is in upload ;)
 }
 ```
-###  How to import (own repo)
+###  How to import (my own repo)
 ```java
 repositories {
     maven {
