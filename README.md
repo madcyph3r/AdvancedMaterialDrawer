@@ -13,7 +13,7 @@ It requires 10+ API and android support v7 (Toolbar)<br>
 - Every Head-Item can has his own menu
 - and many other things, like set yout own start fragment and so on
 
-### Example APK (Veersion 1.0) 
+### Example APK (Version 1.0) 
 https://github.com/madcyph3r/AdvancedMaterialDrawer/raw/master/example-release.apk
 
 ###  How to import
