@@ -6,7 +6,7 @@ A Material Drawer implementation (Like gMail App)
 Based on neokree MaterialDrawer (https://github.com/neokree/MaterialNavigationDrawer).
 Big thanks to neokree, without him this library would not be possible.
 
-API:
+### API
 [![API](https://img.shields.io/badge/API-10%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=10)
 
 ### Different from neokree MaterialDrawer
