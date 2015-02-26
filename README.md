@@ -42,7 +42,7 @@ dependencies {
 
 ### Usage
 See the example apk and the example code. It has 24 examples with explanations, how to use the library. It's really not difficult.
-But here is a small example, with one headItem
+But here is a small example, with one Head-Item. It looks like screenshot three, only in black color.
 
 ```java
 public class OneHeadItem extends MaterialNavigationDrawer {
