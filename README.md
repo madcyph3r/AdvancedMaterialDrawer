@@ -12,6 +12,7 @@ Big thanks to neokree, without him this library would not be possible.
 ### Different from neokree MaterialDrawer
 - Unlimit Head-Items (Accounts), (see first screenshot, it has 5 Head-Items)
 - Every Head-Item can has his own menu
+- Add and remove Head-Items at runtime.
 - and many other things, like set yout own start fragment and so on
 
 ### Example APK (Version 1.0) 
