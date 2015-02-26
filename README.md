@@ -84,7 +84,7 @@ public class OneHeadItem extends MaterialNavigationDrawer {
 ### Others
 - If you found an issues, then open a ticket.
 - If you like the library, press the star ;)
-- A Wiki with smail intruductions will come
+- A Wiki with small intruductions will come
 
 ### Screenshots
 <img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_1.png" alt="screenshot" width="300px" height="auto" />
