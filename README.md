@@ -55,6 +55,7 @@ public class OneHeadItem extends MaterialNavigationDrawer {
         return MaterialNavigationDrawer.DRAWERHEADER_HEADITEMS;
     }
 
+    // called from onCreate(), make your view init here or in your fragment.
     @Override
     public void init(Bundle savedInstanceState) {
 
