@@ -300,7 +300,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
             content.setLayoutParams(params);
             layout.setScrimColor(Color.TRANSPARENT);
             layout.openDrawer(drawer);
-            layout.requestDisallowInterceptTouchEvent(true);
+            layout.setMultipaneSupport(true);
+            //layout.requestDisallowInterceptTouchEvent(true);
         } else {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
@@ -344,6 +345,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                 }
             };
             layout.setDrawerListener(actionBarToggle);
+            layout.setMultipaneSupport(false);
         }
 
         ViewTreeObserver vto = drawer.getViewTreeObserver();
