@@ -116,6 +116,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     private float displayDensity;
     private int primaryColor;
     private int primaryDarkColor;
+    private boolean autoDarkStatusbar;
     private boolean multiPaneSupport;
     private boolean drawerTouchLocked;
     private boolean slidingDrawerEffect;
@@ -197,6 +198,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         primaryColor = typedValue.data;
         theme.resolveAttribute(R.attr.colorPrimaryDark, typedValue, true);
         primaryDarkColor = typedValue.data;
+        theme.resolveAttribute(R.attr.autoDarkStatusBar, typedValue, true);
+        autoDarkStatusbar = typedValue.data != 0;
         theme.resolveAttribute(R.attr.uniqueToolbarColor, typedValue, false);
         uniqueToolbarColor = typedValue.data != 0;
         theme.resolveAttribute(R.attr.drawerColor, typedValue, true);
@@ -417,6 +420,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
         // loadMenu
         loadMenu(loadFragmentOnStart, true);
+
+//        changeToolbarColor(currentSection);
 
         /*} else {
 
@@ -769,8 +774,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     protected int darkenColor(int color) {
-        if (color == primaryColor)
-            return primaryDarkColor;
+        /*if (color == primaryColor)
+            return primaryDarkColor;*/
 
         float[] hsv = new float[3];
         Color.colorToHSV(color, hsv);
@@ -805,17 +810,23 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
             sectionPrimaryColor = section.getSectionColor();
         } else {
-            sectionPrimaryColorDark = primaryDarkColor;
+            if(autoDarkStatusbar)
+                sectionPrimaryColorDark = darkenColor(primaryColor);
+            else
+                sectionPrimaryColorDark = primaryDarkColor;
+
             sectionPrimaryColor = primaryColor;
         }
 
-        this.getToolbar().setBackgroundColor(sectionPrimaryColor);
+        /*this.getToolbar().setBackgroundColor(sectionPrimaryColor);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            this.statusBar.setImageDrawable(new ColorDrawable(sectionPrimaryColorDark));
+            this.statusBar.setImageDrawable(new ColorDrawable(sectionPrimaryColorDark));*/
+
+        changeToolbarColor(sectionPrimaryColor, sectionPrimaryColorDark);
     }
 
     public void changeToolbarColor(int primaryColor, int primaryDarkColor) {
-        if (statusBar != null)
+        if (statusBar != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
             this.statusBar.setImageDrawable(new ColorDrawable(primaryDarkColor));
         if (getToolbar() != null)
             this.getToolbar().setBackgroundColor(primaryColor);

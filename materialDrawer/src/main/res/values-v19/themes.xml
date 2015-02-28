@@ -33,41 +33,17 @@
         <item name="autoDarkStatusBar">true</item>
     </style>
 
-    <style name="MaterialNavigationDrawerTheme.Light.TranslucentKitKatStatusBar" parent="MaterialNavigationDrawerTheme.Light" />
-
-    <style name="MaterialNavigationDrawerTheme.TranslucentKitKatStatusBar" parent="MaterialNavigationDrawerTheme" />
-
-    <style name="MaterialNavigationDrawerTheme.Light.DarkActionBar.TranslucentKitKatStatusBar" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar" />
-
-    <style name="MaterialSectionTheme" >
-        <item name="sectionColorIcon">#FFF</item>
-        <item name="sectionColorText">#FFF</item>
-        <item name="sectionColorNotification">#FFF</item>
-        <item name="sectionBackgroundColorPressed">#16FFFFFF</item>
-        <item name="sectionBackgroundColorSelected">#0AFFFFFF</item>
-        <item name="sectionBackgroundColor">#00FFFFFF</item>
+    <style name="MaterialNavigationDrawerTheme.Light.TranslucentKitKatStatusBar" parent="MaterialNavigationDrawerTheme.Light" >
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
-    <style name="MaterialSectionTheme.Light" >
-        <item name="sectionColorIcon">#000000</item>
-        <item name="sectionColorText">#000000</item>
-        <item name="sectionColorNotification">#000000</item>
-        <item name="sectionBackgroundColorPressed">#16000000</item>
-        <item name="sectionBackgroundColorSelected">#0A000000</item>
-        <item name="sectionBackgroundColor">#00FFFFFF</item>
+    <style name="MaterialNavigationDrawerTheme.TranslucentKitKatStatusBar" parent="MaterialNavigationDrawerTheme" >
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
-    <style name="MaterialSubheaderTheme">
-        <item name="subheaderTitleColor">#FFF</item>
+    <style name="MaterialNavigationDrawerTheme.Light.DarkActionBar.TranslucentKitKatStatusBar" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar" >
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
-    <style name="MaterialSubheaderTheme.Light">
-        <item name="subheaderTitleColor">#000</item>
-    </style>
-
-    <style name="MaterialAccountTheme">
-        <item name="titleColor">#FFF</item>
-        <item name="subtitleColor">#FFF</item>
-    </style>
 
 </resources>

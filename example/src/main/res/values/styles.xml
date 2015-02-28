@@ -1,17 +1,20 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="MyTheme" parent="MaterialNavigationDrawerTheme">
+    <!--<style name="MyTheme" parent="MaterialNavigationDrawerTheme">-->
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@android:color/holo_blue_light</item>
+        <!--<item name="colorPrimary">@android:color/holo_blue_light</item>
         <item name="colorAccent">#FFFFFF</item>
-    </style>
+        <item name="colorPrimaryDark">@android:color/holo_blue_light</item>
+    </style>-->
 
     <style name="MyOwnTheme" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar">
         <item name="colorPrimary">#8bc34a</item>
-        <item name="colorPrimaryDark">#558b2f</item>
+        <item name="colorPrimaryDark">#1C375B</item>
         <item name="colorAccent">#FFFFFF</item>
         <item name="drawerColor">#558b2f</item>
+        <!-- use colorPrimaryDark color for the status bar (here dark blue), otherwiese it creates his own dark color -->
+        <item name="autoDarkStatusBar">false</item>
         <!-- doesn't change the toolbar color on fragment change-->
         <item name="uniqueToolbarColor">true</item>
         <item name="sectionStyle">@style/MySection</item>

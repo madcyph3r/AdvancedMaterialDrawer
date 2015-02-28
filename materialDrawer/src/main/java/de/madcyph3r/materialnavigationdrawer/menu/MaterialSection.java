@@ -100,6 +100,7 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
         //iconColor = Color.rgb(98, 98, 98);
         isSelected = false;
         hasSectionColor = false;
+        hasColorDark = false;
         targetType = target;
         numberNotifications = 0;
         fillIconColor = true;
