@@ -15,19 +15,9 @@ Big thanks to neokree, without him this library would not be possible.
 - Add and remove Head-Items at runtime.
 - and many other things, like set yout own start fragment and so on
 
-### Example APK (Lib-Version 1.0.3) 
+### Example APK (Lib-Version 1.0.4) 
 https://github.com/madcyph3r/AdvancedMaterialDrawer/raw/master/example-release.apk
 
-###  How to import (jCenter, coming soon)
-```java
-repositories {
-    jcenter()
-}
-
-dependencies {
-    coming soon, is in upload ;)
-}
-```
 ###  How to import (my own repo)
 ```java
 repositories {
@@ -37,7 +27,7 @@ repositories {
 }
 
 dependencies {
-    compile(group: 'de.madcyph3r', name: 'materialDrawer', version: '1.0.3', ext: 'aar')
+    compile(group: 'de.madcyph3r', name: 'materialDrawer', version: '1.0.4', ext: 'aar')
 }
 ```
 
