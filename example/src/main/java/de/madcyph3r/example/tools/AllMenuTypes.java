@@ -5,18 +5,18 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import de.madcyph3r.example.FragmentIndex;
 import de.madcyph3r.example.R;
 import de.madcyph3r.example.Settings;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
-import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawerListener;
 import de.madcyph3r.materialnavigationdrawer.item.MaterialHeadItem;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialDevisor;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialSection;
-import de.madcyph3r.materialnavigationdrawer.menu.MaterialSectionListener;
+import de.madcyph3r.materialnavigationdrawer.menu.MaterialSectionOnClickListener;
 import de.madcyph3r.materialnavigationdrawer.tools.RoundedCornersDrawable;
 
 /**
@@ -49,9 +49,9 @@ public class AllMenuTypes extends MaterialNavigationDrawer {
         menu.addSection(new MaterialDevisor());
         // section with own in click listener
         MaterialSection section3 = this.newSection("On Click listener", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), i, false, menu);
-        section3.setOnClickListener(new MaterialSectionListener() {
+        section3.setOnClickListener(new MaterialSectionOnClickListener() {
             @Override
-            public void onClick(MaterialSection section) {
+            public void onClick(MaterialSection section, View view) {
                 Toast.makeText(drawer, "on click listener ;)", Toast.LENGTH_LONG).show();
                 section.unSelect();
             }

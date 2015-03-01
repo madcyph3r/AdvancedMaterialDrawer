@@ -8,8 +8,6 @@ import android.view.View;
 import de.madcyph3r.example.FragmentIndex;
 import de.madcyph3r.example.R;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
-import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawerListener;
-import de.madcyph3r.materialnavigationdrawer.item.MaterialHeadItem;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialSection;
 

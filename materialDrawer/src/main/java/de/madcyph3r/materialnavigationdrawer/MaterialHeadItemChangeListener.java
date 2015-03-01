@@ -2,7 +2,7 @@ package de.madcyph3r.materialnavigationdrawer;
 
 import de.madcyph3r.materialnavigationdrawer.item.MaterialHeadItem;
 
-public interface MaterialNavigationDrawerListener {
+public interface MaterialHeadItemChangeListener {
 
     public void onBeforeChangedHeadItem(MaterialHeadItem newHeadItem);
 

@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -11,12 +12,11 @@ import com.amulyakhare.textdrawable.TextDrawable;
 import de.madcyph3r.example.FragmentIndex;
 import de.madcyph3r.example.R;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
-import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawerListener;
 import de.madcyph3r.materialnavigationdrawer.item.MaterialHeadItem;
 import de.madcyph3r.materialnavigationdrawer.item.MaterialHeadItemListener;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialSection;
-import de.madcyph3r.materialnavigationdrawer.menu.MaterialSectionListener;
+import de.madcyph3r.materialnavigationdrawer.menu.MaterialSectionOnClickListener;
 import de.madcyph3r.materialnavigationdrawer.tools.RoundedCornersDrawable;
 
 /**
@@ -50,17 +50,17 @@ public class TwoHeadItemRemoveAddNewHeadItem extends MaterialNavigationDrawer {
         MaterialSection section2 = this.newSection("Add Head Item", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), false, menu);
         MaterialSection section3 = this.newSection("Remove Last Head Item", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), false, menu);
 
-        section2.setOnClickListener(new MaterialSectionListener() {
+        section2.setOnClickListener(new MaterialSectionOnClickListener() {
             @Override
-            public void onClick(MaterialSection section) {
+            public void onClick(MaterialSection section, View view) {
                 // add headItem, true is needed for view change
                 drawer.addHeadItem(getHeadItem3(), true);
             }
         });
 
-        section3.setOnClickListener(new MaterialSectionListener() {
+        section3.setOnClickListener(new MaterialSectionOnClickListener() {
             @Override
-            public void onClick(MaterialSection section) {
+            public void onClick(MaterialSection section, View view) {
                 drawer.removeHeadItem(drawer.getHeadItemManager().size()-1);
             }
         });

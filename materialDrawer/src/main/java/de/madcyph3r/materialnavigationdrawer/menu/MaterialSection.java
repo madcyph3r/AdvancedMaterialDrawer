@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -27,7 +26,7 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
     private TextView text;
     private TextView notifications;
     private ImageView icon;
-    private MaterialSectionListener listener;
+    private MaterialSectionOnClickListener listener;
     private boolean isSelected;
     private int targetType;
     private int sectionColor;
@@ -131,8 +130,18 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
                 text.setTextColor(iconColor);
             }
 
-            if (listener != null)
-                listener.onClick(this);
+            if (listener != null) {
+                final MaterialSection section = this;
+                view.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+                listener.onClick(section, v);
+
+                /*v.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listener.onClick(section, v);
+                    }
+                });*/
+            }
 
             return true;
         }
@@ -166,7 +175,7 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
         return position;
     }
 
-    public void setOnClickListener(MaterialSectionListener listener) {
+    public void setOnClickListener(final MaterialSectionOnClickListener listener) {
         this.listener = listener;
     }
 

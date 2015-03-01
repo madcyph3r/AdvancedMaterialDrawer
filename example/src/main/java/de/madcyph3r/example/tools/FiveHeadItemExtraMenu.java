@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -11,11 +12,10 @@ import com.amulyakhare.textdrawable.TextDrawable;
 import de.madcyph3r.example.FragmentIndex;
 import de.madcyph3r.example.R;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
-import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawerListener;
 import de.madcyph3r.materialnavigationdrawer.item.MaterialHeadItem;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialSection;
-import de.madcyph3r.materialnavigationdrawer.menu.MaterialSectionListener;
+import de.madcyph3r.materialnavigationdrawer.menu.MaterialSectionOnClickListener;
 import de.madcyph3r.materialnavigationdrawer.tools.RoundedCornersDrawable;
 
 /**
@@ -39,9 +39,9 @@ public class FiveHeadItemExtraMenu extends MaterialNavigationDrawer {
         MaterialMenu menu = new MaterialMenu();
 
         MaterialSection section = this.newSection("Create new Head Item", this.getResources().getDrawable(R.drawable.ic_favorite_black_36dp), false, menu);
-        section.setOnClickListener(new MaterialSectionListener() {
+        section.setOnClickListener(new MaterialSectionOnClickListener() {
             @Override
-            public void onClick(MaterialSection section) {
+            public void onClick(MaterialSection section, View view) {
                 Toast.makeText(drawer, "extra menu on click. do something here", Toast.LENGTH_LONG).show();
             }
         });

@@ -1,28 +1,13 @@
 package de.madcyph3r.example.tools;
 
 
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.widget.Toast;
-
-import com.amulyakhare.textdrawable.TextDrawable;
 
 import de.madcyph3r.example.FragmentIndex;
 import de.madcyph3r.example.R;
-import de.madcyph3r.example.Settings;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
-import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawerListener;
-import de.madcyph3r.materialnavigationdrawer.item.MaterialHeadItem;
-import de.madcyph3r.materialnavigationdrawer.item.MaterialHeadItemListener;
-import de.madcyph3r.materialnavigationdrawer.menu.MaterialDevisor;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialSection;
-import de.madcyph3r.materialnavigationdrawer.menu.MaterialSectionListener;
-import de.madcyph3r.materialnavigationdrawer.tools.RoundedCornersDrawable;
 
 public class NoHeaderActivity extends MaterialNavigationDrawer {
 

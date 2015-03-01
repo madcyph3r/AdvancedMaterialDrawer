@@ -45,7 +45,7 @@ import java.util.List;
 import de.madcyph3r.materialnavigationdrawer.item.MaterialHeadItem;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialSection;
-import de.madcyph3r.materialnavigationdrawer.menu.MaterialSectionListener;
+import de.madcyph3r.materialnavigationdrawer.menu.MaterialSectionOnClickListener;
 import de.madcyph3r.materialnavigationdrawer.tools.Utils;
 
 
@@ -55,7 +55,7 @@ import de.madcyph3r.materialnavigationdrawer.tools.Utils;
  * @author created by neokree
  */
 @SuppressLint("InflateParams")
-public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivity implements MaterialSectionListener, MaterialHeadItem.OnHeadItemDataLoaded {
+public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivity implements MaterialSectionOnClickListener, MaterialHeadItem.OnHeadItemDataLoaded {
 
     // static backpattern types
     public static final int BACKPATTERN_BACK_ANYWHERE = 0;
@@ -100,7 +100,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
     // global vars headItem
     private List<MaterialHeadItem> headItemManager;
-    private MaterialNavigationDrawerListener headItemChangedListener;
+    private MaterialHeadItemChangeListener headItemChangedListener;
     private MaterialMenu headItemSwitchExtraMenu;
     private boolean headItemSwitchShowForce;
     private boolean headItemSwitcherOpen = false;
@@ -161,9 +161,14 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
         // init headItem listeners
         if (drawerHeaderType == DRAWERHEADER_HEADITEMS) {
+            // set listener without sound. sound is called in the own listener
+            headItemFirstPhoto.setSoundEffectsEnabled(false);
             headItemFirstPhoto.setOnClickListener(headItemFirstOnClickListener);
-            headItemBackground.setOnClickListener(headItemFirstBackgroundOnClickListener);
+            headItemBackground.setSoundEffectsEnabled(false);
+            headItemBackground.setOnClickListener(headItemBackgroundOnClickListener);
+            headItemSecondPhoto.setSoundEffectsEnabled(false);
             headItemSecondPhoto.setOnClickListener(headItemSecondOnClickListener);
+            headItemThirdPhoto.setSoundEffectsEnabled(false);
             headItemThirdPhoto.setOnClickListener(headItemThirdOnClickListener);
         }
 
@@ -552,6 +557,10 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         setFragment(fragment, title, null, true);
     }
 
+    public void setCustomFragment(Fragment fragment, String title, boolean closeDrawer) {
+        setFragment(fragment, title, null, closeDrawer);
+    }
+
     public void setFragment(Fragment fragment, String title, Fragment oldFragment, boolean closeDrawer) {
         setTitle(title);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
@@ -564,7 +573,6 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         } else if (fragment instanceof android.app.Fragment) {
             if (oldFragment instanceof android.support.v4.app.Fragment)
                 throw new RuntimeException("You should use only one type of Fragment");
-
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             if (oldFragment != null && fragment != oldFragment)
@@ -583,7 +591,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         } else
             throw new RuntimeException("Fragment must be android.app.Fragment or android.support.v4.app.Fragment");
 
-        if (!deviceSupportMultiPane() && closeDrawer == true)
+        if (!deviceSupportMultiPane() && closeDrawer)
             layout.closeDrawer(drawer);
     }
 
@@ -1059,11 +1067,16 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
     // listener
     // Head Item Listener
-    private View.OnClickListener headItemFirstBackgroundOnClickListener = new View.OnClickListener() {
+    private View.OnClickListener headItemBackgroundOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (!drawerTouchLocked) {
                 if (headItemManager.get(0).getOnClickListener() != null) {
+
+                    headItemBackground.setSoundEffectsEnabled(true);
+                    v.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+                    headItemFirstPhoto.setSoundEffectsEnabled(false);
+
                     headItemManager.get(0).getOnClickListener().onBackgroundClick(headItemManager.get(0));
 
                     if (headItemManager.get(0).isCloseDrawerOnBackgroundClick()) {
@@ -1079,6 +1092,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         public void onClick(View v) {
             if (!drawerTouchLocked) {
                 if (headItemManager.get(0).getOnClickListener() != null) {
+
+                    headItemFirstPhoto.setSoundEffectsEnabled(true);
+                    v.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+                    headItemFirstPhoto.setSoundEffectsEnabled(false);
+
                     headItemManager.get(0).getOnClickListener().onClick(headItemManager.get(0));
 
                     if (headItemManager.get(0).isCloseDrawerOnClick() && !deviceSupportMultiPane()) {
@@ -1095,6 +1113,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
             if (!drawerTouchLocked) {
                 MaterialHeadItem headItem = findHeadItemNumber(MaterialHeadItem.SECOND_HEADITEM);
                 if (headItem != null) {
+
+                    headItemSecondPhoto.setSoundEffectsEnabled(true);
+                    v.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+                    headItemSecondPhoto.setSoundEffectsEnabled(false);
+
                     if (headItemChangedListener != null)
                         headItemChangedListener.onBeforeChangedHeadItem(headItem);
 
@@ -1104,6 +1127,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                         headItemChangedListener.onAfterChangedHeadItem(headItem);
                 } else {
                     if (headItemManager.get(0).getOnClickListener() != null) {
+
+                        headItemSecondPhoto.setSoundEffectsEnabled(true);
+                        v.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+                        headItemSecondPhoto.setSoundEffectsEnabled(false);
+
                         headItemManager.get(0).getOnClickListener().onBackgroundClick(headItemManager.get(0));
 
                         if (headItemManager.get(0).isCloseDrawerOnBackgroundClick() && !deviceSupportMultiPane()) {
@@ -1122,6 +1150,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
             if (!drawerTouchLocked) {
                 MaterialHeadItem headItem = findHeadItemNumber(MaterialHeadItem.THIRD_HEADITEM);
                 if (headItem != null) {
+
+                    headItemThirdPhoto.setSoundEffectsEnabled(true);
+                    v.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+                    headItemThirdPhoto.setSoundEffectsEnabled(false);
+
                     if (headItemChangedListener != null)
                         headItemChangedListener.onBeforeChangedHeadItem(headItem);
 
@@ -1132,6 +1165,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                 } else {// if there is no second account user clicked for open it
                     //accountListener.onAccountOpening(currentAccount);
                     if (headItemManager.get(0).getOnClickListener() != null) {
+
+                        headItemThirdPhoto.setSoundEffectsEnabled(true);
+                        v.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+                        headItemThirdPhoto.setSoundEffectsEnabled(false);
+
                         headItemManager.get(0).getOnClickListener().onBackgroundClick(headItemManager.get(0));
 
                         if (headItemManager.get(0).isCloseDrawerOnBackgroundClick() && !deviceSupportMultiPane()) {
@@ -1156,9 +1194,9 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                     final MaterialHeadItem newHeadItem = headItemManager.get(i);
 
                     MaterialSection section = newHeadSection(newHeadItem.getTitle(), newHeadItem.getPhoto(), menu);
-                    section.setOnClickListener(new MaterialSectionListener() {
+                    section.setOnClickListener(new MaterialSectionOnClickListener() {
                         @Override
-                        public void onClick(MaterialSection section) {
+                        public void onClick(MaterialSection section, View view) {
                             switchHeadItemsList(headItemManager.get(0), newHeadItem);
                         }
                     });
@@ -1248,7 +1286,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                     super.onBackPressed();
                 else {
                     section.select();
-                    onClick(section);
+                    onClick(section, section.getView());
                 }
                 break;
             case BACKPATTERN_CUSTOM:
@@ -1260,7 +1298,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                     if (backedSection.getTarget() != MaterialSection.TARGET_FRAGMENT) {
                         throw new RuntimeException("The restored section must have a fragment as target");
                     }
-                    onClick(backedSection);
+                    onClick(backedSection, backedSection.getView());
                 }
 
                 break;
@@ -1281,7 +1319,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
      }
 
     @Override
-    public void onClick(MaterialSection section) {
+    public void onClick(MaterialSection section, View view) {
         if (section != currentSection) {
             unSelectOldSection(section);
 
@@ -1354,7 +1392,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         this.loadFragmentOnStart = loadFragmentOnStart;
     }
 
-    public void setOnChangedListener(MaterialNavigationDrawerListener listener) {
+    public void setOnChangedListener(MaterialHeadItemChangeListener listener) {
         this.headItemChangedListener = listener;
     }
 

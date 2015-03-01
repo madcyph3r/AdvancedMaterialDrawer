@@ -12,18 +12,17 @@ import com.amulyakhare.textdrawable.TextDrawable;
 
 import de.madcyph3r.example.FragmentIndex;
 import de.madcyph3r.example.R;
+import de.madcyph3r.materialnavigationdrawer.MaterialHeadItemChangeListener;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
-import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawerListener;
 import de.madcyph3r.materialnavigationdrawer.item.MaterialHeadItem;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialSection;
-import de.madcyph3r.materialnavigationdrawer.menu.MaterialSectionListener;
 import de.madcyph3r.materialnavigationdrawer.tools.RoundedCornersDrawable;
 
 /**
  * Created by marc on 23.02.2015.
  */
-public class TwoHeadItemChangeListenerDrawerListener extends MaterialNavigationDrawer implements MaterialNavigationDrawerListener {
+public class TwoHeadItemChangeListenerDrawerListener extends MaterialNavigationDrawer implements MaterialHeadItemChangeListener {
 
     MaterialNavigationDrawer drawer = null;
 
