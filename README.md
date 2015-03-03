@@ -9,13 +9,16 @@ Big thanks to neokree, without him this library would not be possible.
 ### API
 [![API](https://img.shields.io/badge/API-10%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=10)
 
-### Different from neokree MaterialDrawer
+### Different from neokree MaterialDrawer and some features
 - Unlimit Head-Items (Accounts), (see first screenshot, it has 5 Head-Items)
 - Every Head-Item can has his own menu
 - Add and remove Head-Items at runtime.
+- Themeing
+- Labels
+- Sections in the bottom
 - and many other things, like set yout own start fragment and so on
 
-### Example APK (Lib-Version 1.0.4) 
+### Example APK (Lib-Version 1.0.5) 
 https://github.com/madcyph3r/AdvancedMaterialDrawer/raw/master/example-release.apk
 
 ###  How to import (my own repo)
@@ -27,7 +30,7 @@ repositories {
 }
 
 dependencies {
-    compile(group: 'de.madcyph3r', name: 'materialDrawer', version: '1.0.4', ext: 'aar')
+    compile(group: 'de.madcyph3r', name: 'materialDrawer', version: '1.0.5', ext: 'aar')
 }
 ```
 
