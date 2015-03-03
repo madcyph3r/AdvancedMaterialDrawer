@@ -4,6 +4,7 @@
     <style name="MaterialNavigationDrawerTheme" parent="Theme.AppCompat.NoActionBar" >
         <item name="drawerColor">#111</item>
         <item name="uniqueToolbarColor">false</item>
+        <item name="labelColor">#888888</item>
         <item name="sectionStyle">@style/MaterialSectionTheme</item>
         <item name="subheaderStyle">@style/MaterialSubheaderTheme</item>
         <item name="accountStyle">@style/MaterialAccountTheme</item>
@@ -14,6 +15,7 @@
     <style name="MaterialNavigationDrawerTheme.Light" parent="Theme.AppCompat.Light.NoActionBar" >
         <item name="drawerColor">#fafafa</item>
         <item name="uniqueToolbarColor">false</item>
+        <item name="labelColor">#afafaf</item>
         <item name="sectionStyle">@style/MaterialSectionTheme.Light</item>
         <item name="subheaderStyle">@style/MaterialSubheaderTheme.Light</item>
         <item name="accountStyle">@style/MaterialAccountTheme</item>
@@ -25,6 +27,7 @@
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
         <item name="uniqueToolbarColor">false</item>
         <item name="popupTheme">@style/Base.V21.Theme.AppCompat.Light.Dialog</item>
+        <item name="labelColor">#afafaf</item>
         <item name="drawerColor">#fafafa</item>
         <item name="sectionStyle">@style/MaterialSectionTheme.Light</item>
         <item name="subheaderStyle">@style/MaterialSubheaderTheme.Light</item>

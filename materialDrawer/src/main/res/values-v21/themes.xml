@@ -5,6 +5,7 @@
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="drawerColor">#111</item>
+        <item name="labelColor">#888888</item>
         <item name="uniqueToolbarColor">false</item>
         <item name="sectionStyle">@style/MaterialSectionTheme</item>
         <item name="subheaderStyle">@style/MaterialSubheaderTheme</item>
@@ -17,6 +18,7 @@
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="drawerColor">#fafafa</item>
+        <item name="labelColor">#afafaf</item>
         <item name="uniqueToolbarColor">false</item>
         <item name="sectionStyle">@style/MaterialSectionTheme.Light</item>
         <item name="subheaderStyle">@style/MaterialSubheaderTheme.Light</item>
@@ -32,6 +34,7 @@
         <item name="uniqueToolbarColor">false</item>
         <item name="popupTheme">@style/Base.V21.Theme.AppCompat.Light.Dialog</item>
         <item name="drawerColor">#fafafa</item>
+        <item name="labelColor">#afafaf</item>
         <item name="sectionStyle">@style/MaterialSectionTheme.Light</item>
         <item name="subheaderStyle">@style/MaterialSubheaderTheme.Light</item>
         <item name="accountStyle">@style/MaterialAccountTheme</item>

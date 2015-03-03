@@ -25,6 +25,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,10 +43,13 @@ import android.widget.TextView;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.madcyph3r.materialnavigationdrawer.item.MaterialHeadItem;
+import de.madcyph3r.materialnavigationdrawer.listener.MaterialHeadItemChangeListener;
+import de.madcyph3r.materialnavigationdrawer.head.MaterialHeadItem;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
-import de.madcyph3r.materialnavigationdrawer.menu.MaterialSection;
-import de.madcyph3r.materialnavigationdrawer.menu.MaterialSectionOnClickListener;
+import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialDevisor;
+import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialLabel;
+import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
+import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionOnClickListener;
 import de.madcyph3r.materialnavigationdrawer.tools.Utils;
 
 
@@ -472,8 +476,19 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                         addBottomSection((MaterialSection) sectionList.get(i));
                     else
                         addSection((MaterialSection) sectionList.get(i));
-                } else {
-                    addDivisor();
+                }  else if (sectionList.get(i) instanceof MaterialDevisor) {
+                    MaterialDevisor devisor = (MaterialDevisor) sectionList.get(i);
+                    if(devisor.isBottom())
+                        addDevisorBottom();
+                    else
+                        addDevisor();
+
+                } else if (sectionList.get(i) instanceof MaterialLabel) {
+                    MaterialLabel label = (MaterialLabel) sectionList.get(i);
+                    if (label.isBottom())
+                        addBottomLabel((MaterialLabel) sectionList.get(i));
+                    else
+                        addLabel((MaterialLabel) sectionList.get(i));
                 }
             }
 
@@ -537,8 +552,19 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                     addBottomSection((MaterialSection) sectionList.get(i));
                 else
                     addSection((MaterialSection) sectionList.get(i));
-            } else {
-                addDivisor();
+            } else if (sectionList.get(i) instanceof MaterialDevisor) {
+                MaterialDevisor devisor = (MaterialDevisor) sectionList.get(i);
+                if(devisor.isBottom())
+                    addDevisorBottom();
+                else
+                    addDevisor();
+
+            } else if (sectionList.get(i) instanceof MaterialLabel) {
+                MaterialLabel label = (MaterialLabel) sectionList.get(i);
+                if (label.isBottom())
+                    addBottomLabel((MaterialLabel) sectionList.get(i));
+                else
+                    addLabel((MaterialLabel) sectionList.get(i));
             }
         }
     }
@@ -554,11 +580,12 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     public void setCustomFragment(Fragment fragment, String title) {
-        setFragment(fragment, title, null, true);
+        setCustomFragment(fragment, title, true);
     }
 
     public void setCustomFragment(Fragment fragment, String title, boolean closeDrawer) {
         setFragment(fragment, title, null, closeDrawer);
+        changeToolbarColor(null);
     }
 
     public void setFragment(Fragment fragment, String title, Fragment oldFragment, boolean closeDrawer) {
@@ -805,12 +832,16 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         slidingDrawerEffect = true;
     }
 
+    public void changeToolbarColor() {
+        changeToolbarColor(null);
+    }
+
     public void changeToolbarColor(MaterialSection section) {
 
         int sectionPrimaryColor;
         int sectionPrimaryColorDark;
 
-        if (section.hasSectionColor() && !uniqueToolbarColor) {
+        if (section != null && section.hasSectionColor() && !uniqueToolbarColor) {
             if (!section.hasSectionColorDark())
                 sectionPrimaryColorDark = darkenColor(section.getSectionColor());
             else
@@ -840,6 +871,16 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
             this.getToolbar().setBackgroundColor(primaryColor);
     }
 
+    private void addLabel(MaterialLabel label) {
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (48 * displayDensity));
+        sections.addView(label.getView(), params);
+    }
+
+    private void addBottomLabel(MaterialLabel label) {
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (48 * displayDensity));
+        bottomSections.addView(label.getView(), params);
+    }
+
     private void addSection(MaterialSection section) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (48 * displayDensity));
         sections.addView(section.getView(), params);
@@ -850,13 +891,17 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         bottomSections.addView(section.getView(), params);
     }
 
-    private void addDivisor() {
-        View view = new View(this);
-        view.setBackgroundColor(Color.parseColor("#e0e0e0"));
-        // height 1 px
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1);
-        params.setMargins(0, (int) (8 * displayDensity), 0, (int) (8 * displayDensity));
+    private void addDevisor() {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.layout_divisor, null, false);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        sections.addView(view, params);
+    }
 
+    private void addDevisorBottom() {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.layout_divisor, null, false);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         sections.addView(view, params);
     }
 
@@ -956,6 +1001,20 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         menu.addSection(section);
 
         return section;
+    }
+
+    public MaterialLabel newLabel(String label, boolean bottom, MaterialMenu menu) {
+        MaterialLabel labelM = new MaterialLabel(this, label, bottom);
+        menu.addSection(labelM);
+
+        return labelM;
+    }
+
+    public MaterialDevisor newDevisor(/*boolean bottom,*/ MaterialMenu menu) {
+        MaterialDevisor devisor = new MaterialDevisor();
+        menu.addSection(devisor);
+
+        return devisor;
     }
 
     // create sections for a headItem
@@ -1334,6 +1393,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
             } else if (section.getTarget() == MaterialSection.TARGET_ACTIVITY) {
                 section.unSelect();
                 this.startActivity(section.getTargetIntent());
+                finish();
             }
         }
     }

@@ -153,7 +153,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dip"
         android:layout_above="@+id/bottom_sections"
-        android:background="?android:attr/dividerVertical" />
+        android:background="?android:attr/listDivider" />
 
     <LinearLayout
         android:id="@+id/bottom_sections"

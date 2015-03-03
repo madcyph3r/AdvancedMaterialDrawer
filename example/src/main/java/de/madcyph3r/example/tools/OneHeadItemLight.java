@@ -7,9 +7,9 @@ import android.os.Bundle;
 import de.madcyph3r.example.FragmentIndex;
 import de.madcyph3r.example.R;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
-import de.madcyph3r.materialnavigationdrawer.item.MaterialHeadItem;
+import de.madcyph3r.materialnavigationdrawer.head.MaterialHeadItem;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
-import de.madcyph3r.materialnavigationdrawer.menu.MaterialSection;
+import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
 import de.madcyph3r.materialnavigationdrawer.tools.RoundedCornersDrawable;
 
 /**
@@ -36,6 +36,7 @@ public class OneHeadItemLight extends MaterialNavigationDrawer {
 
         // first section is loaded
         MaterialSection section1 = this.newSection("Section 1", this.getResources().getDrawable(R.drawable.ic_favorite_black_36dp), new FragmentIndex(), false, menu);
+        this.newLabel("label 1", false, menu);
         MaterialSection section2 = this.newSection("Section 2", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu);
 
         // use bitmap and make a circle photo

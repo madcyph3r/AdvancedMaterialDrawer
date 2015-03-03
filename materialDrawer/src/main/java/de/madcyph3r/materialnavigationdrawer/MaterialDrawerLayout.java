@@ -23,22 +23,6 @@ public class MaterialDrawerLayout extends DrawerLayout {
         super(context, attrs, defStyle);
     }
 
-    /*
-    @Override
-    public boolean onInterceptTouchEvent(final MotionEvent ev) {
-        if (multipaneSupport) {
-            return false;
-        }
-        return super.onInterceptTouchEvent(ev);
-    }
-
-    @Override
-    public void requestDisallowInterceptTouchEvent(final boolean disallowIntercept) {
-        super.requestDisallowInterceptTouchEvent(disallowIntercept);
-
-        multipaneSupport = disallowIntercept;
-    }*/
-
     @Override
     public boolean onInterceptTouchEvent(final MotionEvent ev) {
         if (multipaneSupport) {

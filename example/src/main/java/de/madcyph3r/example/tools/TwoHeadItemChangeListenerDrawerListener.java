@@ -12,11 +12,11 @@ import com.amulyakhare.textdrawable.TextDrawable;
 
 import de.madcyph3r.example.FragmentIndex;
 import de.madcyph3r.example.R;
-import de.madcyph3r.materialnavigationdrawer.MaterialHeadItemChangeListener;
+import de.madcyph3r.materialnavigationdrawer.listener.MaterialHeadItemChangeListener;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
-import de.madcyph3r.materialnavigationdrawer.item.MaterialHeadItem;
+import de.madcyph3r.materialnavigationdrawer.head.MaterialHeadItem;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
-import de.madcyph3r.materialnavigationdrawer.menu.MaterialSection;
+import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
 import de.madcyph3r.materialnavigationdrawer.tools.RoundedCornersDrawable;
 
 /**

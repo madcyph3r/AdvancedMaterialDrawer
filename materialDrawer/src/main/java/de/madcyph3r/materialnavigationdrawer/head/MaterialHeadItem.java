@@ -1,4 +1,4 @@
-package de.madcyph3r.materialnavigationdrawer.item;
+package de.madcyph3r.materialnavigationdrawer.head;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 
+import de.madcyph3r.materialnavigationdrawer.listener.MaterialHeadItemListener;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
 import de.madcyph3r.materialnavigationdrawer.tools.Utils;

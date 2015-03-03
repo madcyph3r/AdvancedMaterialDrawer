@@ -1,4 +1,4 @@
-package de.madcyph3r.materialnavigationdrawer.menu;
+package de.madcyph3r.materialnavigationdrawer.menu.item;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionOnClickListener;
 import de.madcyph3r.materialnavigationdrawer.R;
 
 public class MaterialSection<Fragment> implements View.OnTouchListener {

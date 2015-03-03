@@ -3,12 +3,11 @@ package de.madcyph3r.example;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
-import de.madcyph3r.materialnavigationdrawer.item.MaterialHeadItem;
+import de.madcyph3r.materialnavigationdrawer.head.MaterialHeadItem;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
-import de.madcyph3r.materialnavigationdrawer.menu.MaterialSection;
+import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
 import de.madcyph3r.materialnavigationdrawer.tools.RoundedCornersDrawable;
 
 /**

@@ -15,6 +15,7 @@
         <attr name="uniqueToolbarColor" format="boolean" /><!-- La toolbar non cambia mai di colore -->
         <attr name="multipaneSupport" format="boolean" />
         <attr name="drawerColor" format="color" /><!-- Colore del drawer -->
+        <attr name="labelColor" format="color" />
         <attr name="sectionStyle" format="reference" />
         <attr name="subheaderStyle" format="reference"/>
         <attr name="autoDarkStatusBar" format="boolean"/>

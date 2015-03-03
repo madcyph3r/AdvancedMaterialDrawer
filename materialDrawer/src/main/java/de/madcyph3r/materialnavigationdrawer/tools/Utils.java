@@ -105,11 +105,11 @@ public class Utils {
     public static void recycleDrawable(Drawable drawable) {
         if (drawable instanceof BitmapDrawable) {
             BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-            if (bitmapDrawable.getBitmap() != null && !bitmapDrawable.getBitmap().isRecycled())
-            {
+            //if (bitmapDrawable.getBitmap() != null && !bitmapDrawable.getBitmap().isRecycled())
+            //{
                 bitmapDrawable.getBitmap().recycle();
                 System.gc();
-            }
+            //}
         }
     }
 
