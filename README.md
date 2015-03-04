@@ -13,11 +13,13 @@ Big thanks to neokree, without him this library would not be possible.
 ### Different from neokree MaterialDrawer and some features
 - Unlimit Head-Items (Accounts), (see first screenshot, it has 5 Head-Items)
 - Every Head-Item can has his own menu
-- Add and remove Head-Items at runtime.
+- Head-Item listener for avatar or background click
+- Add and remove Head-Items at runtime
 - Themeing
 - Labels
-- Sections in the bottom
-- and many other things, like set yout own start fragment and so on
+- Normal Sections (with Fragment/Activty start or own onClick listener)
+- Bottom-Sections (see second screenshot)
+- and many other things, like set your own fragment on start and so on
 
 ### Example APK (Lib-Version 1.0.5) 
 https://github.com/madcyph3r/AdvancedMaterialDrawer/raw/master/example-release.apk
