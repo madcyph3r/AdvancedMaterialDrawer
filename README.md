@@ -1,5 +1,6 @@
 AdvancedMaterialDrawer
 ======================
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-AdvancedMaterialDrawer-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1617)
 
 A Material Drawer implementation (Like gMail App)
 
