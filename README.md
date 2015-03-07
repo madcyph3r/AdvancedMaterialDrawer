@@ -24,7 +24,7 @@ Big thanks to neokree, without him this library would not be possible.
 ### Example APK (Lib-Version 1.0.5) 
 https://github.com/madcyph3r/AdvancedMaterialDrawer/raw/master/example-release.apk
 
-###  How to import (my own repo)
+###  How to import (my own repo, Version: 1.0.6)
 ```java
 repositories {
     maven {
@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    compile(group: 'de.madcyph3r', name: 'materialDrawer', version: '1.0.5', ext: 'aar')
+    compile(group: 'de.madcyph3r', name: 'materialDrawer', version: '1.0.6', ext: 'aar')
 }
 ```
 
