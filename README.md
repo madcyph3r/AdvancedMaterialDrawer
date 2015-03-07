@@ -3,7 +3,7 @@ AdvancedMaterialDrawer
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-AdvancedMaterialDrawer-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1617) [![API](https://img.shields.io/badge/API-10%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=10)
 
-A Material Drawer implementation (Like gMail App)
+A Gmail-like Material Drawer implementation 
 
 Based on neokree's [MaterialDrawer](https://github.com/neokree/MaterialNavigationDrawer) library.
 Big thanks to neokree, without him this library would not exist.
@@ -20,7 +20,7 @@ Big thanks to neokree, without him this library would not exist.
 - Bottom-Sections
 - More: Setting your own Fragment on Start, etc
 
-### Example APK (Lib-Version 1.0.7 [pre-version]) 
+### Example APK (Lib-Version 1.0.7 pre-release) 
 https://github.com/madcyph3r/AdvancedMaterialDrawer/raw/master/example-release.apk
 
 ### Download
