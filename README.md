@@ -15,13 +15,14 @@ Big thanks to neokree, without him this library would not be possible.
 - Every Head-Item can has his own menu
 - Head-Item listener for avatar or background click
 - Add and remove Head-Items at runtime
+- Add and remove Menu-Items at runtime (since 1.0.7)
 - Themeing
 - Labels
 - Normal Sections (with Fragment/Activty start or own onClick listener)
 - Bottom-Sections (see second screenshot)
 - and many other things, like set your own fragment on start and so on
 
-### Example APK (Lib-Version 1.0.5) 
+### Example APK (Lib-Version 1.0.7 [pre-version]) 
 https://github.com/madcyph3r/AdvancedMaterialDrawer/raw/master/example-release.apk
 
 ###  How to import (my own repo, Version: 1.0.6)
