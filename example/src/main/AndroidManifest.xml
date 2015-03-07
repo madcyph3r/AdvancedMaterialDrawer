@@ -74,6 +74,12 @@
         </activity>
         <activity android:name=".tools.TwoHeadItemChangeListenerDrawerListener">
         </activity>
+        <activity android:name=".tools.ClosePreviousActivity">
+        </activity>
+        <activity android:name=".tools.NoClosePreviousActivity">
+        </activity>
+        <activity android:name=".SecondActivity">
+        </activity>
 
     </application>
 

@@ -130,6 +130,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     private int drawerDPWidth;
     private int drawerHeaderType;
     private boolean uniqueToolbarColor;
+    private boolean finishActivityOnNewIntent;
     private DrawerLayout.DrawerListener drawerStateListener;
     private int drawerColor;
     private ActionBar actionBar;
@@ -153,6 +154,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
         // get and set header type
         drawerHeaderType = headerType();
+        finishActivityOnNewIntent = finishActivityOnNewIntent();
 
         // set contentView
         if (drawerHeaderType == DRAWERHEADER_HEADITEMS)
@@ -1203,6 +1205,10 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
     public abstract int headerType();
 
+    public boolean finishActivityOnNewIntent(){
+        return true;
+    }
+
 
     // listener
     // Head Item Listener
@@ -1460,9 +1466,9 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     @Override
     public void onClick(MaterialSection section, View view) {
         if (section != currentSection) {
-            unSelectOldSection(section);
 
             if (section.getTarget() == MaterialSection.TARGET_FRAGMENT) {
+                unSelectOldSection(section);
                 if (currentSection != null)
                     setFragment((Fragment) section.getTargetFragment(), section.getTitle(), (Fragment) currentSection.getTargetFragment(), true);
                 else
@@ -1473,7 +1479,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
             } else if (section.getTarget() == MaterialSection.TARGET_ACTIVITY) {
                 section.unSelect();
                 this.startActivity(section.getTargetIntent());
-                finish();
+                if (finishActivityOnNewIntent) finish();
+                else closeDrawer();
             }
         }
     }
