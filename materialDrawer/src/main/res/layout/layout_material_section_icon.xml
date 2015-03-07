@@ -4,8 +4,8 @@
     android:layout_height="48dp">
 
     <ImageView
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="@dimen/sectionIconWidth"
+        android:layout_height="@dimen/sectionIconHeight"
         android:id="@+id/section_icon"
         android:layout_marginLeft="16dp"
         android:layout_centerVertical="true" />
@@ -16,7 +16,7 @@
         android:id="@+id/section_text"
         android:layout_centerVertical="true"
         android:layout_marginLeft="72dp"
-        android:textSize="14sp"
+        android:textSize="@dimen/sectionSize"
         android:textColor="@android:color/black"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:layout_toLeftOf="@+id/section_notification"
@@ -31,7 +31,7 @@
         android:layout_marginRight="8dp"
         android:lines="1"
         android:maxLength="3"
-        android:textSize="14sp"
+        android:textSize="@dimen/sectionNotificationSize"
         android:textColor="@android:color/black"
         android:textStyle="bold"
         android:gravity="center_horizontal"

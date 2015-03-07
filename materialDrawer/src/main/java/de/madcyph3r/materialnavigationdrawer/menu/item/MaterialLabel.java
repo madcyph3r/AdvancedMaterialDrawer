@@ -54,4 +54,8 @@ public class MaterialLabel {
     public void setBottom(boolean bottom) {
         this.bottom = bottom;
     }
+
+    public TextView getText() {
+        return text;
+    }
 }

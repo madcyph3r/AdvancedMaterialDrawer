@@ -52,9 +52,12 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
     private Fragment targetFragment;
     private Intent targetIntent;
 
+    private boolean hasIcon = false;
+
     public MaterialSection(Context ctx, boolean hasIcon, int target, boolean bottom) {
 
         this.bottom = bottom;
+        this.hasIcon = hasIcon;
 
         if (!hasIcon) {
             view = LayoutInflater.from(ctx).inflate(R.layout.layout_material_section, null);
@@ -304,5 +307,17 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
 
     public void setFillIconColor(boolean fillIconColor) {
         this.fillIconColor = fillIconColor;
+    }
+
+    public TextView getText() {
+        return text;
+    }
+
+    public ImageView getIcon() {
+        return icon;
+    }
+
+    public boolean isHasIcon() {
+        return hasIcon;
     }
 }
