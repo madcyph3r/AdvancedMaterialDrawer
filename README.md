@@ -1,46 +1,41 @@
 AdvancedMaterialDrawer
 ======================
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-AdvancedMaterialDrawer-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1617)
 
-A Material Drawer implementation (Like gMail App)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-AdvancedMaterialDrawer-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1617) [![API](https://img.shields.io/badge/API-10%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=10)
 
-Based on neokree MaterialDrawer (https://github.com/neokree/MaterialNavigationDrawer).
-Big thanks to neokree, without him this library would not be possible.
+A Gmail-like Material Drawer implementation 
 
-### API
-[![API](https://img.shields.io/badge/API-10%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=10)
+Based on neokree's [MaterialDrawer](https://github.com/neokree/MaterialNavigationDrawer) library.
+Big thanks to neokree, without him this library would not exist.
 
-### Different from neokree MaterialDrawer and some features
-- Unlimit Head-Items (Accounts), (see first screenshot, it has 5 Head-Items)
-- Every Head-Item can has his own menu
-- Head-Item listener for avatar or background click
-- Add and remove Head-Items at runtime
-- Add and remove Menu-Items at runtime (since 1.0.7)
-- Themeing
+
+### Differences with neokree's lib & new Features:
+- Unlimited Head-Items (Accounts)
+- Every Head-Item can have its own Menu
+- Head-Item listeners for Avatar or Background taps
+- Adding and removing Head-Items and Menu-Items at runtime
+- Theming
 - Labels
 - Normal Sections (with Fragment/Activty start or own onClick listener)
-- Bottom-Sections (see second screenshot)
-- and many other things, like set your own fragment on start and so on
+- Bottom-Sections
+- More: Setting your own Fragment on Start, etc
 
-### Example APK (Lib-Version 1.0.7 [pre-version]) 
+### Example APK (Lib-Version 1.0.7 pre-release) 
 https://github.com/madcyph3r/AdvancedMaterialDrawer/raw/master/example-release.apk
 
-###  How to import (my own repo, Version: 1.0.6)
+### Download
 ```java
 repositories {
-    maven {
-            url "http://dl.bintray.com/madcyph3r/maven/"
-        }
+    maven { url 'http://dl.bintray.com/madcyph3r/maven/' }
 }
 
 dependencies {
-    compile(group: 'de.madcyph3r', name: 'materialDrawer', version: '1.0.6', ext: 'aar')
+    compile 'de.madcyph3r:materialDrawer:1.0.6@aar'
 }
 ```
 
 ### Usage
-See the example apk and the example code. It has 24 examples with explanations, how to use the library. It's really not difficult.
-But here is a small example, with one Head-Item. It looks like screenshot three, only in black color.
+There are 24 examples with explanations how to use the library, here is a small example with one Head-Item. It looks like [screenshot three](https://raw.githubusercontent.com/madcyph3r/AdvancedMaterialDrawer/master/Screenshot_3.png), only in black color.
 
 ```java
 public class OneHeadItem extends MaterialNavigationDrawer {
@@ -79,9 +74,9 @@ public class OneHeadItem extends MaterialNavigationDrawer {
 ```
 
 ### Others
-- If you found an issues, then open a ticket.
-- If you like the library, press the star ;)
-- A Wiki with small intruductions will come
+- If you've found an issue, look up the open [issues](https://github.com/madcyph3r/AdvancedMaterialDrawer/issues) and submit a new one if it isn't yet reported.
+- If you like the library press the star ;)
+- A Wiki with some Introduction will come soon.
 
 ### Screenshots
 <img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_1.png" alt="screenshot" width="300px" height="auto" />
