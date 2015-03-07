@@ -171,13 +171,13 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
         }
     }
 
-    public void setPosition(int position) {
+    /*public void setPosition(int position) {
         this.position = position;
     }
 
     public int getPosition() {
         return position;
-    }
+    }*/
 
     public void setOnClickListener(final MaterialSectionOnClickListener listener) {
         this.listener = listener;

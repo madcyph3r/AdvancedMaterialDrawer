@@ -154,12 +154,16 @@ activity#de.madcyph3r.example.tools.TwoHeadItemChangeListenerDrawerListener
 ADDED from AndroidManifest.xml:75:9
 	android:name
 		ADDED from AndroidManifest.xml:75:19
+activity#de.madcyph3r.example.tools.OneHeadItemReloadMenu
+ADDED from AndroidManifest.xml:77:9
+	android:name
+		ADDED from AndroidManifest.xml:77:19
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:21.0.3:15:5
 MERGED from com.android.support:support-v4:21.0.3:15:5
 MERGED from com.amulyakhare:com.amulyakhare.textdrawable:1.0.0:8:5
-MERGED from MaterialDrawer:materialDrawer:1.0.5:18:5
+MERGED from MaterialDrawer:materialDrawer:1.0.6:18:5
 MERGED from com.android.support:appcompat-v7:21.0.3:15:5
 MERGED from com.android.support:support-v4:21.0.3:15:5
 	android:targetSdkVersion

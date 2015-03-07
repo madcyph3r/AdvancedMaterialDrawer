@@ -74,6 +74,8 @@
         </activity>
         <activity android:name=".tools.TwoHeadItemChangeListenerDrawerListener">
         </activity>
+        <activity android:name=".tools.OneHeadItemReloadMenu">
+        </activity>
 
     </application>
 

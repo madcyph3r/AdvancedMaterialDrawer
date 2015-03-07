@@ -54,20 +54,24 @@ public class BackPatternCustom extends MaterialNavigationDrawer {
 
     @Override
     protected MaterialSection backToSection(MaterialSection currentSection) {
-        // info: don't forget, devisor is in the section list, you can't cast it to MaterialSection
-        // you must caught the exception or work with the current headitem, because you now the menu order ;)
+
+        // use getCurrentMenu().getSectionPosition, it doesn't considered devisor and label in the list
+        // quivalent is getCurrentMenu().getSection(int position)
+
+        // or use getCurrentMenu().getRealSectionPosition, it does considered devisor and label in the list
+        // equivalent is getCurrentMenu().getRealSection(int position)
         MaterialSection section;
-        switch(currentSection.getPosition()) {
+        switch(getCurrentMenu().getSectionPosition(currentSection)) {
             case 3:
-                section = (MaterialSection) this.getCurrentMenu().getSections().get(2);
+                section = getCurrentMenu().getSection(2);
                 this.changeToolbarColor((MaterialSection) section); // remember to change the toolbar color
                 break;
             case 2:
-                section = (MaterialSection) this.getCurrentMenu().getSections().get(1);
+                section = getCurrentMenu().getSection(1);
                 this.changeToolbarColor((MaterialSection) section); // remember to change the toolbar color
                 break;
             case 1:
-                section = (MaterialSection) this.getCurrentMenu().getSections().get(0);
+                section = getCurrentMenu().getSection(0);
                 this.changeToolbarColor((MaterialSection) section); // remember to change the toolbar color
                 break;
             default:
