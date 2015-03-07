@@ -76,6 +76,12 @@
         </activity>
         <activity android:name=".tools.OneHeadItemReloadMenu">
         </activity>
+        <activity android:name=".tools.ClosePreviousActivity">
+        </activity>
+        <activity android:name=".tools.NoClosePreviousActivity">
+        </activity>
+        <activity android:name=".SecondActivity">
+        </activity>
 
     </application>
 

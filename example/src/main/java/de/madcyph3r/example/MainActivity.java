@@ -18,12 +18,14 @@ import de.madcyph3r.example.tools.AllMenuTypes;
 import de.madcyph3r.example.tools.BackPatternCustom;
 import de.madcyph3r.example.tools.BackPatternDefault;
 import de.madcyph3r.example.tools.BackPatternStartIndex;
+import de.madcyph3r.example.tools.ClosePreviousActivity;
 import de.madcyph3r.example.tools.CustomHeaderActivity;
 import de.madcyph3r.example.tools.FiveHeadItem;
 import de.madcyph3r.example.tools.FiveHeadItemExtraMenu;
 import de.madcyph3r.example.tools.HeadItemAvaterBackgroundClick;
 import de.madcyph3r.example.tools.HeadItemStartSecSection;
 import de.madcyph3r.example.tools.ImageHeaderActivity;
+import de.madcyph3r.example.tools.NoClosePreviousActivity;
 import de.madcyph3r.example.tools.NoHeaderActivity;
 import de.madcyph3r.example.tools.OneHeadItem;
 import de.madcyph3r.example.tools.OneHeadItemDark;
@@ -79,6 +81,8 @@ public class MainActivity extends ActionBarActivity {
         listValues.add("image header");
         listValues.add("two head item: on change listener and drawer listener");
         listValues.add("add and remove sections dynamically");
+        listValues.add("close drawer activity");
+        listValues.add("no close drawer actvity");
         // on drawer open close und head item change listener hinzufügen
 
         // initiate the listadapter
@@ -166,6 +170,12 @@ public class MainActivity extends ActionBarActivity {
                     startActivity(i);
                 }  else if(position == 24) {
                     Intent i = new Intent(ctx, OneHeadItemReloadMenu.class);
+                    startActivity(i);
+                }  else if(position == 25) {
+                     Intent i = new Intent(ctx, ClosePreviousActivity.class);
+                    startActivity(i);
+                } else if(position == 26) {
+                    Intent i = new Intent(ctx, NoClosePreviousActivity.class);
                     startActivity(i);
                 }
             }
