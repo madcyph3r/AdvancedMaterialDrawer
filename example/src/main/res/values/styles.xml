@@ -17,16 +17,23 @@
         <item name="autoDarkStatusBar">false</item>
         <!-- doesn't change the toolbar color on fragment change-->
         <item name="uniqueToolbarColor">true</item>
-        <item name="sectionStyle">@style/MySection</item>
+        <item name="sectionStyle">@style/MySectionTheme</item>
+        <item name="accountStyle">@style/MyMaterialAccountTheme</item>
     </style>
 
-    <style name="MySection" >
+    <style name="MySectionTheme" >
         <item name="sectionColorIcon">#3A74C5</item>
         <item name="sectionColorText">#3A74C5</item>
         <item name="sectionColorNotification">#3A74C5</item>
-        <item name="sectionBackgroundColorPressed">#163A74C5</item>
-        <item name="sectionBackgroundColorSelected">#0A3A74C5</item>
-        <item name="sectionBackgroundColor">#003A74C5</item>
+        <item name="sectionBackgroundColorPressed">#dbcbbc</item>
+        <item name="sectionBackgroundColorSelected">#feacff</item>
+        <item name="sectionBackgroundColor">#b9faff</item>
+    </style>
+
+    <style name="MyMaterialAccountTheme">
+        <item name="titleColor">#f9bd80</item>
+        <item name="subTitleColor">#f9bd80</item>
+        <item name="backgroundGradient">@drawable/red_gradient</item>
     </style>
 
 </resources>

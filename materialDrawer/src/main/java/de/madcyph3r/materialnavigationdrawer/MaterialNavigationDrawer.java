@@ -19,6 +19,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -45,6 +46,7 @@ import java.util.List;
 
 import de.madcyph3r.materialnavigationdrawer.listener.MaterialHeadItemChangeListener;
 import de.madcyph3r.materialnavigationdrawer.head.MaterialHeadItem;
+import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionChangeListener;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
 import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialDevisor;
 import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialLabel;
@@ -59,7 +61,7 @@ import de.madcyph3r.materialnavigationdrawer.tools.Utils;
  * @author created by neokree
  */
 @SuppressLint("InflateParams")
-public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivity implements MaterialSectionOnClickListener, MaterialHeadItem.OnHeadItemDataLoaded {
+public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivity implements MaterialSectionOnClickListener, MaterialSectionChangeListener, MaterialHeadItem.OnHeadItemDataLoaded {
 
     // static backpattern types
     public static final int BACKPATTERN_BACK_ANYWHERE = 0;
@@ -94,6 +96,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     private TextView headItemSubTitle;
     private ImageView headItemBackgroundSwitcher;
     private ImageButton headItemButtonSwitcher;
+    private LinearLayout headItemBackgroundGradientLL;
 
     // global vars view custom
     private LinearLayout customDrawerHeader;
@@ -105,9 +108,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     // global vars headItem
     private List<MaterialHeadItem> headItemManager;
     private MaterialHeadItemChangeListener headItemChangedListener;
+    private MaterialSectionChangeListener sectionChangedListener;
     private MaterialMenu headItemSwitchExtraMenu;
     private boolean headItemSwitchShowForce;
     private boolean headItemSwitcherOpen = false;
+    private Drawable headItemBackgroundGradient;
 
     // global vars menu
     private MaterialSection currentSection;
@@ -133,6 +138,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     private boolean finishActivityOnNewIntent;
     private DrawerLayout.DrawerListener drawerStateListener;
     private int drawerColor;
+    private int titleColor;
+    private int subTitleColor;
     private ActionBar actionBar;
 
     @Override
@@ -217,6 +224,12 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         drawerColor = typedValue.data;
         theme.resolveAttribute(R.attr.multipaneSupport, typedValue, false);
         multiPaneSupport = typedValue.data != 0;
+        theme.resolveAttribute(R.attr.titleColor, typedValue, true);
+        theme.resolveAttribute(R.attr.accountStyle, typedValue, true);
+        TypedArray values = theme.obtainStyledAttributes(typedValue.resourceId, R.styleable.MaterialAccount);
+        titleColor = values.getColor(R.styleable.MaterialAccount_titleColor, 0x00FFFFFF);
+        subTitleColor = values.getColor(R.styleable.MaterialAccount_subTitleColor, 0x00FFFFFF);
+        headItemBackgroundGradient = values.getDrawable(R.styleable.MaterialAccount_backgroundGradient);
     }
 
     private void initGlobalVars() {
@@ -240,6 +253,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         headItemSwitchExtraMenu = new MaterialMenu();
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @SuppressWarnings("deprecation")
     private void initViews() {
         // init toolbar & status bar
         statusBar = (ImageView) findViewById(R.id.statusBar);
@@ -255,17 +270,28 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         // init header, depends on setContentView
         if (drawerHeaderType == DRAWERHEADER_HEADITEMS) {
             headItemTitle = (TextView) this.findViewById(R.id.current_head_item_title);
+            headItemTitle.setTextColor(titleColor);
             headItemSubTitle = (TextView) this.findViewById(R.id.current_head_item_sub_title);
+            headItemSubTitle.setTextColor(subTitleColor);
             headItemFirstPhoto = (ImageView) this.findViewById(R.id.current_head_item_photo);
             headItemSecondPhoto = (ImageView) this.findViewById(R.id.second_head_item_photo);
             headItemThirdPhoto = (ImageView) this.findViewById(R.id.third_head_item_photo);
             headItemBackground = (ImageView) this.findViewById(R.id.current_back_item_background);
-            headItemBackgroundSwitcher = (ImageView) this.findViewById(R.id.user_cover_switcher);
+            headItemBackgroundSwitcher = (ImageView) this.findViewById(R.id.background_switcher);
             headItemButtonSwitcher = (ImageButton) this.findViewById(R.id.user_switcher);
+            headItemBackgroundGradientLL = (LinearLayout) this.findViewById(R.id.background_gradient);
+
+            int sdk = android.os.Build.VERSION.SDK_INT;
+            if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                headItemBackgroundGradientLL.setBackgroundDrawable(headItemBackgroundGradient);
+            } else {
+                headItemBackgroundGradientLL.setBackground(headItemBackgroundGradient);
+            }
         } else
             customDrawerHeader = (LinearLayout) this.findViewById(R.id.drawer_header);
 
         drawer.setBackgroundColor(drawerColor);
+
 
         // set sections
         sections = (LinearLayout) this.findViewById(R.id.sections);
@@ -844,11 +870,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         return Color.HSVToColor(hsv);
     }
 
-    public void unSelectOldSection(MaterialSection section) {
+    /*private void unSelectOldSection(MaterialSection section) {
         if (currentSection != null && section != currentSection) {
             currentSection.unSelect();
         }
-    }
+    }*/
 
     public void addMultiPaneSupport() {
         this.multiPaneSupport = true;
@@ -1018,60 +1044,108 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     // create section for the headItem changer menu
-    private MaterialSection newHeadSection(String title, Drawable icon, MaterialMenu menu, int position) {
-        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_CLICK, false);
+    private MaterialSection newHeadSection(String title, Drawable icon, MaterialMenu menu, int position, boolean refreshMenu) {
+        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_CLICK, false, this);
         section.setFillIconColor(false);
         section.setIcon(icon);
         section.setTitle(title);
         //section.setPosition(position);
         menu.addSection(section, position);
 
+        if (refreshMenu)
+            reloadMenu();
+
         return section;
+    }
+
+    private MaterialSection newHeadSection(String title, Drawable icon, MaterialMenu menu, int position) {
+        return newHeadSection(title, icon, menu, position, false);
+    }
+
+    private MaterialSection newHeadSection(String title, Drawable icon, MaterialMenu menu, boolean refreshMenu) {
+        return newHeadSection(title, icon, menu, menu.getSections().size(), refreshMenu);
     }
 
     private MaterialSection newHeadSection(String title, Drawable icon, MaterialMenu menu) {
         return newHeadSection(title, icon, menu, menu.getSections().size());
     }
 
-    public MaterialLabel newLabel(String label, boolean bottom, MaterialMenu menu, int position) {
+
+    public MaterialLabel newLabel(String label, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
         MaterialLabel labelM = new MaterialLabel(this, label, bottom);
         menu.addSection(labelM, position);
 
+        if (refreshMenu)
+            reloadMenu();
+
         return labelM;
+    }
+
+    public MaterialLabel newLabel(String label, boolean bottom, MaterialMenu menu, int position) {
+        return newLabel(label, bottom, menu, position, false);
+    }
+
+    public MaterialLabel newLabel(String label, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
+        return newLabel(label, bottom, menu, menu.getSections().size(), refreshMenu);
     }
 
     public MaterialLabel newLabel(String label, boolean bottom, MaterialMenu menu) {
         return newLabel(label, bottom, menu, menu.getSections().size());
     }
 
-    public MaterialDevisor newDevisor(MaterialMenu menu, int position) {
+
+    public MaterialDevisor newDevisor(MaterialMenu menu, int position, boolean refreshMenu) {
         MaterialDevisor devisor = new MaterialDevisor();
         menu.addSection(devisor, position);
 
+        if (refreshMenu)
+            reloadMenu();
+
         return devisor;
+    }
+
+    public MaterialDevisor newDevisor(MaterialMenu menu, int position) {
+        return newDevisor(menu, position, false);
+    }
+
+    public MaterialDevisor newDevisor(MaterialMenu menu, boolean refreshMenu) {
+        return newDevisor(menu, menu.getSections().size(), refreshMenu);
     }
 
     public MaterialDevisor newDevisor(MaterialMenu menu) {
         return newDevisor(menu, menu.getSections().size());
     }
 
+
     // create sections for a headItem
-    public MaterialSection newSection(String title, Drawable icon, boolean bottom, MaterialMenu menu, int position) {
-        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_CLICK, bottom);
+    public MaterialSection newSection(String title, Drawable icon, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
+        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_CLICK, bottom, this);
         section.setIcon(icon);
         section.setTitle(title);
         //section.setPosition(position);
         menu.addSection(section, position);
 
+        if (refreshMenu)
+            reloadMenu();
+
         return section;
+    }
+
+    public MaterialSection newSection(String title, Drawable icon, boolean bottom, MaterialMenu menu, int position) {
+        return newSection(title, icon, bottom, menu, position, false);
+    }
+
+    public MaterialSection newSection(String title, Drawable icon, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
+        return newSection(title, icon, bottom, menu, menu.getSections().size(), refreshMenu);
     }
 
     public MaterialSection newSection(String title, Drawable icon, boolean bottom, MaterialMenu menu) {
         return newSection(title, icon, bottom, menu, menu.getSections().size());
     }
 
-    public MaterialSection newSection(String title, Drawable icon, Fragment target, boolean bottom, MaterialMenu menu, int position) {
-        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_FRAGMENT, bottom);
+
+    public MaterialSection newSection(String title, Drawable icon, Fragment target, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
+        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_FRAGMENT, bottom, this);
         section.setOnClickListener(this);
         section.setIcon(icon);
         section.setTitle(title);
@@ -1079,15 +1153,27 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         //section.setPosition(position);
         menu.addSection(section, position);
 
+        if (refreshMenu)
+            reloadMenu();
+
         return section;
+    }
+
+    public MaterialSection newSection(String title, Drawable icon, Fragment target, boolean bottom, MaterialMenu menu, int position) {
+        return newSection(title, icon, target, bottom, menu, position, false);
+    }
+
+    public MaterialSection newSection(String title, Drawable icon, Fragment target, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
+        return newSection(title, icon, target, bottom, menu, menu.getSections().size(), refreshMenu);
     }
 
     public MaterialSection newSection(String title, Drawable icon, Fragment target, boolean bottom, MaterialMenu menu) {
         return newSection(title, icon, target, bottom, menu, menu.getSections().size());
     }
 
-    public MaterialSection newSection(String title, Drawable icon, Intent target, boolean bottom, MaterialMenu menu, int position) {
-        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_ACTIVITY, bottom);
+
+    public MaterialSection newSection(String title, Drawable icon, Intent target, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
+        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_ACTIVITY, bottom, this);
         section.setOnClickListener(this);
         section.setIcon(icon);
         section.setTitle(title);
@@ -1095,28 +1181,52 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         //section.setPosition(position);
         menu.addSection(section, position);
 
+        if (refreshMenu)
+            reloadMenu();
+
         return section;
+    }
+
+    public MaterialSection newSection(String title, Drawable icon, Intent target, boolean bottom, MaterialMenu menu, int position) {
+        return newSection(title, icon, target, bottom, menu, position, false);
+    }
+
+    public MaterialSection newSection(String title, Drawable icon, Intent target, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
+        return newSection(title, icon, target, bottom, menu, menu.getSections().size(), refreshMenu);
     }
 
     public MaterialSection newSection(String title, Drawable icon, Intent target, boolean bottom, MaterialMenu menu) {
         return newSection(title, icon, target, bottom, menu, menu.getSections().size());
     }
 
-    public MaterialSection newSection(String title, Bitmap icon, boolean bottom, MaterialMenu menu, int position) {
-        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_CLICK, bottom);
+
+    public MaterialSection newSection(String title, Bitmap icon, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
+        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_CLICK, bottom, this);
         section.setIcon(icon);
         section.setTitle(title);
         menu.addSection(section, position);
 
+        if (refreshMenu)
+            reloadMenu();
+
         return section;
+    }
+
+    public MaterialSection newSection(String title, Bitmap icon, boolean bottom, MaterialMenu menu, int position) {
+        return newSection(title, icon, bottom, menu, position, false);
+    }
+
+    public MaterialSection newSection(String title, Bitmap icon, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
+        return newSection(title, icon, bottom, menu, menu.getSections().size(), refreshMenu);
     }
 
     public MaterialSection newSection(String title, Bitmap icon, boolean bottom, MaterialMenu menu) {
         return newSection(title, icon, bottom, menu, menu.getSections().size());
     }
 
-    public MaterialSection newSection(String title, Bitmap icon, Fragment target, boolean bottom, MaterialMenu menu, int position) {
-        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_FRAGMENT, bottom);
+
+    public MaterialSection newSection(String title, Bitmap icon, Fragment target, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
+        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_FRAGMENT, bottom, this);
         section.setOnClickListener(this);
         section.setIcon(icon);
         section.setTitle(title);
@@ -1124,15 +1234,27 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         //section.setPosition(menu.getSections().size());
         menu.addSection(section, position);
 
+        if (refreshMenu)
+            reloadMenu();
+
         return section;
+    }
+
+    public MaterialSection newSection(String title, Bitmap icon, Fragment target, boolean bottom, MaterialMenu menu, int position) {
+        return newSection(title, icon, target, bottom, menu, position, false);
+    }
+
+    public MaterialSection newSection(String title, Bitmap icon, Fragment target, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
+        return newSection(title, icon, target, bottom, menu, menu.getSections().size(), refreshMenu);
     }
 
     public MaterialSection newSection(String title, Bitmap icon, Fragment target, boolean bottom, MaterialMenu menu) {
         return newSection(title, icon, target, bottom, menu, menu.getSections().size());
     }
 
-    public MaterialSection newSection(String title, Bitmap icon, Intent target, boolean bottom, MaterialMenu menu, int position) {
-        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_ACTIVITY, bottom);
+
+    public MaterialSection newSection(String title, Bitmap icon, Intent target, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
+        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_ACTIVITY, bottom, this);
         section.setOnClickListener(this);
         section.setIcon(icon);
         section.setTitle(title);
@@ -1140,50 +1262,97 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         //section.setPosition(menu.getSections().size());
         menu.addSection(section, position);
 
+        if (refreshMenu)
+            reloadMenu();
+
         return section;
+    }
+
+    public MaterialSection newSection(String title, Bitmap icon, Intent target, boolean bottom, MaterialMenu menu, int position) {
+        return newSection(title, icon, target, bottom, menu, position, false);
+    }
+
+    public MaterialSection newSection(String title, Bitmap icon, Intent target, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
+        return newSection(title, icon, target, bottom, menu, menu.getSections().size(), refreshMenu);
     }
 
     public MaterialSection newSection(String title, Bitmap icon, Intent target, boolean bottom, MaterialMenu menu) {
         return newSection(title, icon, target, bottom, menu, menu.getSections().size());
     }
 
-    public MaterialSection newSection(String title, boolean bottom, MaterialMenu menu, int position) {
-        MaterialSection section = new MaterialSection<Fragment>(this, false, MaterialSection.TARGET_CLICK, bottom);
+
+    public MaterialSection newSection(String title, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
+        MaterialSection section = new MaterialSection<Fragment>(this, false, MaterialSection.TARGET_CLICK, bottom, this);
         section.setTitle(title);
         //section.setPosition(menu.getSections().size());
         menu.addSection(section, position);
 
+        if (refreshMenu)
+            reloadMenu();
+
         return section;
+    }
+
+    public MaterialSection newSection(String title, boolean bottom, MaterialMenu menu, int position) {
+        return newSection(title, bottom, menu, position, false);
+    }
+
+    public MaterialSection newSection(String title, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
+        return newSection(title, bottom, menu, menu.getSections().size(), refreshMenu);
     }
 
     public MaterialSection newSection(String title, boolean bottom, MaterialMenu menu) {
         return newSection(title, bottom, menu, menu.getSections().size());
     }
 
-    public MaterialSection newSection(String title, Fragment target, boolean bottom, MaterialMenu menu, int position) {
-        MaterialSection section = new MaterialSection<Fragment>(this, false, MaterialSection.TARGET_FRAGMENT, bottom);
+
+    public MaterialSection newSection(String title, Fragment target, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
+        MaterialSection section = new MaterialSection<Fragment>(this, false, MaterialSection.TARGET_FRAGMENT, bottom, this);
         section.setOnClickListener(this);
         section.setTitle(title);
         section.setTarget(target);
         //section.setPosition(menu.getSections().size());
         menu.addSection(section, position);
 
+        if (refreshMenu)
+            reloadMenu();
+
         return section;
+    }
+
+    public MaterialSection newSection(String title, Fragment target, boolean bottom, MaterialMenu menu, int position) {
+        return newSection(title, target, bottom, menu, position, false);
+    }
+
+    public MaterialSection newSection(String title, Fragment target, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
+        return newSection(title, target, bottom, menu, menu.getSections().size(), refreshMenu);
     }
 
     public MaterialSection newSection(String title, Fragment target, boolean bottom, MaterialMenu menu) {
         return newSection(title, target, bottom, menu, menu.getSections().size());
     }
 
-    public MaterialSection newSection(String title, Intent target, boolean bottom, MaterialMenu menu, int position) {
-        MaterialSection section = new MaterialSection<Fragment>(this, false, MaterialSection.TARGET_ACTIVITY, bottom);
+
+    public MaterialSection newSection(String title, Intent target, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
+        MaterialSection section = new MaterialSection<Fragment>(this, false, MaterialSection.TARGET_ACTIVITY, bottom, this);
         section.setOnClickListener(this);
         section.setTitle(title);
         section.setTarget(target);
         //section.setPosition(menu.getSections().size());
         menu.addSection(section, position);
 
+        if (refreshMenu)
+            reloadMenu();
+
         return section;
+    }
+
+    public MaterialSection newSection(String title, Intent target, boolean bottom, MaterialMenu menu, int position) {
+        return newSection(title, target, bottom, menu, position, false);
+    }
+
+    public MaterialSection newSection(String title, Intent target, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
+        return newSection(title, target, bottom, menu, menu.getSections().size(), refreshMenu);
     }
 
     public MaterialSection newSection(String title, Intent target, boolean bottom, MaterialMenu menu) {
@@ -1453,26 +1622,41 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         recycleHeadItem();
     }
 
+
     @Override
-    public void onClick(MaterialSection section, View view) {
+    public void onClick(final MaterialSection section, View view) {
         if (section != currentSection) {
 
             if (section.getTarget() == MaterialSection.TARGET_FRAGMENT) {
-                unSelectOldSection(section);
-                if (currentSection != null)
+                //unSelectOldSection(section);
+                if (currentSection != null) {
+                    currentSection.unSelect();
                     setFragment((Fragment) section.getTargetFragment(), section.getTitle(), (Fragment) currentSection.getTargetFragment(), true);
-                else
+                } else
                     setFragment((Fragment) section.getTargetFragment(), section.getTitle(), null, true);
 
                 changeToolbarColor(section);
                 currentSection = section;
             } else if (section.getTarget() == MaterialSection.TARGET_ACTIVITY) {
                 section.unSelect();
-                this.startActivity(section.getTargetIntent());
+
                 //finish();
-                if (finishActivityOnNewIntent)
+               /* if (finishActivityOnNewIntent) {
+                    this.startActivity(section.getTargetIntent());
                     finish();
-                else closeDrawer();
+                } else {*/
+
+                // smooth close drawer before activity start
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(section.getTargetIntent());
+                        if (finishActivityOnNewIntent)
+                            finish();
+                    }
+                }, 200);
+
+                closeDrawer();
             }
         }
     }
@@ -1629,5 +1813,15 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
     public void setThirdHeadItemPhoto(Drawable photo) {
         headItemThirdPhoto.setImageDrawable(photo);
+    }
+
+    @Override
+    public void onBeforeChangedSection(MaterialSection newSection) {
+
+    }
+
+    @Override
+    public void onAfterChangedSection(MaterialSection newSection) {
+
     }
 }

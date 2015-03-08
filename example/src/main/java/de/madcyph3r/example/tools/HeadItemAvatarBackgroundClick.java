@@ -18,7 +18,7 @@ import de.madcyph3r.materialnavigationdrawer.tools.RoundedCornersDrawable;
 /**
  * Created by marc on 23.02.2015.
  */
-public class HeadItemAvaterBackgroundClick extends MaterialNavigationDrawer {
+public class HeadItemAvatarBackgroundClick extends MaterialNavigationDrawer {
 
     MaterialNavigationDrawer drawer = null;
 

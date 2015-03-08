@@ -25,7 +25,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/userSpace"
-                android:id="@+id/user_cover_switcher"
+                android:id="@+id/background_switcher"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
@@ -96,7 +96,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/gradient"
+                android:id="@+id/background_gradient"
                 android:layout_width="wrap_content"
                 android:layout_height="56dp"
                 android:layout_alignBottom="@+id/current_back_item_background"

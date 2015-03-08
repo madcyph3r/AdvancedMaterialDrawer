@@ -38,6 +38,9 @@ public class OneHeadItemMyTheme extends MaterialNavigationDrawer {
         // first section is loaded
         MaterialSection section1 = this.newSection("Section 1", this.getResources().getDrawable(R.drawable.ic_favorite_black_36dp), new FragmentIndex(), false, menu);
         MaterialSection section2 = this.newSection("Section 2", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu).setSectionColor(Color.parseColor("#ff0000"));
+        MaterialSection section3 = this.newSection("Section 3", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu);
+        MaterialSection section4 = this.newSection("Section 4", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu);
+
 
         // use bitmap and make a circle photo
         final Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.app_drawer_icon);

@@ -69,11 +69,24 @@ public class OneHeadItemReloadMenu extends MaterialNavigationDrawer {
                 //getCurrentMenu().getRealSectionPosition(yourSection), this give you the real position of an item, to remove it
                 Object o = getCurrentMenu().getItem(0);
                 getCurrentMenu().removeItem(0); // can remove devisor and labels too
-                if(o instanceof MaterialSection && (MaterialSection) o == getCurrentSection()) {
+                if (o instanceof MaterialSection && (MaterialSection) o == getCurrentSection()) {
                     reloadMenu(-1); // load the first fragment with an section, because the current section is removed
                 } else {
                     reloadMenu();
                 }
+            }
+        });
+
+
+        MaterialSection section5 = this.newSection("add one section", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu);
+
+        section5.setOnClickListener(new MaterialSectionOnClickListener() {
+            @Override
+            public void onClick(MaterialSection section, View v) {
+                Toast.makeText(drawer, "added one section", Toast.LENGTH_SHORT).show();
+
+                // last true make the refresh possible. then you don't must call reloadMenu(); method
+                drawer.newSection("added one", drawer.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu, true);
             }
         });
 

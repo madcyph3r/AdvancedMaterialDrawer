@@ -8,7 +8,7 @@
         <item name="labelColor">#888888</item>
         <item name="uniqueToolbarColor">false</item>
         <item name="sectionStyle">@style/MaterialSectionTheme</item>
-        <item name="subheaderStyle">@style/MaterialSubheaderTheme</item>
+        <!--<item name="subheaderStyle">@style/MaterialSubheaderTheme</item>-->
         <item name="accountStyle">@style/MaterialAccountTheme</item>
         <item name="multipaneSupport">false</item>
         <item name="autoDarkStatusBar">true</item>
@@ -21,8 +21,8 @@
         <item name="labelColor">#afafaf</item>
         <item name="uniqueToolbarColor">false</item>
         <item name="sectionStyle">@style/MaterialSectionTheme.Light</item>
-        <item name="subheaderStyle">@style/MaterialSubheaderTheme.Light</item>
-        <item name="accountStyle">@style/MaterialAccountTheme</item>
+        <!--<item name="subheaderStyle">@style/MaterialSubheaderTheme.Light</item>-->
+        <item name="accountStyle">@style/MaterialAccountTheme.Light</item>
         <item name="multipaneSupport">false</item>
         <item name="autoDarkStatusBar">true</item>
     </style>
@@ -36,8 +36,8 @@
         <item name="drawerColor">#fafafa</item>
         <item name="labelColor">#afafaf</item>
         <item name="sectionStyle">@style/MaterialSectionTheme.Light</item>
-        <item name="subheaderStyle">@style/MaterialSubheaderTheme.Light</item>
-        <item name="accountStyle">@style/MaterialAccountTheme</item>
+       <!-- <item name="subheaderStyle">@style/MaterialSubheaderTheme.Light</item>-->
+        <item name="accountStyle">@style/MaterialAccountTheme.Light</item>
         <item name="multipaneSupport">false</item>
         <item name="autoDarkStatusBar">true</item>
     </style>

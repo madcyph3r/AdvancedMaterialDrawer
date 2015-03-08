@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionChangeListener;
 import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionOnClickListener;
 import de.madcyph3r.materialnavigationdrawer.R;
 
@@ -28,6 +29,7 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
     private TextView notifications;
     private ImageView icon;
     private MaterialSectionOnClickListener listener;
+    private MaterialSectionChangeListener changeListener;
     private boolean isSelected;
     private int targetType;
     private int sectionColor;
@@ -54,8 +56,9 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
 
     private boolean hasIcon = false;
 
-    public MaterialSection(Context ctx, boolean hasIcon, int target, boolean bottom) {
+    public MaterialSection(Context ctx, boolean hasIcon, int target, boolean bottom, MaterialSectionChangeListener changeListener) {
 
+        this.changeListener = changeListener;
         this.bottom = bottom;
         this.hasIcon = hasIcon;
 
@@ -137,7 +140,10 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
             if (listener != null) {
                 final MaterialSection section = this;
                 view.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+
+                changeListener.onBeforeChangedSection(this);
                 listener.onClick(section, v);
+                changeListener.onAfterChangedSection(this);
 
                 /*v.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -168,6 +168,8 @@ public class MaterialHeadItem {
         loadFragmentOnChanged = true;
     }
 
+
+
     // setter
     public void setPhoto(Drawable photo) {
         this.photo = photo;

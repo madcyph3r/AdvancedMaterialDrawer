@@ -11,10 +11,10 @@
     </declare-styleable>
 
     <declare-styleable name="MaterialNavigationDrawer">
-        <attr name="drawerType" format="integer" /><!-- Tipologia del drawer -->
-        <attr name="uniqueToolbarColor" format="boolean" /><!-- La toolbar non cambia mai di colore -->
+        <attr name="drawerType" format="integer" />
+        <attr name="uniqueToolbarColor" format="boolean" />
         <attr name="multipaneSupport" format="boolean" />
-        <attr name="drawerColor" format="color" /><!-- Colore del drawer -->
+        <attr name="drawerColor" format="color" />
         <attr name="labelColor" format="color" />
         <attr name="sectionStyle" format="reference" />
         <attr name="subheaderStyle" format="reference"/>
@@ -22,13 +22,14 @@
         <attr name="accountStyle" format="reference" />
     </declare-styleable>
 
-    <declare-styleable name="MaterialSubheader">
+ <!--   <declare-styleable name="MaterialSubheader">
         <attr name="subheaderTitleColor" format="color"/>
-    </declare-styleable>
+    </declare-styleable>-->
     
     <declare-styleable name="MaterialAccount">
         <attr name="titleColor" format="color" />
-        <attr name="subtitleColor" format="color" />
+        <attr name="subTitleColor" format="color" />
+        <attr name="backgroundGradient" format="reference" />
     </declare-styleable>
 
 </resources>

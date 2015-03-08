@@ -22,7 +22,7 @@ import de.madcyph3r.example.tools.ClosePreviousActivity;
 import de.madcyph3r.example.tools.CustomHeaderActivity;
 import de.madcyph3r.example.tools.FiveHeadItem;
 import de.madcyph3r.example.tools.FiveHeadItemExtraMenu;
-import de.madcyph3r.example.tools.HeadItemAvaterBackgroundClick;
+import de.madcyph3r.example.tools.HeadItemAvatarBackgroundClick;
 import de.madcyph3r.example.tools.HeadItemStartSecSection;
 import de.madcyph3r.example.tools.ImageHeaderActivity;
 import de.madcyph3r.example.tools.NoClosePreviousActivity;
@@ -34,6 +34,7 @@ import de.madcyph3r.example.tools.OneHeadItemLight;
 import de.madcyph3r.example.tools.OneHeadItemOwnDrawerWidth;
 import de.madcyph3r.example.tools.OneHeadItemOwnFragment;
 import de.madcyph3r.example.tools.OneHeadItemReloadMenu;
+import de.madcyph3r.example.tools.SectionChangeListener;
 import de.madcyph3r.example.tools.ThreeHeadItem;
 import de.madcyph3r.example.tools.ThreeHeadItemNoCloseDrawer;
 import de.madcyph3r.example.tools.TwoHeadItemChangeListenerDrawerListener;
@@ -83,6 +84,7 @@ public class MainActivity extends ActionBarActivity {
         listValues.add("add and remove sections dynamically");
         listValues.add("close drawer activity");
         listValues.add("no close drawer actvity");
+        listValues.add("section change listener");
         // on drawer open close und head item change listener hinzufügen
 
         // initiate the listadapter
@@ -112,7 +114,7 @@ public class MainActivity extends ActionBarActivity {
                     Intent i = new Intent(ctx, HeadItemStartSecSection.class);
                     startActivity(i);
                 } else if(position == 5) {
-                    Intent i = new Intent(ctx, HeadItemAvaterBackgroundClick.class);
+                    Intent i = new Intent(ctx, HeadItemAvatarBackgroundClick.class);
                     startActivity(i);
                 } else if(position == 6) {
                     Intent i = new Intent(ctx, ThreeHeadItemNoCloseDrawer.class);
@@ -176,6 +178,9 @@ public class MainActivity extends ActionBarActivity {
                     startActivity(i);
                 } else if(position == 26) {
                     Intent i = new Intent(ctx, NoClosePreviousActivity.class);
+                    startActivity(i);
+                }  else if(position == 27) {
+                    Intent i = new Intent(ctx, SectionChangeListener.class);
                     startActivity(i);
                 }
             }
