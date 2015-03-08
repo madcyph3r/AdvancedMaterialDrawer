@@ -72,7 +72,7 @@ activity#de.madcyph3r.example.tools.HeadItemStartSecSection
 ADDED from AndroidManifest.xml:31:9
 	android:name
 		ADDED from AndroidManifest.xml:31:19
-activity#de.madcyph3r.example.tools.HeadItemAvaterBackgroundClick
+activity#de.madcyph3r.example.tools.HeadItemAvatarBackgroundClick
 ADDED from AndroidManifest.xml:33:9
 	android:name
 		ADDED from AndroidManifest.xml:33:19
@@ -158,12 +158,28 @@ activity#de.madcyph3r.example.tools.OneHeadItemReloadMenu
 ADDED from AndroidManifest.xml:77:9
 	android:name
 		ADDED from AndroidManifest.xml:77:19
+activity#de.madcyph3r.example.tools.ClosePreviousActivity
+ADDED from AndroidManifest.xml:79:9
+	android:name
+		ADDED from AndroidManifest.xml:79:19
+activity#de.madcyph3r.example.tools.NoClosePreviousActivity
+ADDED from AndroidManifest.xml:81:9
+	android:name
+		ADDED from AndroidManifest.xml:81:19
+activity#de.madcyph3r.example.SecondActivity
+ADDED from AndroidManifest.xml:83:9
+	android:name
+		ADDED from AndroidManifest.xml:83:19
+activity#de.madcyph3r.example.tools.SectionChangeListener
+ADDED from AndroidManifest.xml:85:9
+	android:name
+		ADDED from AndroidManifest.xml:85:19
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:21.0.3:15:5
 MERGED from com.android.support:support-v4:21.0.3:15:5
 MERGED from com.amulyakhare:com.amulyakhare.textdrawable:1.0.0:8:5
-MERGED from MaterialDrawer:materialDrawer:1.0.6:18:5
+MERGED from de.madcyph3r:materialDrawer:1.0.7:18:5
 MERGED from com.android.support:appcompat-v7:21.0.3:15:5
 MERGED from com.android.support:support-v4:21.0.3:15:5
 	android:targetSdkVersion
