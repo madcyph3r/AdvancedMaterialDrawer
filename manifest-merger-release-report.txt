@@ -179,7 +179,7 @@ INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:21.0.3:15:5
 MERGED from com.android.support:support-v4:21.0.3:15:5
 MERGED from com.amulyakhare:com.amulyakhare.textdrawable:1.0.0:8:5
-MERGED from de.madcyph3r:materialDrawer:1.0.7:18:5
+MERGED from MaterialDrawer:materialDrawer:1.0.8.1:18:5
 MERGED from com.android.support:appcompat-v7:21.0.3:15:5
 MERGED from com.android.support:support-v4:21.0.3:15:5
 	android:targetSdkVersion
