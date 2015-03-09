@@ -3,6 +3,7 @@ AdvancedMaterialDrawer
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-AdvancedMaterialDrawer-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1617) [![API](https://img.shields.io/badge/API-10%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=10)
 
+[![Donate](https://www.paypalobjects.com/en_GB/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FXXJENAV99CNQ)
 A Gmail-like Material Drawer implementation 
 
 Based on neokree's [MaterialDrawer](https://github.com/neokree/MaterialNavigationDrawer) library.
