@@ -102,7 +102,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     private LinearLayout customDrawerHeader;
 
     // global vars view menu
-    private LinearLayout sections;
+    private LinearLayout items;
     private LinearLayout bottomSections;
 
     // global vars headItem
@@ -293,8 +293,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         drawer.setBackgroundColor(drawerColor);
 
 
-        // set sections
-        sections = (LinearLayout) this.findViewById(R.id.sections);
+        // set items
+        items = (LinearLayout) this.findViewById(R.id.items);
         bottomSections = (LinearLayout) this.findViewById(R.id.bottom_sections);
     }
 
@@ -507,7 +507,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
             if ((headItemManager.get(0).getMenu() != null && currentMenu != headItemManager.get(0).getMenu()) || currentMenu == null) {
                 currentMenu = headItemManager.get(0).getMenu();
             } else {
-                if (currentMenu.getSections().size() == 0)
+                if (currentMenu.getItems().size() == 0)
                     loadMenu = false;
             }
         }
@@ -517,10 +517,10 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         }
 
         if (loadMenu) {
-            sections.removeAllViews();
+            items.removeAllViews();
             bottomSections.removeAllViews();
             // create Menu
-            List<Object> sectionList = currentMenu.getSections();
+            List<Object> sectionList = currentMenu.getItems();
             for (int i = 0; i < sectionList.size(); i++) {
                 if (sectionList.get(i) instanceof MaterialSection) {
                     MaterialSection section = (MaterialSection) sectionList.get(i);
@@ -544,7 +544,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                 }
             }
 
-            // unselect all sections
+            // unselect all items
             for (int i = 0; i < sectionList.size(); i++) {
                 try {
                     ((MaterialSection) sectionList.get(i)).unSelect();
@@ -592,11 +592,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
     private void loadHeadItemMenu() {
         // remove all section views
-        sections.removeAllViews();
+        items.removeAllViews();
         bottomSections.removeAllViews();
 
         // show current menu
-        List<Object> sectionList = currentMenu.getSections();
+        List<Object> sectionList = currentMenu.getItems();
         for (int i = 0; i < sectionList.size(); i++) {
             if (sectionList.get(i) instanceof MaterialSection) {
                 MaterialSection section = (MaterialSection) sectionList.get(i);
@@ -925,7 +925,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
     private void addLabel(MaterialLabel label) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (48 * displayDensity));
-        sections.addView(label.getView(), params);
+        items.addView(label.getView(), params);
     }
 
     private void addBottomLabel(MaterialLabel label) {
@@ -935,7 +935,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
     private void addSection(MaterialSection section) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (48 * displayDensity));
-        sections.addView(section.getView(), params);
+        items.addView(section.getView(), params);
     }
 
     private void addBottomSection(MaterialSection section) {
@@ -947,14 +947,14 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.layout_divisor, null, false);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        sections.addView(view, params);
+        items.addView(view, params);
     }
 
     private void addDevisorBottom() {
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.layout_divisor, null, false);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        sections.addView(view, params);
+        items.addView(view, params);
     }
 
     public void removeHeadItem(MaterialHeadItem headItem) {
@@ -1050,7 +1050,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         section.setIcon(icon);
         section.setTitle(title);
         //section.setPosition(position);
-        menu.addSection(section, position);
+        menu.addItem(section, position);
 
         if (refreshMenu)
             reloadMenu();
@@ -1063,17 +1063,17 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     private MaterialSection newHeadSection(String title, Drawable icon, MaterialMenu menu, boolean refreshMenu) {
-        return newHeadSection(title, icon, menu, menu.getSections().size(), refreshMenu);
+        return newHeadSection(title, icon, menu, menu.getItems().size(), refreshMenu);
     }
 
     private MaterialSection newHeadSection(String title, Drawable icon, MaterialMenu menu) {
-        return newHeadSection(title, icon, menu, menu.getSections().size());
+        return newHeadSection(title, icon, menu, menu.getItems().size());
     }
 
 
     public MaterialLabel newLabel(String label, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
         MaterialLabel labelM = new MaterialLabel(this, label, bottom);
-        menu.addSection(labelM, position);
+        menu.addItem(labelM, position);
 
         if (refreshMenu)
             reloadMenu();
@@ -1086,17 +1086,17 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     public MaterialLabel newLabel(String label, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
-        return newLabel(label, bottom, menu, menu.getSections().size(), refreshMenu);
+        return newLabel(label, bottom, menu, menu.getItems().size(), refreshMenu);
     }
 
     public MaterialLabel newLabel(String label, boolean bottom, MaterialMenu menu) {
-        return newLabel(label, bottom, menu, menu.getSections().size());
+        return newLabel(label, bottom, menu, menu.getItems().size());
     }
 
 
     public MaterialDevisor newDevisor(MaterialMenu menu, int position, boolean refreshMenu) {
         MaterialDevisor devisor = new MaterialDevisor();
-        menu.addSection(devisor, position);
+        menu.addItem(devisor, position);
 
         if (refreshMenu)
             reloadMenu();
@@ -1109,21 +1109,21 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     public MaterialDevisor newDevisor(MaterialMenu menu, boolean refreshMenu) {
-        return newDevisor(menu, menu.getSections().size(), refreshMenu);
+        return newDevisor(menu, menu.getItems().size(), refreshMenu);
     }
 
     public MaterialDevisor newDevisor(MaterialMenu menu) {
-        return newDevisor(menu, menu.getSections().size());
+        return newDevisor(menu, menu.getItems().size());
     }
 
 
-    // create sections for a headItem
+    // create items for a headItem
     public MaterialSection newSection(String title, Drawable icon, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
         MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_CLICK, bottom, this);
         section.setIcon(icon);
         section.setTitle(title);
         //section.setPosition(position);
-        menu.addSection(section, position);
+        menu.addItem(section, position);
 
         if (refreshMenu)
             reloadMenu();
@@ -1136,11 +1136,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     public MaterialSection newSection(String title, Drawable icon, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
-        return newSection(title, icon, bottom, menu, menu.getSections().size(), refreshMenu);
+        return newSection(title, icon, bottom, menu, menu.getItems().size(), refreshMenu);
     }
 
     public MaterialSection newSection(String title, Drawable icon, boolean bottom, MaterialMenu menu) {
-        return newSection(title, icon, bottom, menu, menu.getSections().size());
+        return newSection(title, icon, bottom, menu, menu.getItems().size());
     }
 
 
@@ -1151,7 +1151,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         section.setTitle(title);
         section.setTarget(target);
         //section.setPosition(position);
-        menu.addSection(section, position);
+        menu.addItem(section, position);
 
         if (refreshMenu)
             reloadMenu();
@@ -1164,11 +1164,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     public MaterialSection newSection(String title, Drawable icon, Fragment target, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
-        return newSection(title, icon, target, bottom, menu, menu.getSections().size(), refreshMenu);
+        return newSection(title, icon, target, bottom, menu, menu.getItems().size(), refreshMenu);
     }
 
     public MaterialSection newSection(String title, Drawable icon, Fragment target, boolean bottom, MaterialMenu menu) {
-        return newSection(title, icon, target, bottom, menu, menu.getSections().size());
+        return newSection(title, icon, target, bottom, menu, menu.getItems().size());
     }
 
 
@@ -1179,7 +1179,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         section.setTitle(title);
         section.setTarget(target);
         //section.setPosition(position);
-        menu.addSection(section, position);
+        menu.addItem(section, position);
 
         if (refreshMenu)
             reloadMenu();
@@ -1192,11 +1192,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     public MaterialSection newSection(String title, Drawable icon, Intent target, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
-        return newSection(title, icon, target, bottom, menu, menu.getSections().size(), refreshMenu);
+        return newSection(title, icon, target, bottom, menu, menu.getItems().size(), refreshMenu);
     }
 
     public MaterialSection newSection(String title, Drawable icon, Intent target, boolean bottom, MaterialMenu menu) {
-        return newSection(title, icon, target, bottom, menu, menu.getSections().size());
+        return newSection(title, icon, target, bottom, menu, menu.getItems().size());
     }
 
 
@@ -1204,7 +1204,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_CLICK, bottom, this);
         section.setIcon(icon);
         section.setTitle(title);
-        menu.addSection(section, position);
+        menu.addItem(section, position);
 
         if (refreshMenu)
             reloadMenu();
@@ -1217,11 +1217,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     public MaterialSection newSection(String title, Bitmap icon, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
-        return newSection(title, icon, bottom, menu, menu.getSections().size(), refreshMenu);
+        return newSection(title, icon, bottom, menu, menu.getItems().size(), refreshMenu);
     }
 
     public MaterialSection newSection(String title, Bitmap icon, boolean bottom, MaterialMenu menu) {
-        return newSection(title, icon, bottom, menu, menu.getSections().size());
+        return newSection(title, icon, bottom, menu, menu.getItems().size());
     }
 
 
@@ -1231,8 +1231,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         section.setIcon(icon);
         section.setTitle(title);
         section.setTarget(target);
-        //section.setPosition(menu.getSections().size());
-        menu.addSection(section, position);
+        //section.setPosition(menu.getItems().size());
+        menu.addItem(section, position);
 
         if (refreshMenu)
             reloadMenu();
@@ -1245,11 +1245,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     public MaterialSection newSection(String title, Bitmap icon, Fragment target, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
-        return newSection(title, icon, target, bottom, menu, menu.getSections().size(), refreshMenu);
+        return newSection(title, icon, target, bottom, menu, menu.getItems().size(), refreshMenu);
     }
 
     public MaterialSection newSection(String title, Bitmap icon, Fragment target, boolean bottom, MaterialMenu menu) {
-        return newSection(title, icon, target, bottom, menu, menu.getSections().size());
+        return newSection(title, icon, target, bottom, menu, menu.getItems().size());
     }
 
 
@@ -1259,8 +1259,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         section.setIcon(icon);
         section.setTitle(title);
         section.setTarget(target);
-        //section.setPosition(menu.getSections().size());
-        menu.addSection(section, position);
+        //section.setPosition(menu.getItems().size());
+        menu.addItem(section, position);
 
         if (refreshMenu)
             reloadMenu();
@@ -1273,19 +1273,19 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     public MaterialSection newSection(String title, Bitmap icon, Intent target, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
-        return newSection(title, icon, target, bottom, menu, menu.getSections().size(), refreshMenu);
+        return newSection(title, icon, target, bottom, menu, menu.getItems().size(), refreshMenu);
     }
 
     public MaterialSection newSection(String title, Bitmap icon, Intent target, boolean bottom, MaterialMenu menu) {
-        return newSection(title, icon, target, bottom, menu, menu.getSections().size());
+        return newSection(title, icon, target, bottom, menu, menu.getItems().size());
     }
 
 
     public MaterialSection newSection(String title, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
         MaterialSection section = new MaterialSection<Fragment>(this, false, MaterialSection.TARGET_CLICK, bottom, this);
         section.setTitle(title);
-        //section.setPosition(menu.getSections().size());
-        menu.addSection(section, position);
+        //section.setPosition(menu.getItems().size());
+        menu.addItem(section, position);
 
         if (refreshMenu)
             reloadMenu();
@@ -1298,11 +1298,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     public MaterialSection newSection(String title, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
-        return newSection(title, bottom, menu, menu.getSections().size(), refreshMenu);
+        return newSection(title, bottom, menu, menu.getItems().size(), refreshMenu);
     }
 
     public MaterialSection newSection(String title, boolean bottom, MaterialMenu menu) {
-        return newSection(title, bottom, menu, menu.getSections().size());
+        return newSection(title, bottom, menu, menu.getItems().size());
     }
 
 
@@ -1311,8 +1311,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         section.setOnClickListener(this);
         section.setTitle(title);
         section.setTarget(target);
-        //section.setPosition(menu.getSections().size());
-        menu.addSection(section, position);
+        //section.setPosition(menu.getItems().size());
+        menu.addItem(section, position);
 
         if (refreshMenu)
             reloadMenu();
@@ -1325,11 +1325,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     public MaterialSection newSection(String title, Fragment target, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
-        return newSection(title, target, bottom, menu, menu.getSections().size(), refreshMenu);
+        return newSection(title, target, bottom, menu, menu.getItems().size(), refreshMenu);
     }
 
     public MaterialSection newSection(String title, Fragment target, boolean bottom, MaterialMenu menu) {
-        return newSection(title, target, bottom, menu, menu.getSections().size());
+        return newSection(title, target, bottom, menu, menu.getItems().size());
     }
 
 
@@ -1338,8 +1338,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         section.setOnClickListener(this);
         section.setTitle(title);
         section.setTarget(target);
-        //section.setPosition(menu.getSections().size());
-        menu.addSection(section, position);
+        //section.setPosition(menu.getItems().size());
+        menu.addItem(section, position);
 
         if (refreshMenu)
             reloadMenu();
@@ -1352,11 +1352,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     public MaterialSection newSection(String title, Intent target, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
-        return newSection(title, target, bottom, menu, menu.getSections().size(), refreshMenu);
+        return newSection(title, target, bottom, menu, menu.getItems().size(), refreshMenu);
     }
 
     public MaterialSection newSection(String title, Intent target, boolean bottom, MaterialMenu menu) {
-        return newSection(title, target, bottom, menu, menu.getSections().size());
+        return newSection(title, target, bottom, menu, menu.getItems().size());
     }
 
     // abstract methods
@@ -1507,7 +1507,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                 }
 
                 // add extra menu
-                menu.getSections().addAll(headItemSwitchExtraMenu.getSections());
+                menu.getItems().addAll(headItemSwitchExtraMenu.getItems());
 
                 currentMenu = menu;
                 loadHeadItemMenu();
@@ -1585,7 +1585,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                 super.onBackPressed();
                 break;
             case BACKPATTERN_BACK_TO_START_INDEX:
-                MaterialSection section = (MaterialSection) headItemManager.get(0).getMenu().getSections().get(headItemManager.get(0).getStartIndex());
+                MaterialSection section = (MaterialSection) headItemManager.get(0).getMenu().getItems().get(headItemManager.get(0).getStartIndex());
                 if (currentSection == section)
                     super.onBackPressed();
                 else {
@@ -1635,6 +1635,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                 } else
                     setFragment((Fragment) section.getTargetFragment(), section.getTitle(), null, true);
 
+                section.select();
                 changeToolbarColor(section);
                 currentSection = section;
             } else if (section.getTarget() == MaterialSection.TARGET_ACTIVITY) {

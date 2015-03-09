@@ -39,7 +39,7 @@ public class OneHeadItemReloadMenu extends MaterialNavigationDrawer {
         MaterialSection section1 = this.newSection("Section 1", this.getResources().getDrawable(R.drawable.ic_favorite_black_36dp), new FragmentIndex(), false, menu);
         MaterialSection section2 = this.newSection("Section 2", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu);
         this.newDevisor(menu);
-        MaterialSection section3 = this.newSection("add two sections", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu);
+        MaterialSection section3 = this.newSection("add two sections and one devisor", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu);
 
         section3.setOnClickListener(new MaterialSectionOnClickListener() {
             @Override
@@ -51,7 +51,7 @@ public class OneHeadItemReloadMenu extends MaterialNavigationDrawer {
                 drawer.newDevisor(menu, 1);
 
                 //reloadMenu(int loadSectionPosition) and load the section on the given position (loadSectionPosition)
-                // to get a position use this method: menu.getSection(int position); not menu.getRealSection(int position);
+                // to get a position use this method: menu.getSection(int position); not menu.getSectionFromRealPosition(int position);
                 // or insert -1, to load the first section with a fragment
 
                 // this methods reloads only the menu, but does not load a new section
@@ -59,34 +59,62 @@ public class OneHeadItemReloadMenu extends MaterialNavigationDrawer {
             }
         });
 
-        MaterialSection section4 = this.newSection("remove first menu item", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu);
+        MaterialSection section4 = this.newSection("add one section at the end", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu);
 
         section4.setOnClickListener(new MaterialSectionOnClickListener() {
-            @Override
-            public void onClick(MaterialSection section, View v) {
-                Toast.makeText(drawer, "removed first menu item", Toast.LENGTH_SHORT).show();
-
-                //getCurrentMenu().getRealSectionPosition(yourSection), this give you the real position of an item, to remove it
-                Object o = getCurrentMenu().getItem(0);
-                getCurrentMenu().removeItem(0); // can remove devisor and labels too
-                if (o instanceof MaterialSection && (MaterialSection) o == getCurrentSection()) {
-                    reloadMenu(-1); // load the first fragment with an section, because the current section is removed
-                } else {
-                    reloadMenu();
-                }
-            }
-        });
-
-
-        MaterialSection section5 = this.newSection("add one section", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu);
-
-        section5.setOnClickListener(new MaterialSectionOnClickListener() {
             @Override
             public void onClick(MaterialSection section, View v) {
                 Toast.makeText(drawer, "added one section", Toast.LENGTH_SHORT).show();
 
                 // last true make the refresh possible. then you don't must call reloadMenu(); method
                 drawer.newSection("added one", drawer.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu, true);
+            }
+        });
+
+        MaterialSection section5 = this.newSection("remove first menu item", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu);
+
+        section5.setOnClickListener(new MaterialSectionOnClickListener() {
+            @Override
+            public void onClick(MaterialSection section, View v) {
+
+                //getCurrentMenu().getRealSectionPosition(yourSection), this give you the real position of an item, to remove it
+                if(getCurrentMenu().getItems().size() > 1 ) {
+                    Toast.makeText(drawer, "removed first menu item", Toast.LENGTH_SHORT).show();
+
+                    Object o = getCurrentMenu().getItem(0);
+                    getCurrentMenu().removeItem(0); // can remove devisor and labels too
+                    if (o instanceof MaterialSection && o == getCurrentSection()) {
+                        reloadMenu(-1); // load the first fragment with an section, because the current section is removed
+                    } else {
+                        reloadMenu();
+                    }
+                } else {
+                    Toast.makeText(drawer, "you shoud have one item", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        MaterialSection section6 = this.newSection("remove second menu section", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu);
+
+        section6.setOnClickListener(new MaterialSectionOnClickListener() {
+            @Override
+            public void onClick(MaterialSection section, View v) {
+
+
+                MaterialSection secSection = getCurrentMenu().getSection(1); // get second section
+                if(secSection != null) {
+                    Toast.makeText(drawer, "remove second menu section", Toast.LENGTH_SHORT).show();
+
+                    int realPos = getCurrentMenu().getRealSectionPosition(secSection);
+                    getCurrentMenu().removeItem(realPos); // can remove devisor and labels too
+                    if (secSection == getCurrentSection()) {
+                        reloadMenu(-1); // load the first fragment with an section, because the current section is removed
+                    } else {
+                        reloadMenu();
+                    }
+                } else {
+                    Toast.makeText(drawer, "no section is available, to remove", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

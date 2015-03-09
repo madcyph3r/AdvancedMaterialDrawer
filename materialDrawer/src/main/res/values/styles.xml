@@ -8,6 +8,7 @@
         <attr name="sectionBackgroundColorPressed" format="color" />
         <attr name="sectionBackgroundColorSelected" format="color" />
         <attr name="sectionBackgroundColor" format="color" />
+        <attr name="sectionRippleColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="MaterialNavigationDrawer">
@@ -16,6 +17,7 @@
         <attr name="multipaneSupport" format="boolean" />
         <attr name="drawerColor" format="color" />
         <attr name="labelColor" format="color" />
+        <attr name="rippleColor" format="color" />
         <attr name="sectionStyle" format="reference" />
         <attr name="subheaderStyle" format="reference"/>
         <attr name="autoDarkStatusBar" format="boolean"/>

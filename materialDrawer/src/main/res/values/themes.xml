@@ -47,8 +47,9 @@
         <item name="sectionColorText">#FFF</item>
         <item name="sectionColorNotification">#FFF</item>
         <item name="sectionBackgroundColorPressed">#16FFFFFF</item>
-        <item name="sectionBackgroundColorSelected">#0AFFFFFF</item>
+        <item name="sectionBackgroundColorSelected">#1AFFFFFF</item>
         <item name="sectionBackgroundColor">#00FFFFFF</item>
+        <item name="sectionRippleColor">#fafafa</item>
     </style>
 
     <style name="MaterialSectionTheme.Light" >
@@ -58,6 +59,7 @@
         <item name="sectionBackgroundColorPressed">#16000000</item>
         <item name="sectionBackgroundColorSelected">#0A000000</item>
         <item name="sectionBackgroundColor">#00FFFFFF</item>
+        <item name="sectionRippleColor">#8C8C8C</item>
     </style>
 
   <!--  <style name="MaterialSubheaderTheme">

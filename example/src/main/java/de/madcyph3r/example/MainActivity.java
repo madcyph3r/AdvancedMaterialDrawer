@@ -280,12 +280,12 @@ public class MainActivity extends ActionBarActivity {
         MaterialSection settingsSection = this.newSection("Settings", this.getResources().getDrawable(R.drawable.ic_settings_black_24dp), intentSettings, true);
 
         // add sections to the menu
-        menu1.getSections().add(section1);
-        menu1.getSections().add(new MaterialDevisor());
-        menu1.getSections().add(section2);
-        menu1.getSections().add(section3);
-        menu1.getSections().add(new MaterialDevisor());
-        menu1.getSections().add(settingsSection);
+        menu1.getItems().add(section1);
+        menu1.getItems().add(new MaterialDevisor());
+        menu1.getItems().add(section2);
+        menu1.getItems().add(section3);
+        menu1.getItems().add(new MaterialDevisor());
+        menu1.getItems().add(settingsSection);
 
         // create TextDrawable with lable F and color blue
         TextDrawable headPhoto = TextDrawable.builder()
@@ -336,8 +336,8 @@ public class MainActivity extends ActionBarActivity {
         MaterialSection section5 = this.newSection("Kaufen", this.getResources().getDrawable(R.drawable.ic_extension_black_36dp), new FragmentIndex(), false);
         section5.setSectionColor(Color.parseColor("#ff9800"));
         // add sections to menu
-        menu2.getSections().add(section4);
-        menu2.getSections().add(section5);
+        menu2.getItems().add(section4);
+        menu2.getItems().add(section5);
 
         // create TextDrawable with lable M and color gray
         TextDrawable headPhoto3 = TextDrawable.builder()
@@ -353,7 +353,7 @@ public class MainActivity extends ActionBarActivity {
         //this.addHeadItem(headItem4);
 
         MaterialMenu menu5 = new MaterialMenu();
-        menu5.getSections().add(section3);
+        menu5.getItems().add(section3);
         MaterialHeadItem headItem5 = new MaterialHeadItem(this, "headitem 5", "subtitle", drawableAppIcon, R.drawable.mat5, menu5, 0);
         //this.addHeadItem(headItem5);
         //this.addHeadItem(headItem2);

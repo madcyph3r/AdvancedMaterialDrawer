@@ -11,45 +11,45 @@ public class MaterialMenu {
     public static int BOTTOM_SECTION = 1;
     public static int DIVISOR = 2;
 
-    private List<Object> sections = new ArrayList<Object>();
-    //private Map<Integer, MaterialSection> sections = new HashMap<Integer, MaterialSection>();
+    private List<Object> items = new ArrayList<Object>();
+    //private Map<Integer, MaterialSection> items = new HashMap<Integer, MaterialSection>();
 
-    public List<Object> getSections() {
-        return sections;
+    public List<Object> getItems() {
+        return items;
     }
 
-    public void setSections(List<Object> sections) {
-        this.sections = sections;
+    public void setItems(List<Object> items) {
+        this.items = items;
     }
 
-    public void addSection(Object section) {
-        getSections().add(section);
+    public void addItem(Object item) {
+        getItems().add(item);
     }
 
-    public void addSection(Object section, int position) {
-        getSections().add(position, section);
+    public void addItem(Object item, int position) {
+        getItems().add(position, item);
     }
 
-    public void removeItem(Object section) {
-        getSections().remove(section);
+    public void removeItem(Object item) {
+        getItems().remove(item);
     }
 
     public void removeItem(int position) {
-        getSections().remove(position);
+        getItems().remove(position);
     }
 
     public int getItemPosition(Object item) {
-        return getSections().indexOf(item);
+        return getItems().indexOf(item);
     }
 
     public Object getItem(int position) {
-        return getSections().get(position);
+        return getItems().get(position);
     }
 
     // return the real pos int the list, considered devisor and label
     public int getRealSectionPosition(MaterialSection section) {
        // if (section instanceof MaterialSection) {
-        return getSections().indexOf(section);
+        return getItems().indexOf(section);
         /*} else {
             throw new RuntimeException("Object is not a MaterialSection");
         }*/
@@ -59,9 +59,9 @@ public class MaterialMenu {
     public int getSectionPosition(MaterialSection section) {
         //if (section instanceof MaterialSection) {
         int pos = 0;
-        for (int i = 0; i < getSections().size(); i++) {
-            if (getSections().get(i) instanceof MaterialSection) {
-                if (getSections().get(i) == section) {
+        for (int i = 0; i < getItems().size(); i++) {
+            if (getItems().get(i) instanceof MaterialSection) {
+                if (getItems().get(i) == section) {
                     return pos;
                 }
                 pos++;
@@ -75,10 +75,10 @@ public class MaterialMenu {
 
     public MaterialSection getSection(int position) {
         int pos = 0;
-        for (int i = 0; i < getSections().size(); i++) {
-            if (getSections().get(i) instanceof MaterialSection) {
+        for (int i = 0; i < getItems().size(); i++) {
+            if (getItems().get(i) instanceof MaterialSection) {
                 if (pos == position) {
-                    return (MaterialSection) getSections().get(i);
+                    return (MaterialSection) getItems().get(i);
                 }
                 pos++;
             }
@@ -86,9 +86,9 @@ public class MaterialMenu {
         return null;
     }
 
-    public MaterialSection getRealSection(int position) {
-        if (getSections().get(position) instanceof MaterialSection) {
-            return (MaterialSection) getSections().get(position);
+    public MaterialSection getSectionFromRealPosition(int position) {
+        if (getItems().get(position) instanceof MaterialSection) {
+            return (MaterialSection) getItems().get(position);
         } else {
             return null;
         }

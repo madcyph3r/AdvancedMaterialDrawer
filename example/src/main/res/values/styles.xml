@@ -28,6 +28,7 @@
         <item name="sectionBackgroundColorPressed">#dbcbbc</item>
         <item name="sectionBackgroundColorSelected">#feacff</item>
         <item name="sectionBackgroundColor">#b9faff</item>
+        <item name="sectionRippleColor">#f89d54</item>
     </style>
 
     <style name="MyMaterialAccountTheme">

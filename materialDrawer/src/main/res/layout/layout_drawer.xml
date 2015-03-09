@@ -84,7 +84,7 @@
                 android:layout_marginRight="16dp" />
 
             <LinearLayout
-                android:id="@+id/sections"
+                android:id="@+id/items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"

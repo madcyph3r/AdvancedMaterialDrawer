@@ -59,7 +59,7 @@ public class BackPatternCustom extends MaterialNavigationDrawer {
         // quivalent is getCurrentMenu().getSection(int position)
 
         // or use getCurrentMenu().getRealSectionPosition, it does considered devisor and label in the list
-        // equivalent is getCurrentMenu().getRealSection(int position)
+        // equivalent is getCurrentMenu().getSectionFromRealPosition(int position)
         MaterialSection section;
         switch(getCurrentMenu().getSectionPosition(currentSection)) {
             case 3:

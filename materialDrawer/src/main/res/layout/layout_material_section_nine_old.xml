@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<de.madcyph3r.materialnavigationdrawer.ripple.MaterialRippleLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<de.madcyph3r.materialnavigationdrawer.ripple.MaterialRippleLayoutNineOld xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/section_ripple"
     app:mrl_rippleOverlay="true"
@@ -46,4 +46,4 @@
 
 
     </RelativeLayout>
-</de.madcyph3r.materialnavigationdrawer.ripple.MaterialRippleLayout>
+</de.madcyph3r.materialnavigationdrawer.ripple.MaterialRippleLayoutNineOld>
