@@ -22,7 +22,7 @@ Big thanks to neokree, without him this library would not exist.
 - Bottom-Sections
 - More: Setting your own Fragment on Start, etc
 
-### Example APK (Lib-Version 1.0.8.1) 
+### Example APK (Lib-Version 1.0.9) 
 https://github.com/madcyph3r/AdvancedMaterialDrawer/raw/master/example-release.apk
 
 ### Download
@@ -32,12 +32,18 @@ repositories {
 }
 
 dependencies {
-    compile 'de.madcyph3r:materialDrawer:1.0.8.1@aar'
+    compile 'de.madcyph3r:materialDrawer:1.0.9@aar'
 }
 ```
 
+### Dependencies
+```java
+compile 'com.android.support:appcompat-v7:21.0.3'
+compile 'com.nineoldandroids:library:2.4.0'
+```
+
 ### Usage
-There are 28 examples with explanations how to use the library, here is a small example with one Head-Item. It looks like [screenshot three](https://raw.githubusercontent.com/madcyph3r/AdvancedMaterialDrawer/master/Screenshot_3.png), only in black color.
+There are 29 examples with explanations how to use the library, here is a small example with one Head-Item. It looks like [screenshot three](https://raw.githubusercontent.com/madcyph3r/AdvancedMaterialDrawer/master/Screenshot_3.png), only in black color.
 
 ```java
 public class OneHeadItem extends MaterialNavigationDrawer {
