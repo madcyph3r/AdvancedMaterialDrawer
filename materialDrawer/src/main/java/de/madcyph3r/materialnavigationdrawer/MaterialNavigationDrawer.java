@@ -716,7 +716,9 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
         // load new first head item information
         notifyHeadItemDataChangedSwitch();
-        loadMenu(true);
+
+        if(newFirstHeadItem.getMenu() != null && newFirstHeadItem.getMenu().getItems() != null && newFirstHeadItem.getMenu().getItems().size() > 0)
+            loadMenu(true);
 
         if (headItemManager.get(0).isCloseDrawerOnChanged() && !deviceSupportMultiPane()) {
             layout.closeDrawer(drawer);
@@ -732,7 +734,9 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
             changeHeadItems(headItemManager.get(0), newFirstHeadItem);
 
             notifyHeadItemsDataChanged();
-            loadMenu(true);
+
+            if(newFirstHeadItem.getMenu() != null && newFirstHeadItem.getMenu().getItems() != null && newFirstHeadItem.getMenu().getItems().size() > 0)
+                loadMenu(true);
 
             if (headItemManager.get(0).isCloseDrawerOnChanged() && !deviceSupportMultiPane()) {
                 layout.closeDrawer(drawer);
@@ -832,7 +836,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                 changeHeadItems(headItemManager.get(0), newFirstHeadItem);
 
                 // load head item menu
-                loadMenu(true);
+                if(newFirstHeadItem.getMenu() != null && newFirstHeadItem.getMenu().getItems() != null && newFirstHeadItem.getMenu().getItems().size() > 0)
+                    loadMenu(true);
 
                 if (headItemManager.get(0).isCloseDrawerOnChanged() && !deviceSupportMultiPane()) {
                     layout.closeDrawer(drawer);
