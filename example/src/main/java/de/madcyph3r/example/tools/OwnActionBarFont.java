@@ -42,7 +42,7 @@ public class OwnActionBarFont  extends MaterialNavigationDrawer {
     }
 
     @Override
-    public void afterInit() {
+    public void afterInit(Bundle savedInstanceState) {
         if(getCurrentSection() != null)
             setActionBarTitle(getCurrentSection().getTitle());
         else

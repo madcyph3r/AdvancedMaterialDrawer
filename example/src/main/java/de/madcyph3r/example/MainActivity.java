@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import de.madcyph3r.example.tools.ActionBarButtons;
 import de.madcyph3r.example.tools.AllMenuTypes;
 import de.madcyph3r.example.tools.BackPatternCustom;
 import de.madcyph3r.example.tools.BackPatternDefault;
@@ -87,6 +88,7 @@ public class MainActivity extends ActionBarActivity {
         listValues.add("no close drawer actvity");
         listValues.add("section change listener");
         listValues.add("own actionbar font");
+        listValues.add("lock drawer, hide menu button, show back button instead");
         // on drawer open close und head item change listener hinzufügen
 
         // initiate the listadapter
@@ -186,6 +188,9 @@ public class MainActivity extends ActionBarActivity {
                     startActivity(i);
                 } else if(position == 28) {
                     Intent i = new Intent(ctx, OwnActionBarFont.class);
+                    startActivity(i);
+                } else if(position == 29) {
+                    Intent i = new Intent(ctx, ActionBarButtons.class);
                     startActivity(i);
                 }
             }

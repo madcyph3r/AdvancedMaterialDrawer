@@ -86,7 +86,8 @@
         </activity>
         <activity android:name=".tools.OwnActionBarFont">
         </activity>
-
+        <activity android:name=".tools.ActionBarButtons">
+        </activity>
     </application>
 
 </manifest>

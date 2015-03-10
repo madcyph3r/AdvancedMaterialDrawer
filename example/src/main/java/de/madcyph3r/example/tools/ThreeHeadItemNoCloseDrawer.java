@@ -37,6 +37,9 @@ public class ThreeHeadItemNoCloseDrawer extends MaterialNavigationDrawer {
         this.addHeadItem(getHeadItem1());
         this.addHeadItem(getHeadItem2());
         this.addHeadItem(getHeadItem3());
+        this.addHeadItem(getHeadItem4());
+
+        this.setHeadItemSwitchShowForce(true);
     }
 
     private MaterialHeadItem getHeadItem1() {
@@ -86,6 +89,23 @@ public class ThreeHeadItemNoCloseDrawer extends MaterialNavigationDrawer {
 
         // create Head Item (Start index is section 2)
         MaterialHeadItem headItem = new MaterialHeadItem(this, "C HeadItem", "C Subtitle", headPhoto, R.drawable.mat6, menu, 0);
+        headItem.setCloseDrawerOnChanged(false);
+        return headItem;
+    }
+
+    private MaterialHeadItem getHeadItem4() {
+        MaterialMenu menu = new MaterialMenu();
+
+        // create section
+        MaterialSection section1 = this.newSection("Section 1 (Head 4)", this.getResources().getDrawable(R.drawable.ic_favorite_black_36dp), new FragmentIndex(), false, menu);
+        MaterialSection section2 = this.newSection("Section 2", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu);
+
+        // create icon
+        TextDrawable headPhoto = TextDrawable.builder()
+                .buildRound("D", Color.GRAY);
+
+        // create Head Item (Start index is section 2)
+        MaterialHeadItem headItem = new MaterialHeadItem(this, "D HeadItem", "D Subtitle", headPhoto, R.drawable.mat6, menu, 1);
         headItem.setCloseDrawerOnChanged(false);
         return headItem;
     }

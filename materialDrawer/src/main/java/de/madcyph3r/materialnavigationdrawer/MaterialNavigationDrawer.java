@@ -207,7 +207,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         // load here header and menu
         initHeaderAndMenu(savedInstanceState);
 
-        afterInit();
+        //afterInit();
+        afterInit(savedInstanceState);
     }
 
     // init methods
@@ -348,7 +349,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
 
-            actionBarToggle = new ActionBarDrawerToggle(this, layout, toolbar, R.string.nothing, R.string.nothing) {
+            // don't use the constructor with toolbar, or onOptionsItemSelected() method will not be called
+            actionBarToggle = new ActionBarDrawerToggle(this, layout/*, toolbar*/, R.string.nothing, R.string.nothing) {
 
                 public void onDrawerClosed(View view) {
                     invalidateOptionsMenu();
@@ -386,6 +388,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                         drawerStateListener.onDrawerStateChanged(newState);
                 }
             };
+
             layout.setDrawerListener(actionBarToggle);
             layout.setMultipaneSupport(false);
         }
@@ -696,6 +699,34 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         layout.openDrawer(drawer);
     }
 
+    public enum ActionBarMenuItem {
+        MENU, BACK, NONE
+    }
+
+    public void showActionBarMenuIcon(ActionBarMenuItem icon) {
+        switch (icon) {
+            case BACK:
+                getActionBarToggle().setDrawerIndicatorEnabled(false);
+                getSupportActionBar().setHomeButtonEnabled(true);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().invalidateOptionsMenu();
+                break;
+            case NONE:
+                getActionBarToggle().setDrawerIndicatorEnabled(false);
+                getSupportActionBar().setHomeButtonEnabled(false);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                getSupportActionBar().invalidateOptionsMenu();
+                break;
+            case MENU:
+            default:
+                getSupportActionBar().setHomeButtonEnabled(true);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getActionBarToggle().setDrawerIndicatorEnabled(true);
+                getSupportActionBar().invalidateOptionsMenu();
+                break;
+        }
+    }
+
     // change the headItem1 with headItem 2 in the headItemManager list
     private void changeHeadItems(MaterialHeadItem headItem1, MaterialHeadItem headItem2) {
         int index1 = headItemManager.indexOf(headItem1);
@@ -706,13 +737,13 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         headItemManager.set(index2, headItemTmp);
     }
 
-    private void switchHeadItemsList(MaterialHeadItem oldHeaditem, MaterialHeadItem newFirstHeadItem) {
+    private void switchHeadItemsList(MaterialHeadItem oldHeadItem, MaterialHeadItem newFirstHeadItem) {
 
         // change button back
         headItemButtonSwitcher.setImageResource(R.drawable.ic_arrow_drop_down_white_24dp);
         headItemSwitcherOpen = false;
 
-        changeHeadItems(oldHeaditem, newFirstHeadItem);
+        changeHeadItems(oldHeadItem, newFirstHeadItem);
 
         // load new first head item information
         notifyHeadItemDataChangedSwitch();
@@ -887,10 +918,10 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         this.multiPaneSupport = true;
     }
 
-    public void allowArrowAnimation() {
+ /*   public void allowArrowAnimation() {
         slidingDrawerEffect = true;
     }
-
+*/
     public void changeToolbarColor() {
         changeToolbarColor(null);
     }
@@ -1375,7 +1406,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         return true;
     }
 
-    public void afterInit() {
+    /*public void afterInit() {
+
+    }*/
+
+    public void afterInit(Bundle savedInstanceState) {
 
     }
 
@@ -1554,14 +1589,12 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Se dal drawer si seleziona un oggetto
         if (actionBarToggle != null)
             if (actionBarToggle.onOptionsItemSelected(item)) {
                 return true;
             }
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -1614,10 +1647,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                     }
                     onClick(backedSection, backedSection.getView());
                 }
-
                 break;
         }
-
     }
 
     @Override
@@ -1635,39 +1666,41 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
     @Override
     public void onClick(final MaterialSection section, View view) {
-        if (section != currentSection) {
+        if (!drawerTouchLocked) {
+            if (section != currentSection) {
 
-            if (section.getTarget() == MaterialSection.TARGET_FRAGMENT) {
-                //unSelectOldSection(section);
-                if (currentSection != null) {
-                    currentSection.unSelect();
-                    setFragment((Fragment) section.getTargetFragment(), section.getTitle(), (Fragment) currentSection.getTargetFragment(), true);
-                } else
-                    setFragment((Fragment) section.getTargetFragment(), section.getTitle(), null, true);
+                if (section.getTarget() == MaterialSection.TARGET_FRAGMENT) {
+                    //unSelectOldSection(section);
+                    if (currentSection != null) {
+                        currentSection.unSelect();
+                        setFragment((Fragment) section.getTargetFragment(), section.getTitle(), (Fragment) currentSection.getTargetFragment(), true);
+                    } else
+                        setFragment((Fragment) section.getTargetFragment(), section.getTitle(), null, true);
 
-                section.select();
-                changeToolbarColor(section);
-                currentSection = section;
-            } else if (section.getTarget() == MaterialSection.TARGET_ACTIVITY) {
-                section.unSelect();
+                    section.select();
+                    changeToolbarColor(section);
+                    currentSection = section;
+                } else if (section.getTarget() == MaterialSection.TARGET_ACTIVITY) {
+                    section.unSelect();
 
-                //finish();
+                    //finish();
                /* if (finishActivityOnNewIntent) {
                     this.startActivity(section.getTargetIntent());
                     finish();
                 } else {*/
 
-                // smooth close drawer before activity start
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        startActivity(section.getTargetIntent());
-                        if (finishActivityOnNewIntent)
-                            finish();
-                    }
-                }, 200);
+                    // smooth close drawer before activity start
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            startActivity(section.getTargetIntent());
+                            if (finishActivityOnNewIntent)
+                                finish();
+                        }
+                    }, 200);
 
-                closeDrawer();
+                    closeDrawer();
+                }
             }
         }
     }
@@ -1824,6 +1857,22 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
     public void setThirdHeadItemPhoto(Drawable photo) {
         headItemThirdPhoto.setImageDrawable(photo);
+    }
+
+    public ActionBarDrawerToggle getActionBarToggle() {
+        return actionBarToggle;
+    }
+
+    public boolean isDrawerTouchLocked() {
+        return drawerTouchLocked;
+    }
+
+    public void setDrawerTouchLocked(boolean drawerTouchLocked) {
+        this.drawerTouchLocked = drawerTouchLocked;
+    }
+
+    public void setDrawerLockMode(int mode) {
+        layout.setDrawerLockMode(mode, drawer);
     }
 
     @Override
