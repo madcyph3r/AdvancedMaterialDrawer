@@ -1,8 +1,6 @@
 package de.madcyph3r.example.tools;
 
 import android.annotation.TargetApi;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -11,15 +9,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import de.madcyph3r.example.tools.oneHeadItemActionBarButtons.FragmentActionBarButtons;
-import de.madcyph3r.example.FragmentIndex;
+import de.madcyph3r.example.tools.ActionBarButtons.FragmentActionBarButtons;
 import de.madcyph3r.example.R;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
-import de.madcyph3r.materialnavigationdrawer.head.MaterialHeadItem;
 import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionOnClickListener;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
 import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
-import de.madcyph3r.materialnavigationdrawer.tools.RoundedCornersDrawable;
 
 /**
  * Created by marc on 23.02.2015.
