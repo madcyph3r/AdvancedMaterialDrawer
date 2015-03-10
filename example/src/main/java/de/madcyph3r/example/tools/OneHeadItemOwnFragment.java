@@ -45,7 +45,7 @@ public class OneHeadItemOwnFragment extends MaterialNavigationDrawer {
 
         // set load fragment on start to false and then set your own fragment
         this.setLoadFragmentOnStart(false);
-        this.setCustomFragment(new FragmentIndex(), "Custom Fragment, no from Menu");
+        this.setCustomFragment(new FragmentIndex(), "custom fragment, not from menu");
 
         // add head Item (menu will be loaded automatically)
         this.addHeadItem(headItem);

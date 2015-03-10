@@ -84,6 +84,8 @@
         </activity>
         <activity android:name=".tools.SectionChangeListener">
         </activity>
+        <activity android:name=".tools.OwnActionBarFont">
+        </activity>
 
     </application>
 

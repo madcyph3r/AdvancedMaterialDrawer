@@ -34,6 +34,7 @@ import de.madcyph3r.example.tools.OneHeadItemLight;
 import de.madcyph3r.example.tools.OneHeadItemOwnDrawerWidth;
 import de.madcyph3r.example.tools.OneHeadItemOwnFragment;
 import de.madcyph3r.example.tools.OneHeadItemReloadMenu;
+import de.madcyph3r.example.tools.OwnActionBarFont;
 import de.madcyph3r.example.tools.SectionChangeListener;
 import de.madcyph3r.example.tools.ThreeHeadItem;
 import de.madcyph3r.example.tools.ThreeHeadItemNoCloseDrawer;
@@ -85,6 +86,7 @@ public class MainActivity extends ActionBarActivity {
         listValues.add("close drawer activity");
         listValues.add("no close drawer actvity");
         listValues.add("section change listener");
+        listValues.add("own actionbar font");
         // on drawer open close und head item change listener hinzufügen
 
         // initiate the listadapter
@@ -179,8 +181,11 @@ public class MainActivity extends ActionBarActivity {
                 } else if(position == 26) {
                     Intent i = new Intent(ctx, NoClosePreviousActivity.class);
                     startActivity(i);
-                }  else if(position == 27) {
+                } else if(position == 27) {
                     Intent i = new Intent(ctx, SectionChangeListener.class);
+                    startActivity(i);
+                } else if(position == 28) {
+                    Intent i = new Intent(ctx, OwnActionBarFont.class);
                     startActivity(i);
                 }
             }
@@ -212,172 +217,4 @@ public class MainActivity extends ActionBarActivity {
         }
 
     }
-
 }
-
-
-
-
-   // MaterialNavigationDrawer drawer = null;
-
-
-
-/*    @Override
-    public void init(Bundle savedInstanceState) {
-
-        drawer = this;
-
-        // create menu
-
-        // Style dark
-        // style light
-        // image header
-        // customheader header
-
-
-
-
-
-        /*
-
-        MaterialMenu menu = new MaterialMenu();
-
-
-
-        // create HeadItem 1 with menu
-
-        // create menu
-        MaterialMenu menu1 = new MaterialMenu();
-        // create sections for menu
-        MaterialSection section1 = this.newSection("Favoriten 1", this.getResources().getDrawable(R.drawable.ic_favorite_black_36dp), new FragmentIndex(), false);
-        MaterialSection section2 = this.newSection("Verfügbare Tools", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false).setSectionColor((Color.parseColor("#ff9800")));
-        // no new Fragment or Activity. need own listener.
-        MaterialSection section3 = this.newSection("Tools Erwerben", this.getResources().getDrawable(R.drawable.ic_extension_black_36dp), false).setSectionColor((Color.parseColor("#ff9800")));
-
-
-        section3.setNotifications(33);
-        // set on click listener for section 3
-        section3.setOnClickListener(new MaterialSectionListener() {
-            @Override
-            public void onClick(MaterialSection section) {
-
-                // on click action for section 3
-                Context context = getApplicationContext();
-                CharSequence text = "Tools erwerben toast";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-
-                section.unSelect();
-
-                drawer.closeDrawer();
-            }
-        });
-
-        Intent intentSettings = new Intent(this, Settings.class);
-        // create settings section. with bottom true. it will be shown on the bottom of the drawer
-        MaterialSection settingsSection = this.newSection("Settings", this.getResources().getDrawable(R.drawable.ic_settings_black_24dp), intentSettings, true);
-
-        // add sections to the menu
-        menu1.getItems().add(section1);
-        menu1.getItems().add(new MaterialDevisor());
-        menu1.getItems().add(section2);
-        menu1.getItems().add(section3);
-        menu1.getItems().add(new MaterialDevisor());
-        menu1.getItems().add(settingsSection);
-
-        // create TextDrawable with lable F and color blue
-        TextDrawable headPhoto = TextDrawable.builder()
-                .buildRound("F", Color.BLUE);
-
-        // create headItem1 and add menu1
-        MaterialHeadItem headItem1 = new MaterialHeadItem(this, "F HeadItem", "F Subtitle", headPhoto, R.drawable.mat5, menu1, 0);
-        // add headItem1 to the drawer
-        //this.addHeadItem(headItem1);
-        headItem1.setCloseDrawerOnChanged(false);
-
-
-
-
-        // Create HeadItem 2 without menu
-
-        // use bitmap and make a circle photo
-        final Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.app_drawer_icon);
-        final RoundedCornersDrawable drawableAppIcon = new RoundedCornersDrawable(getResources(), bitmap);
-
-        // create head item, don't give a own menu
-        MaterialHeadItem headItem2 = new MaterialHeadItem(this, "Material Navigation Drawer", "version 1.0", drawableAppIcon, R.drawable.mat6, menu1, 0);
-       // this.addHeadItem(headItem2);
-
-        // listener for the avatar (photo) click
-        headItem2.setOnClickListener(new MaterialHeadItemListener() {
-            @Override
-            public void onClick(MaterialHeadItem headItem) {
-                Toast.makeText(getApplicationContext(), "This is a avatar toast", Toast.LENGTH_LONG).show();
-                //addDivisor();
-            }
-
-            @Override
-            public void onBackgroundClick(MaterialHeadItem headItem) {
-                Toast.makeText(getApplicationContext(), "on headItem2 background", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        headItem2.setCloseDrawerOnChanged(false);
-
-
-        // Create HeadItem 3 with menu
-
-        // create menu
-        MaterialMenu menu2 = new MaterialMenu();
-        // create sections for menu
-        MaterialSection section4 = this.newSection("Favoriten", this.getResources().getDrawable(R.drawable.ic_favorite_black_36dp), new FragmentIndex(), false);
-        MaterialSection section5 = this.newSection("Kaufen", this.getResources().getDrawable(R.drawable.ic_extension_black_36dp), new FragmentIndex(), false);
-        section5.setSectionColor(Color.parseColor("#ff9800"));
-        // add sections to menu
-        menu2.getItems().add(section4);
-        menu2.getItems().add(section5);
-
-        // create TextDrawable with lable M and color gray
-        TextDrawable headPhoto3 = TextDrawable.builder()
-                .buildRound("M", Color.GRAY);
-        // (1): use second menu as start menu for this headitem
-        MaterialHeadItem headItem3 = new MaterialHeadItem(this, "M HeadItem", "subtitle", headPhoto3, R.drawable.mat5, menu2, 1);
-        //headItem3.setCloseDrawerOnClick(false);
-        //this.addHeadItem(headItem3);
-
-        TextDrawable headPhoto4 = TextDrawable.builder()
-                .buildRound("x", Color.GRAY);
-        MaterialHeadItem headItem4 = new MaterialHeadItem(this, "headitem 4", "subtitle", headPhoto4, R.drawable.mat5, menu2, 0);
-        //this.addHeadItem(headItem4);
-
-        MaterialMenu menu5 = new MaterialMenu();
-        menu5.getItems().add(section3);
-        MaterialHeadItem headItem5 = new MaterialHeadItem(this, "headitem 5", "subtitle", drawableAppIcon, R.drawable.mat5, menu5, 0);
-        //this.addHeadItem(headItem5);
-        //this.addHeadItem(headItem2);
-
-
-        this.setCustomMenu(menu2);
-
-        // set this class as onchangedListener
-        this.setOnChangedListener(this);*/
-   /* }
-
-    @Override
-    public int headerType() {
-        return MaterialNavigationDrawer.DRAWERHEADER_NO_HEADER;
-    }
-
-    @Override
-    public void onBeforeChangedHeadItem(MaterialHeadItem newHeadItem) {
-        //Toast.makeText(getApplicationContext(), "on changed", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onAfterChangedHeadItem(MaterialHeadItem newHeadItem) {
-
-    }*/
-
-//}

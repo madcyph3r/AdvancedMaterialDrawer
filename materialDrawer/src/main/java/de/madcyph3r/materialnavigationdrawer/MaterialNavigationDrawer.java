@@ -206,6 +206,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
         // load here header and menu
         initHeaderAndMenu(savedInstanceState);
+
+        afterInit();
     }
 
     // init methods
@@ -1368,6 +1370,9 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         return true;
     }
 
+    public void afterInit() {
+
+    }
 
     // listener
     // Head Item Listener

@@ -174,12 +174,16 @@ activity#de.madcyph3r.example.tools.SectionChangeListener
 ADDED from AndroidManifest.xml:85:9
 	android:name
 		ADDED from AndroidManifest.xml:85:19
+activity#de.madcyph3r.example.tools.OwnActionBarFont
+ADDED from AndroidManifest.xml:87:9
+	android:name
+		ADDED from AndroidManifest.xml:87:19
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:21.0.3:15:5
 MERGED from com.android.support:support-v4:21.0.3:15:5
 MERGED from com.amulyakhare:com.amulyakhare.textdrawable:1.0.0:8:5
-MERGED from MaterialDrawer:materialDrawer:1.0.8.1:18:5
+MERGED from MaterialDrawer:materialDrawer:1.0.9:18:5
 MERGED from com.android.support:appcompat-v7:21.0.3:15:5
 MERGED from com.android.support:support-v4:21.0.3:15:5
 	android:targetSdkVersion
