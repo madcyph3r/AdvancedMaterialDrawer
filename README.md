@@ -11,7 +11,7 @@ Based on neokree's [MaterialDrawer](https://github.com/neokree/MaterialNavigatio
 Big thanks to neokree, without him this library would not exist.
 
 
-### Differences with neokree's lib & new Features:
+### Main Features:
 - Unlimited Head-Items (Accounts)
 - Every Head-Item can have its own Menu
 - Head-Item listeners for Avatar or Background taps
@@ -20,9 +20,11 @@ Big thanks to neokree, without him this library would not exist.
 - Labels
 - Normal Sections (with Fragment/Activty start or own onClick listener)
 - Bottom-Sections
+- Drawer below the toolbar
+- Tablet support
 - More: Setting your own Fragment on Start, etc
 
-### Example APK (Lib-Version 1.0.9) 
+### Example APK (Lib-Version 1.1.0) 
 https://github.com/madcyph3r/AdvancedMaterialDrawer/raw/master/example-release.apk
 
 ### Download
@@ -32,7 +34,7 @@ repositories {
 }
 
 dependencies {
-    compile 'de.madcyph3r:materialDrawer:1.0.9@aar'
+    compile 'de.madcyph3r:materialDrawer:1.1.0@aar'
 }
 ```
 
@@ -89,7 +91,11 @@ public class OneHeadItem extends MaterialNavigationDrawer {
 ### Screenshots
 <img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_1.png" alt="screenshot" width="300px" height="auto" />
 <img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_2.png" alt="screenshot" width="300px" height="auto" />
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_7.png" alt="screenshot" width="300px" height="auto" />
 <img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_3.png" alt="screenshot" width="300px" height="auto" />
 <img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_4.png" alt="screenshot" width="300px" height="auto" />
 <img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_5.png" alt="screenshot" width="300px" height="auto" />
 <img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_6.png" alt="screenshot" width="300px" height="auto" />
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_8.png" alt="screenshot" width="300px" height="auto" />
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_9.png" alt="screenshot" width="300px" height="auto" />
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_10.png" alt="screenshot" width="300px" height="auto" />
