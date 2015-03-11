@@ -22,60 +22,20 @@ public class MaterialHeadItem {
     private boolean closeDrawerOnBackgroundClick = false;
     private boolean closeDrawerOnChanged = true;
     private MaterialMenu menu;
-    private int startIndex = 0;
     private boolean loadFragmentOnChanged = true;
     private Resources resources;
     private OnHeadItemDataLoaded listenerLoaded;
-    //private int drawerDPWidth;
     private MaterialNavigationDrawer drawer;
 
     //public static final int FIRST_HEADITEM = 0;
     public static final int SECOND_HEADITEM = 1;
     public static final int THIRD_HEADITEM = 2;
 
-  /*  @Deprecated
-    public MaterialHeadItem(String title, String subTitle, Drawable photo, Drawable background) {
-        this.title = title;
-        this.subTitle = subTitle;
-        this.menu = null;
-        this.startIndex = -1;
-        this.photo = photo;
-        this.background = background;
-    }*/
-
-   /* @Deprecated
-    public MaterialHeadItem(String title, String subTitle, Drawable photo, Drawable background, MaterialMenu menu, int startIndex) {
-        this.title = title;
-        this.subTitle = subTitle;
-        this.menu = menu;
-        this.startIndex = startIndex;
-        this.photo = photo;
-        this.background = background;
-    }
-
     public MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, int photoRessourceID, int backgroundRessourceID) {
         this.title = title;
         this.subTitle = subTitle;
         this.menu = null;
-        this.startIndex = -1;
-        //this.drawerDPWidth = drawer.getDrawerDPWidth();
         this.photo = drawer.getResources().getDrawable(photoRessourceID);
-        this.background = drawer.getResources().getDrawable(backgroundRessourceID);
-        this.drawer = drawer;
-        this.resources = drawer.getResources();
-
-        resizeBackground.execute(backgroundRessourceID);
-        resizePhoto.execute(photoRessourceID);
-    }*/
-
-    public MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, int photoRessourceID, int backgroundRessourceID) {
-        this.title = title;
-        this.subTitle = subTitle;
-        this.menu = null;
-        this.startIndex = -1;
-        //this.drawerDPWidth = drawer.getDrawerDPWidth();
-        this.photo = drawer.getResources().getDrawable(photoRessourceID);
-        //this.background = drawer.getResources().getDrawable(backgroundRessourceID);
         this.drawer = drawer;
         this.resources = drawer.getResources();
 
@@ -86,25 +46,27 @@ public class MaterialHeadItem {
         this.title = title;
         this.subTitle = subTitle;
         this.menu = menu;
-        //this.drawerDPWidth = drawer.getDrawerDPWidth();
         this.photo = drawer.getResources().getDrawable(photoRessourceID);
-        //this.background = drawer.getResources().getDrawable(backgroundRessourceID);
         this.drawer = drawer;
         this.resources = drawer.getResources();
 
         resizeBackground.execute(backgroundRessourceID);
     }
 
+    /**
+     * Set the startIndex to the menu directly
+     *
+     * @deprecated use {@link #MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, int photoRessourceID, int backgroundRessourceID, MaterialMenu menu)} instead.
+     */
+    @Deprecated
     public MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, int photoRessourceID, int backgroundRessourceID, MaterialMenu menu, int startIndex) {
         initVars();
 
         this.title = title;
         this.subTitle = subTitle;
+        menu.setStartIndex(startIndex);
         this.menu = menu;
-        this.startIndex = startIndex;
-        //this.drawerDPWidth = drawer.getDrawerDPWidth();
-        //this.photo = drawer.getResources().getDrawable(photoRessourceID);
-        //this.background = drawer.getResources().getDrawable(backgroundRessourceID);
+
         this.drawer = drawer;
         this.resources = drawer.getResources();
 
@@ -118,10 +80,7 @@ public class MaterialHeadItem {
         this.title = title;
         this.subTitle = subTitle;
         this.menu = null;
-        this.startIndex = -1;
-        //this.drawerDPWidth = drawer.getDrawerDPWidth();
         this.photo = photo;
-        //this.background = drawer.getResources().getDrawable(backgroundRessourceID);
         this.drawer = drawer;
         this.resources = drawer.getResources();
 
@@ -135,22 +94,28 @@ public class MaterialHeadItem {
         this.title = title;
         this.subTitle = subTitle;
         this.menu = menu;
-        //this.drawerDPWidth = drawer.getDrawerDPWidth();
         this.photo = photo;
-        //this.background = drawer.getResources().getDrawable(backgroundRessourceID);
         this.drawer = drawer;
         this.resources = drawer.getResources();
 
         resizeBackground.execute(backgroundRessourceID);
     }
 
+    /**
+     * Set the startIndex to the menu directly
+     *
+     * @deprecated use {@link #MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, Drawable photo, int backgroundRessourceID, MaterialMenu menu)} instead.
+     */
+    @Deprecated
     public MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, Drawable photo, int backgroundRessourceID, MaterialMenu menu, int startIndex) {
         initVars();
 
         this.title = title;
         this.subTitle = subTitle;
         this.menu = menu;
-        this.startIndex = startIndex;
+
+        menu.setStartIndex(startIndex);
+        //this.startIndex = startIndex;
         //this.drawerDPWidth = drawer.getDrawerDPWidth();
         this.photo = photo;
         //this.background = drawer.getResources().getDrawable(backgroundRessourceID);
@@ -164,7 +129,7 @@ public class MaterialHeadItem {
         closeDrawerOnClick = false;
         closeDrawerOnBackgroundClick = false;
         closeDrawerOnChanged = true;
-        startIndex = 0;
+        //startIndex = 0;
         loadFragmentOnChanged = true;
     }
 
@@ -203,10 +168,10 @@ public class MaterialHeadItem {
         this.menu = menu;
     }
 
-    public void setStartIndex(int startIndex) {
+  /*  public void setStartIndex(int startIndex) {
         this.startIndex = startIndex;
     }
-
+*/
     public void setLoadFragmentOnChanged(boolean loadFragmentOnChanged) {
         this.loadFragmentOnChanged = loadFragmentOnChanged;
     }
@@ -252,10 +217,10 @@ public class MaterialHeadItem {
         return closeDrawerOnBackgroundClick;
     }
 
-    public int getStartIndex() {
+ /*   public int getStartIndex() {
         return startIndex;
     }
-
+*/
     public boolean isLoadFragmentOnChanged() {
         return loadFragmentOnChanged;
     }

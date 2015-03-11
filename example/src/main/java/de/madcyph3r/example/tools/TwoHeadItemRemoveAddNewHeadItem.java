@@ -70,7 +70,7 @@ public class TwoHeadItemRemoveAddNewHeadItem extends MaterialNavigationDrawer {
         final RoundedCornersDrawable drawableAppIcon = new RoundedCornersDrawable(getResources(), bitmap);
 
         // create Head Item (on start: Section 1 (Head 1) will be get loaded, if you don't want this, see "Load own Fragment on start")
-        MaterialHeadItem headItem = new MaterialHeadItem(this, "A HeadItem", "A Subtitle", drawableAppIcon, R.drawable.mat5, menu, 0);
+        MaterialHeadItem headItem = new MaterialHeadItem(this, "A HeadItem", "A Subtitle", drawableAppIcon, R.drawable.mat5, menu);
 
         headItem.setOnClickListener(new MaterialHeadItemListener() {
             @Override

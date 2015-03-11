@@ -11,8 +11,13 @@ public class MaterialMenu {
     public static int BOTTOM_SECTION = 1;
     public static int DIVISOR = 2;
 
+    private int startIndex;
+
+    public MaterialMenu() {
+        startIndex = -1;
+    }
+
     private List<Object> items = new ArrayList<Object>();
-    //private Map<Integer, MaterialSection> items = new HashMap<Integer, MaterialSection>();
 
     public List<Object> getItems() {
         return items;
@@ -48,11 +53,7 @@ public class MaterialMenu {
 
     // return the real pos int the list, considered devisor and label
     public int getRealSectionPosition(MaterialSection section) {
-       // if (section instanceof MaterialSection) {
         return getItems().indexOf(section);
-        /*} else {
-            throw new RuntimeException("Object is not a MaterialSection");
-        }*/
     }
 
     // return position, does not considered devisor and label
@@ -84,6 +85,14 @@ public class MaterialMenu {
             }
         }
         return null;
+    }
+
+    public int getStartIndex() {
+        return startIndex;
+    }
+
+    public void setStartIndex(int startIndex) {
+        this.startIndex = startIndex;
     }
 
     public MaterialSection getSectionFromRealPosition(int position) {

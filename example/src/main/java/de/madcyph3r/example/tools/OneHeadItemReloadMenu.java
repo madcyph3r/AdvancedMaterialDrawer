@@ -85,6 +85,9 @@ public class OneHeadItemReloadMenu extends MaterialNavigationDrawer {
                     getCurrentMenu().removeItem(0); // can remove devisor and labels too
                     if (o instanceof MaterialSection && o == getCurrentSection()) {
                         reloadMenu(-1); // load the first fragment with an section, because the current section is removed
+                        // reloadMenu(int loadSectionPosition) give here the position of a section.
+                        // you can use this method to get the section position: menu.getSectionPosition(...)
+                        // do not use menu.getRealSectionPosition(...);
                     } else {
                         reloadMenu();
                     }
@@ -123,7 +126,7 @@ public class OneHeadItemReloadMenu extends MaterialNavigationDrawer {
         final RoundedCornersDrawable drawableAppIcon = new RoundedCornersDrawable(getResources(), bitmap);
 
         // create Head Item
-        MaterialHeadItem headItem = new MaterialHeadItem(this, "F HeadItem", "F Subtitle", drawableAppIcon, R.drawable.mat5, menu, 0);
+        MaterialHeadItem headItem = new MaterialHeadItem(this, "F HeadItem", "F Subtitle", drawableAppIcon, R.drawable.mat5, menu);
 
         // add head Item (menu will be loaded automatically)
         this.addHeadItem(headItem);

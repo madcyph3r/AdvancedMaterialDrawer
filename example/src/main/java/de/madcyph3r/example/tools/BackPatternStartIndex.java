@@ -37,12 +37,15 @@ public class BackPatternStartIndex extends MaterialNavigationDrawer {
         MaterialSection section2 = this.newSection("Section 2", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu);
         MaterialSection section3 = this.newSection("Section 3", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu);
 
+        // set start section
+        menu.setStartIndex(1);
+
         // use bitmap and make a circle photo
         final Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.app_drawer_icon);
         final RoundedCornersDrawable drawableAppIcon = new RoundedCornersDrawable(getResources(), bitmap);
 
         // create Head Item
-        MaterialHeadItem headItem = new MaterialHeadItem(this, "F HeadItem", "F Subtitle", drawableAppIcon, R.drawable.mat5, menu, 1);
+        MaterialHeadItem headItem = new MaterialHeadItem(this, "F HeadItem", "F Subtitle", drawableAppIcon, R.drawable.mat5, menu);
 
         // add head Item (menu will be loaded automatically)
         this.addHeadItem(headItem);

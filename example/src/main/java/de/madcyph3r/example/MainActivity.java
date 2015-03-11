@@ -29,6 +29,7 @@ import de.madcyph3r.example.tools.ImageHeaderActivity;
 import de.madcyph3r.example.tools.NoClosePreviousActivity;
 import de.madcyph3r.example.tools.NoHeaderActivity;
 import de.madcyph3r.example.tools.OneHeadItem;
+import de.madcyph3r.example.tools.OneHeadItemBelowToolbar;
 import de.madcyph3r.example.tools.OneHeadItemDark;
 import de.madcyph3r.example.tools.OneHeadItemMyTheme;
 import de.madcyph3r.example.tools.OneHeadItemLight;
@@ -89,6 +90,7 @@ public class MainActivity extends ActionBarActivity {
         listValues.add("section change listener");
         listValues.add("own actionbar font");
         listValues.add("lock drawer, hide menu button, show back button instead");
+        listValues.add("drawer below toolbar");
         // on drawer open close und head item change listener hinzufügen
 
         // initiate the listadapter
@@ -191,6 +193,9 @@ public class MainActivity extends ActionBarActivity {
                     startActivity(i);
                 } else if(position == 29) {
                     Intent i = new Intent(ctx, ActionBarButtons.class);
+                    startActivity(i);
+                } else if(position == 30) {
+                    Intent i = new Intent(ctx, OneHeadItemBelowToolbar.class);
                     startActivity(i);
                 }
             }

@@ -30,6 +30,7 @@ public class NoHeaderActivity extends MaterialNavigationDrawer {
         MaterialSection section1 = this.newSection("Section 1", this.getResources().getDrawable(R.drawable.ic_favorite_black_36dp), new FragmentIndex(), false, menu);
         MaterialSection section2 = this.newSection("Section 2", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu);
 
+        menu.setStartIndex(1);
         // set this menu
         this.setCustomMenu(menu);
     }

@@ -15,7 +15,7 @@ import de.madcyph3r.materialnavigationdrawer.tools.RoundedCornersDrawable;
 /**
  * Created by marc on 23.02.2015.
  */
-public class BackPatternDefault extends MaterialNavigationDrawer {
+public class OneHeadItemBelowToolbar extends MaterialNavigationDrawer {
 
     MaterialNavigationDrawer drawer = null;
 
@@ -35,7 +35,6 @@ public class BackPatternDefault extends MaterialNavigationDrawer {
         // first section is loaded
         MaterialSection section1 = this.newSection("Section 1", this.getResources().getDrawable(R.drawable.ic_favorite_black_36dp), new FragmentIndex(), false, menu);
         MaterialSection section2 = this.newSection("Section 2", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu);
-        MaterialSection section3 = this.newSection("Section 3", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentIndex(), false, menu);
 
         // use bitmap and make a circle photo
         final Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.app_drawer_icon);
@@ -47,7 +46,6 @@ public class BackPatternDefault extends MaterialNavigationDrawer {
         // add head Item (menu will be loaded automatically)
         this.addHeadItem(headItem);
 
-        // set Pattern
-        this.setBackPattern(MaterialNavigationDrawer.BACKPATTERN_BACK_ANYWHERE);
+        // manifest and style.xml, to set below Toolbar
     }
 }

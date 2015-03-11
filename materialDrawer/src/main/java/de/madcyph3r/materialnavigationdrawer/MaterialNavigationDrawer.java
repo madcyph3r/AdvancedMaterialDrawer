@@ -35,6 +35,7 @@ import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -55,11 +56,6 @@ import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionOnClickList
 import de.madcyph3r.materialnavigationdrawer.tools.Utils;
 
 
-/**
- * Activity that implements ActionBarActivity with a Navigation Drawer with Material Design style
- *
- * @author created by neokree
- */
 @SuppressLint("InflateParams")
 public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivity implements MaterialSectionOnClickListener, MaterialSectionChangeListener, MaterialHeadItem.OnHeadItemDataLoaded {
 
@@ -80,12 +76,14 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     private static final String STATE_HEAD_COUNTER = "headcounter";*/
 
     // globbar vars view
-    private MaterialDrawerLayout layout;
+    private MaterialDrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarToggle;
     private ImageView statusBar;
     private Toolbar toolbar;
-    private RelativeLayout drawer;
-    private RelativeLayout content;
+    private ViewGroup drawerViewGroup;
+    private ViewGroup contentViewGroup;
+    private FrameLayout frameContainer;
+    //private RelativeLayout contentViewGroup;
 
     // global vars view headItem
     private ImageView headItemFirstPhoto;
@@ -108,7 +106,6 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     // global vars headItem
     private List<MaterialHeadItem> headItemManager;
     private MaterialHeadItemChangeListener headItemChangedListener;
-    private MaterialSectionChangeListener sectionChangedListener;
     private MaterialMenu headItemSwitchExtraMenu;
     private boolean headItemSwitchShowForce;
     private boolean headItemSwitcherOpen = false;
@@ -130,6 +127,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     private boolean drawerTouchLocked;
     private boolean slidingDrawerEffect;
     private boolean kitkatTraslucentStatusbar;
+    private boolean belowToolbar;
     private Resources resources;
     private int backPattern;
     private int drawerDPWidth;
@@ -164,11 +162,17 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         finishActivityOnNewIntent = finishActivityOnNewIntent();
 
         // set contentView
-        if (drawerHeaderType == DRAWERHEADER_HEADITEMS)
-            setContentView(R.layout.activity_material_navigation_drawer);
-        else
-            setContentView(R.layout.activity_material_navigation_drawer_customheader);
-
+        if (drawerHeaderType == DRAWERHEADER_HEADITEMS) {
+            if (belowToolbar)
+                setContentView(R.layout.activity_material_navigation_drawer_below_toolbar);
+            else
+                setContentView(R.layout.activity_material_navigation_drawer);
+        } else {
+            if (belowToolbar)
+                setContentView(R.layout.activity_material_navigation_drawer_customheader_below_toolbar);
+            else
+                setContentView(R.layout.activity_material_navigation_drawer_customheader);
+        }
         // init views
         initViews();
 
@@ -201,7 +205,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         // DEVELOPER CALL TO INIT
         init(savedInstanceState);
 
-        // drawer init
+        // drawerViewGroup init
         initDrawer();
 
         // load here header and menu
@@ -225,6 +229,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         uniqueToolbarColor = typedValue.data != 0;
         theme.resolveAttribute(R.attr.drawerColor, typedValue, true);
         drawerColor = typedValue.data;
+        theme.resolveAttribute(R.attr.belowToolbar, typedValue, true);
+        belowToolbar = typedValue.data != 0;
         theme.resolveAttribute(R.attr.multipaneSupport, typedValue, false);
         multiPaneSupport = typedValue.data != 0;
         theme.resolveAttribute(R.attr.titleColor, typedValue, true);
@@ -263,12 +269,13 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         statusBar = (ImageView) findViewById(R.id.statusBar);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        // init drawer components
-        layout = (MaterialDrawerLayout) this.findViewById(R.id.drawer_layout);
+        // init drawerViewGroup components
+        drawerLayout = (MaterialDrawerLayout) this.findViewById(R.id.drawer_layout);
 
-        // init content
-        content = (RelativeLayout) this.findViewById(R.id.content);
-        drawer = (RelativeLayout) this.findViewById(R.id.drawer);
+        // init contentViewGroup
+        contentViewGroup = (ViewGroup) this.findViewById(R.id.content);
+        drawerViewGroup = (ViewGroup) this.findViewById(R.id.drawer);
+        frameContainer = (FrameLayout) this.findViewById(R.id.frame_container);
 
         // init header, depends on setContentView
         if (drawerHeaderType == DRAWERHEADER_HEADITEMS) {
@@ -285,7 +292,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
             headItemBackgroundGradientLL = (LinearLayout) this.findViewById(R.id.background_gradient);
 
             int sdk = android.os.Build.VERSION.SDK_INT;
-            if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
                 headItemBackgroundGradientLL.setBackgroundDrawable(headItemBackgroundGradient);
             } else {
                 headItemBackgroundGradientLL.setBackground(headItemBackgroundGradient);
@@ -293,7 +300,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         } else
             customDrawerHeader = (LinearLayout) this.findViewById(R.id.drawer_header);
 
-        drawer.setBackgroundColor(drawerColor);
+        drawerViewGroup.setBackgroundColor(drawerColor);
 
 
         // set items
@@ -324,33 +331,35 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     private void initDrawer() {
+
+        DrawerLayout.LayoutParams drawerParams = (android.support.v4.widget.DrawerLayout.LayoutParams) drawerViewGroup.getLayoutParams();
+        Resources r = getResources();
+
         if (drawerDPWidth > 0) {
-            ViewGroup.LayoutParams params = drawer.getLayoutParams();
-            Resources r = getResources();
             int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, drawerDPWidth, r.getDisplayMetrics());
-            params.width = px;
-            drawer.setLayoutParams(params);
+            drawerParams.width = px;
+            drawerViewGroup.setLayoutParams(drawerParams);
         } else {
-            DrawerLayout.LayoutParams drawerParams = (android.support.v4.widget.DrawerLayout.LayoutParams) drawer.getLayoutParams();
             drawerParams.width = Utils.getDrawerWidth(resources, drawerDPWidth);
-            drawer.setLayoutParams(drawerParams);
         }
 
+        drawerViewGroup.setLayoutParams(drawerParams);
+
         if (deviceSupportMultiPane()) {
-            layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN, drawer);
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN, drawerViewGroup);
             DrawerLayout.LayoutParams params = new DrawerLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             params.setMargins((int) (320 * displayDensity), 0, 0, 0);
-            content.setLayoutParams(params);
-            layout.setScrimColor(Color.TRANSPARENT);
-            layout.openDrawer(drawer);
-            layout.setMultipaneSupport(true);
-            //layout.requestDisallowInterceptTouchEvent(true);
+            contentViewGroup.setLayoutParams(params);
+            drawerLayout.setScrimColor(Color.TRANSPARENT);
+            drawerLayout.openDrawer(drawerViewGroup);
+            drawerLayout.setMultipaneSupport(true);
+            //drawerLayout.requestDisallowInterceptTouchEvent(true);
         } else {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
 
             // don't use the constructor with toolbar, or onOptionsItemSelected() method will not be called
-            actionBarToggle = new ActionBarDrawerToggle(this, layout/*, toolbar*/, R.string.nothing, R.string.nothing) {
+            actionBarToggle = new ActionBarDrawerToggle(this, drawerLayout/*, toolbar*/, R.string.nothing, R.string.nothing) {
 
                 public void onDrawerClosed(View view) {
                     invalidateOptionsMenu();
@@ -389,17 +398,17 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                 }
             };
 
-            layout.setDrawerListener(actionBarToggle);
-            layout.setMultipaneSupport(false);
+            drawerLayout.setDrawerListener(actionBarToggle);
+            drawerLayout.setMultipaneSupport(false);
         }
 
-        ViewTreeObserver vto = drawer.getViewTreeObserver();
+        ViewTreeObserver vto = drawerViewGroup.getViewTreeObserver();
 
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
             @Override
             public void onGlobalLayout() {
-                int width = drawer.getWidth();
+                int width = drawerViewGroup.getWidth();
 
                 int heightHeader = 0;
 
@@ -411,10 +420,12 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                         heightHeader = (9 * width) / 16;
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-                            heightHeader += (int) (24 * displayDensity);
+                            if (!belowToolbar)
+                                heightHeader += (int) (24 * displayDensity);
 
                         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT && kitkatTraslucentStatusbar)
-                            heightHeader += (int) (25 * displayDensity);
+                            if (!belowToolbar)
+                                heightHeader += (int) (25 * displayDensity);
 
                         break;
                     case DRAWERHEADER_NO_HEADER:
@@ -422,7 +433,10 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                             heightHeader = 0;
                         } else {
                             // kitkat traslucentstatusbar and lollipop has 25 dp
-                            heightHeader = (int) (25 * displayDensity);
+                            if (!belowToolbar)
+                                heightHeader = (int) (25 * displayDensity);
+                            else
+                                heightHeader = 0;
                         }
                         break;
                 }
@@ -435,7 +449,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                     customDrawerHeader.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, heightHeader));
                 }
 
-                ViewTreeObserver obs = drawer.getViewTreeObserver();
+                ViewTreeObserver obs = drawerViewGroup.getViewTreeObserver();
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     obs.removeOnGlobalLayoutListener(this);
@@ -461,7 +475,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         }
 
         // loadMenu
-        loadMenu(loadFragmentOnStart, true);
+        loadMenu(loadFragmentOnStart);
 
 //        changeToolbarColor(currentSection);
 
@@ -478,24 +492,24 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     // own methods
     public void reloadMenu() {
         loadMenu(false, false);
-        currentSection.select();
+
+        if (null != currentSection)
+            currentSection.select();
     }
 
-    // if you send -1, it will load the first fragment section
+    // if you send -1, it will load the first StartSection it finds
     public void reloadMenu(int loadSectionPosition) {
         if (loadSectionPosition == -1)
             loadMenu(true, true);
         else {
             loadMenu(false, false);
-            if (currentMenu.getSection(loadSectionPosition) instanceof MaterialSection) {
-                currentSection = currentMenu.getSection(loadSectionPosition);
-                if ((currentSection.getTarget() == MaterialSection.TARGET_FRAGMENT)) {
-                    currentSection.select();
-                    setFragment((Fragment) currentSection.getTargetFragment(), currentSection.getTitle(), null, false);
-                    changeToolbarColor(currentSection);
-                }
+            currentSection = currentMenu.getSection(loadSectionPosition);
+            if ((currentSection.getTarget() == MaterialSection.TARGET_FRAGMENT)) {
+                currentSection.select();
+                setFragment((Fragment) currentSection.getTargetFragment(), currentSection.getTitle(), null, false);
+                changeToolbarColor(currentSection);
             } else {
-                throw new RuntimeException("Given Position has not a MaterialSection");
+                throw new RuntimeException("StartIndex should selected a section with a fragment");
             }
         }
     }
@@ -560,31 +574,51 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
             try {
                 if (loadFragment) {
-                    if (drawerHeaderType == DRAWERHEADER_HEADITEMS && headItemManager.get(0) != null &&
-                            headItemManager.get(0).isLoadFragmentOnChanged() &&
-                            sectionList.get(headItemManager.get(0).getStartIndex()) instanceof MaterialSection) {
 
-                        currentSection = (MaterialSection) sectionList.get(headItemManager.get(0).getStartIndex());
-                        if ((currentSection.getTarget() == MaterialSection.TARGET_FRAGMENT)) {
+                    int startIndex = currentMenu.getStartIndex();
+
+                    if (startIndex == -1)
+                        fromStart = true;
+
+                    if (!fromStart && ((drawerHeaderType == DRAWERHEADER_HEADITEMS &&
+                            headItemManager.get(0).isLoadFragmentOnChanged() &&
+                            sectionList.get(startIndex) instanceof MaterialSection) || (drawerHeaderType != DRAWERHEADER_HEADITEMS))) {
+
+                        MaterialSection newSection = (MaterialSection) sectionList.get(startIndex);
+
+                        if ((newSection.getTarget() == MaterialSection.TARGET_FRAGMENT)) {
+                            currentSection = newSection;
                             currentSection.select();
                             setFragment((Fragment) currentSection.getTargetFragment(), currentSection.getTitle(), null, false);
                             changeToolbarColor(currentSection);
+                        } else {
+                            throw new RuntimeException("StartIndex should selected a section with a fragment");
                         }
 
-                    } else if (fromStart || headItemManager == null || headItemManager.get(0) == null || (headItemManager.get(0) != null && headItemManager.get(0).isLoadFragmentOnChanged())) {
+                    }/* else if(!fromStart && drawerHeaderType != DRAWERHEADER_HEADITEMS) {
+
+                        MaterialSection newSection = (MaterialSection) sectionList.get(startIndex);
+
+                        if ((newSection.getTarget() == MaterialSection.TARGET_FRAGMENT)) {
+                            currentSection = newSection;
+                            currentSection.select();
+                            setFragment((Fragment) currentSection.getTargetFragment(), currentSection.getTitle(), null, false);
+                            changeToolbarColor(currentSection);
+                        } else {
+                            throw new RuntimeException("StartIndex should selected a section with a fragment");
+                        }
+
+                    }*/ else if (fromStart || headItemManager == null || headItemManager.get(0) == null || (headItemManager.get(0) != null && headItemManager.get(0).isLoadFragmentOnChanged())) {
                         // load first found fragment
                         for (int i = 0; i < sectionList.size(); i++) {
                             if (sectionList.get(i) instanceof MaterialSection) {
                                 currentSection = (MaterialSection) sectionList.get(i);
-                                if ((/*currentSection.getTarget() == MaterialSection.TARGET_ACTIVITY ||*/ currentSection.getTarget() == MaterialSection.TARGET_FRAGMENT)) {
-                                    //fragmentFound = true;
+                                if ((currentSection.getTarget() == MaterialSection.TARGET_FRAGMENT)) {
                                     currentSection.select();
                                     setFragment((Fragment) currentSection.getTargetFragment(), currentSection.getTitle(), null, false);
                                     changeToolbarColor(currentSection);
                                     break;
-                                } /*else {
-                                currentSection.unSelect();
-                            }*/
+                                }
                             }
                         }
                     }
@@ -676,7 +710,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
             throw new RuntimeException("Fragment must be android.app.Fragment or android.support.v4.app.Fragment");
 
         if (!deviceSupportMultiPane() && closeDrawer)
-            layout.closeDrawer(drawer);
+            drawerLayout.closeDrawer(drawerViewGroup);
     }
 
     private int getHeadItemNumber(MaterialHeadItem headItem) {
@@ -692,11 +726,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     public void closeDrawer() {
-        layout.closeDrawer(drawer);
+        drawerLayout.closeDrawer(drawerViewGroup);
     }
 
     public void openDrawer() {
-        layout.openDrawer(drawer);
+        drawerLayout.openDrawer(drawerViewGroup);
     }
 
     public enum ActionBarMenuItem {
@@ -748,11 +782,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         // load new first head item information
         notifyHeadItemDataChangedSwitch();
 
-        if(newFirstHeadItem.getMenu() != null && newFirstHeadItem.getMenu().getItems() != null && newFirstHeadItem.getMenu().getItems().size() > 0)
+        if (newFirstHeadItem.getMenu() != null && newFirstHeadItem.getMenu().getItems() != null && newFirstHeadItem.getMenu().getItems().size() > 0)
             loadMenu(true);
 
         if (headItemManager.get(0).isCloseDrawerOnChanged() && !deviceSupportMultiPane()) {
-            layout.closeDrawer(drawer);
+            drawerLayout.closeDrawer(drawerViewGroup);
         }
     }
 
@@ -766,11 +800,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
             notifyHeadItemsDataChanged();
 
-            if(newFirstHeadItem.getMenu() != null && newFirstHeadItem.getMenu().getItems() != null && newFirstHeadItem.getMenu().getItems().size() > 0)
+            if (newFirstHeadItem.getMenu() != null && newFirstHeadItem.getMenu().getItems() != null && newFirstHeadItem.getMenu().getItems().size() > 0)
                 loadMenu(true);
 
             if (headItemManager.get(0).isCloseDrawerOnChanged() && !deviceSupportMultiPane()) {
-                layout.closeDrawer(drawer);
+                drawerLayout.closeDrawer(drawerViewGroup);
             }
         }
 
@@ -809,10 +843,10 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         headItemPhotoClicked.getGlobalVisibleRect(startingRect, offsetHover);
         floatingPhotoImage.setImageDrawable(headItemPhotoClicked.getDrawable());
 
-        // add floating image, this image will egt moved and animated
+        // add floating image, this image will get moved and animated
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(headItemPhotoClicked.getWidth(), headItemPhotoClicked.getHeight());
         params.setMargins(offsetHover.x, offsetHover.y - statusBarHeight, 0, 0);
-        drawer.addView(floatingPhotoImage, params);
+        drawerViewGroup.addView(floatingPhotoImage, params);
 
         // get the drawable photo from the first headItem
         headItemPhotoClicked.setImageDrawable(headItemManager.get(0).getPhoto());
@@ -822,18 +856,18 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
         headItemFirstPhoto.getGlobalVisibleRect(finalRect);
 
+
         //calculate offset for the move
         int offset = (((finalRect.bottom - finalRect.top) - (startingRect.bottom - finalRect.top)) / 2);
         finalRect.offset(offset, offset - statusBarHeight);
         startingRect.offset(0, -statusBarHeight);
-
 
         // generate animator set
         AnimatorSet set = new AnimatorSet();
         set
                 // si ingrandisce l'immagine e la si sposta a sinistra.
                 .play(ObjectAnimator.ofFloat(floatingPhotoImage, View.X, startingRect.left, finalRect.left))
-                .with(ObjectAnimator.ofFloat(floatingPhotoImage, View.Y, startingRect.top, finalRect.top))
+                .with(ObjectAnimator.ofFloat(floatingPhotoImage, View.Y, headItemPhotoClicked.getTop(), headItemFirstPhoto.getTop() + offset))
                 .with(ObjectAnimator.ofFloat(floatingPhotoImage, View.SCALE_X, 1f, finalScale))
                 .with(ObjectAnimator.ofFloat(floatingPhotoImage, View.SCALE_Y, 1f, finalScale))
                 .with(ObjectAnimator.ofFloat(headItemFirstPhoto, View.ALPHA, 1f, 0f))
@@ -853,7 +887,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                 setFirstHeadItemPhoto(newFirstHeadItem.getPhoto());
 
                 // remove floating image after animation
-                drawer.removeView(floatingPhotoImage);
+                drawerViewGroup.removeView(floatingPhotoImage);
 
                 // set title and subtitle
                 setHeadItemTitle(newFirstHeadItem.getTitle());
@@ -867,11 +901,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                 changeHeadItems(headItemManager.get(0), newFirstHeadItem);
 
                 // load head item menu
-                if(newFirstHeadItem.getMenu() != null && newFirstHeadItem.getMenu().getItems() != null && newFirstHeadItem.getMenu().getItems().size() > 0)
+                if (newFirstHeadItem.getMenu() != null && newFirstHeadItem.getMenu().getItems() != null && newFirstHeadItem.getMenu().getItems().size() > 0)
                     loadMenu(true);
 
                 if (headItemManager.get(0).isCloseDrawerOnChanged() && !deviceSupportMultiPane()) {
-                    layout.closeDrawer(drawer);
+                    drawerLayout.closeDrawer(drawerViewGroup);
                 }
 
             }
@@ -918,10 +952,10 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         this.multiPaneSupport = true;
     }
 
- /*   public void allowArrowAnimation() {
-        slidingDrawerEffect = true;
-    }
-*/
+    /*   public void allowArrowAnimation() {
+           slidingDrawerEffect = true;
+       }
+   */
     public void changeToolbarColor() {
         changeToolbarColor(null);
     }
@@ -1429,7 +1463,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                     headItemManager.get(0).getOnClickListener().onBackgroundClick(headItemManager.get(0));
 
                     if (headItemManager.get(0).isCloseDrawerOnBackgroundClick()) {
-                        layout.closeDrawer(drawer);
+                        drawerLayout.closeDrawer(drawerViewGroup);
                     }
                 }
             }
@@ -1449,7 +1483,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                     headItemManager.get(0).getOnClickListener().onClick(headItemManager.get(0));
 
                     if (headItemManager.get(0).isCloseDrawerOnClick() && !deviceSupportMultiPane()) {
-                        layout.closeDrawer(drawer);
+                        drawerLayout.closeDrawer(drawerViewGroup);
                     }
                 }
             }
@@ -1484,7 +1518,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                         headItemManager.get(0).getOnClickListener().onBackgroundClick(headItemManager.get(0));
 
                         if (headItemManager.get(0).isCloseDrawerOnBackgroundClick() && !deviceSupportMultiPane()) {
-                            layout.closeDrawer(drawer);
+                            drawerLayout.closeDrawer(drawerViewGroup);
                         }
                     }
                 }
@@ -1522,7 +1556,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                         headItemManager.get(0).getOnClickListener().onBackgroundClick(headItemManager.get(0));
 
                         if (headItemManager.get(0).isCloseDrawerOnBackgroundClick() && !deviceSupportMultiPane()) {
-                            layout.closeDrawer(drawer);
+                            drawerLayout.closeDrawer(drawerViewGroup);
                         }
                     }
                 }
@@ -1571,9 +1605,9 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     protected void onResume() {
         super.onResume();
         if (!deviceSupportMultiPane())
-            layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, drawer);
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, drawerViewGroup);
         else
-            layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN, drawer);
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN, drawerViewGroup);
     }
 
     @Override
@@ -1608,7 +1642,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     public void onConfigurationChanged(Configuration newConfig) {// al cambio di orientamento dello schermo
         super.onConfigurationChanged(newConfig);
 
-        // Passa tutte le configurazioni al drawer
+        // Passa tutte le configurazioni al drawerViewGroup
         if (actionBarToggle != null) {
             actionBarToggle.onConfigurationChanged(newConfig);
         }
@@ -1628,7 +1662,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                 super.onBackPressed();
                 break;
             case BACKPATTERN_BACK_TO_START_INDEX:
-                MaterialSection section = (MaterialSection) headItemManager.get(0).getMenu().getItems().get(headItemManager.get(0).getStartIndex());
+                MaterialSection section = (MaterialSection) currentMenu.getItems().get(currentMenu.getStartIndex());
                 if (currentSection == section)
                     super.onBackPressed();
                 else {
@@ -1689,7 +1723,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                     finish();
                 } else {*/
 
-                    // smooth close drawer before activity start
+                    // smooth close drawerViewGroup before activity start
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -1872,7 +1906,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     public void setDrawerLockMode(int mode) {
-        layout.setDrawerLockMode(mode, drawer);
+        drawerLayout.setDrawerLockMode(mode, drawerViewGroup);
     }
 
     @Override

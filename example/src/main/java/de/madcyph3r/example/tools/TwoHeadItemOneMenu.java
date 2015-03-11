@@ -52,7 +52,7 @@ public class TwoHeadItemOneMenu extends MaterialNavigationDrawer {
         final RoundedCornersDrawable drawableAppIcon = new RoundedCornersDrawable(getResources(), bitmap);
 
         // create Head Item
-        MaterialHeadItem headItem = new MaterialHeadItem(this, "A HeadItem", "A Subtitle", drawableAppIcon, R.drawable.mat5, menu, 0);
+        MaterialHeadItem headItem = new MaterialHeadItem(this, "A HeadItem", "A Subtitle", drawableAppIcon, R.drawable.mat5, menu);
         return headItem;
     }
 

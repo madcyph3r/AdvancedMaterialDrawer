@@ -13,6 +13,7 @@
 
     <declare-styleable name="MaterialNavigationDrawer">
         <attr name="drawerType" format="integer" />
+        <attr name="belowToolbar" format="boolean" />
         <attr name="uniqueToolbarColor" format="boolean" />
         <attr name="multipaneSupport" format="boolean" />
         <attr name="drawerColor" format="color" />

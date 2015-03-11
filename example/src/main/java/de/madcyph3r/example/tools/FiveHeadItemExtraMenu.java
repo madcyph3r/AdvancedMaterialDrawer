@@ -68,7 +68,7 @@ public class FiveHeadItemExtraMenu extends MaterialNavigationDrawer {
         final RoundedCornersDrawable drawableAppIcon = new RoundedCornersDrawable(getResources(), bitmap);
 
         // create Head Item
-        MaterialHeadItem headItem = new MaterialHeadItem(this, "A HeadItem", "A Subtitle", drawableAppIcon, R.drawable.mat5, menu, 0);
+        MaterialHeadItem headItem = new MaterialHeadItem(this, "A HeadItem", "A Subtitle", drawableAppIcon, R.drawable.mat5, menu);
         return headItem;
     }
 
@@ -84,7 +84,7 @@ public class FiveHeadItemExtraMenu extends MaterialNavigationDrawer {
                 .buildRound("B", Color.DKGRAY);
 
         // create Head Item (Start index is section 2)
-        MaterialHeadItem headItem = new MaterialHeadItem(this, "B HeadItem", "B Subtitle", headPhoto, R.drawable.mat6, menu, 1);
+        MaterialHeadItem headItem = new MaterialHeadItem(this, "B HeadItem", "B Subtitle", headPhoto, R.drawable.mat6, menu);
         return headItem;
     }
 
@@ -100,7 +100,7 @@ public class FiveHeadItemExtraMenu extends MaterialNavigationDrawer {
                 .buildRound("C", Color.GRAY);
 
         // create Head Item (Start index is section 2)
-        MaterialHeadItem headItem = new MaterialHeadItem(this, "C HeadItem", "C Subtitle", headPhoto, R.drawable.mat6, menu, 0);
+        MaterialHeadItem headItem = new MaterialHeadItem(this, "C HeadItem", "C Subtitle", headPhoto, R.drawable.mat6, menu);
         return headItem;
     }
 
@@ -116,7 +116,7 @@ public class FiveHeadItemExtraMenu extends MaterialNavigationDrawer {
                 .buildRound("D", Color.RED);
 
         // create Head Item (Start index is section 2)
-        MaterialHeadItem headItem = new MaterialHeadItem(this, "D HeadItem", "D Subtitle", headPhoto, R.drawable.mat6, menu, 0);
+        MaterialHeadItem headItem = new MaterialHeadItem(this, "D HeadItem", "D Subtitle", headPhoto, R.drawable.mat6, menu);
         return headItem;
     }
 
@@ -132,7 +132,7 @@ public class FiveHeadItemExtraMenu extends MaterialNavigationDrawer {
                 .buildRound("E", Color.YELLOW);
 
         // create Head Item (Start index is section 2)
-        MaterialHeadItem headItem = new MaterialHeadItem(this, "E HeadItem", "E Subtitle", headPhoto, R.drawable.mat6, menu, 0);
+        MaterialHeadItem headItem = new MaterialHeadItem(this, "E HeadItem", "E Subtitle", headPhoto, R.drawable.mat6, menu);
         return headItem;
     }
 }

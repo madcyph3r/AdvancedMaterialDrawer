@@ -44,11 +44,9 @@ public class ClosePreviousActivity extends MaterialNavigationDrawer {
 
         MaterialMenu menu = new MaterialMenu();
 
-
         // create sections
         this.newSection("Start Fragment", this.getResources().getDrawable(R.drawable.ic_favorite_black_36dp), new FragmentIndex(), false, menu);
         newSection("Close drawer activity", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new Intent(this, Settings.class), false, menu);
-
 
         drawer.setCustomMenu(menu);
     }

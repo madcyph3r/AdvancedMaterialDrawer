@@ -178,6 +178,16 @@ activity#de.madcyph3r.example.tools.OwnActionBarFont
 ADDED from AndroidManifest.xml:87:9
 	android:name
 		ADDED from AndroidManifest.xml:87:19
+activity#de.madcyph3r.example.tools.ActionBarButtons
+ADDED from AndroidManifest.xml:89:9
+	android:name
+		ADDED from AndroidManifest.xml:89:19
+activity#de.madcyph3r.example.tools.OneHeadItemBelowToolbar
+ADDED from AndroidManifest.xml:91:9
+	android:theme
+		ADDED from AndroidManifest.xml:92:13
+	android:name
+		ADDED from AndroidManifest.xml:91:19
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:21.0.3:15:5
