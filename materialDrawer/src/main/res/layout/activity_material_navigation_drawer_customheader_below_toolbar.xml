@@ -1,5 +1,4 @@
-<!-- Framelayout per la visualizzazione -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
@@ -11,11 +10,11 @@
         android:layout_height="@dimen/statusMargin"
         android:background="?attr/colorPrimary" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
+    <View
+        android:id="@+id/overlayView"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary" />
+        android:layout_width="match_parent"
+        android:layout_below="@+id/statusBar" />
 
     <de.madcyph3r.materialnavigationdrawer.MaterialDrawerLayout
         android:id="@+id/drawer_layout"
@@ -38,4 +37,10 @@
 
     </de.madcyph3r.materialnavigationdrawer.MaterialDrawerLayout>
 
-</LinearLayout>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary" />
+
+</RelativeLayout>
