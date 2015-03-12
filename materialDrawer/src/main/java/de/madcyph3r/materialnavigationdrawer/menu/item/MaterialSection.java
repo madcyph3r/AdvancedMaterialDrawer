@@ -28,7 +28,6 @@ public class MaterialSection<Fragment> implements /*View.OnTouchListener,*/ View
     public static final int TARGET_ACTIVITY = 1;
     public static final int TARGET_CLICK = 2;
 
-    private int position;
     private View view;
     private TextView text;
     private TextView notifications;

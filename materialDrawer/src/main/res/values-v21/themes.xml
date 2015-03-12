@@ -3,7 +3,8 @@
 
     <style name="MaterialNavigationDrawerTheme" parent="Theme.AppCompat.NoActionBar" >
         <item name="belowToolbar">false</item>
-        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="drawerColor">#111</item>
         <item name="labelColor">#888888</item>
@@ -19,7 +20,8 @@
 
     <style name="MaterialNavigationDrawerTheme.Light" parent="Theme.AppCompat.Light.NoActionBar" >
         <item name="belowToolbar">false</item>
-        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="drawerColor">#fafafa</item>
         <item name="labelColor">#afafaf</item>
@@ -35,7 +37,8 @@
 
     <style name="MaterialNavigationDrawerTheme.Light.DarkActionBar" parent="Theme.AppCompat.Light.NoActionBar" >
         <item name="belowToolbar">false</item>
-        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
         <item name="uniqueToolbarColor">false</item>

@@ -11,12 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <ImageView
-            android:id="@+id/statusBar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/statusMargin"
-            android:background="?attr/colorPrimary" />
-
         <View
             android:id="@+id/overlayView"
             android:layout_height="?attr/actionBarSize"
@@ -37,6 +31,12 @@
             android:background="?attr/colorPrimary"
             android:layout_below="@+id/statusBar">
         </android.support.v7.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/statusBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/statusMargin"
+            android:background="?attr/colorPrimary" />
 
     </RelativeLayout>
 

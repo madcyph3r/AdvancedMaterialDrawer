@@ -4,12 +4,6 @@
     android:fitsSystemWindows="false"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/statusBar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/statusMargin"
-        android:background="?attr/colorPrimary" />
-
     <View
         android:id="@+id/overlayView"
         android:layout_height="?attr/actionBarSize"
@@ -46,5 +40,11 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:layout_below="@id/statusBar"/>
+
+    <ImageView
+        android:id="@+id/statusBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/statusMargin"
+        android:background="?attr/colorPrimary" />
 
 </RelativeLayout>

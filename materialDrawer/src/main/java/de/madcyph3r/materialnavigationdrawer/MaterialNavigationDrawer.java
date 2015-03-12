@@ -70,10 +70,10 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     public static final int DRAWERHEADER_CUSTOM = 2;
     public static final int DRAWERHEADER_NO_HEADER = 3;
 
-    // static restore state , maybe need later
-    /*private static final String STATE_HEAD_ITEM = "headitem";
-    private static final String STATE_SECTION = "section";
-    private static final String STATE_HEAD_COUNTER = "headcounter";*/
+    // default width and height
+    public static final int DRAWER_DEFAULT_HEIGHT = 0;
+    public static final int DRAWER_DEFAULT_WIDTH = 0;
+
 
     // globbar vars view
     private MaterialDrawerLayout drawerLayout;
@@ -130,6 +130,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     private boolean belowToolbar;
     private Resources resources;
     private int backPattern;
+    private int drawerDPHeight;
     private int drawerDPWidth;
     private int drawerHeaderType;
     private boolean uniqueToolbarColor;
@@ -259,6 +260,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         slidingDrawerEffect = true;
         kitkatTraslucentStatusbar = false;
         drawerDPWidth = 0; // 0 not set, will get calculated
+        drawerDPHeight = 0;
         drawerHeaderType = 0; // default type is headItem, but will get overridden
         backPattern = BACKPATTERN_BACK_ANYWHERE; // default back button option
 
@@ -428,7 +430,12 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                     case DRAWERHEADER_HEADITEMS:
                     case DRAWERHEADER_IMAGE:
                     case DRAWERHEADER_CUSTOM:
-                        heightHeader = (9 * width) / 16;
+                        if(drawerDPHeight == 0 || drawerHeaderType == DRAWERHEADER_HEADITEMS)
+                            heightHeader = (9 * width) / 16;
+                        else {
+                            Resources r = getResources();
+                            heightHeader = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, drawerDPHeight, r.getDisplayMetrics());
+                        }
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
                             if (!belowToolbar)
@@ -1862,6 +1869,12 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         customDrawerHeader.addView(view, params);
     }
 
+    public void setDrawerHeaderCustom(View view, int drawerDPHeight) {
+        setDrawerHeaderCustom(view);
+
+        this.drawerDPHeight = drawerDPHeight;
+    }
+
     public void setDrawerHeaderImage(Bitmap background) {
         if (drawerHeaderType != DRAWERHEADER_IMAGE)
             throw new RuntimeException("Your header is not set to Image.");
@@ -1874,6 +1887,12 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         customDrawerHeader.addView(image, params);
     }
 
+    public void setDrawerHeaderImage(Bitmap background, int drawerDPHeight) {
+        setDrawerHeaderImage(background);
+
+        this.drawerDPHeight = drawerDPHeight;
+    }
+
     public void setDrawerHeaderImage(Drawable background) {
         if (drawerHeaderType != DRAWERHEADER_IMAGE)
             throw new RuntimeException("Your header is not set to Image.");
@@ -1884,6 +1903,12 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         image.setImageDrawable(background);
 
         customDrawerHeader.addView(image, params);
+    }
+
+    public void setDrawerHeaderImage(Drawable background, int drawerDPHeight) {
+        setDrawerHeaderImage(background);
+
+        this.drawerDPHeight = drawerDPHeight;
     }
 
     public void setHeadItemSubTitle(String email) {
