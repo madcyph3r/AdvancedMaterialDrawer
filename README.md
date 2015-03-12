@@ -16,12 +16,13 @@ Big thanks to neokree, without him this library would not exist.
 - Every Head-Item can have its own Menu
 - Head-Item listeners for Avatar or Background taps
 - Adding and removing Head-Items and Menu-Items at runtime
-- Theming
+- Own theme
 - Labels
 - Normal Sections (with Fragment/Activty start or own onClick listener)
 - Bottom-Sections
 - Drawer below the toolbar
 - Tablet support
+- Toolbar overflow support
 - More: Setting your own Fragment on Start, etc
 
 ### Example APK (Lib-Version 1.1.0) 
@@ -45,7 +46,7 @@ compile 'com.nineoldandroids:library:2.4.0'
 ```
 
 ### Usage
-There are 29 examples with explanations how to use the library, here is a small example with one Head-Item. It looks like [screenshot three](https://raw.githubusercontent.com/madcyph3r/AdvancedMaterialDrawer/master/Screenshot_3.png), only in black color.
+There are 30 examples with explanations how to use the library, here is a small example with one Head-Item. It looks like [screenshot three](https://raw.githubusercontent.com/madcyph3r/AdvancedMaterialDrawer/master/Screenshot_4.png), only in black color.
 
 ```java
 public class OneHeadItem extends MaterialNavigationDrawer {
@@ -89,14 +90,46 @@ public class OneHeadItem extends MaterialNavigationDrawer {
 - A Wiki with some Introduction will come soon.
 
 ### Screenshots
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_1.png" alt="screenshot" width="300px" height="auto" />
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_2.png" alt="screenshot" width="300px" height="auto" />
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_7.png" alt="screenshot" width="300px" height="auto" />
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_3.png" alt="screenshot" width="300px" height="auto" />
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_11.png" alt="screenshot" width="300px" height="auto" />
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_4.png" alt="screenshot" width="300px" height="auto" />
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_5.png" alt="screenshot" width="300px" height="auto" />
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_6.png" alt="screenshot" width="300px" height="auto" />
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_8.png" alt="screenshot" width="300px" height="auto" />
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_9.png" alt="screenshot" width="300px" height="auto" />
+5 head-items. Every one has his own menu. (Dark-Style):
+
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_1.png" alt="screenshot" width="200px" height="auto" />
+
+Section kinds (section with and without icon, bottom Section, label, devisor, icon color):
+
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_2.png" alt="screenshot" width="200px" height="auto" />
+
+drawer below the toolbar:
+
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_7.png" alt="screenshot" width="200px" height="auto" />
+
+Light-Style:
+
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_3.png" alt="screenshot" width="200px" height="auto" />
+
+Toolbar (Actionbar) Overflow:
+
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_11.png" alt="screenshot" width="200px" height="auto" />
+
+Own Theme:
+
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_4.png" alt="screenshot" width="200px" height="auto" />
+
+Custom-Header:
+
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_5.png" alt="screenshot" width="200px" height="auto" />
+
+Selected section sets the toolbar color:
+
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_6.png" alt="screenshot" width="200px" height="auto" />
+
+Tablet, drawer is always present (multipaneSupport = true), below toolbar:
+
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_8.png" alt="screenshot" width="200px" height="auto" />
+
+Tablet, drawer with hiding, not always open:
+
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_9.png" alt="screenshot" width="200px" height="auto" />
+
+Tablet, drawer is always present (multipaneSupport = true):
+
 <img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_10.png" alt="screenshot" width="300px" height="auto" />
