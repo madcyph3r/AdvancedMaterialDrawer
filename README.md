@@ -89,7 +89,9 @@ public class OneHeadItem extends MaterialNavigationDrawer {
 - If you like the library press the star ;)
 - A Wiki with some Introduction will come soon.
 
-### Screenshots
+### Screenshots 
+**Info: The statusbar is now semi-transparent on lollipop with the latest snapshot. New screenshot will come, with the new release.**
+
 5 head-items. Every one has his own menu. (Dark-Style):
 
 <img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_1.png" alt="screenshot" width="200px" height="auto" />
