@@ -52,7 +52,6 @@ public class ActionBarButtons extends MaterialNavigationDrawer {
         // set load fragment on start to false and then set your own fragment
         this.setLoadFragmentOnStart(false);
         this.setCustomFragment(new FragmentActionBarButtons(), "title");
-
     }
 
     @TargetApi(11)

@@ -80,7 +80,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     private ActionBarDrawerToggle actionBarToggle;
     private ImageView statusBar;
     private Toolbar toolbar;
-    private ViewGroup drawerViewGroup;
+    private RelativeLayout drawerViewGroup;
     private ViewGroup contentViewGroup;
     private FrameLayout frameContainer;
     //private RelativeLayout contentViewGroup;
@@ -141,6 +141,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     private ActionBar actionBar;
     private View overlayView;
     private boolean actionBarOverlay;
+    private Float actionBarOverlayAlpha;
 
     @Override
     /**
@@ -247,6 +248,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         headItemBackgroundGradient = values.getDrawable(R.styleable.MaterialAccount_backgroundGradient);
         theme.resolveAttribute(R.attr.actionBarOverlay, typedValue, false);
         actionBarOverlay = typedValue.data != 0;
+        theme.resolveAttribute(R.attr.actionBarOverlayAlpha, typedValue, false);
+        actionBarOverlayAlpha = typedValue.getFloat();
     }
 
     private void initGlobalVars() {
@@ -282,7 +285,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
         // init contentViewGroup
         contentViewGroup = (ViewGroup) this.findViewById(R.id.content);
-        drawerViewGroup = (ViewGroup) this.findViewById(R.id.drawer);
+        drawerViewGroup = (RelativeLayout) this.findViewById(R.id.drawer);
         frameContainer = (FrameLayout) this.findViewById(R.id.frame_container);
 
         // init header, depends on setContentView
@@ -999,8 +1002,10 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     public void changeToolbarColor(int primaryColor, int primaryDarkColor) {
         if (statusBar != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
             this.statusBar.setImageDrawable(new ColorDrawable(primaryDarkColor));
-        if (getToolbar() != null)
+        if (getToolbar() != null) {
             this.getToolbar().setBackgroundColor(primaryColor);
+            setActionBarAlpha(actionBarOverlayAlpha);
+        }
     }
 
     private void addLabel(MaterialLabel label) {
@@ -1917,6 +1922,10 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         drawerLayout.setDrawerLockMode(mode, drawerViewGroup);
     }
 
+    public MaterialDrawerLayout getDrawerLayout() {
+        return drawerLayout;
+    }
+
     @Override
     public void onBeforeChangedSection(MaterialSection newSection) {
 
@@ -1927,10 +1936,25 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
     }
 
-    public void setActionBarOverlay(boolean overlay){
+    public void setToolbarOverlay(boolean overlay) {
+        setActionBarOverlay(overlay);
+    }
+
+    public void setActionBarOverlay(boolean overlay) {
         actionBarOverlay = overlay;
         if (actionBarOverlay) overlayView.setVisibility(View.GONE);
         else overlayView.setVisibility(View.VISIBLE);
+    }
+
+    public void setToolbarAlpha(Float alpha) {
+        setActionBarAlpha(alpha);
+    }
+
+    public void setActionBarAlpha(Float alpha) {
+        Drawable mActionBarBackgroundDrawable = toolbar.getBackground();
+        int newAlpha = (int) (alpha * 255);
+        mActionBarBackgroundDrawable.setAlpha(newAlpha);
+        toolbar.getBackground().setAlpha(newAlpha);
     }
 
     public boolean isActionBarOverlay(){

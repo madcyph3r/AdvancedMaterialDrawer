@@ -91,6 +91,8 @@
         <activity android:name=".tools.OneHeadItemBelowToolbar"
             android:theme="@style/BelowToolbarTheme">
         </activity>
+        <activity android:name=".tools.ActionBarOverlayActivity">
+        </activity>
     </application>
 
 </manifest>

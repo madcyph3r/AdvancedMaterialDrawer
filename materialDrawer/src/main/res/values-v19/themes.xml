@@ -7,10 +7,11 @@
         <item name="uniqueToolbarColor">false</item>
         <item name="labelColor">#888888</item>
         <item name="sectionStyle">@style/MaterialSectionTheme</item>
-        <!--<item name="subheaderStyle">@style/MaterialSubheaderTheme</item>-->
         <item name="accountStyle">@style/MaterialAccountTheme</item>
         <item name="multipaneSupport">false</item>
         <item name="autoDarkStatusBar">true</item>
+        <item name="actionBarOverlay">false</item>
+        <item name="actionBarOverlayAlpha">1.0</item>
     </style>
 
     <style name="MaterialNavigationDrawerTheme.Light" parent="Theme.AppCompat.Light.NoActionBar" >
@@ -23,6 +24,8 @@
         <item name="accountStyle">@style/MaterialAccountTheme.Light</item>
         <item name="multipaneSupport">false</item>
         <item name="autoDarkStatusBar">true</item>
+        <item name="actionBarOverlay">false</item>
+        <item name="actionBarOverlayAlpha">1.0</item>
     </style>
 
     <style name="MaterialNavigationDrawerTheme.Light.DarkActionBar" parent="Theme.AppCompat.Light.NoActionBar" >
@@ -37,6 +40,8 @@
         <item name="accountStyle">@style/MaterialAccountTheme.Light</item>
         <item name="multipaneSupport">false</item>
         <item name="autoDarkStatusBar">true</item>
+        <item name="actionBarOverlay">false</item>
+        <item name="actionBarOverlayAlpha">1.0</item>
     </style>
 
     <style name="MaterialNavigationDrawerTheme.Light.TranslucentKitKatStatusBar" parent="MaterialNavigationDrawerTheme.Light" >

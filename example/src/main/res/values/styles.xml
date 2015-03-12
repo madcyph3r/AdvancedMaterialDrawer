@@ -1,7 +1,7 @@
 <resources>
 
     <style name="BelowToolbarTheme" parent="MaterialNavigationDrawerTheme.Light">
-        <item name="belowToolbar">false</item>
+        <item name="belowToolbar">true</item>
         <item name="colorPrimary">#5677fc</item>
         <item name="autoDarkStatusBar">true</item>
         <item name="multipaneSupport">true</item>

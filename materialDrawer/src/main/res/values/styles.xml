@@ -23,6 +23,7 @@
         <attr name="autoDarkStatusBar" format="boolean"/>
         <attr name="accountStyle" format="reference" />
         <attr name="actionBarOverlay" format="boolean"/>
+        <attr name="actionBarOverlayAlpha" format="float" />
     </declare-styleable>
 
     <!--   <declare-styleable name="MaterialSubheader">
