@@ -93,6 +93,7 @@ public class OneHeadItem extends MaterialNavigationDrawer {
 <img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_2.png" alt="screenshot" width="300px" height="auto" />
 <img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_7.png" alt="screenshot" width="300px" height="auto" />
 <img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_3.png" alt="screenshot" width="300px" height="auto" />
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_11.png" alt="screenshot" width="300px" height="auto" />
 <img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_4.png" alt="screenshot" width="300px" height="auto" />
 <img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_5.png" alt="screenshot" width="300px" height="auto" />
 <img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_6.png" alt="screenshot" width="300px" height="auto" />
