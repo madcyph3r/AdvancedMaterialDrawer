@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
     <declare-styleable name="MaterialSection">
         <attr name="sectionColorIcon" format="color" />
         <attr name="sectionColorText" format="color" />
@@ -22,12 +22,13 @@
         <attr name="subheaderStyle" format="reference"/>
         <attr name="autoDarkStatusBar" format="boolean"/>
         <attr name="accountStyle" format="reference" />
+        <attr name="actionBarOverlay" format="boolean"/>
     </declare-styleable>
 
- <!--   <declare-styleable name="MaterialSubheader">
-        <attr name="subheaderTitleColor" format="color"/>
-    </declare-styleable>-->
-    
+    <!--   <declare-styleable name="MaterialSubheader">
+           <attr name="subheaderTitleColor" format="color"/>
+       </declare-styleable>-->
+
     <declare-styleable name="MaterialAccount">
         <attr name="titleColor" format="color" />
         <attr name="subTitleColor" format="color" />

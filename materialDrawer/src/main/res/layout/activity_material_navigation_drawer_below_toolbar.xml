@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
@@ -10,17 +10,17 @@
         android:layout_height="@dimen/statusMargin"
         android:background="?attr/colorPrimary" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <View
+        android:id="@+id/overlayView"
+        android:layout_height="?attr/actionBarSize"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize" />
+        android:layout_below="@+id/statusBar" />
 
     <de.madcyph3r.materialnavigationdrawer.MaterialDrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/overlayView"
         android:fitsSystemWindows="false">
 
         <RelativeLayout
@@ -39,4 +39,12 @@
 
     </de.madcyph3r.materialnavigationdrawer.MaterialDrawerLayout>
 
-</LinearLayout>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_below="@id/statusBar"/>
+
+</RelativeLayout>

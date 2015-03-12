@@ -139,6 +139,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     private int titleColor;
     private int subTitleColor;
     private ActionBar actionBar;
+    private View overlayView;
+    private boolean actionBarOverlay;
 
     @Override
     /**
@@ -202,6 +204,10 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         this.setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
 
+        overlayView = findViewById(R.id.overlayView);
+
+        setActionBarOverlay(actionBarOverlay);
+
         // DEVELOPER CALL TO INIT
         init(savedInstanceState);
 
@@ -239,6 +245,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         titleColor = values.getColor(R.styleable.MaterialAccount_titleColor, 0x00FFFFFF);
         subTitleColor = values.getColor(R.styleable.MaterialAccount_subTitleColor, 0x00FFFFFF);
         headItemBackgroundGradient = values.getDrawable(R.styleable.MaterialAccount_backgroundGradient);
+        theme.resolveAttribute(R.attr.actionBarOverlay, typedValue, false);
+        actionBarOverlay = typedValue.data != 0;
     }
 
     private void initGlobalVars() {
@@ -1918,4 +1926,15 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     public void onAfterChangedSection(MaterialSection newSection) {
 
     }
+
+    public void setActionBarOverlay(boolean overlay){
+        actionBarOverlay = overlay;
+        if (actionBarOverlay) overlayView.setVisibility(View.GONE);
+        else overlayView.setVisibility(View.VISIBLE);
+    }
+
+    public boolean isActionBarOverlay(){
+        return actionBarOverlay;
+    }
+
 }
