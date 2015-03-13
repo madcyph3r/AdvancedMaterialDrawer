@@ -55,6 +55,7 @@ public class MaterialSection<Fragment> implements /*View.OnTouchListener,*/ View
     private int numberNotifications;
 
     private String title;
+    private String fragmentTitle;
 
     private Fragment targetFragment;
     private Intent targetIntent;
@@ -64,6 +65,8 @@ public class MaterialSection<Fragment> implements /*View.OnTouchListener,*/ View
     public MaterialSection(Context ctx, boolean hasIcon, int target, boolean bottom, MaterialSectionChangeListener changeListener) {
 
         int currentApiVersion = android.os.Build.VERSION.SDK_INT;
+
+        fragmentTitle = null;
 
         this.changeListener = changeListener;
         this.bottom = bottom;
@@ -362,5 +365,16 @@ public class MaterialSection<Fragment> implements /*View.OnTouchListener,*/ View
             listener.onClick(section, v);
             changeListener.onAfterChangedSection(this);
         }
+    }
+
+    public String getFragmentTitle() {
+        if(fragmentTitle == null || fragmentTitle.length() == 0)
+            return title;
+        else
+            return fragmentTitle;
+    }
+
+    public void setFragmentTitle(String fragmentTitle) {
+        this.fragmentTitle = fragmentTitle;
     }
 }

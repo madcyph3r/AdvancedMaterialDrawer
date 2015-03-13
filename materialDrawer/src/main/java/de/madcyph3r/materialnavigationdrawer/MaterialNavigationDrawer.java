@@ -524,7 +524,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
             currentSection = currentMenu.getSection(loadSectionPosition);
             if ((currentSection.getTarget() == MaterialSection.TARGET_FRAGMENT)) {
                 currentSection.select();
-                setFragment((Fragment) currentSection.getTargetFragment(), currentSection.getTitle(), null, false);
+                setFragment((Fragment) currentSection.getTargetFragment(), currentSection.getFragmentTitle(), null, false);
                 changeToolbarColor(currentSection);
             } else {
                 throw new RuntimeException("StartIndex should selected a section with a fragment");
@@ -607,7 +607,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                         if ((newSection.getTarget() == MaterialSection.TARGET_FRAGMENT)) {
                             currentSection = newSection;
                             currentSection.select();
-                            setFragment((Fragment) currentSection.getTargetFragment(), currentSection.getTitle(), null, false);
+                            setFragment((Fragment) currentSection.getTargetFragment(), currentSection.getFragmentTitle(), null, false);
                             changeToolbarColor(currentSection);
                         } else {
                             throw new RuntimeException("StartIndex should selected a section with a fragment");
@@ -633,7 +633,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                                 currentSection = (MaterialSection) sectionList.get(i);
                                 if ((currentSection.getTarget() == MaterialSection.TARGET_FRAGMENT)) {
                                     currentSection.select();
-                                    setFragment((Fragment) currentSection.getTargetFragment(), currentSection.getTitle(), null, false);
+                                    setFragment((Fragment) currentSection.getTargetFragment(), currentSection.getFragmentTitle(), null, false);
                                     changeToolbarColor(currentSection);
                                     break;
                                 }
@@ -1727,9 +1727,9 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                     //unSelectOldSection(section);
                     if (currentSection != null) {
                         currentSection.unSelect();
-                        setFragment((Fragment) section.getTargetFragment(), section.getTitle(), (Fragment) currentSection.getTargetFragment(), true);
+                        setFragment((Fragment) section.getTargetFragment(), section.getFragmentTitle(), (Fragment) currentSection.getTargetFragment(), true);
                     } else
-                        setFragment((Fragment) section.getTargetFragment(), section.getTitle(), null, true);
+                        setFragment((Fragment) section.getTargetFragment(), section.getFragmentTitle(), null, true);
 
                     section.select();
                     changeToolbarColor(section);
