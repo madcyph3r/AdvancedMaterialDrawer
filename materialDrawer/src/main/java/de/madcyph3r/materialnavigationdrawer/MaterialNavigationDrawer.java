@@ -130,7 +130,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     private boolean belowToolbar;
     private Resources resources;
     private int backPattern;
-    private int drawerDPHeight;
+    private int headerDPHeight;
     private int drawerDPWidth;
     private int drawerHeaderType;
     private boolean uniqueToolbarColor;
@@ -260,7 +260,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         slidingDrawerEffect = true;
         kitkatTraslucentStatusbar = false;
         drawerDPWidth = 0; // 0 not set, will get calculated
-        drawerDPHeight = 0;
+        headerDPHeight = 0;
         drawerHeaderType = 0; // default type is headItem, but will get overridden
         backPattern = BACKPATTERN_BACK_ANYWHERE; // default back button option
 
@@ -430,11 +430,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                     case DRAWERHEADER_HEADITEMS:
                     case DRAWERHEADER_IMAGE:
                     case DRAWERHEADER_CUSTOM:
-                        if(drawerDPHeight == 0 || drawerHeaderType == DRAWERHEADER_HEADITEMS)
+                        if(headerDPHeight == 0 || drawerHeaderType == DRAWERHEADER_HEADITEMS)
                             heightHeader = (9 * width) / 16;
                         else {
                             Resources r = getResources();
-                            heightHeader = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, drawerDPHeight, r.getDisplayMetrics());
+                            heightHeader = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, headerDPHeight, r.getDisplayMetrics());
                         }
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
@@ -1826,6 +1826,9 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     public void setHeadItemSwitchExtraMenu(MaterialMenu headItemSwitchExtraMenu) {
+        if (drawerHeaderType != DRAWERHEADER_HEADITEMS)
+            throw new RuntimeException("Your header is is not set to DRAWERHEADER_HEADITEMS.");
+
         this.headItemSwitchExtraMenu = headItemSwitchExtraMenu;
     }
 
@@ -1869,10 +1872,10 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         customDrawerHeader.addView(view, params);
     }
 
-    public void setDrawerHeaderCustom(View view, int drawerDPHeight) {
+    public void setDrawerHeaderCustom(View view, int headerDPHeight) {
         setDrawerHeaderCustom(view);
 
-        this.drawerDPHeight = drawerDPHeight;
+        this.headerDPHeight = headerDPHeight;
     }
 
     public void setDrawerHeaderImage(Bitmap background) {
@@ -1887,10 +1890,10 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         customDrawerHeader.addView(image, params);
     }
 
-    public void setDrawerHeaderImage(Bitmap background, int drawerDPHeight) {
+    public void setDrawerHeaderImage(Bitmap background, int headerDPHeight) {
         setDrawerHeaderImage(background);
 
-        this.drawerDPHeight = drawerDPHeight;
+        this.headerDPHeight = headerDPHeight;
     }
 
     public void setDrawerHeaderImage(Drawable background) {
@@ -1905,10 +1908,10 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         customDrawerHeader.addView(image, params);
     }
 
-    public void setDrawerHeaderImage(Drawable background, int drawerDPHeight) {
+    public void setDrawerHeaderImage(Drawable background, int headerDPHeight) {
         setDrawerHeaderImage(background);
 
-        this.drawerDPHeight = drawerDPHeight;
+        this.headerDPHeight = headerDPHeight;
     }
 
     public void setHeadItemSubTitle(String email) {
