@@ -87,6 +87,16 @@ public class MaterialMenu {
         return null;
     }
 
+    public int getSectionSize() {
+        int size = 0;
+        for (int i = 0; i < getItems().size(); i++) {
+            if (getItems().get(i) instanceof MaterialSection) {
+                size++;
+            }
+        }
+        return size;
+    }
+
     public int getStartIndex() {
         return startIndex;
     }

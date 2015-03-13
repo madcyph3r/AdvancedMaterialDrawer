@@ -42,6 +42,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -63,6 +64,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     public static final int BACKPATTERN_BACK_ANYWHERE = 0;
     public static final int BACKPATTERN_BACK_TO_START_INDEX = 1;
     public static final int BACKPATTERN_CUSTOM = 2;
+    public static final int BACKPATTERN_LAST_SECTION = 3;
 
     // static header types
     public static final int DRAWERHEADER_HEADITEMS = 0;
@@ -143,6 +145,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     private View overlayView;
     private boolean actionBarOverlay;
     private Float actionBarOverlayAlpha;
+    private List<MaterialSection> sectionLastBackPatternList;
 
     @Override
     /**
@@ -263,6 +266,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         headerDPHeight = 0;
         drawerHeaderType = 0; // default type is headItem, but will get overridden
         backPattern = BACKPATTERN_BACK_ANYWHERE; // default back button option
+
+        sectionLastBackPatternList = new ArrayList<>();
 
         //get resources and displayDensity
         resources = this.getResources();
@@ -515,11 +520,16 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
             currentSection.select();
     }
 
-    // if you send -1, it will load the first StartSection it finds
     public void reloadMenu(int loadSectionPosition) {
-        if (loadSectionPosition == -1)
+        reloadMenu(loadSectionPosition, true);
+    }
+
+    // if you send -1, it will load the first StartSection it finds
+    private void reloadMenu(int loadSectionPosition, boolean addLastSection) {
+        MaterialSection tmpSection = currentSection;
+        if (loadSectionPosition == -1) {
             loadMenu(true, true);
-        else {
+        } else {
             loadMenu(false, false);
             currentSection = currentMenu.getSection(loadSectionPosition);
             if ((currentSection.getTarget() == MaterialSection.TARGET_FRAGMENT)) {
@@ -529,6 +539,10 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
             } else {
                 throw new RuntimeException("StartIndex should selected a section with a fragment");
             }
+        }
+
+        if (addLastSection && sectionLastBackPatternList.size() > 0 && sectionLastBackPatternList.get(sectionLastBackPatternList.size() - 1) != tmpSection) {
+            sectionLastBackPatternList.add(tmpSection);
         }
     }
 
@@ -1702,6 +1716,25 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                     onClick(backedSection, backedSection.getView());
                 }
                 break;
+            case BACKPATTERN_LAST_SECTION:
+
+                if(sectionLastBackPatternList.size() == 0) {
+                    super.onBackPressed();
+                }
+
+                while(sectionLastBackPatternList.size() > 0) {
+                    // get section position
+                    int posSection = currentMenu.getSectionPosition(sectionLastBackPatternList.get(sectionLastBackPatternList.size()-1));
+                    // remove last section
+                    sectionLastBackPatternList.remove(sectionLastBackPatternList.size()-1);
+
+                    // if section found in the menu, load the section
+                    if(posSection != -1) {
+                        reloadMenu(posSection, false);
+                        break;
+                    }
+                }
+                break;
         }
     }
 
@@ -1728,6 +1761,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                     if (currentSection != null) {
                         currentSection.unSelect();
                         setFragment((Fragment) section.getTargetFragment(), section.getFragmentTitle(), (Fragment) currentSection.getTargetFragment(), true);
+                        sectionLastBackPatternList.add(currentSection);
                     } else
                         setFragment((Fragment) section.getTargetFragment(), section.getFragmentTitle(), null, true);
 
