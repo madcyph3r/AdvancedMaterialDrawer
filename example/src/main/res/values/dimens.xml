@@ -3,6 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="example_custom_header_below_toolbar">0dp</dimen>
 <!--
     <dimen name="sectionIconHeight">30dp</dimen>
     <dimen name="sectionIconWidth">30dp</dimen>

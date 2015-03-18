@@ -9,89 +9,154 @@
         android:label="@string/app_name"
         tools:replace="android:icon,android:theme"
         android:theme="@style/MaterialNavigationDrawerTheme" >
+
+        <!-- Main Activity. Use Drawer for the examples with parallax recycleview -->
         <activity
-            android:name="de.madcyph3r.example.MainActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="de.madcyph3r.example.Settings" >
-        </activity>
-        <activity android:name=".tools.NoHeaderActivity">
-        </activity>
-        <activity android:name=".tools.OneHeadItem">
-        </activity>
-        <activity android:name=".tools.ThreeHeadItem">
-        </activity>
-        <activity android:name=".tools.FiveHeadItem">
-        </activity>
-        <activity android:name=".tools.HeadItemStartSecSection">
-        </activity>
-        <activity android:name=".tools.HeadItemAvatarBackgroundClick">
-        </activity>
-        <activity android:name=".tools.ThreeHeadItemNoCloseDrawer">
-        </activity>
-        <activity android:name=".tools.TwoHeadItemOneMenu">
-        </activity>
-        <activity android:name=".tools.OneHeadItemOwnFragment">
-        </activity>
-        <activity android:name=".tools.TwoHeadItemNoFragementLoadOnChange">
-        </activity>
-        <activity android:name=".tools.AllMenuTypes">
-        </activity>
-        <activity android:name=".tools.BackPatternCustom">
-        </activity>
-        <activity android:name=".tools.BackPatternDefault">
-        </activity>
-        <activity android:name=".tools.BackPatternStartIndex">
-        </activity>
-        <activity android:name=".tools.TwoHeadItemRemoveAddNewHeadItem">
-        </activity>
-        <activity android:name=".tools.FiveHeadItemExtraMenu">
-        </activity>
-        <activity android:name=".tools.TwoHeadItemExtraMenu">
-        </activity>
-        <activity android:name=".tools.OneHeadItemOwnDrawerWidth">
-        </activity>
-        <!-- dark -->
-        <activity android:name=".tools.OneHeadItemDark"
+
+        <!-- Theme: -->
+        <!-- dark theme -->
+        <activity android:name=".example.theme.DarkThemeActivity"
             android:theme="@style/MaterialNavigationDrawerTheme" >
         </activity>
-        <!-- light -->
-        <activity android:name=".tools.OneHeadItemLight"
+        <!-- light theme -->
+        <activity android:name=".example.theme.LightThemeActivity"
             android:theme="@style/MaterialNavigationDrawerTheme.Light" >
         </activity>
-        <!-- dark -->
-        <activity android:name=".tools.OneHeadItemMyTheme"
+        <!-- own theme -->
+        <activity android:name=".example.theme.MyThemeActivity"
             android:theme="@style/MyOwnTheme" >
         </activity>
-        <activity android:name=".tools.CustomHeaderActivity">
+        <!-- unique toolbar color -->
+        <activity android:name=".example.theme.UniqueToolbarColorActivity"
+            android:theme="@style/UniqueToolbarColorTheme" >
         </activity>
-        <activity android:name=".tools.ImageHeaderActivity">
+        <!-- overlay -->
+        <activity android:name=".example.theme.ActionBarOverlayActivity"
+            android:theme="@style/ActionBarOverlayTheme">
         </activity>
-        <activity android:name=".tools.TwoHeadItemChangeListenerDrawerListener">
+        <!-- KitKat Translucent StatusBar -->
+        <activity android:name=".example.theme.KitKatTranslucentStatusBarActivity"
+            android:theme="@style/MaterialNavigationDrawerTheme.TranslucentKitKatStatusBar">
         </activity>
-        <activity android:name=".tools.OneHeadItemReloadMenu">
+        <!-- Actionbar Own Font ActionBar -->
+        <activity android:name=".example.theme.ActionBarOwnFontActivity">
         </activity>
-        <activity android:name=".tools.ClosePreviousActivity">
+        <!-- Own Drawer Width -->
+        <activity android:name=".example.theme.OwnDrawerWidthActivity">
         </activity>
-        <activity android:name=".tools.NoClosePreviousActivity">
+
+        <!-- Drawer Types -->
+        <activity android:name=".example.drawerTypes.MultiPaneSupportActivity"
+            android:theme="@style/MultiPaneSupportTheme">
         </activity>
-        <activity android:name=".SecondActivity">
+        <activity android:name=".example.drawerTypes.MultiPaneSupportBelowToolbarActivity"
+            android:theme="@style/MultiPaneBelowToolbarSupportTheme">
         </activity>
-        <activity android:name=".tools.SectionChangeListener">
+
+        <!-- Header Types -->
+        <activity android:name=".example.headerTypes.NoHeaderActivity">
         </activity>
-        <activity android:name=".tools.OwnActionBarFont">
-        </activity>
-        <activity android:name=".tools.ActionBarButtons">
-        </activity>
-        <activity android:name=".tools.OneHeadItemBelowToolbar"
+        <activity android:name=".example.headerTypes.NoHeaderBelowToolbarActivity"
             android:theme="@style/BelowToolbarTheme">
         </activity>
-        <activity android:name=".tools.ActionBarOverlayActivity">
+        <activity android:name=".example.headerTypes.ImageHeaderActivity">
+        </activity>
+        <activity android:name=".example.headerTypes.ImageHeaderBelowToolbarActivity"
+            android:theme="@style/BelowToolbarTheme">
+        </activity>
+        <activity android:name=".example.headerTypes.ImageHeaderCustomHeightActivity">
+        </activity>
+        <activity android:name=".example.headerTypes.CustomHeaderActivity">
+        </activity>
+        <activity android:name=".example.headerTypes.CustomHeaderBelowToolbarActivity"
+            android:theme="@style/BelowToolbarTheme">
+        </activity>
+        <activity android:name=".example.headerTypes.CustomHeaderCustomHeightActivity">
+        </activity>
+        <activity android:name=".example.headerTypes.HeadItemOneActivity">
+        </activity>
+        <activity android:name=".example.headerTypes.HeadItemOneBelowToolbarActivity"
+            android:theme="@style/BelowToolbarTheme">
+        </activity>
+        <activity android:name=".example.headerTypes.HeadItemThreeActivity">
+        </activity>
+        <activity android:name=".example.headerTypes.HeadItemFiveActivity">
+        </activity>
+
+        <!-- Head Item Types -->
+        <activity android:name=".example.headItemTypes.HeadItemFiveExtraMenuActivity">
+        </activity>
+        <activity android:name=".example.headItemTypes.HeadItemTwoExtraMenuActivity">
+        </activity>
+        <activity android:name=".example.headItemTypes.HeadItemThreeDontCloseOnChangeActivity">
+        </activity>
+        <activity android:name=".example.headItemTypes.HeadItemFiveDontCloseOnChangeActivity">
+        </activity>
+        <activity android:name=".example.headItemTypes.HeadItemOneWhiteThemeActivity"
+            android:theme="@style/MaterialNavigationDrawerTheme.Light">
+        </activity>
+        <activity android:name=".example.headItemTypes.HeadItemTwoOnlyOneHasMenuActivity">
+        </activity>
+        <activity android:name=".example.headItemTypes.HeadItemTwoNoFragmentLoadOnChangeActivity">
+        </activity>
+
+        <!-- Menu -->
+        <activity android:name=".example.menu.AllMenuTypesActivity">
+        </activity>
+        <activity android:name=".example.menu.AddRemoveMenuItemsActivity">
+        </activity>
+        <activity android:name=".example.menu.SectionFragmentTitleActivity">
+        </activity>
+        <activity android:name=".example.menu.StartSectionActivity">
+        </activity>
+
+        <!-- Back Pattern -->
+        <activity android:name=".example.backPattern.BackPatternCustomActivity">
+        </activity>
+        <activity android:name=".example.backPattern.BackPatternDefaultActivity">
+        </activity>
+        <activity android:name=".example.backPattern.BackPatternStartIndexActivity">
+        </activity>
+        <activity android:name=".example.backPattern.BackPatternLastSectionActivity">
+        </activity>
+
+        <!-- Listener -->
+        <activity android:name=".example.listener.HeadItemOneAvatarOnClickListenerActivity">
+        </activity>
+        <activity android:name=".example.listener.HeadItemOneBackgroundOnClickListenerActivity">
+        </activity>
+        <activity android:name=".example.listener.SectionChangeListenerActivity">
+        </activity>
+        <activity android:name=".example.listener.DrawerListenerActivity">
+        </activity>
+        <activity android:name=".example.listener.HeadItemThreeChangeListenerActivity">
+        </activity>
+
+        <!-- Functionally -->
+        <activity android:name=".example.functionally.ActionBarButtons">
+        </activity>
+        <activity android:name=".example.functionally.AddRemoveHeadItemRuntimeActivity">
+        </activity>
+        <activity android:name=".example.functionally.NoClosePrevDrawerActivity_Activity">
+        </activity>
+        <activity android:name=".example.functionally.ClosePrevDrawerActivity_Activity">
+        </activity>
+        <activity android:name=".example.functionally.SetCustomFragmentActivity">
+        </activity>
+
+        <!-- Other -->
+        <activity android:name=".example.functionally.noClosePrevDrawerActivity.NoCloseActivity">
+        </activity>
+        <activity android:name=".example.functionally.closePrevDrawerActivity.CloseActivity">
         </activity>
     </application>
 

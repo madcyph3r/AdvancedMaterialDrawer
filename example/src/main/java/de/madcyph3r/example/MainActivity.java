@@ -1,235 +1,81 @@
 package de.madcyph3r.example;
 
-
-import android.content.Context;
-import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import de.madcyph3r.example.example.FragmentInstruction;
+import de.madcyph3r.example.fragment.BackPatternFragment;
+import de.madcyph3r.example.fragment.DrawerTypesFragment;
+import de.madcyph3r.example.fragment.FunctionallyFragment;
+import de.madcyph3r.example.fragment.HeadItemTypesFragment;
+import de.madcyph3r.example.fragment.HeaderTypesFragment;
+import de.madcyph3r.example.fragment.ListenerFragment;
+import de.madcyph3r.example.fragment.MenuFragment;
+import de.madcyph3r.example.fragment.ThemeFragment;
+import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
+import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
+import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
 
-import de.madcyph3r.example.tools.ActionBarButtons;
-import de.madcyph3r.example.tools.ActionBarOverlayActivity;
-import de.madcyph3r.example.tools.AllMenuTypes;
-import de.madcyph3r.example.tools.BackPatternCustom;
-import de.madcyph3r.example.tools.BackPatternDefault;
-import de.madcyph3r.example.tools.BackPatternStartIndex;
-import de.madcyph3r.example.tools.ClosePreviousActivity;
-import de.madcyph3r.example.tools.CustomHeaderActivity;
-import de.madcyph3r.example.tools.FiveHeadItem;
-import de.madcyph3r.example.tools.FiveHeadItemExtraMenu;
-import de.madcyph3r.example.tools.HeadItemAvatarBackgroundClick;
-import de.madcyph3r.example.tools.HeadItemStartSecSection;
-import de.madcyph3r.example.tools.ImageHeaderActivity;
-import de.madcyph3r.example.tools.NoClosePreviousActivity;
-import de.madcyph3r.example.tools.NoHeaderActivity;
-import de.madcyph3r.example.tools.OneHeadItem;
-import de.madcyph3r.example.tools.OneHeadItemBelowToolbar;
-import de.madcyph3r.example.tools.OneHeadItemDark;
-import de.madcyph3r.example.tools.OneHeadItemMyTheme;
-import de.madcyph3r.example.tools.OneHeadItemLight;
-import de.madcyph3r.example.tools.OneHeadItemOwnDrawerWidth;
-import de.madcyph3r.example.tools.OneHeadItemOwnFragment;
-import de.madcyph3r.example.tools.OneHeadItemReloadMenu;
-import de.madcyph3r.example.tools.OwnActionBarFont;
-import de.madcyph3r.example.tools.SectionChangeListener;
-import de.madcyph3r.example.tools.ThreeHeadItem;
-import de.madcyph3r.example.tools.ThreeHeadItemNoCloseDrawer;
-import de.madcyph3r.example.tools.TwoHeadItemChangeListenerDrawerListener;
-import de.madcyph3r.example.tools.TwoHeadItemExtraMenu;
-import de.madcyph3r.example.tools.TwoHeadItemNoFragementLoadOnChange;
-import de.madcyph3r.example.tools.TwoHeadItemOneMenu;
-import de.madcyph3r.example.tools.TwoHeadItemRemoveAddNewHeadItem;
+public class MainActivity extends MaterialNavigationDrawer {
 
-public class MainActivity extends ActionBarActivity {
+    private MaterialNavigationDrawer drawer = null;
 
-    private Context ctx;
+    private MaterialMenu menu;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        ctx= this;
-
-        setContentView(R.layout.mainactivity);
-        ListView lv = (ListView) findViewById(R.id.listView);
-
-        ArrayList<String> listValues = new ArrayList<String>();
-        listValues.add("no header");
-        listValues.add("one head item");
-        listValues.add("three head items");
-        listValues.add("five head items");
-        listValues.add("head item start with second section");
-        listValues.add("head item with avatar und background listener");
-        listValues.add("head item change: don't close drawer on change");
-        listValues.add("two head items: first has menu, second not");
-        listValues.add("load own fragment on start");
-        listValues.add("head item change: don't load fragment on change");
-        listValues.add("all Menu (section) types");
-        listValues.add("back pattern start index");
-        listValues.add("back pattern normal back (default)");
-        listValues.add("back pattern custom");
-        listValues.add("add/remove head item at runtime");
-        listValues.add("five head items with extra menu");
-        listValues.add("two head items: force to show head item switcher (has extra menu)");
-        listValues.add("drawer own DP width");
-        listValues.add("dark theme");
-        listValues.add("light theme");
-        listValues.add("my own theme (green actionbar, etc.)");
-        listValues.add("custom header");
-        listValues.add("image header");
-        listValues.add("two head item: on change listener and drawer listener");
-        listValues.add("add and remove sections dynamically");
-        listValues.add("close drawer activity");
-        listValues.add("no close drawer actvity");
-        listValues.add("section change listener");
-        listValues.add("own actionbar font");
-        listValues.add("lock drawer, hide menu button, show back button instead");
-        listValues.add("drawer below toolbar");
-        listValues.add("actionbar overlay");
-        // on drawer open close und head item change listener hinzufügen
-
-        // initiate the listadapter
-
-        StableArrayAdapter mAdapter = new StableArrayAdapter(this,
-                android.R.layout.simple_list_item_1, listValues);
-        // assign the list adapter
-
-        lv.setAdapter(mAdapter);
-
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(position == 0) {
-                    Intent i = new Intent(ctx, NoHeaderActivity.class);
-                    startActivity(i);
-                } else if(position == 1) {
-                    Intent i = new Intent(ctx, OneHeadItem.class);
-                    startActivity(i);
-                } else if(position == 2) {
-                    Intent i = new Intent(ctx, ThreeHeadItem.class);
-                    startActivity(i);
-                } else if(position == 3) {
-                    Intent i = new Intent(ctx, FiveHeadItem.class);
-                    startActivity(i);
-                } else if(position == 4) {
-                    Intent i = new Intent(ctx, HeadItemStartSecSection.class);
-                    startActivity(i);
-                } else if(position == 5) {
-                    Intent i = new Intent(ctx, HeadItemAvatarBackgroundClick.class);
-                    startActivity(i);
-                } else if(position == 6) {
-                    Intent i = new Intent(ctx, ThreeHeadItemNoCloseDrawer.class);
-                    startActivity(i);
-                } else if(position == 7) {
-                    Intent i = new Intent(ctx, TwoHeadItemOneMenu.class);
-                    startActivity(i);
-                } else if(position == 8) {
-                    Intent i = new Intent(ctx, OneHeadItemOwnFragment.class);
-                    startActivity(i);
-                } else if(position == 9) {
-                    Intent i = new Intent(ctx, TwoHeadItemNoFragementLoadOnChange.class);
-                    startActivity(i);
-                } else if(position == 10) {
-                    Intent i = new Intent(ctx, AllMenuTypes.class);
-                    startActivity(i);
-                } else if(position == 11) {
-                    Intent i = new Intent(ctx, BackPatternStartIndex.class);
-                    startActivity(i);
-                } else if(position == 12) {
-                    Intent i = new Intent(ctx, BackPatternDefault.class);
-                    startActivity(i);
-                } else if(position == 13) {
-                    Intent i = new Intent(ctx, BackPatternCustom.class);
-                    startActivity(i);
-                } else if(position == 14) {
-                    Intent i = new Intent(ctx, TwoHeadItemRemoveAddNewHeadItem.class);
-                    startActivity(i);
-                } else if(position == 15) {
-                    Intent i = new Intent(ctx, FiveHeadItemExtraMenu.class);
-                    startActivity(i);
-                } else if(position == 16) {
-                    Intent i = new Intent(ctx, TwoHeadItemExtraMenu.class);
-                    startActivity(i);
-                } else if(position == 17) {
-                    Intent i = new Intent(ctx, OneHeadItemOwnDrawerWidth.class);
-                    startActivity(i);
-                } else if(position == 18) {
-                    Intent i = new Intent(ctx, OneHeadItemDark.class);
-                    startActivity(i);
-                } else if(position == 19) {
-                    Intent i = new Intent(ctx, OneHeadItemLight.class);
-                    startActivity(i);
-                } else if(position == 20) {
-                    Intent i = new Intent(ctx, OneHeadItemMyTheme.class);
-                    startActivity(i);
-                } else if(position == 21) {
-                    Intent i = new Intent(ctx, CustomHeaderActivity.class);
-                    startActivity(i);
-                } else if(position == 22) {
-                    Intent i = new Intent(ctx, ImageHeaderActivity.class);
-                    startActivity(i);
-                } else if(position == 23) {
-                    Intent i = new Intent(ctx, TwoHeadItemChangeListenerDrawerListener.class);
-                    startActivity(i);
-                }  else if(position == 24) {
-                    Intent i = new Intent(ctx, OneHeadItemReloadMenu.class);
-                    startActivity(i);
-                }  else if(position == 25) {
-                     Intent i = new Intent(ctx, ClosePreviousActivity.class);
-                    startActivity(i);
-                } else if(position == 26) {
-                    Intent i = new Intent(ctx, NoClosePreviousActivity.class);
-                    startActivity(i);
-                } else if(position == 27) {
-                    Intent i = new Intent(ctx, SectionChangeListener.class);
-                    startActivity(i);
-                } else if(position == 28) {
-                    Intent i = new Intent(ctx, OwnActionBarFont.class);
-                    startActivity(i);
-                } else if(position == 29) {
-                    Intent i = new Intent(ctx, ActionBarButtons.class);
-                    startActivity(i);
-                } else if(position == 30) {
-                    Intent i = new Intent(ctx, OneHeadItemBelowToolbar.class);
-                    startActivity(i);
-                }else if(position == 31) {
-                    Intent i = new Intent(ctx, ActionBarOverlayActivity.class);
-                    startActivity(i);
-                }
-            }
-        });
-
+    public int headerType() {
+        // set type. you get the available constant from MaterialNavigationDrawer class
+        return MaterialNavigationDrawer.DRAWERHEADER_NO_HEADER;
     }
 
-    private class StableArrayAdapter extends ArrayAdapter<String> {
+    @Override
+    public void init(Bundle savedInstanceState) {
 
-        HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
+        drawer = this;
 
-        public StableArrayAdapter(Context context, int textViewResourceId,
-                                  List<String> objects) {
-            super(context, textViewResourceId, objects);
-            for (int i = 0; i < objects.size(); ++i) {
-                mIdMap.put(objects.get(i), i);
-            }
-        }
+        menu = new MaterialMenu();
 
-        @Override
-        public long getItemId(int position) {
-            String item = getItem(position);
-            return mIdMap.get(item);
-        }
+        // create menu items
+        MaterialSection section1 = this.newSection("Instruction", new FragmentInstruction(), false, menu);
+        this.newDevisor(menu);
+        this.newLabel("Examples", false, menu);
+        this.newSection("Theme", new ThemeFragment(), false, menu).setSectionColor(Color.parseColor("#ff0000"));
+        this.newSection("Drawer Types", new DrawerTypesFragment(), false, menu).setSectionColor(Color.parseColor("#D35400"));
+        this.newSection("Header Types", new HeaderTypesFragment(), false, menu).setSectionColor(Color.parseColor("#01AEA1"));
+        this.newSection("Head Item Types", new HeadItemTypesFragment(), false, menu).setSectionColor(Color.parseColor("#9B59B6"));
+        this.newSection("Menu", new MenuFragment(), false, menu).setSectionColor(Color.parseColor("#3498DB"));
+        this.newSection("Back Pattern", new BackPatternFragment(), false, menu).setSectionColor(Color.parseColor("#3CD876"));
+        this.newSection("Listener", new ListenerFragment(), false, menu).setSectionColor(Color.parseColor("#9D8C84"));
+        this.newSection("Functionally", new FunctionallyFragment(), false, menu).setSectionColor(Color.parseColor("#F1C40F"));
 
-        @Override
-        public boolean hasStableIds() {
-            return true;
-        }
+        //this.newSection("Some Usefull Tricks", new ThemeFragment(), false, menu).setSectionColor(Color.parseColor("#2D5C4F"));
+        // tricks, z.B. white theme oder black theme, aber statusbar andere farbe.
+        // section merken on orientation change und wieder anwählen
+        // custom recycleview_header z.b. und die größe in der dimen setzen und hier wieder auslesen
 
+        menu.setStartIndex(0);
+        // set this menu
+        this.setCustomMenu(menu);
+
+        // actionbar overlay
+        this.setActionBarOverlay(true);
+
+        // set Pattern
+        this.setBackPattern(MaterialNavigationDrawer.BACKPATTERN_LAST_SECTION);
     }
+
+    /*
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        // save current section pos
+        outState.putInt("currentSectionPos", menu.getSectionPosition(this.getCurrentSection()));
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        // reload the menu with the current section pos
+        this.reloadMenu(savedInstanceState.getInt("currentSectionPos"));
+    }*/
 }
