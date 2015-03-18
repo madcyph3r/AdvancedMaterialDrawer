@@ -571,34 +571,34 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
             items.removeAllViews();
             bottomSections.removeAllViews();
             // create Menu
-            List<Object> sectionList = currentMenu.getItems();
-            for (int i = 0; i < sectionList.size(); i++) {
-                if (sectionList.get(i) instanceof MaterialSection) {
-                    MaterialSection section = (MaterialSection) sectionList.get(i);
+            List<Object> itemList = currentMenu.getItems();
+            for (int i = 0; i < itemList.size(); i++) {
+                if (itemList.get(i) instanceof MaterialSection) {
+                    MaterialSection section = (MaterialSection) itemList.get(i);
                     if (section.isBottom())
-                        addBottomSection((MaterialSection) sectionList.get(i));
+                        addBottomSection((MaterialSection) itemList.get(i));
                     else
-                        addSection((MaterialSection) sectionList.get(i));
-                } else if (sectionList.get(i) instanceof MaterialDevisor) {
-                    MaterialDevisor devisor = (MaterialDevisor) sectionList.get(i);
+                        addSection((MaterialSection) itemList.get(i));
+                } else if (itemList.get(i) instanceof MaterialDevisor) {
+                    MaterialDevisor devisor = (MaterialDevisor) itemList.get(i);
                     if (devisor.isBottom())
                         addDevisorBottom();
                     else
                         addDevisor();
 
-                } else if (sectionList.get(i) instanceof MaterialLabel) {
-                    MaterialLabel label = (MaterialLabel) sectionList.get(i);
+                } else if (itemList.get(i) instanceof MaterialLabel) {
+                    MaterialLabel label = (MaterialLabel) itemList.get(i);
                     if (label.isBottom())
-                        addBottomLabel((MaterialLabel) sectionList.get(i));
+                        addBottomLabel((MaterialLabel) itemList.get(i));
                     else
-                        addLabel((MaterialLabel) sectionList.get(i));
+                        addLabel((MaterialLabel) itemList.get(i));
                 }
             }
 
             // unselect all items
-            for (int i = 0; i < sectionList.size(); i++) {
+            for (int i = 0; i < itemList.size(); i++) {
                 try {
-                    ((MaterialSection) sectionList.get(i)).unSelect();
+                    ((MaterialSection) itemList.get(i)).unSelect();
                 } catch (ClassCastException e) {
                     // nothing to do here
                 }
@@ -614,9 +614,9 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
                     if (!fromStart && ((drawerHeaderType == DRAWERHEADER_HEADITEMS &&
                             headItemManager.get(0).isLoadFragmentOnChanged() &&
-                            sectionList.get(startIndex) instanceof MaterialSection) || (drawerHeaderType != DRAWERHEADER_HEADITEMS))) {
+                            itemList.get(startIndex) instanceof MaterialSection) || (drawerHeaderType != DRAWERHEADER_HEADITEMS))) {
 
-                        MaterialSection newSection = (MaterialSection) sectionList.get(startIndex);
+                        MaterialSection newSection = (MaterialSection) itemList.get(startIndex);
 
                         if ((newSection.getTarget() == MaterialSection.TARGET_FRAGMENT)) {
                             currentSection = newSection;
@@ -642,9 +642,9 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
                     }*/ else if (fromStart || headItemManager == null || headItemManager.get(0) == null || (headItemManager.get(0) != null && headItemManager.get(0).isLoadFragmentOnChanged())) {
                         // load first found fragment
-                        for (int i = 0; i < sectionList.size(); i++) {
-                            if (sectionList.get(i) instanceof MaterialSection) {
-                                currentSection = (MaterialSection) sectionList.get(i);
+                        for (int i = 0; i < itemList.size(); i++) {
+                            if (itemList.get(i) instanceof MaterialSection) {
+                                currentSection = (MaterialSection) itemList.get(i);
                                 if ((currentSection.getTarget() == MaterialSection.TARGET_FRAGMENT)) {
                                     currentSection.select();
                                     setFragment((Fragment) currentSection.getTargetFragment(), currentSection.getFragmentTitle(), null, false);
@@ -1488,13 +1488,13 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         @Override
         public void onClick(View v) {
             if (!drawerTouchLocked) {
-                if (headItemManager.get(0).getOnClickListener() != null) {
+                if (headItemManager.get(0).getAvatarOnClickListener() != null) {
 
                     headItemBackground.setSoundEffectsEnabled(true);
                     v.playSoundEffect(android.view.SoundEffectConstants.CLICK);
                     headItemFirstPhoto.setSoundEffectsEnabled(false);
 
-                    headItemManager.get(0).getOnClickListener().onBackgroundClick(headItemManager.get(0));
+                    headItemManager.get(0).getBackgroundOnClickListener().onClick(headItemManager.get(0));
 
                     if (headItemManager.get(0).isCloseDrawerOnBackgroundClick()) {
                         drawerLayout.closeDrawer(drawerViewGroup);
@@ -1508,13 +1508,13 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         @Override
         public void onClick(View v) {
             if (!drawerTouchLocked) {
-                if (headItemManager.get(0).getOnClickListener() != null) {
+                if (headItemManager.get(0).getAvatarOnClickListener() != null) {
 
                     headItemFirstPhoto.setSoundEffectsEnabled(true);
                     v.playSoundEffect(android.view.SoundEffectConstants.CLICK);
                     headItemFirstPhoto.setSoundEffectsEnabled(false);
 
-                    headItemManager.get(0).getOnClickListener().onClick(headItemManager.get(0));
+                    headItemManager.get(0).getAvatarOnClickListener().onClick(headItemManager.get(0));
 
                     if (headItemManager.get(0).isCloseDrawerOnClick() && !deviceSupportMultiPane()) {
                         drawerLayout.closeDrawer(drawerViewGroup);
@@ -1543,13 +1543,13 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                     if (headItemChangedListener != null)
                         headItemChangedListener.onAfterChangedHeadItem(headItem);
                 } else {
-                    if (headItemManager.get(0).getOnClickListener() != null) {
+                    if (headItemManager.get(0).getBackgroundOnClickListener() != null) {
 
                         headItemSecondPhoto.setSoundEffectsEnabled(true);
                         v.playSoundEffect(android.view.SoundEffectConstants.CLICK);
                         headItemSecondPhoto.setSoundEffectsEnabled(false);
 
-                        headItemManager.get(0).getOnClickListener().onBackgroundClick(headItemManager.get(0));
+                        headItemManager.get(0).getBackgroundOnClickListener().onClick(headItemManager.get(0));
 
                         if (headItemManager.get(0).isCloseDrawerOnBackgroundClick() && !deviceSupportMultiPane()) {
                             drawerLayout.closeDrawer(drawerViewGroup);
@@ -1581,13 +1581,13 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                         headItemChangedListener.onAfterChangedHeadItem(headItem);
                 } else {// if there is no second account user clicked for open it
                     //accountListener.onAccountOpening(currentAccount);
-                    if (headItemManager.get(0).getOnClickListener() != null) {
+                    if (headItemManager.get(0).getBackgroundOnClickListener() != null) {
 
                         headItemThirdPhoto.setSoundEffectsEnabled(true);
                         v.playSoundEffect(android.view.SoundEffectConstants.CLICK);
                         headItemThirdPhoto.setSoundEffectsEnabled(false);
 
-                        headItemManager.get(0).getOnClickListener().onBackgroundClick(headItemManager.get(0));
+                        headItemManager.get(0).getBackgroundOnClickListener().onClick(headItemManager.get(0));
 
                         if (headItemManager.get(0).isCloseDrawerOnBackgroundClick() && !deviceSupportMultiPane()) {
                             drawerLayout.closeDrawer(drawerViewGroup);
@@ -1750,6 +1750,12 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         recycleHeadItem();
     }
 
+
+ /*   @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+    }
+*/
 
     @Override
     public void onClick(final MaterialSection section, View view) {
@@ -2023,4 +2029,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         return actionBarOverlay;
     }
 
+    public List<MaterialSection> getSectionLastBackPatternList() {
+        return sectionLastBackPatternList;
+    }
 }

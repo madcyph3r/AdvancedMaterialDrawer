@@ -7,8 +7,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 
-import de.madcyph3r.materialnavigationdrawer.listener.MaterialHeadItemListener;
+import de.madcyph3r.materialnavigationdrawer.listener.MaterialHeadItemAvatarListener;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
+import de.madcyph3r.materialnavigationdrawer.listener.MaterialHeadItemBackgroundListener;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
 import de.madcyph3r.materialnavigationdrawer.tools.Utils;
 
@@ -17,7 +18,8 @@ public class MaterialHeadItem {
     private Drawable background;
     private String title;
     private String subTitle;
-    private MaterialHeadItemListener listener ;
+    private MaterialHeadItemAvatarListener avatarListener;
+    private MaterialHeadItemBackgroundListener backgroundListener;
     private boolean closeDrawerOnClick = false;
     private boolean closeDrawerOnBackgroundClick = false;
     private boolean closeDrawerOnChanged = true;
@@ -197,8 +199,12 @@ public class MaterialHeadItem {
         return subTitle;
     }
 
-    public MaterialHeadItemListener getOnClickListener() {
-        return listener;
+    public MaterialHeadItemAvatarListener getAvatarOnClickListener() {
+        return avatarListener;
+    }
+
+    public MaterialHeadItemBackgroundListener getBackgroundOnClickListener() {
+        return backgroundListener;
     }
 
     public MaterialMenu getMenu() {
@@ -225,9 +231,14 @@ public class MaterialHeadItem {
         return loadFragmentOnChanged;
     }
 
-    // listener
-    public void setOnClickListener(MaterialHeadItemListener listener) {
-        this.listener = listener;
+    // avatarListener
+    public void setAvatarOnClickListener(MaterialHeadItemAvatarListener listener) {
+        this.avatarListener = listener;
+    }
+
+    // backgroundListener
+    public void setBackgroundOnClickListener(MaterialHeadItemBackgroundListener listener) {
+        this.backgroundListener = listener;
     }
 
     // own method
