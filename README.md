@@ -134,11 +134,11 @@ Selected section sets the toolbar color:
 
 Tablet, drawer is always present (multipaneSupport = true), below toolbar:
 
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_8.png" alt="screenshot" width="200px" height="auto" />
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_8.png" alt="screenshot" width="300px" height="auto" />
 
 Tablet, drawer with hiding, not always open:
 
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_9.png" alt="screenshot" width="200px" height="auto" />
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_9.png" alt="screenshot" width="300px" height="auto" />
 
 Tablet, drawer is always present (multipaneSupport = true):
 
