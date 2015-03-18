@@ -497,8 +497,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
             }
         }
 
-        // loadMenu
-        loadMenu(loadFragmentOnStart);
+        // loadMenuAndFragment
+        loadMenuAndFragment(loadFragmentOnStart);
 
 //        changeToolbarColor(currentSection);
 
@@ -514,7 +514,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
     // own methods
     public void reloadMenu() {
-        loadMenu(false, false);
+        loadMenuAndFragment(false, false);
 
         if (null != currentSection)
             currentSection.select();
@@ -528,9 +528,9 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     private void reloadMenu(int loadSectionPosition, boolean addLastSection) {
         MaterialSection tmpSection = currentSection;
         if (loadSectionPosition == -1) {
-            loadMenu(true, true);
+            loadMenuAndFragment(true, true);
         } else {
-            loadMenu(false, false);
+            loadMenuAndFragment(false, false);
             currentSection = currentMenu.getSection(loadSectionPosition);
             if ((currentSection.getTarget() == MaterialSection.TARGET_FRAGMENT)) {
                 currentSection.select();
@@ -546,11 +546,11 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         }
     }
 
-    private void loadMenu(boolean loadFragment) {
-        loadMenu(loadFragment, false);
+    private void loadMenuAndFragment(boolean loadFragment) {
+        loadMenuAndFragment(loadFragment, false);
     }
 
-    private void loadMenu(boolean loadFragment, boolean fromStart) {
+    private void loadMenuAndFragment(boolean loadFragment, boolean fromStart) {
         //change menu only if a menu is defined
         // clear selected after change
         boolean loadMenu = true;
@@ -613,7 +613,6 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                         fromStart = true;
 
                     if (!fromStart && ((drawerHeaderType == DRAWERHEADER_HEADITEMS &&
-                            headItemManager.get(0).isLoadFragmentOnChanged() &&
                             itemList.get(startIndex) instanceof MaterialSection) || (drawerHeaderType != DRAWERHEADER_HEADITEMS))) {
 
                         MaterialSection newSection = (MaterialSection) itemList.get(startIndex);
@@ -640,7 +639,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                             throw new RuntimeException("StartIndex should selected a section with a fragment");
                         }
 
-                    }*/ else if (fromStart || headItemManager == null || headItemManager.get(0) == null || (headItemManager.get(0) != null && headItemManager.get(0).isLoadFragmentOnChanged())) {
+                    }*/ else if (fromStart || headItemManager == null || headItemManager.get(0) == null/* || (headItemManager.get(0) != null && headItemManager.get(0).isLoadFragmentOnChanged())*/) {
                         // load first found fragment
                         for (int i = 0; i < itemList.size(); i++) {
                             if (itemList.get(i) instanceof MaterialSection) {
@@ -815,7 +814,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         notifyHeadItemDataChangedSwitch();
 
         if (newFirstHeadItem.getMenu() != null && newFirstHeadItem.getMenu().getItems() != null && newFirstHeadItem.getMenu().getItems().size() > 0)
-            loadMenu(true);
+            loadMenuAndFragment(newFirstHeadItem.isLoadFragmentOnChanged());
 
         if (headItemManager.get(0).isCloseDrawerOnChanged() && !deviceSupportMultiPane()) {
             drawerLayout.closeDrawer(drawerViewGroup);
@@ -833,7 +832,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
             notifyHeadItemsDataChanged();
 
             if (newFirstHeadItem.getMenu() != null && newFirstHeadItem.getMenu().getItems() != null && newFirstHeadItem.getMenu().getItems().size() > 0)
-                loadMenu(true);
+                loadMenuAndFragment(true);
 
             if (headItemManager.get(0).isCloseDrawerOnChanged() && !deviceSupportMultiPane()) {
                 drawerLayout.closeDrawer(drawerViewGroup);
@@ -934,7 +933,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
                 // load head item menu
                 if (newFirstHeadItem.getMenu() != null && newFirstHeadItem.getMenu().getItems() != null && newFirstHeadItem.getMenu().getItems().size() > 0)
-                    loadMenu(true);
+                    loadMenuAndFragment(newFirstHeadItem.isLoadFragmentOnChanged());
 
                 if (headItemManager.get(0).isCloseDrawerOnChanged() && !deviceSupportMultiPane()) {
                     drawerLayout.closeDrawer(drawerViewGroup);
@@ -1496,7 +1495,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
                     headItemManager.get(0).getBackgroundOnClickListener().onClick(headItemManager.get(0));
 
-                    if (headItemManager.get(0).isCloseDrawerOnBackgroundClick()) {
+                    if (headItemManager.get(0).isCloseDrawerBackgroundOnClick()) {
                         drawerLayout.closeDrawer(drawerViewGroup);
                     }
                 }
@@ -1516,7 +1515,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
                     headItemManager.get(0).getAvatarOnClickListener().onClick(headItemManager.get(0));
 
-                    if (headItemManager.get(0).isCloseDrawerOnClick() && !deviceSupportMultiPane()) {
+                    if (headItemManager.get(0).isCloseDrawerAvatarOnClick() && !deviceSupportMultiPane()) {
                         drawerLayout.closeDrawer(drawerViewGroup);
                     }
                 }
@@ -1551,7 +1550,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
                         headItemManager.get(0).getBackgroundOnClickListener().onClick(headItemManager.get(0));
 
-                        if (headItemManager.get(0).isCloseDrawerOnBackgroundClick() && !deviceSupportMultiPane()) {
+                        if (headItemManager.get(0).isCloseDrawerBackgroundOnClick() && !deviceSupportMultiPane()) {
                             drawerLayout.closeDrawer(drawerViewGroup);
                         }
                     }
@@ -1589,7 +1588,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
                         headItemManager.get(0).getBackgroundOnClickListener().onClick(headItemManager.get(0));
 
-                        if (headItemManager.get(0).isCloseDrawerOnBackgroundClick() && !deviceSupportMultiPane()) {
+                        if (headItemManager.get(0).isCloseDrawerBackgroundOnClick() && !deviceSupportMultiPane()) {
                             drawerLayout.closeDrawer(drawerViewGroup);
                         }
                     }
@@ -1628,7 +1627,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                 // load old menu
                 headItemButtonSwitcher.setImageResource(R.drawable.ic_arrow_drop_down_white_24dp);
                 headItemSwitcherOpen = false;
-                loadMenu(true); // currentMenu will set in the method
+                loadMenuAndFragment(true); // currentMenu will set in the method
             }
         }
     };

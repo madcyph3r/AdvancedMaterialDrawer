@@ -20,11 +20,11 @@ public class MaterialHeadItem {
     private String subTitle;
     private MaterialHeadItemAvatarListener avatarListener;
     private MaterialHeadItemBackgroundListener backgroundListener;
-    private boolean closeDrawerOnClick = false;
-    private boolean closeDrawerOnBackgroundClick = false;
-    private boolean closeDrawerOnChanged = true;
+    private boolean closeDrawerAvatarOnClick;
+    private boolean closeDrawerBackgroundOnClick;
+    private boolean closeDrawerOnChanged;
     private MaterialMenu menu;
-    private boolean loadFragmentOnChanged = true;
+    private boolean loadFragmentOnChanged;
     private Resources resources;
     private OnHeadItemDataLoaded listenerLoaded;
     private MaterialNavigationDrawer drawer;
@@ -128,8 +128,8 @@ public class MaterialHeadItem {
     }
 
     private void initVars() {
-        closeDrawerOnClick = false;
-        closeDrawerOnBackgroundClick = false;
+        closeDrawerAvatarOnClick = false;
+        closeDrawerBackgroundOnClick = false;
         closeDrawerOnChanged = true;
         //startIndex = 0;
         loadFragmentOnChanged = true;
@@ -154,16 +154,16 @@ public class MaterialHeadItem {
         this.subTitle = subTitle;
     }
 
-    public void setCloseDrawerOnClick(boolean closeDrawerOnClick) {
-        this.closeDrawerOnClick = closeDrawerOnClick;
+    public void setCloseDrawerAvatarOnClick(boolean closeDrawerAvatarOnClick) {
+        this.closeDrawerAvatarOnClick = closeDrawerAvatarOnClick;
     }
 
     public void setCloseDrawerOnChanged(boolean closeDrawerOnChanged) {
         this.closeDrawerOnChanged = closeDrawerOnChanged;
     }
 
-    public void setCloseDrawerOnBackgroundClick(boolean closeDrawerOnBackgroundClick) {
-        this.closeDrawerOnBackgroundClick = closeDrawerOnBackgroundClick;
+    public void setCloseDrawerBackgroundOnClick(boolean closeDrawerBackgroundOnClick) {
+        this.closeDrawerBackgroundOnClick = closeDrawerBackgroundOnClick;
     }
 
     public void setMenu(MaterialMenu menu) {
@@ -211,16 +211,16 @@ public class MaterialHeadItem {
         return menu;
     }
 
-    public boolean isCloseDrawerOnClick() {
-        return closeDrawerOnClick;
+    public boolean isCloseDrawerAvatarOnClick() {
+        return closeDrawerAvatarOnClick;
     }
 
     public boolean isCloseDrawerOnChanged() {
         return closeDrawerOnChanged;
     }
 
-    public boolean isCloseDrawerOnBackgroundClick() {
-        return closeDrawerOnBackgroundClick;
+    public boolean isCloseDrawerBackgroundOnClick() {
+        return closeDrawerBackgroundOnClick;
     }
 
  /*   public int getStartIndex() {
