@@ -120,6 +120,14 @@ Custom-Header:
 
 <img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_5.png" alt="screenshot" width="200px" height="auto" />
 
+No-Header:
+
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_12.png" alt="screenshot" width="200px" height="auto" />
+
+No-Header Below Toolbar:
+
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_13.png" alt="screenshot" width="200px" height="auto" />
+
 Selected section sets the toolbar color:
 
 <img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_6.png" alt="screenshot" width="200px" height="auto" />
