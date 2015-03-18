@@ -25,7 +25,7 @@ Big thanks to neokree, without him this library would not exist.
 - Toolbar overflow support
 - More: Setting your own Fragment on Start, etc
 
-### Example APK (Lib-Version 1.1.0) 
+### Example APK (Lib-Version 1.1.1) 
 https://github.com/madcyph3r/AdvancedMaterialDrawer/raw/master/example-release.apk
 
 ### Download
@@ -35,7 +35,7 @@ repositories {
 }
 
 dependencies {
-    compile 'de.madcyph3r:materialDrawer:1.1.0@aar'
+    compile 'de.madcyph3r:materialDrawer:1.1.1@aar'
 }
 ```
 
@@ -76,8 +76,8 @@ public class OneHeadItem extends MaterialNavigationDrawer {
         final RoundedCornersDrawable drawableAppIcon = new RoundedCornersDrawable(getResources(), bitmap);
 
         // create Head Item
-        MaterialHeadItem headItem = new MaterialHeadItem(this, "F HeadItem", "F Subtitle", drawableAppIcon, R.drawable.mat5, menu, 0);
-
+        MaterialHeadItem headItem = new MaterialHeadItem(this, "F HeadItem", "F Subtitle", drawableAppIcon, R.drawable.mat5, menu);
+        
         // add head Item (menu will be loaded automatically)
         this.addHeadItem(headItem);
     }
