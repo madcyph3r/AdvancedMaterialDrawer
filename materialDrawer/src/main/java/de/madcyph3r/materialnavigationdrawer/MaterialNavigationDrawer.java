@@ -1487,7 +1487,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         @Override
         public void onClick(View v) {
             if (!drawerTouchLocked) {
-                if (headItemManager.get(0).getAvatarOnClickListener() != null) {
+                if (headItemManager.get(0).getBackgroundOnClickListener() != null) {
 
                     headItemBackground.setSoundEffectsEnabled(true);
                     v.playSoundEffect(android.view.SoundEffectConstants.CLICK);
@@ -1535,12 +1535,12 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                     headItemSecondPhoto.setSoundEffectsEnabled(false);
 
                     if (headItemChangedListener != null)
-                        headItemChangedListener.onBeforeChangedHeadItem(headItem);
+                        headItemChangedListener.onBeforeChangeHeadItem(headItem);
 
                     switchHeadItemsIcon(headItem, true);
 
                     if (headItemChangedListener != null)
-                        headItemChangedListener.onAfterChangedHeadItem(headItem);
+                        headItemChangedListener.onAfterChangeHeadItem(headItem);
                 } else {
                     if (headItemManager.get(0).getBackgroundOnClickListener() != null) {
 
@@ -1572,12 +1572,12 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                     headItemThirdPhoto.setSoundEffectsEnabled(false);
 
                     if (headItemChangedListener != null)
-                        headItemChangedListener.onBeforeChangedHeadItem(headItem);
+                        headItemChangedListener.onBeforeChangeHeadItem(headItem);
 
                     switchHeadItemsIcon(headItem, true);
 
                     if (headItemChangedListener != null)
-                        headItemChangedListener.onAfterChangedHeadItem(headItem);
+                        headItemChangedListener.onAfterChangeHeadItem(headItem);
                 } else {// if there is no second account user clicked for open it
                     //accountListener.onAccountOpening(currentAccount);
                     if (headItemManager.get(0).getBackgroundOnClickListener() != null) {
@@ -1852,7 +1852,10 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         this.loadFragmentOnStart = loadFragmentOnStart;
     }
 
-    public void setOnChangedListener(MaterialHeadItemChangeListener listener) {
+    public void setHeadItemOnChangeListener(MaterialHeadItemChangeListener listener) {
+        if (drawerHeaderType != DRAWERHEADER_HEADITEMS)
+            throw new RuntimeException("Your header is is not set to DRAWERHEADER_HEADITEMS.");
+
         this.headItemChangedListener = listener;
     }
 
@@ -1994,13 +1997,13 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     @Override
-    public void onBeforeChangedSection(MaterialSection newSection) {
-
+    public void onBeforeChangeSection(MaterialSection newSection) {
+        // nothing
     }
 
     @Override
-    public void onAfterChangedSection(MaterialSection newSection) {
-
+    public void onAfterChangeSection(MaterialSection newSection) {
+        // nothing
     }
 
     public void setToolbarOverlay(boolean overlay) {

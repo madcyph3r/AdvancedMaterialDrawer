@@ -9,10 +9,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -169,9 +167,9 @@ public class MaterialSection<Fragment> implements /*View.OnTouchListener,*/ View
                 final MaterialSection section = this;
                 view.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 
-                changeListener.onBeforeChangedSection(this);
+                changeListener.onBeforeChangeSection(this);
                 listener.onClick(section, v);
-                changeListener.onAfterChangedSection(this);
+                changeListener.onAfterChangeSection(this);
             }
 
             return true;
@@ -361,9 +359,9 @@ public class MaterialSection<Fragment> implements /*View.OnTouchListener,*/ View
             final MaterialSection section = this;
             //view.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 
-            changeListener.onBeforeChangedSection(this);
+            changeListener.onBeforeChangeSection(this);
             listener.onClick(section, v);
-            changeListener.onAfterChangedSection(this);
+            changeListener.onAfterChangeSection(this);
         }
     }
 

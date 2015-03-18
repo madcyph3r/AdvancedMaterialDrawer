@@ -7,9 +7,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 
-import de.madcyph3r.materialnavigationdrawer.listener.MaterialHeadItemAvatarListener;
+import de.madcyph3r.materialnavigationdrawer.listener.MaterialHeadItemAvatarOnClickListener;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
-import de.madcyph3r.materialnavigationdrawer.listener.MaterialHeadItemBackgroundListener;
+import de.madcyph3r.materialnavigationdrawer.listener.MaterialHeadItemBackgroundOnClickListener;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
 import de.madcyph3r.materialnavigationdrawer.tools.Utils;
 
@@ -18,8 +18,8 @@ public class MaterialHeadItem {
     private Drawable background;
     private String title;
     private String subTitle;
-    private MaterialHeadItemAvatarListener avatarListener;
-    private MaterialHeadItemBackgroundListener backgroundListener;
+    private MaterialHeadItemAvatarOnClickListener avatarListener;
+    private MaterialHeadItemBackgroundOnClickListener backgroundListener;
     private boolean closeDrawerAvatarOnClick;
     private boolean closeDrawerBackgroundOnClick;
     private boolean closeDrawerOnChanged;
@@ -199,11 +199,11 @@ public class MaterialHeadItem {
         return subTitle;
     }
 
-    public MaterialHeadItemAvatarListener getAvatarOnClickListener() {
+    public MaterialHeadItemAvatarOnClickListener getAvatarOnClickListener() {
         return avatarListener;
     }
 
-    public MaterialHeadItemBackgroundListener getBackgroundOnClickListener() {
+    public MaterialHeadItemBackgroundOnClickListener getBackgroundOnClickListener() {
         return backgroundListener;
     }
 
@@ -232,12 +232,12 @@ public class MaterialHeadItem {
     }
 
     // avatarListener
-    public void setAvatarOnClickListener(MaterialHeadItemAvatarListener listener) {
+    public void setAvatarOnClickListener(MaterialHeadItemAvatarOnClickListener listener) {
         this.avatarListener = listener;
     }
 
     // backgroundListener
-    public void setBackgroundOnClickListener(MaterialHeadItemBackgroundListener listener) {
+    public void setBackgroundOnClickListener(MaterialHeadItemBackgroundOnClickListener listener) {
         this.backgroundListener = listener;
     }
 
