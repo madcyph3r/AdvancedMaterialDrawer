@@ -29,6 +29,7 @@ Big thanks to neokree, without him this library would not exist.
 https://github.com/madcyph3r/AdvancedMaterialDrawer/raw/master/example-release.apk
 
 or on the play store
+
 https://play.google.com/store/apps/details?id=de.madcyph3r.MaterialDrawer
 
 ### Download
