@@ -30,7 +30,9 @@ https://github.com/madcyph3r/AdvancedMaterialDrawer/raw/master/example-release.a
 
 or on the play store
 
-https://play.google.com/store/apps/details?id=de.madcyph3r.MaterialDrawer
+<a href="https://play.google.com/store/apps/details?id=de.madcyph3r.MaterialDrawer">
+  <img alt="Android app on Google Play" src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
+</a>
 
 ### Download
 ```java
