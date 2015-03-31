@@ -28,18 +28,10 @@ public class SetCustomFragmentActivity extends MaterialNavigationDrawer {
     @Override
     public void init(Bundle savedInstanceState) {
 
-        Bundle bundle = new Bundle();
-        bundle.putString("instruction", "This activity starts with a custom fragment. " +
-                "It's not from the menu.");
-
         drawer = this;
 
         // create menu
         MaterialMenu menu = new MaterialMenu();
-
-        //create instruction fragment
-        Fragment fragmentInstruction = new FragmentInstruction();
-        fragmentInstruction.setArguments(bundle);
 
         this.newSection("Section", new FragmentDummy(), false, menu);
         // menu items
@@ -49,6 +41,21 @@ public class SetCustomFragmentActivity extends MaterialNavigationDrawer {
 
         // set custom menu
         this.setCustomMenu(menu);
+
+        // don't load a standard fragment
+        this.setLoadFragmentOnStart(false);
+    }
+
+    @Override
+    public void afterInit(Bundle savedInstanceState) {
+
+        Bundle bundle = new Bundle();
+        bundle.putString("instruction", "This activity starts with a custom fragment. " +
+                "It's not from the menu.");
+
+        //create instruction fragment
+        Fragment fragmentInstruction = new FragmentInstruction();
+        fragmentInstruction.setArguments(bundle);
 
         // set custom fragment
         this.setCustomFragment(fragmentInstruction, "Custom Fragment Instruction");

@@ -702,10 +702,16 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     public void setCustomFragment(Fragment fragment, String title) {
+        if(currentSection != null)
+            currentSection.unSelect();
+
         setCustomFragment(fragment, title, true);
     }
 
     public void setCustomFragment(Fragment fragment, String title, boolean closeDrawer) {
+        if(currentSection != null)
+            currentSection.unSelect();
+
         setFragment(fragment, title, null, closeDrawer);
         changeToolbarColor(null);
     }
@@ -1818,6 +1824,10 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
     public MaterialSection getCurrentSection() {
         return currentSection;
+    }
+
+    public void setCurrentSection(MaterialSection section) {
+        currentSection = section;
     }
 
     public MaterialHeadItem getCurrentHeadItem() {
