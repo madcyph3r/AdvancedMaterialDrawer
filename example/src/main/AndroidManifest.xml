@@ -22,6 +22,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".DummyActivity">
+
+        </activity>
+
         <!-- Theme: -->
         <!-- dark theme -->
         <activity android:name=".example.theme.DarkThemeActivity"
