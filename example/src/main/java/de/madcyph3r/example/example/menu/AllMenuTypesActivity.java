@@ -95,5 +95,6 @@ public class AllMenuTypesActivity extends MaterialNavigationDrawer {
 
         // add head Item (menu will be loaded automatically)
         this.addHeadItem(headItem);
+
     }
 }

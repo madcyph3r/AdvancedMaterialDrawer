@@ -22,16 +22,15 @@ import de.madcyph3r.example.DividerItemDecoration;
 import de.madcyph3r.example.MainActivity;
 import de.madcyph3r.example.R;
 import de.madcyph3r.example.data.ExampleData;
-import de.madcyph3r.example.example.functionally.ActionBarButtons;
+import de.madcyph3r.example.example.functionally.ActionBarButtonsActivity;
 import de.madcyph3r.example.example.functionally.AddRemoveHeadItemRuntimeActivity;
 import de.madcyph3r.example.example.functionally.ClosePrevDrawerActivity_Activity;
+import de.madcyph3r.example.example.functionally.MasterChildNavActivity;
 import de.madcyph3r.example.example.functionally.NoClosePrevDrawerActivity_Activity;
 import de.madcyph3r.example.example.functionally.SetCustomFragmentActivity;
 import de.madcyph3r.example.example.headItemTypes.HeadItemTwoNoFragmentLoadOnChangeActivity;
 import de.madcyph3r.example.example.headItemTypes.HeadItemTwoOnlyOneHasMenuActivity;
 import de.madcyph3r.example.example.menu.AddRemoveMenuItemsActivity;
-import de.madcyph3r.example.example.menu.AllMenuTypesActivity;
-import de.madcyph3r.example.example.menu.SectionFragmentTitleActivity;
 
 /**
  * Created by marc on 12.03.2015.
@@ -56,7 +55,7 @@ public class FunctionallyFragment extends Fragment {
 
     private void createAdapter(RecyclerView recyclerView) {
         final List<ExampleData> content = new ArrayList<>();
-        content.add(new ExampleData("Change/Hide Actionbar Button", ActionBarButtons.class));
+        content.add(new ExampleData("Change/Hide Actionbar Button", ActionBarButtonsActivity.class));
         content.add(new ExampleData("Add Remove HeadItems At Runtime", AddRemoveHeadItemRuntimeActivity.class));
         content.add(new ExampleData("Add And Remove Menu Items At Runtime", AddRemoveMenuItemsActivity.class));
         content.add(new ExampleData("No Close Previous Drawer Activity", NoClosePrevDrawerActivity_Activity.class));
@@ -64,6 +63,7 @@ public class FunctionallyFragment extends Fragment {
         content.add(new ExampleData("Set Custom Fragment (Not From Section)", SetCustomFragmentActivity.class));
         content.add(new ExampleData("Head Item Style (Two Items) Only First Item Has a Menu", HeadItemTwoOnlyOneHasMenuActivity.class));
         content.add(new ExampleData("Head Item Style (Two Items) Fragment Doesn't Change On HeadItem Change", HeadItemTwoNoFragmentLoadOnChangeActivity.class));
+        content.add(new ExampleData("Master Child Navigation", MasterChildNavActivity.class));
 
 
         final ParallaxRecyclerAdapter<ExampleData> adapter = new ParallaxRecyclerAdapter<>(content);

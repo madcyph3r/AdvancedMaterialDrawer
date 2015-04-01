@@ -22,7 +22,7 @@ import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
 /**
  * Created by marc on 23.02.2015.
  */
-public class ActionBarButtons extends MaterialNavigationDrawer {
+public class ActionBarButtonsActivity extends MaterialNavigationDrawer {
 
     MaterialNavigationDrawer drawer = null;
 

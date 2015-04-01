@@ -146,7 +146,7 @@
         </activity>
 
         <!-- Functionally -->
-        <activity android:name=".example.functionally.ActionBarButtons">
+        <activity android:name=".example.functionally.ActionBarButtonsActivity">
         </activity>
         <activity android:name=".example.functionally.AddRemoveHeadItemRuntimeActivity">
         </activity>
@@ -155,6 +155,8 @@
         <activity android:name=".example.functionally.ClosePrevDrawerActivity_Activity">
         </activity>
         <activity android:name=".example.functionally.SetCustomFragmentActivity">
+        </activity>
+        <activity android:name=".example.functionally.MasterChildNavActivity">
         </activity>
 
         <!-- Other -->

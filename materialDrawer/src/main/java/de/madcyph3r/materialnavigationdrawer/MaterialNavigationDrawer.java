@@ -705,11 +705,15 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         if(currentSection != null)
             currentSection.unSelect();
 
-        setCustomFragment(fragment, title, true);
+        setCustomFragment(fragment, title, true, true);
     }
 
     public void setCustomFragment(Fragment fragment, String title, boolean closeDrawer) {
-        if(currentSection != null)
+        setCustomFragment(fragment, title, closeDrawer, true);
+    }
+
+    public void setCustomFragment(Fragment fragment, String title, boolean closeDrawer, boolean unselectCurrentSection) {
+        if(currentSection != null && unselectCurrentSection)
             currentSection.unSelect();
 
         setFragment(fragment, title, null, closeDrawer);

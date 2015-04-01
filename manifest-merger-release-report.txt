@@ -250,7 +250,7 @@ activity#de.madcyph3r.example.example.listener.HeadItemThreeChangeListenerActivi
 ADDED from AndroidManifest.xml:145:9
 	android:name
 		ADDED from AndroidManifest.xml:145:19
-activity#de.madcyph3r.example.example.functionally.ActionBarButtons
+activity#de.madcyph3r.example.example.functionally.ActionBarButtonsActivity
 ADDED from AndroidManifest.xml:149:9
 	android:name
 		ADDED from AndroidManifest.xml:149:19
@@ -270,14 +270,18 @@ activity#de.madcyph3r.example.example.functionally.SetCustomFragmentActivity
 ADDED from AndroidManifest.xml:157:9
 	android:name
 		ADDED from AndroidManifest.xml:157:19
-activity#de.madcyph3r.example.example.functionally.noClosePrevDrawerActivity.NoCloseActivity
-ADDED from AndroidManifest.xml:161:9
+activity#de.madcyph3r.example.example.functionally.MasterChildNavActivity
+ADDED from AndroidManifest.xml:159:9
 	android:name
-		ADDED from AndroidManifest.xml:161:19
-activity#de.madcyph3r.example.example.functionally.closePrevDrawerActivity.CloseActivity
+		ADDED from AndroidManifest.xml:159:19
+activity#de.madcyph3r.example.example.functionally.noClosePrevDrawerActivity.NoCloseActivity
 ADDED from AndroidManifest.xml:163:9
 	android:name
 		ADDED from AndroidManifest.xml:163:19
+activity#de.madcyph3r.example.example.functionally.closePrevDrawerActivity.CloseActivity
+ADDED from AndroidManifest.xml:165:9
+	android:name
+		ADDED from AndroidManifest.xml:165:19
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:21.0.3:15:5
