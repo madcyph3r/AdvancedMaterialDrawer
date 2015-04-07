@@ -12,7 +12,7 @@ Big thanks to neokree, without him this library would not exist.
 
 
 ### Main Features:
-- Unlimited Head-Items (Accounts)
+- Unlimited Head-Items (Accounts), tested with 100 Head-Items
 - Every Head-Item can have its own Menu
 - Head-Item listeners for Avatar or Background taps
 - Adding and removing Head-Items and Menu-Items at runtime
