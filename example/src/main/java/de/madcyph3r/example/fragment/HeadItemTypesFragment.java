@@ -22,6 +22,7 @@ import de.madcyph3r.example.DividerItemDecoration;
 import de.madcyph3r.example.MainActivity;
 import de.madcyph3r.example.R;
 import de.madcyph3r.example.data.ExampleData;
+import de.madcyph3r.example.example.headItemTypes.HeadItem100StaticBackgroundActivity;
 import de.madcyph3r.example.example.headItemTypes.HeadItemTwoNoFragmentLoadOnChangeActivity;
 import de.madcyph3r.example.example.headItemTypes.HeadItemTwoOnlyOneHasMenuActivity;
 import de.madcyph3r.example.example.headerTypes.HeadItemFiveActivity;
@@ -70,6 +71,7 @@ public class HeadItemTypesFragment extends Fragment {
         content.add(new ExampleData("Add And Remove Menu Items At Runtime", AddRemoveMenuItemsActivity.class));
         content.add(new ExampleData("(Two Items) Only First Item Has a Menu", HeadItemTwoOnlyOneHasMenuActivity.class));
         content.add(new ExampleData("(Two Items) Fragment Doesn't Change On HeadItem Change", HeadItemTwoNoFragmentLoadOnChangeActivity.class));
+        content.add(new ExampleData("100 Head Items With Static Background", HeadItem100StaticBackgroundActivity.class));
 
 
         final ParallaxRecyclerAdapter<ExampleData> adapter = new ParallaxRecyclerAdapter<>(content);

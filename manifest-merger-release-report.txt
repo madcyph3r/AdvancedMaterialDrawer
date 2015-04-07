@@ -198,90 +198,94 @@ activity#de.madcyph3r.example.example.headItemTypes.HeadItemTwoNoFragmentLoadOnC
 ADDED from AndroidManifest.xml:113:9
 	android:name
 		ADDED from AndroidManifest.xml:113:19
-activity#de.madcyph3r.example.example.menu.AllMenuTypesActivity
-ADDED from AndroidManifest.xml:117:9
+activity#de.madcyph3r.example.example.headItemTypes.HeadItem100StaticBackgroundActivity
+ADDED from AndroidManifest.xml:115:9
 	android:name
-		ADDED from AndroidManifest.xml:117:19
-activity#de.madcyph3r.example.example.menu.AddRemoveMenuItemsActivity
+		ADDED from AndroidManifest.xml:115:19
+activity#de.madcyph3r.example.example.menu.AllMenuTypesActivity
 ADDED from AndroidManifest.xml:119:9
 	android:name
 		ADDED from AndroidManifest.xml:119:19
-activity#de.madcyph3r.example.example.menu.SectionFragmentTitleActivity
+activity#de.madcyph3r.example.example.menu.AddRemoveMenuItemsActivity
 ADDED from AndroidManifest.xml:121:9
 	android:name
 		ADDED from AndroidManifest.xml:121:19
-activity#de.madcyph3r.example.example.menu.StartSectionActivity
+activity#de.madcyph3r.example.example.menu.SectionFragmentTitleActivity
 ADDED from AndroidManifest.xml:123:9
 	android:name
 		ADDED from AndroidManifest.xml:123:19
-activity#de.madcyph3r.example.example.backPattern.BackPatternCustomActivity
-ADDED from AndroidManifest.xml:127:9
+activity#de.madcyph3r.example.example.menu.StartSectionActivity
+ADDED from AndroidManifest.xml:125:9
 	android:name
-		ADDED from AndroidManifest.xml:127:19
-activity#de.madcyph3r.example.example.backPattern.BackPatternDefaultActivity
+		ADDED from AndroidManifest.xml:125:19
+activity#de.madcyph3r.example.example.backPattern.BackPatternCustomActivity
 ADDED from AndroidManifest.xml:129:9
 	android:name
 		ADDED from AndroidManifest.xml:129:19
-activity#de.madcyph3r.example.example.backPattern.BackPatternStartIndexActivity
+activity#de.madcyph3r.example.example.backPattern.BackPatternDefaultActivity
 ADDED from AndroidManifest.xml:131:9
 	android:name
 		ADDED from AndroidManifest.xml:131:19
-activity#de.madcyph3r.example.example.backPattern.BackPatternLastSectionActivity
+activity#de.madcyph3r.example.example.backPattern.BackPatternStartIndexActivity
 ADDED from AndroidManifest.xml:133:9
 	android:name
 		ADDED from AndroidManifest.xml:133:19
-activity#de.madcyph3r.example.example.listener.HeadItemOneAvatarOnClickListenerActivity
-ADDED from AndroidManifest.xml:137:9
+activity#de.madcyph3r.example.example.backPattern.BackPatternLastSectionActivity
+ADDED from AndroidManifest.xml:135:9
 	android:name
-		ADDED from AndroidManifest.xml:137:19
-activity#de.madcyph3r.example.example.listener.HeadItemOneBackgroundOnClickListenerActivity
+		ADDED from AndroidManifest.xml:135:19
+activity#de.madcyph3r.example.example.listener.HeadItemOneAvatarOnClickListenerActivity
 ADDED from AndroidManifest.xml:139:9
 	android:name
 		ADDED from AndroidManifest.xml:139:19
-activity#de.madcyph3r.example.example.listener.SectionChangeListenerActivity
+activity#de.madcyph3r.example.example.listener.HeadItemOneBackgroundOnClickListenerActivity
 ADDED from AndroidManifest.xml:141:9
 	android:name
 		ADDED from AndroidManifest.xml:141:19
-activity#de.madcyph3r.example.example.listener.DrawerListenerActivity
+activity#de.madcyph3r.example.example.listener.SectionChangeListenerActivity
 ADDED from AndroidManifest.xml:143:9
 	android:name
 		ADDED from AndroidManifest.xml:143:19
-activity#de.madcyph3r.example.example.listener.HeadItemThreeChangeListenerActivity
+activity#de.madcyph3r.example.example.listener.DrawerListenerActivity
 ADDED from AndroidManifest.xml:145:9
 	android:name
 		ADDED from AndroidManifest.xml:145:19
-activity#de.madcyph3r.example.example.functionally.ActionBarButtonsActivity
-ADDED from AndroidManifest.xml:149:9
+activity#de.madcyph3r.example.example.listener.HeadItemThreeChangeListenerActivity
+ADDED from AndroidManifest.xml:147:9
 	android:name
-		ADDED from AndroidManifest.xml:149:19
-activity#de.madcyph3r.example.example.functionally.AddRemoveHeadItemRuntimeActivity
+		ADDED from AndroidManifest.xml:147:19
+activity#de.madcyph3r.example.example.functionally.ActionBarButtonsActivity
 ADDED from AndroidManifest.xml:151:9
 	android:name
 		ADDED from AndroidManifest.xml:151:19
-activity#de.madcyph3r.example.example.functionally.NoClosePrevDrawerActivity_Activity
+activity#de.madcyph3r.example.example.functionally.AddRemoveHeadItemRuntimeActivity
 ADDED from AndroidManifest.xml:153:9
 	android:name
 		ADDED from AndroidManifest.xml:153:19
-activity#de.madcyph3r.example.example.functionally.ClosePrevDrawerActivity_Activity
+activity#de.madcyph3r.example.example.functionally.NoClosePrevDrawerActivity_Activity
 ADDED from AndroidManifest.xml:155:9
 	android:name
 		ADDED from AndroidManifest.xml:155:19
-activity#de.madcyph3r.example.example.functionally.SetCustomFragmentActivity
+activity#de.madcyph3r.example.example.functionally.ClosePrevDrawerActivity_Activity
 ADDED from AndroidManifest.xml:157:9
 	android:name
 		ADDED from AndroidManifest.xml:157:19
-activity#de.madcyph3r.example.example.functionally.MasterChildNavActivity
+activity#de.madcyph3r.example.example.functionally.SetCustomFragmentActivity
 ADDED from AndroidManifest.xml:159:9
 	android:name
 		ADDED from AndroidManifest.xml:159:19
-activity#de.madcyph3r.example.example.functionally.noClosePrevDrawerActivity.NoCloseActivity
-ADDED from AndroidManifest.xml:163:9
+activity#de.madcyph3r.example.example.functionally.MasterChildNavActivity
+ADDED from AndroidManifest.xml:161:9
 	android:name
-		ADDED from AndroidManifest.xml:163:19
-activity#de.madcyph3r.example.example.functionally.closePrevDrawerActivity.CloseActivity
+		ADDED from AndroidManifest.xml:161:19
+activity#de.madcyph3r.example.example.functionally.noClosePrevDrawerActivity.NoCloseActivity
 ADDED from AndroidManifest.xml:165:9
 	android:name
 		ADDED from AndroidManifest.xml:165:19
+activity#de.madcyph3r.example.example.functionally.closePrevDrawerActivity.CloseActivity
+ADDED from AndroidManifest.xml:167:9
+	android:name
+		ADDED from AndroidManifest.xml:167:19
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:21.0.3:15:5

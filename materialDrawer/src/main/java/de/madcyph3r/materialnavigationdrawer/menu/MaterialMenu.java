@@ -23,7 +23,7 @@ public class MaterialMenu {
         return items;
     }
 
-    public void setItems(List<Object> items) {
+    public void sesetItems(List<Object> items) {
         this.items = items;
     }
 

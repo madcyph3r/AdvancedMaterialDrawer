@@ -50,7 +50,7 @@ public class MasterChildNavActivity extends MaterialNavigationDrawer {
         instruction.setFragmentTitle("Master Child Navigation");
         this.newDevisor(menu);
         this.newLabel("Label", false, menu);
-        this.newSection("Master 1", new MasterFragment(), false, menu);
+        MaterialSection section = this.newSection("Master 1", new MasterFragment(), false, menu);
         this.newSection("Master 2", new MasterFragment2(), false, menu);
 
         setCustomMenu(menu);

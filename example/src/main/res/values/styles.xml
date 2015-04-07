@@ -19,12 +19,12 @@
     </style>
 
     <style name="UniqueToolbarColorTheme" parent="MaterialNavigationDrawerTheme">
-        <item name="uniqueToolbarColor">true</item>
-        <item name="colorPrimary">#8bc34a</item>
-        <item name="autoDarkStatusBar">true</item>
-        <!-- if autoDarkStatusBar false, then the statusbar gets the color from colorPrimaryDark-->
-        <!--<item name="colorPrimaryDark">#1C375B</item>-->
-    </style>
+    <item name="uniqueToolbarColor">true</item>
+    <item name="colorPrimary">#8bc34a</item>
+    <item name="autoDarkStatusBar">true</item>
+    <!-- if autoDarkStatusBar false, then the statusbar gets the color from colorPrimaryDark-->
+    <!--<item name="colorPrimaryDark">#1C375B</item>-->
+</style>
 
     <style name="MyOwnTheme" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar">
         <item name="colorPrimary">#8bc34a</item>

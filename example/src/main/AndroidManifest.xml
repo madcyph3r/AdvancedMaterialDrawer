@@ -112,6 +112,8 @@
         </activity>
         <activity android:name=".example.headItemTypes.HeadItemTwoNoFragmentLoadOnChangeActivity">
         </activity>
+        <activity android:name=".example.headItemTypes.HeadItem100StaticBackgroundActivity">
+        </activity>
 
         <!-- Menu -->
         <activity android:name=".example.menu.AllMenuTypesActivity">

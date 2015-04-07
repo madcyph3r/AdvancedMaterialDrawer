@@ -77,7 +77,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     public static final int DRAWER_DEFAULT_WIDTH = 0;
 
 
-    // globbar vars view
+    // global vars view
     private MaterialDrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarToggle;
     private ImageView statusBar;
@@ -112,6 +112,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     private boolean headItemSwitchShowForce;
     private boolean headItemSwitcherOpen = false;
     private Drawable headItemBackgroundGradient;
+    private boolean staticHeadItemBackground = false;
 
     // global vars menu
     private MaterialSection currentSection;
@@ -702,8 +703,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
     }
 
     public void setCustomFragment(Fragment fragment, String title) {
-        if(currentSection != null)
-            currentSection.unSelect();
+        /*if(currentSection != null)
+            currentSection.unSelect();*/
 
         setCustomFragment(fragment, title, true, true);
     }
@@ -712,8 +713,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         setCustomFragment(fragment, title, closeDrawer, true);
     }
 
-    public void setCustomFragment(Fragment fragment, String title, boolean closeDrawer, boolean unselectCurrentSection) {
-        if(currentSection != null && unselectCurrentSection)
+    public void setCustomFragment(Fragment fragment, String title, boolean closeDrawer, boolean unSelectCurrentSection) {
+        if(currentSection != null && unSelectCurrentSection)
             currentSection.unSelect();
 
         setFragment(fragment, title, null, closeDrawer);
@@ -935,7 +936,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                 setHeadItemSubTitle(newFirstHeadItem.getSubTitle());
 
                 // show new background
-                setDrawerBackground(newFirstHeadItem.getBackground());
+                if(!staticHeadItemBackground && newFirstHeadItem.getBackground() != null)
+                    setDrawerHeadItemBackground(newFirstHeadItem.getBackground());
                 ((View) headItemBackground).setAlpha(1);
 
                 // switch old and new headitem in the manager list
@@ -1125,7 +1127,9 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
     private void notifyHeadItemDataChangedSwitch() {
         this.setFirstHeadItemPhoto(headItemManager.get(0).getPhoto());
-        this.setDrawerBackground(headItemManager.get(0).getBackground());
+        if(!staticHeadItemBackground && headItemManager.get(0).getBackground() != null)
+            this.setDrawerHeadItemBackground(headItemManager.get(0).getBackground());
+
         this.setHeadItemTitle(headItemManager.get(0).getTitle());
         this.setHeadItemSubTitle(headItemManager.get(0).getSubTitle());
     }
@@ -1138,21 +1142,24 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
             this.setThirdHeadItemPhoto(findHeadItemNumber(MaterialHeadItem.THIRD_HEADITEM).getPhoto());
             this.setSecondHeadItemPhoto(findHeadItemNumber(MaterialHeadItem.SECOND_HEADITEM).getPhoto());
             this.setFirstHeadItemPhoto(headItemManager.get(0).getPhoto());
-            this.setDrawerBackground(headItemManager.get(0).getBackground());
+            if(!staticHeadItemBackground && headItemManager.get(0).getBackground() != null)
+                this.setDrawerHeadItemBackground(headItemManager.get(0).getBackground());
             this.setHeadItemTitle(headItemManager.get(0).getTitle());
             this.setHeadItemSubTitle(headItemManager.get(0).getSubTitle());
         } else if (headItemManager.size() == 2) {
             this.setThirdHeadItemPhoto(null);
             this.setSecondHeadItemPhoto(findHeadItemNumber(MaterialHeadItem.SECOND_HEADITEM).getPhoto());
             this.setFirstHeadItemPhoto(headItemManager.get(0).getPhoto());
-            this.setDrawerBackground(headItemManager.get(0).getBackground());
+            if(!staticHeadItemBackground && headItemManager.get(0).getBackground() != null)
+                this.setDrawerHeadItemBackground(headItemManager.get(0).getBackground());
             this.setHeadItemTitle(headItemManager.get(0).getTitle());
             this.setHeadItemSubTitle(headItemManager.get(0).getSubTitle());
         } else if (headItemManager.size() == 1) {
             this.setThirdHeadItemPhoto(null);
             this.setSecondHeadItemPhoto(null);
             this.setFirstHeadItemPhoto(headItemManager.get(0).getPhoto());
-            this.setDrawerBackground(headItemManager.get(0).getBackground());
+            if(!staticHeadItemBackground && headItemManager.get(0).getBackground() != null)
+                this.setDrawerHeadItemBackground(headItemManager.get(0).getBackground());
             this.setHeadItemTitle(headItemManager.get(0).getTitle());
             this.setHeadItemSubTitle(headItemManager.get(0).getSubTitle());
         }
@@ -1709,7 +1716,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                 if (currentSection == section)
                     super.onBackPressed();
                 else {
-                    section.select();
+                    //section.select();
                     onClick(section, section.getView());
                 }
                 break;
@@ -1912,7 +1919,15 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
         this.animationTransition = animationTransition;
     }
 
-    public void setDrawerBackground(Drawable background) {
+    public void setDrawerHeadItemBackground(Drawable background) {
+        setDrawerHeadItemBackground(background, false);
+    }
+
+    public void setDrawerHeadItemBackground(Drawable background, boolean staticBackground) {
+        if (drawerHeaderType != DRAWERHEADER_HEADITEMS)
+            throw new RuntimeException("Your header is is not set to DRAWERHEADER_HEADITEMS.");
+
+        staticHeadItemBackground = staticBackground;
         this.headItemBackground.setImageDrawable(background);
     }
 

@@ -33,6 +33,57 @@ public class MaterialHeadItem {
     public static final int SECOND_HEADITEM = 1;
     public static final int THIRD_HEADITEM = 2;
 
+    // without background
+    public MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, int photoRessourceID) {
+        this.title = title;
+        this.subTitle = subTitle;
+        this.menu = null;
+        this.photo = drawer.getResources().getDrawable(photoRessourceID);
+        this.drawer = drawer;
+        this.resources = drawer.getResources();
+
+        background = null;
+    }
+
+    public MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, int photoRessourceID, MaterialMenu menu) {
+        this.title = title;
+        this.subTitle = subTitle;
+        this.menu = menu;
+        this.photo = drawer.getResources().getDrawable(photoRessourceID);
+        this.drawer = drawer;
+        this.resources = drawer.getResources();
+
+        background = null;
+    }
+
+    public MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, Drawable photo) {
+        initVars();
+
+        this.title = title;
+        this.subTitle = subTitle;
+        this.menu = null;
+        this.photo = photo;
+        this.drawer = drawer;
+        this.resources = drawer.getResources();
+
+        background = null;
+    }
+
+    public MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, Drawable photo, MaterialMenu menu) {
+        initVars();
+
+        this.title = title;
+        this.subTitle = subTitle;
+        this.menu = menu;
+        this.photo = photo;
+        this.drawer = drawer;
+        this.resources = drawer.getResources();
+
+        background = null;
+    }
+
+
+    // with background
     public MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, int photoRessourceID, int backgroundRessourceID) {
         this.title = title;
         this.subTitle = subTitle;
