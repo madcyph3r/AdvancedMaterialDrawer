@@ -25,10 +25,10 @@ Big thanks to neokree, without him this library would not exist.
 - Toolbar overflow support
 - More: Setting your own Fragment on Start, etc
 
-### Example APK (Lib-Version 1.1.1) 
+### Example APK (Lib-Version [current git head]) 
 https://github.com/madcyph3r/AdvancedMaterialDrawer/raw/master/example-release.apk
 
-or on the play store
+or on the play store (Lib-Version 1.1.1) 
 
 <a href="https://play.google.com/store/apps/details?id=de.madcyph3r.MaterialDrawer">
   <img alt="Android app on Google Play" src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
