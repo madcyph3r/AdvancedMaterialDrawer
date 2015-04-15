@@ -2,33 +2,43 @@
 <resources>
 
     <style name="MaterialNavigationDrawerTheme" parent="Theme.AppCompat.NoActionBar" >
-        <item name="android:windowTranslucentStatus">false</item>
+        <item name="belowToolbar">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="drawerColor">#111</item>
         <item name="labelColor">#888888</item>
         <item name="uniqueToolbarColor">false</item>
         <item name="sectionStyle">@style/MaterialSectionTheme</item>
-        <item name="subheaderStyle">@style/MaterialSubheaderTheme</item>
+        <!--<item name="subheaderStyle">@style/MaterialSubheaderTheme</item>-->
         <item name="accountStyle">@style/MaterialAccountTheme</item>
         <item name="multipaneSupport">false</item>
         <item name="autoDarkStatusBar">true</item>
+        <item name="actionBarOverlay">false</item>
+        <item name="actionBarOverlayAlpha">1.0</item>
     </style>
 
     <style name="MaterialNavigationDrawerTheme.Light" parent="Theme.AppCompat.Light.NoActionBar" >
-        <item name="android:windowTranslucentStatus">false</item>
+        <item name="belowToolbar">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="drawerColor">#fafafa</item>
         <item name="labelColor">#afafaf</item>
         <item name="uniqueToolbarColor">false</item>
         <item name="sectionStyle">@style/MaterialSectionTheme.Light</item>
-        <item name="subheaderStyle">@style/MaterialSubheaderTheme.Light</item>
-        <item name="accountStyle">@style/MaterialAccountTheme</item>
+        <!--<item name="subheaderStyle">@style/MaterialSubheaderTheme.Light</item>-->
+        <item name="accountStyle">@style/MaterialAccountTheme.Light</item>
         <item name="multipaneSupport">false</item>
         <item name="autoDarkStatusBar">true</item>
+        <item name="actionBarOverlay">false</item>
+        <item name="actionBarOverlayAlpha">1.0</item>
     </style>
 
     <style name="MaterialNavigationDrawerTheme.Light.DarkActionBar" parent="Theme.AppCompat.Light.NoActionBar" >
-        <item name="android:windowTranslucentStatus">false</item>
+        <item name="belowToolbar">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
         <item name="uniqueToolbarColor">false</item>
@@ -36,10 +46,12 @@
         <item name="drawerColor">#fafafa</item>
         <item name="labelColor">#afafaf</item>
         <item name="sectionStyle">@style/MaterialSectionTheme.Light</item>
-        <item name="subheaderStyle">@style/MaterialSubheaderTheme.Light</item>
-        <item name="accountStyle">@style/MaterialAccountTheme</item>
+       <!-- <item name="subheaderStyle">@style/MaterialSubheaderTheme.Light</item>-->
+        <item name="accountStyle">@style/MaterialAccountTheme.Light</item>
         <item name="multipaneSupport">false</item>
         <item name="autoDarkStatusBar">true</item>
+        <item name="actionBarOverlay">false</item>
+        <item name="actionBarOverlayAlpha">1.0</item>
     </style>
 
     <style name="MaterialNavigationDrawerTheme.Light.TranslucentKitKatStatusBar" parent="MaterialNavigationDrawerTheme.Light" />

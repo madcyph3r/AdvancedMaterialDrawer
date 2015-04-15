@@ -2,4 +2,13 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="example_custom_header_below_toolbar">0dp</dimen>
+<!--
+    <dimen name="sectionIconHeight">30dp</dimen>
+    <dimen name="sectionIconWidth">30dp</dimen>
+    <dimen name="sectionSize">20sp</dimen>
+    <dimen name="sectionNotificationSize">20sp</dimen>
+    <dimen name="labelSize">20sp</dimen>
+-->
 </resources>

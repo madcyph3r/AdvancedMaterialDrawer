@@ -6,28 +6,33 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionChangeListener;
 import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionOnClickListener;
 import de.madcyph3r.materialnavigationdrawer.R;
+import de.madcyph3r.materialnavigationdrawer.ripple.MaterialRippleLayout;
+import de.madcyph3r.materialnavigationdrawer.ripple.MaterialRippleLayoutNineOld;
 
-public class MaterialSection<Fragment> implements View.OnTouchListener {
+public class MaterialSection<Fragment> implements /*View.OnTouchListener,*/ View.OnClickListener {
 
     public static final int TARGET_FRAGMENT = 0;
     public static final int TARGET_ACTIVITY = 1;
     public static final int TARGET_CLICK = 2;
 
-    private int position;
     private View view;
     private TextView text;
     private TextView notifications;
     private ImageView icon;
     private MaterialSectionOnClickListener listener;
+    private MaterialSectionChangeListener changeListener;
+
     private boolean isSelected;
     private int targetType;
     private int sectionColor;
@@ -37,7 +42,7 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
 
     private boolean hasSectionColor;
     private boolean hasColorDark;
-    private int colorPressed;
+    //private int colorPressed;
     private int colorUnpressed;
     private int colorSelected;
     private int iconColor;
@@ -48,28 +53,43 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
     private int numberNotifications;
 
     private String title;
+    private String fragmentTitle;
 
     private Fragment targetFragment;
     private Intent targetIntent;
 
-    public MaterialSection(Context ctx, boolean hasIcon, int target, boolean bottom) {
+    private boolean hasIcon = false;
 
+    public MaterialSection(Context ctx, boolean hasIcon, int target, boolean bottom, MaterialSectionChangeListener changeListener) {
+
+        int currentApiVersion = android.os.Build.VERSION.SDK_INT;
+
+        fragmentTitle = null;
+
+        this.changeListener = changeListener;
         this.bottom = bottom;
+        this.hasIcon = hasIcon;
+
 
         if (!hasIcon) {
-            view = LayoutInflater.from(ctx).inflate(R.layout.layout_material_section, null);
-
-            text = (TextView) view.findViewById(R.id.section_text);
-            notifications = (TextView) view.findViewById(R.id.section_notification);
+            if (currentApiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                view = LayoutInflater.from(ctx).inflate(R.layout.layout_material_section, null);
+            } else {
+                view = LayoutInflater.from(ctx).inflate(R.layout.layout_material_section_nine_old, null);
+            }
         } else {
-            view = LayoutInflater.from(ctx).inflate(R.layout.layout_material_section_icon, null);
-
-            text = (TextView) view.findViewById(R.id.section_text);
+            if (currentApiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                view = LayoutInflater.from(ctx).inflate(R.layout.layout_material_section_icon, null);
+            } else {
+                view = LayoutInflater.from(ctx).inflate(R.layout.layout_material_section_icon_nine_old, null);
+            }
             icon = (ImageView) view.findViewById(R.id.section_icon);
-            notifications = (TextView) view.findViewById(R.id.section_notification);
         }
 
-        view.setOnTouchListener(this);
+
+
+        notifications = (TextView) view.findViewById(R.id.section_notification);
+        text = (TextView) view.findViewById(R.id.section_text);
 
 
         Resources.Theme theme = ctx.getTheme();
@@ -77,7 +97,21 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
         theme.resolveAttribute(R.attr.sectionStyle, typedValue, true);
         TypedArray values = theme.obtainStyledAttributes(typedValue.resourceId, R.styleable.MaterialSection);
 
-        colorPressed = values.getColor(R.styleable.MaterialSection_sectionBackgroundColorPressed, 0x16000000);
+        int rippleColor = values.getColor(R.styleable.MaterialSection_sectionRippleColor, 0x16000000);
+
+        if (currentApiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            MaterialRippleLayout rippleLayout = (MaterialRippleLayout) view.findViewById(R.id.section_ripple);
+            rippleLayout.setRippleColor(rippleColor);
+            rippleLayout.setOnClickListener(this);
+        } else {
+            MaterialRippleLayoutNineOld rippleLayout = (MaterialRippleLayoutNineOld) view.findViewById(R.id.section_ripple);
+            rippleLayout.setRippleColor(rippleColor);
+            rippleLayout.setOnClickListener(this);
+        }
+
+        //view.setOnTouchListener(this);
+
+        //colorPressed = values.getColor(R.styleable.MaterialSection_sectionBackgroundColorPressed, 0x16000000);
         colorUnpressed = values.getColor(R.styleable.MaterialSection_sectionBackgroundColor, 0x00FFFFFF);
         colorSelected = values.getColor(R.styleable.MaterialSection_sectionBackgroundColorSelected, 0x0A000000);
 
@@ -93,11 +127,6 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
             notifications.setTextColor(notificationColor);
         }
 
-/*
-            colorPressed = Color.parseColor("#16000000");
-        colorUnpressed = Color.parseColor("#00FFFFFF");
-        colorSelected = Color.parseColor("#0A000000");*/
-        //iconColor = Color.rgb(98, 98, 98);
         isSelected = false;
         hasSectionColor = false;
         hasColorDark = false;
@@ -106,7 +135,7 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
         fillIconColor = true;
     }
 
-    @Override
+   /* @Override
     public boolean onTouch(View v, MotionEvent event) {
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -115,15 +144,18 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
         }
 
         if (event.getAction() == MotionEvent.ACTION_CANCEL) {
+
             if (isSelected)
                 view.setBackgroundColor(colorSelected);
             else
                 view.setBackgroundColor(colorUnpressed);
 
+
             return true;
         }
 
         if (event.getAction() == MotionEvent.ACTION_UP) {
+
             isSelected = true;
             view.setBackgroundColor(colorSelected);
 
@@ -134,21 +166,17 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
             if (listener != null) {
                 final MaterialSection section = this;
                 view.playSoundEffect(android.view.SoundEffectConstants.CLICK);
-                listener.onClick(section, v);
 
-                /*v.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        listener.onClick(section, v);
-                    }
-                });*/
+                changeListener.onBeforeChangeSection(this);
+                listener.onClick(section, v);
+                changeListener.onAfterChangeSection(this);
             }
 
             return true;
         }
 
         return false;
-    }
+    }*/
 
     public void select() {
         isSelected = true;
@@ -168,13 +196,13 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
         }
     }
 
-    public void setPosition(int position) {
+    /*public void setPosition(int position) {
         this.position = position;
     }
 
     public int getPosition() {
         return position;
-    }
+    }*/
 
     public void setOnClickListener(final MaterialSectionOnClickListener listener) {
         this.listener = listener;
@@ -304,5 +332,47 @@ public class MaterialSection<Fragment> implements View.OnTouchListener {
 
     public void setFillIconColor(boolean fillIconColor) {
         this.fillIconColor = fillIconColor;
+    }
+
+    public TextView getText() {
+        return text;
+    }
+
+    public ImageView getIcon() {
+        return icon;
+    }
+
+    public boolean isHasIcon() {
+        return hasIcon;
+    }
+
+    @Override
+    public void onClick(View v) {
+        //isSelected = true;
+        //view.setBackgroundColor(colorSelected);
+
+        /*if (hasSectionColor) {
+            text.setTextColor(iconColor);
+        }*/
+
+        if (listener != null) {
+            final MaterialSection section = this;
+            //view.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+
+            changeListener.onBeforeChangeSection(this);
+            listener.onClick(section, v);
+            changeListener.onAfterChangeSection(this);
+        }
+    }
+
+    public String getFragmentTitle() {
+        if(fragmentTitle == null || fragmentTitle.length() == 0)
+            return title;
+        else
+            return fragmentTitle;
+    }
+
+    public void setFragmentTitle(String fragmentTitle) {
+        this.fragmentTitle = fragmentTitle;
     }
 }

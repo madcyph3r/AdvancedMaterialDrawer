@@ -1,40 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="48dp">
+<de.madcyph3r.materialnavigationdrawer.ripple.MaterialRippleLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/section_ripple"
+    app:mrl_rippleOverlay="true"
+    app:mrl_rippleColor="#000000"
+    app:mrl_rippleHover="true"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:id="@+id/section_icon"
-        android:layout_marginLeft="16dp"
-        android:layout_centerVertical="true" />
-
-    <TextView
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/section_relative_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/section_text"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="72dp"
-        android:textSize="14sp"
-        android:textColor="@android:color/black"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:layout_toLeftOf="@+id/section_notification"
-        android:layout_toStartOf="@+id/section_notification"
-        android:layout_marginRight="8dp" />
+        android:layout_height="48dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/section_notification"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="8dp"
-        android:lines="1"
-        android:maxLength="3"
-        android:textSize="14sp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:gravity="center_horizontal"
-        android:layout_centerVertical="true" />
+        <ImageView
+            android:id="@+id/section_icon"
+            android:layout_width="@dimen/sectionIconWidth"
+            android:layout_height="@dimen/sectionIconHeight"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/section_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@+id/section_notification"
+            android:layout_toStartOf="@+id/section_notification"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/sectionSize" />
+
+        <TextView
+            android:id="@+id/section_notification"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:gravity="center_horizontal"
+            android:lines="1"
+            android:maxLength="3"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/sectionNotificationSize"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+</de.madcyph3r.materialnavigationdrawer.ripple.MaterialRippleLayout>

@@ -1,32 +1,59 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <!--<style name="MyTheme" parent="MaterialNavigationDrawerTheme">-->
-        <!-- Customize your theme here. -->
-        <!--<item name="colorPrimary">@android:color/holo_blue_light</item>
-        <item name="colorAccent">#FFFFFF</item>
-        <item name="colorPrimaryDark">@android:color/holo_blue_light</item>
-    </style>-->
+    <style name="MultiPaneSupportTheme" parent="MaterialNavigationDrawerTheme">
+        <item name="multipaneSupport">true</item>
+    </style>
+
+    <style name="MultiPaneBelowToolbarSupportTheme" parent="MaterialNavigationDrawerTheme">
+        <item name="multipaneSupport">true</item>
+        <item name="belowToolbar">true</item>
+    </style>
+
+    <style name="ActionBarOverlayTheme" parent="MaterialNavigationDrawerTheme">
+        <item name="actionBarOverlay">true</item>
+        <item name="actionBarOverlayAlpha">0.6</item>
+    </style>
+
+    <style name="BelowToolbarTheme" parent="MaterialNavigationDrawerTheme">
+        <item name="belowToolbar">true</item>
+    </style>
+
+    <style name="UniqueToolbarColorTheme" parent="MaterialNavigationDrawerTheme">
+    <item name="uniqueToolbarColor">true</item>
+    <item name="colorPrimary">#8bc34a</item>
+    <item name="autoDarkStatusBar">true</item>
+    <!-- if autoDarkStatusBar false, then the statusbar gets the color from colorPrimaryDark-->
+    <!--<item name="colorPrimaryDark">#1C375B</item>-->
+</style>
 
     <style name="MyOwnTheme" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar">
         <item name="colorPrimary">#8bc34a</item>
-        <item name="colorPrimaryDark">#1C375B</item>
+        <item name="labelColor">#E67E22</item>
         <item name="colorAccent">#FFFFFF</item>
         <item name="drawerColor">#558b2f</item>
         <!-- use colorPrimaryDark color for the status bar (here dark blue), otherwiese it creates his own dark color -->
-        <item name="autoDarkStatusBar">false</item>
+        <item name="autoDarkStatusBar">true</item>
         <!-- doesn't change the toolbar color on fragment change-->
-        <item name="uniqueToolbarColor">true</item>
-        <item name="sectionStyle">@style/MySection</item>
+        <item name="uniqueToolbarColor">false</item>
+        <item name="sectionStyle">@style/MySectionTheme</item>
+        <item name="accountStyle">@style/MyMaterialAccountTheme</item>
+        <item name="multipaneSupport">false</item>
     </style>
 
-    <style name="MySection" >
+    <style name="MySectionTheme" >
         <item name="sectionColorIcon">#3A74C5</item>
         <item name="sectionColorText">#3A74C5</item>
         <item name="sectionColorNotification">#3A74C5</item>
-        <item name="sectionBackgroundColorPressed">#163A74C5</item>
-        <item name="sectionBackgroundColorSelected">#0A3A74C5</item>
-        <item name="sectionBackgroundColor">#003A74C5</item>
+        <item name="sectionBackgroundColorPressed">#dbcbbc</item>
+        <item name="sectionBackgroundColorSelected">#feacff</item>
+        <item name="sectionBackgroundColor">#b9faff</item>
+        <item name="sectionRippleColor">#f89d54</item>
+    </style>
+
+    <style name="MyMaterialAccountTheme">
+        <item name="titleColor">#f9bd80</item>
+        <item name="subTitleColor">#f9bd80</item>
+        <item name="backgroundGradient">@drawable/red_gradient</item>
     </style>
 
 </resources>

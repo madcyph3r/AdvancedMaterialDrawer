@@ -11,11 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <ImageView
-            android:id="@+id/statusBar"
+        <View
+            android:id="@+id/overlayView"
+            android:layout_height="?attr/actionBarSize"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/statusMargin"
-            android:background="?attr/colorPrimary" />
+            android:layout_below="@+id/statusBar" />
+
+        <FrameLayout
+            android:id="@+id/frame_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/overlayView"/>
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -26,11 +32,11 @@
             android:layout_below="@+id/statusBar">
         </android.support.v7.widget.Toolbar>
 
-        <FrameLayout
-            android:id="@+id/frame_container"
+        <ImageView
+            android:id="@+id/statusBar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar"/>
+            android:layout_height="@dimen/statusMargin"
+            android:background="?attr/colorPrimary" />
 
     </RelativeLayout>
 

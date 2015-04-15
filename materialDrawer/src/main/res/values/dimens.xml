@@ -5,6 +5,12 @@
     <dimen name="userSpace">164dp</dimen>
     <dimen name="photoMarginTop">16dp</dimen>
 
+    <dimen name="sectionIconHeight">24dp</dimen>
+    <dimen name="sectionIconWidth">24dp</dimen>
+    <dimen name="sectionSize">14sp</dimen>
+    <dimen name="sectionNotificationSize">14sp</dimen>
+    <dimen name="labelSize">14sp</dimen>
+
     <!-- match_parent = -1dp / wrap_content = -2dp -->
     <dimen name="drawerWidth">-1dp</dimen>
 

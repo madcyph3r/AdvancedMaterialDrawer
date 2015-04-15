@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
     <declare-styleable name="MaterialSection">
         <attr name="sectionColorIcon" format="color" />
         <attr name="sectionColorText" format="color" />
@@ -8,27 +8,32 @@
         <attr name="sectionBackgroundColorPressed" format="color" />
         <attr name="sectionBackgroundColorSelected" format="color" />
         <attr name="sectionBackgroundColor" format="color" />
+        <attr name="sectionRippleColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="MaterialNavigationDrawer">
-        <attr name="drawerType" format="integer" /><!-- Tipologia del drawer -->
-        <attr name="uniqueToolbarColor" format="boolean" /><!-- La toolbar non cambia mai di colore -->
+        <attr name="drawerType" format="integer" />
+        <attr name="belowToolbar" format="boolean" />
+        <attr name="uniqueToolbarColor" format="boolean" />
         <attr name="multipaneSupport" format="boolean" />
-        <attr name="drawerColor" format="color" /><!-- Colore del drawer -->
+        <attr name="drawerColor" format="color" />
         <attr name="labelColor" format="color" />
         <attr name="sectionStyle" format="reference" />
         <attr name="subheaderStyle" format="reference"/>
         <attr name="autoDarkStatusBar" format="boolean"/>
         <attr name="accountStyle" format="reference" />
+        <attr name="actionBarOverlay" format="boolean"/>
+        <attr name="actionBarOverlayAlpha" format="float" />
     </declare-styleable>
 
-    <declare-styleable name="MaterialSubheader">
-        <attr name="subheaderTitleColor" format="color"/>
-    </declare-styleable>
-    
+    <!--   <declare-styleable name="MaterialSubheader">
+           <attr name="subheaderTitleColor" format="color"/>
+       </declare-styleable>-->
+
     <declare-styleable name="MaterialAccount">
         <attr name="titleColor" format="color" />
-        <attr name="subtitleColor" format="color" />
+        <attr name="subTitleColor" format="color" />
+        <attr name="backgroundGradient" format="reference" />
     </declare-styleable>
 
 </resources>
