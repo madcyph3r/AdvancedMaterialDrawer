@@ -1,5 +1,6 @@
 package de.madcyph3r.materialnavigationdrawer.menu.item;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -20,15 +21,15 @@ import de.madcyph3r.materialnavigationdrawer.R;
 import de.madcyph3r.materialnavigationdrawer.ripple.MaterialRippleLayout;
 import de.madcyph3r.materialnavigationdrawer.ripple.MaterialRippleLayoutNineOld;
 
-public class MaterialSection<Fragment> implements /*View.OnTouchListener,*/ View.OnClickListener {
+public class MaterialSection<Fragment, TV extends TextView> implements /*View.OnTouchListener,*/ View.OnClickListener {
 
     public static final int TARGET_FRAGMENT = 0;
     public static final int TARGET_ACTIVITY = 1;
     public static final int TARGET_CLICK = 2;
 
     private View view;
-    private TextView text;
-    private TextView notifications;
+    private TV text;
+    private TV notifications;
     private ImageView icon;
     private MaterialSectionOnClickListener listener;
     private MaterialSectionChangeListener changeListener;
@@ -60,10 +61,33 @@ public class MaterialSection<Fragment> implements /*View.OnTouchListener,*/ View
 
     private boolean hasIcon = false;
 
+
     public MaterialSection(Context ctx, boolean hasIcon, int target, boolean bottom, MaterialSectionChangeListener changeListener) {
+        init(ctx, hasIcon, target, bottom, changeListener);
+    }
+
+    private int getItemLayout(TypedArray values, int defaultResId) {
+        int resId = values.getResourceId(R.styleable.MaterialSection_section_item_layout, -1);
+        if (resId == -1) {
+            return defaultResId;
+        } else return resId;
+    }
+
+    @SuppressLint("WrongViewCast")
+    private void init(Context ctx, boolean hasIcon, int target, boolean bottom, MaterialSectionChangeListener changeListener) {
 
         int currentApiVersion = android.os.Build.VERSION.SDK_INT;
+        /**
+         * theme location
+         */
+        Resources.Theme theme = ctx.getTheme();
+        TypedValue typedValue = new TypedValue();
+        theme.resolveAttribute(R.attr.sectionStyle, typedValue, true);
+        TypedArray values = theme.obtainStyledAttributes(typedValue.resourceId, R.styleable.MaterialSection);
 
+        /**
+         * the title from the fragments
+         */
         fragmentTitle = null;
 
         this.changeListener = changeListener;
@@ -73,29 +97,23 @@ public class MaterialSection<Fragment> implements /*View.OnTouchListener,*/ View
 
         if (!hasIcon) {
             if (currentApiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                view = LayoutInflater.from(ctx).inflate(R.layout.layout_material_section, null);
+                view = LayoutInflater.from(ctx).inflate(getItemLayout(values, R.layout.layout_material_section), null);
             } else {
-                view = LayoutInflater.from(ctx).inflate(R.layout.layout_material_section_nine_old, null);
+                view = LayoutInflater.from(ctx).inflate(getItemLayout(values, R.layout.layout_material_section_nine_old), null);
             }
         } else {
             if (currentApiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                view = LayoutInflater.from(ctx).inflate(R.layout.layout_material_section_icon, null);
+                view = LayoutInflater.from(ctx).inflate(getItemLayout(values, R.layout.layout_material_section_icon), null);
             } else {
-                view = LayoutInflater.from(ctx).inflate(R.layout.layout_material_section_icon_nine_old, null);
+                view = LayoutInflater.from(ctx).inflate(getItemLayout(values, R.layout.layout_material_section_icon_nine_old), null);
             }
             icon = (ImageView) view.findViewById(R.id.section_icon);
         }
 
 
+        notifications = (TV) view.findViewById(R.id.section_notification);
+        text = (TV) view.findViewById(R.id.section_text);
 
-        notifications = (TextView) view.findViewById(R.id.section_notification);
-        text = (TextView) view.findViewById(R.id.section_text);
-
-
-        Resources.Theme theme = ctx.getTheme();
-        TypedValue typedValue = new TypedValue();
-        theme.resolveAttribute(R.attr.sectionStyle, typedValue, true);
-        TypedArray values = theme.obtainStyledAttributes(typedValue.resourceId, R.styleable.MaterialSection);
 
         int rippleColor = values.getColor(R.styleable.MaterialSection_sectionRippleColor, 0x16000000);
 
@@ -366,7 +384,7 @@ public class MaterialSection<Fragment> implements /*View.OnTouchListener,*/ View
     }
 
     public String getFragmentTitle() {
-        if(fragmentTitle == null || fragmentTitle.length() == 0)
+        if (fragmentTitle == null || fragmentTitle.length() == 0)
             return title;
         else
             return fragmentTitle;
