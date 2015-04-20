@@ -1167,7 +1167,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
     // create section for the headItem changer menu
     private MaterialSection newHeadSection(String title, Drawable icon, MaterialMenu menu, int position, boolean refreshMenu) {
-        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_CLICK, false, this);
+        MaterialSection section = new MaterialSection(this, true, MaterialSection.TARGET_CLICK, false, this);
         section.setFillIconColor(false);
         section.setIcon(icon);
         section.setTitle(title);
@@ -1241,7 +1241,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
     // create items for a headItem
     public MaterialSection newSection(String title, Drawable icon, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
-        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_CLICK, bottom, this);
+        MaterialSection section = new MaterialSection(this, true, MaterialSection.TARGET_CLICK, bottom, this);
         section.setIcon(icon);
         section.setTitle(title);
         //section.setPosition(position);
@@ -1267,7 +1267,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
 
     public MaterialSection newSection(String title, Drawable icon, Fragment target, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
-        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_FRAGMENT, bottom, this);
+        MaterialSection section = new MaterialSection(this, true, MaterialSection.TARGET_FRAGMENT, bottom, this);
         section.setOnClickListener(this);
         section.setIcon(icon);
         section.setTitle(title);
@@ -1295,7 +1295,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
 
     public MaterialSection newSection(String title, Drawable icon, Intent target, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
-        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_ACTIVITY, bottom, this);
+        MaterialSection section = new MaterialSection(this, true, MaterialSection.TARGET_ACTIVITY, bottom, this);
         section.setOnClickListener(this);
         section.setIcon(icon);
         section.setTitle(title);
@@ -1323,7 +1323,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
 
     public MaterialSection newSection(String title, Bitmap icon, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
-        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_CLICK, bottom, this);
+        MaterialSection section = new MaterialSection(this, true, MaterialSection.TARGET_CLICK, bottom, this);
         section.setIcon(icon);
         section.setTitle(title);
         menu.addItem(section, position);
@@ -1348,7 +1348,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
 
     public MaterialSection newSection(String title, Bitmap icon, Fragment target, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
-        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_FRAGMENT, bottom, this);
+        MaterialSection section = new MaterialSection(this, true, MaterialSection.TARGET_FRAGMENT, bottom, this);
         section.setOnClickListener(this);
         section.setIcon(icon);
         section.setTitle(title);
@@ -1376,7 +1376,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
 
     public MaterialSection newSection(String title, Bitmap icon, Intent target, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
-        MaterialSection section = new MaterialSection<Fragment>(this, true, MaterialSection.TARGET_ACTIVITY, bottom, this);
+        MaterialSection section = new MaterialSection(this, true, MaterialSection.TARGET_ACTIVITY, bottom, this);
         section.setOnClickListener(this);
         section.setIcon(icon);
         section.setTitle(title);
@@ -1404,7 +1404,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
 
     public MaterialSection newSection(String title, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
-        MaterialSection section = new MaterialSection<Fragment>(this, false, MaterialSection.TARGET_CLICK, bottom, this);
+        MaterialSection section = new MaterialSection(this, false, MaterialSection.TARGET_CLICK, bottom, this);
         section.setTitle(title);
         //section.setPosition(menu.getItems().size());
         menu.addItem(section, position);
@@ -1429,7 +1429,7 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
 
     public MaterialSection newSection(String title, Fragment target, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
-        MaterialSection section = new MaterialSection<Fragment>(this, false, MaterialSection.TARGET_FRAGMENT, bottom, this);
+        MaterialSection section = new MaterialSection(this, false, MaterialSection.TARGET_FRAGMENT, bottom, this);
         section.setOnClickListener(this);
         section.setTitle(title);
         section.setTarget(target);
@@ -1456,7 +1456,8 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
 
     public MaterialSection newSection(String title, Intent target, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
-        MaterialSection section = new MaterialSection<Fragment>(this, false, MaterialSection.TARGET_ACTIVITY, bottom, this);
+        MaterialSection section = new MaterialSection
+                (this, false, MaterialSection.TARGET_ACTIVITY, bottom, this);
         section.setOnClickListener(this);
         section.setTitle(title);
         section.setTarget(target);
