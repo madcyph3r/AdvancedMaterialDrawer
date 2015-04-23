@@ -8,6 +8,7 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,15 +22,15 @@ import de.madcyph3r.materialnavigationdrawer.R;
 import de.madcyph3r.materialnavigationdrawer.ripple.MaterialRippleLayout;
 import de.madcyph3r.materialnavigationdrawer.ripple.MaterialRippleLayoutNineOld;
 
-public class MaterialSection<Fragment, TV extends TextView> implements /*View.OnTouchListener,*/ View.OnClickListener {
+public class MaterialSection<Fragment, customTextView extends TextView> implements /*View.OnTouchListener,*/ View.OnClickListener {
 
     public static final int TARGET_FRAGMENT = 0;
     public static final int TARGET_ACTIVITY = 1;
     public static final int TARGET_CLICK = 2;
 
     private View view;
-    private TV text;
-    private TV notifications;
+    private customTextView text;
+    private customTextView notifications;
     private ImageView icon;
     private MaterialSectionOnClickListener listener;
     private MaterialSectionChangeListener changeListener;
@@ -69,8 +70,12 @@ public class MaterialSection<Fragment, TV extends TextView> implements /*View.On
     private int getItemLayout(TypedArray values, int defaultResId) {
         int resId = values.getResourceId(R.styleable.MaterialSection_section_item_layout, -1);
         if (resId == -1) {
+            Log.d("not", "got -1");
             return defaultResId;
-        } else return resId;
+        } else {
+            Log.d("not", "resId > -1");
+            return resId;
+        }
     }
 
     @SuppressLint("WrongViewCast")
@@ -111,8 +116,8 @@ public class MaterialSection<Fragment, TV extends TextView> implements /*View.On
         }
 
 
-        notifications = (TV) view.findViewById(R.id.section_notification);
-        text = (TV) view.findViewById(R.id.section_text);
+        notifications = (customTextView) view.findViewById(R.id.section_notification);
+        text = (customTextView) view.findViewById(R.id.section_text);
 
 
         int rippleColor = values.getColor(R.styleable.MaterialSection_sectionRippleColor, 0x16000000);
