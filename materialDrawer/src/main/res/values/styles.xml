@@ -9,6 +9,7 @@
         <attr name="sectionBackgroundColorSelected" format="color" />
         <attr name="sectionBackgroundColor" format="color" />
         <attr name="sectionRippleColor" format="color" />
+        <attr name="section_item_layout" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="MaterialNavigationDrawer">
@@ -19,10 +20,10 @@
         <attr name="drawerColor" format="color" />
         <attr name="labelColor" format="color" />
         <attr name="sectionStyle" format="reference" />
-        <attr name="subheaderStyle" format="reference"/>
-        <attr name="autoDarkStatusBar" format="boolean"/>
+        <attr name="subheaderStyle" format="reference" />
+        <attr name="autoDarkStatusBar" format="boolean" />
         <attr name="accountStyle" format="reference" />
-        <attr name="actionBarOverlay" format="boolean"/>
+        <attr name="actionBarOverlay" format="boolean" />
         <attr name="actionBarOverlayAlpha" format="float" />
     </declare-styleable>
 
