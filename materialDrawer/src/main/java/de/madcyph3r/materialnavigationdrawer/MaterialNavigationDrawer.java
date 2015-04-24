@@ -349,6 +349,16 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
         }
     }
 
+    /*private View.OnClickListener toolbarToggleListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(isCurrentFragmentChild) {
+                onHomeAsUpSelected();
+                onBackPressed();
+            }
+        }
+    };*/
+
     private void initDrawer() {
 
         DrawerLayout.LayoutParams drawerParams = (android.support.v4.widget.DrawerLayout.LayoutParams) drawerViewGroup.getLayoutParams();
@@ -416,6 +426,8 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
                         drawerStateListener.onDrawerStateChanged(newState);
                 }
             };
+
+            //actionBarToggle.setToolbarNavigationClickListener(toolbarToggleListener);
 
             drawerLayout.setDrawerListener(actionBarToggle);
             drawerLayout.setMultipaneSupport(false);
@@ -721,7 +733,7 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
         changeToolbarColor(null);
     }
 
-    public void setFragment(Fragment fragment, String title, Fragment oldFragment, boolean closeDrawer) {
+    private void changeFragment(final Fragment fragment, final String title, final Fragment oldFragment) {
         setTitle(title);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             // before honeycomb there is not android.app.Fragment
@@ -751,8 +763,21 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
         } else
             throw new RuntimeException("Fragment must be android.app.Fragment or android.support.v4.app.Fragment");
 
-        if (!deviceSupportMultiPane() && closeDrawer)
-            drawerLayout.closeDrawer(drawerViewGroup);
+    }
+
+    public void setFragment(final Fragment fragment, final String title, final Fragment oldFragment, boolean closeDrawer) {
+
+        if (!deviceSupportMultiPane() && closeDrawer) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    changeFragment(fragment, title, oldFragment);
+                }
+            }, 200);
+            closeDrawer();
+        } else {
+            changeFragment(fragment, title, oldFragment);
+        }
     }
 
     private int getHeadItemNumber(MaterialHeadItem headItem) {
@@ -775,27 +800,36 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
         drawerLayout.openDrawer(drawerViewGroup);
     }
 
+    public boolean isDrawerOpen(){
+        return drawerLayout.isDrawerOpen(drawerViewGroup);
+    }
+
     public enum ActionBarMenuItem {
         MENU, BACK, NONE
     }
 
+    public void onHomeAsUpSelected() {}
+
     public void showActionBarMenuIcon(ActionBarMenuItem icon) {
         switch (icon) {
             case BACK:
-                getActionBarToggle().setDrawerIndicatorEnabled(false);
+                if(actionBarToggle != null)
+                    getActionBarToggle().setDrawerIndicatorEnabled(false);
                 getSupportActionBar().setHomeButtonEnabled(true);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 getSupportActionBar().invalidateOptionsMenu();
                 break;
             case NONE:
-                getActionBarToggle().setDrawerIndicatorEnabled(false);
+                if(actionBarToggle != null)
+                    getActionBarToggle().setDrawerIndicatorEnabled(false);
                 getSupportActionBar().setHomeButtonEnabled(false);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                 getSupportActionBar().invalidateOptionsMenu();
                 break;
             case MENU:
             default:
-                getSupportActionBar().setHomeButtonEnabled(true);
+                if(actionBarToggle != null)
+                    getSupportActionBar().setHomeButtonEnabled(true);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 getActionBarToggle().setDrawerIndicatorEnabled(true);
                 getSupportActionBar().invalidateOptionsMenu();
@@ -995,10 +1029,38 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
         this.multiPaneSupport = true;
     }
 
+    public void allowArrowAnimation() {
+        slidingDrawerEffect = true;
+    }
+
     /*   public void allowArrowAnimation() {
            slidingDrawerEffect = true;
        }
    */
+
+    /**
+     * Set the HomeAsUpIndicator that is visible when user navigate to a fragment child
+     *
+     * N.B. call this method AFTER the init() to leave the time to instantiate the ActionBarDrawerToggle
+     * @param resId the id to resource drawable to use as indicator
+     */
+    public void setHomeAsUpIndicator(int resId) {
+        setHomeAsUpIndicator(resources.getDrawable(resId));
+    }
+
+    /**
+     * Set the HomeAsUpIndicator that is visible when user navigate to a fragment child
+     * @param indicator the resource drawable to use as indicator
+     */
+    public void setHomeAsUpIndicator(Drawable indicator) {
+        if(!deviceSupportMultiPane()) {
+            actionBarToggle.setHomeAsUpIndicator(indicator);
+        }
+        else {
+            actionBar.setHomeAsUpIndicator(indicator);
+        }
+    }
+
     public void changeToolbarColor() {
         changeToolbarColor(null);
     }
@@ -1666,15 +1728,29 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        //hide all action item when drawer is open
+        if(isDrawerOpen() && !deviceSupportMultiPane()) {
+            menu.clear();
+        }
         return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (actionBarToggle != null)
-            if (actionBarToggle.onOptionsItemSelected(item)) {
-                return true;
-            }
+        if(!deviceSupportMultiPane()) {
+            if (actionBarToggle != null)
+                if (actionBarToggle.onOptionsItemSelected(item)) {
+                    return true;
+                }
+        } else {
+            // for later use
+            /*switch (item.getItemId()) {
+                // Respond to the action bar's Up/Home button
+                case android.R.id.home:
+                    toolbarToggleListener.onClick(null);
+                    return true;
+            }*/
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -1704,6 +1780,12 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
 
     @Override
     public void onBackPressed() {
+
+        if(isDrawerOpen()){
+            closeDrawer();
+            return;
+        }
+
         switch (backPattern) {
             default:
             case BACKPATTERN_BACK_ANYWHERE:
@@ -1806,7 +1888,9 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
                                 finish();
                         }
                     }, 200);
-
+                    closeDrawer();
+                } else {
+                    // close, security
                     closeDrawer();
                 }
             }
