@@ -828,10 +828,11 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
                 break;
             case MENU:
             default:
-                if(actionBarToggle != null)
+                if(actionBarToggle != null) {
+                    getActionBarToggle().setDrawerIndicatorEnabled(true);
                     getSupportActionBar().setHomeButtonEnabled(true);
+                }
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                getActionBarToggle().setDrawerIndicatorEnabled(true);
                 getSupportActionBar().invalidateOptionsMenu();
                 break;
         }
