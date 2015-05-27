@@ -1482,9 +1482,17 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
         return newSection(title, bottom, menu, position, false);
     }
 
+    public MaterialSection newSection(String title, boolean bottom, MaterialMenu menu) {
+        return newSection(title, bottom, menu,  menu.getItems().size(), false);
+    }
+
     public MaterialSection newSection(String title, boolean bottom, MaterialMenu menu, boolean refreshMenu) {
         return newSection(title, bottom, menu, menu.getItems().size(), refreshMenu);
     }
+
+    /*public MaterialSection newSection(String title, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
+        return newSection(title, bottom, menu, position, refreshMenu);
+    }*/
 
 
 
