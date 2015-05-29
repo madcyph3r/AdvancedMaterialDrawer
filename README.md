@@ -28,7 +28,7 @@ Big thanks to neokree, without him this library would not exist.
 ### Example APK (Lib-Version [current git head]) 
 https://github.com/madcyph3r/AdvancedMaterialDrawer/raw/master/example-release.apk
 
-or on the play store (Lib-Version 1.1.1) 
+or on the play store (Lib-Version 1.1.3) 
 
 <a href="https://play.google.com/store/apps/details?id=de.madcyph3r.MaterialDrawer">
   <img alt="Android app on Google Play" src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
@@ -41,7 +41,7 @@ repositories {
 }
 
 dependencies {
-    compile 'de.madcyph3r:materialDrawer:1.1.1@aar'
+    compile 'de.madcyph3r:materialDrawer:1.1.3@aar'
 }
 ```
 
