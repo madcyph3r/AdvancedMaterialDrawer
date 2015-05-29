@@ -32,7 +32,7 @@ public class MaterialDrawerLayout extends DrawerLayout {
     }
 
     public void setMultipaneSupport(boolean support) {
-        if(Utils.isTablet(this.getResources())) {
+        if (Utils.isTablet(this.getResources())) {
             // custom implementation only for tablets
             multipaneSupport = support;
         }
@@ -41,10 +41,9 @@ public class MaterialDrawerLayout extends DrawerLayout {
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
 
-        if(multipaneSupport) {
+        if (multipaneSupport) {
             return false;
-        }
-        else {
+        } else {
             return super.onKeyUp(keyCode, event);
         }
     }

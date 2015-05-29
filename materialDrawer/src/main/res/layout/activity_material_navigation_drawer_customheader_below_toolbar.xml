@@ -32,12 +32,7 @@
 
     </de.madcyph3r.materialnavigationdrawer.MaterialDrawerLayout>
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:layout_below="@id/statusBar"/>
+    <include layout="@layout/toolbar" />
 
     <ImageView
         android:id="@+id/statusBar"
