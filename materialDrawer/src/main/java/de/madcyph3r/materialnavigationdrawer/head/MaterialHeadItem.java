@@ -187,7 +187,6 @@ public class MaterialHeadItem {
     }
 
 
-
     // setter
     public void setPhoto(Drawable photo) {
         this.photo = photo;
@@ -221,10 +220,10 @@ public class MaterialHeadItem {
         this.menu = menu;
     }
 
-  /*  public void setStartIndex(int startIndex) {
-        this.startIndex = startIndex;
-    }
-*/
+    /*  public void setStartIndex(int startIndex) {
+          this.startIndex = startIndex;
+      }
+  */
     public void setLoadFragmentOnChanged(boolean loadFragmentOnChanged) {
         this.loadFragmentOnChanged = loadFragmentOnChanged;
     }
@@ -274,10 +273,10 @@ public class MaterialHeadItem {
         return closeDrawerBackgroundOnClick;
     }
 
- /*   public int getStartIndex() {
-        return startIndex;
-    }
-*/
+    /*   public int getStartIndex() {
+           return startIndex;
+       }
+   */
     public boolean isLoadFragmentOnChanged() {
         return loadFragmentOnChanged;
     }
@@ -309,40 +308,32 @@ public class MaterialHeadItem {
     private AsyncTask<Integer, Void, Drawable> resizePhoto = new AsyncTask<Integer, Void, Drawable>() {
         @Override
         protected Drawable doInBackground(Integer... params) {
-
             Point photoSize = Utils.getUserPhotoSize(resources);
-
             Bitmap photo = Utils.resizeBitmapFromResource(resources, params[0], photoSize.x, photoSize.y);
             BitmapDrawable photoD = new BitmapDrawable(resources, photo);
             photo.recycle();
-
             return photoD;
         }
 
         @Override
         protected void onPostExecute(Drawable drawable) {
             photo = drawable;
-
             if (listenerLoaded != null)
                 listenerLoaded.onUserPhotoLoaded(MaterialHeadItem.this);
         }
     };
 
-
     private AsyncTask<Integer, Void, BitmapDrawable> resizeBackground = new AsyncTask<Integer, Void, BitmapDrawable>() {
         @Override
         protected BitmapDrawable doInBackground(Integer... params) {
             Point backSize = Utils.getBackgroundSize(resources, drawer.getDrawerDPWidth());
-
             Bitmap back = Utils.resizeBitmapFromResource(resources, params[0], backSize.x, backSize.y);
-
             return new BitmapDrawable(resources, back);
         }
 
         @Override
         protected void onPostExecute(BitmapDrawable drawable) {
             background = drawable;
-
             if (listenerLoaded != null)
                 listenerLoaded.onBackgroundLoaded(MaterialHeadItem.this);
         }

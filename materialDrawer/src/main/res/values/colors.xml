@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="transparent">#00FFFFFF</color>
+    <color name="defaultactionbarColor">#FFFFFFFF</color>
+    <color name="defaultactionbarColorDark">#ffcbcbcb</color>
+    <color name="defaultactionbarColorThree">#ffcb4e41</color>
+    <color name="hb_grey_light">#eee</color>
 </resources>
