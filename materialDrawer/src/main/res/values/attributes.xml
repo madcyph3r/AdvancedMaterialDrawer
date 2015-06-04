@@ -14,4 +14,54 @@
         <attr name="mrl_rippleInAdapter" format="boolean" localization="suggested" />
         <attr name="mrl_rippleRoundedCorners" format="dimension" localization="suggested" />
     </declare-styleable>
+    <declare-styleable name="MaterialPlain">
+        <attr name="hkm_touch_normal" format="reference" />
+        <attr name="hkm_touch_press" format="reference" />
+    </declare-styleable>
+
+
+
+
+    <declare-styleable name="MaterialSection">
+        <attr name="sectionColorIcon" format="color" />
+        <attr name="sectionColorText" format="color" />
+        <attr name="sectionColorNotification" format="color" />
+        <attr name="sectionBackgroundColorPressed" format="color" />
+        <attr name="sectionBackgroundColorSelected" format="color" />
+        <attr name="sectionBackgroundColor" format="color" />
+        <attr name="sectionOnPressHighLightColor" format="color" />
+        <attr name="sectionRippleColor" format="color" />
+        <attr name="section_item_layout" format="reference" />
+        <!-- section divider will be using OnPress color -->
+        <attr name="sectionDivider" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="MaterialNavigationDrawer">
+        <attr name="drawerType" format="integer" />
+        <attr name="belowToolbar" format="boolean" />
+        <attr name="uniqueToolbarColor" format="boolean" />
+        <attr name="multipaneSupport" format="boolean" />
+        <attr name="drawerColor" format="color" />
+        <attr name="labelColor" format="color" />
+        <attr name="dividerColor" format="color" />
+        <attr name="sectionStyle" format="reference" />
+        <attr name="subheaderStyle" format="reference" />
+        <attr name="autoDarkStatusBar" format="boolean" />
+        <attr name="accountStyle" format="reference" />
+        <attr name="actionBarOverlay" format="boolean" />
+        <attr name="actionBarOverlayAlpha" format="float" />
+        <attr name="dividerStrokeWidth" format="dimension" />
+        <attr name="drawerWidth" format="dimension" />
+        <attr name="drawerActionBarStyle" format="reference" />
+    </declare-styleable>
+
+    <!--   <declare-styleable name="MaterialSubheader">
+           <attr name="subheaderTitleColor" format="color"/>
+       </declare-styleable>-->
+
+    <declare-styleable name="MaterialAccount">
+        <attr name="titleColor" format="color" />
+        <attr name="subTitleColor" format="color" />
+        <attr name="backgroundGradient" format="reference" />
+    </declare-styleable>
 </resources>

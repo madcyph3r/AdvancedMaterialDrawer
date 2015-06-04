@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="MaterialNavigationDrawerTheme" parent="Theme.AppCompat.NoActionBar" >
+    <style name="MaterialNavigationDrawerTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="belowToolbar">false</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -16,9 +16,10 @@
         <item name="autoDarkStatusBar">true</item>
         <item name="actionBarOverlay">false</item>
         <item name="actionBarOverlayAlpha">1.0</item>
+        <item name="drawerActionBarStyle">@null</item>
     </style>
 
-    <style name="MaterialNavigationDrawerTheme.Light" parent="Theme.AppCompat.Light.NoActionBar" >
+    <style name="MaterialNavigationDrawerTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="belowToolbar">false</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -33,9 +34,10 @@
         <item name="autoDarkStatusBar">true</item>
         <item name="actionBarOverlay">false</item>
         <item name="actionBarOverlayAlpha">1.0</item>
+        <item name="drawerActionBarStyle">@null</item>
     </style>
 
-    <style name="MaterialNavigationDrawerTheme.Light.DarkActionBar" parent="Theme.AppCompat.Light.NoActionBar" >
+    <style name="MaterialNavigationDrawerTheme.Light.DarkActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="belowToolbar">false</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -46,12 +48,13 @@
         <item name="drawerColor">#fafafa</item>
         <item name="labelColor">#afafaf</item>
         <item name="sectionStyle">@style/MaterialSectionTheme.Light</item>
-       <!-- <item name="subheaderStyle">@style/MaterialSubheaderTheme.Light</item>-->
+        <!-- <item name="subheaderStyle">@style/MaterialSubheaderTheme.Light</item>-->
         <item name="accountStyle">@style/MaterialAccountTheme.Light</item>
         <item name="multipaneSupport">false</item>
         <item name="autoDarkStatusBar">true</item>
         <item name="actionBarOverlay">false</item>
         <item name="actionBarOverlayAlpha">1.0</item>
+        <item name="drawerActionBarStyle">@null</item>
     </style>
 
     <style name="MaterialNavigationDrawerTheme.Light.TranslucentKitKatStatusBar" parent="MaterialNavigationDrawerTheme.Light" />

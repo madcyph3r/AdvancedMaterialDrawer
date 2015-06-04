@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     android:id="@+id/drawer"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:layout_gravity="start"
     android:choiceMode="singleChoice"
@@ -15,12 +15,12 @@
         android:layout_above="@+id/separator"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentTop="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -32,16 +32,16 @@
                 android:layout_alignParentBottom="false"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:scaleType="fitXY"/>
-      <!--      <ImageView
-                android:id="@+id/current_back_item_background_tmp"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/userSpace"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:src="#c6c6c6"
-                android:scaleType="fitXY" />-->
+                android:scaleType="fitXY" />
+            <!--      <ImageView
+                      android:id="@+id/current_back_item_background_tmp"
+                      android:layout_width="wrap_content"
+                      android:layout_height="@dimen/userSpace"
+                      android:layout_alignParentLeft="true"
+                      android:layout_alignParentRight="true"
+                      android:layout_alignParentTop="true"
+                      android:src="#c6c6c6"
+                      android:scaleType="fitXY" />-->
 
             <ImageView
                 android:id="@+id/current_back_item_background"
@@ -71,7 +71,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/photoMarginTop"
-                android:layout_marginRight="16dp"/>
+                android:layout_marginRight="16dp" />
 
             <ImageView
                 android:id="@+id/third_head_item_photo"
@@ -91,7 +91,7 @@
                 android:layout_below="@+id/current_back_item_background"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
             </LinearLayout>
 
@@ -114,7 +114,7 @@
                     android:textSize="16sp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                     android:textStyle="bold"
-                    android:textColor="@android:color/white"/>
+                    android:textColor="@android:color/white" />
 
                 <TextView
                     android:id="@+id/current_head_item_sub_title"
@@ -123,7 +123,7 @@
                     android:layout_marginLeft="16dp"
                     android:textSize="14sp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@android:color/white"/>
+                    android:textColor="@android:color/white" />
 
             </LinearLayout>
 
@@ -162,7 +162,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
     </LinearLayout>
 
