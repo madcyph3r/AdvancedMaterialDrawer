@@ -27,7 +27,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -208,7 +207,7 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
         // DEVELOPER CALL TO INIT
         init(savedInstanceState);
         // drawerViewGroup init
-        initDrawer();
+        initDrawerPrivate();
         // load here header and menu
         initHeaderAndMenu(savedInstanceState);
         //afterInit();
@@ -326,6 +325,7 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
         bottomSections = (LinearLayout) this.findViewById(R.id.bottom_sections);
     }
 
+
     private void initKitKatDependencies(Resources.Theme theme) {
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
             TypedArray windowTraslucentAttribute = theme.obtainStyledAttributes(new int[]{android.R.attr.windowTranslucentStatus});
@@ -348,7 +348,7 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
         }
     }
 
-    private void initDrawer() {
+    private void initDrawerPrivate() {
 
         DrawerLayout.LayoutParams drawerParams = (android.support.v4.widget.DrawerLayout.LayoutParams) drawerViewGroup.getLayoutParams();
         Resources r = getResources();
@@ -363,62 +363,7 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
 
         drawerViewGroup.setLayoutParams(drawerParams);
 
-        if (deviceSupportMultiPane()) {
-            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN, drawerViewGroup);
-            DrawerLayout.LayoutParams params = new DrawerLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            params.setMargins((int) (320 * displayDensity), 0, 0, 0);
-            contentViewGroup.setLayoutParams(params);
-            drawerLayout.setScrimColor(Color.TRANSPARENT);
-            drawerLayout.openDrawer(drawerViewGroup);
-            drawerLayout.setMultipaneSupport(true);
-            //drawerLayout.requestDisallowInterceptTouchEvent(true);
-        } else {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeButtonEnabled(true);
-
-            // don't use the constructor with toolbar, or onOptionsItemSelected() method will not be called
-            actionBarToggle = new ActionBarDrawerToggle(this, drawerLayout/*, toolbar*/, R.string.nothing, R.string.nothing) {
-
-                public void onDrawerClosed(View view) {
-                    invalidateOptionsMenu();
-
-                    drawerTouchLocked = false;
-
-                    if (drawerStateListener != null)
-                        drawerStateListener.onDrawerClosed(view);
-                }
-
-                public void onDrawerOpened(View drawerView) {
-                    invalidateOptionsMenu();
-
-                    if (drawerStateListener != null)
-                        drawerStateListener.onDrawerOpened(drawerView);
-                }
-
-                @Override
-                public void onDrawerSlide(View drawerView, float slideOffset) {
-                    // if user wants the sliding arrow it compare
-                    if (slidingDrawerEffect)
-                        super.onDrawerSlide(drawerView, slideOffset);
-                    else
-                        super.onDrawerSlide(drawerView, 0);
-
-                    if (drawerStateListener != null)
-                        drawerStateListener.onDrawerSlide(drawerView, slideOffset);
-                }
-
-                @Override
-                public void onDrawerStateChanged(int newState) {
-                    super.onDrawerStateChanged(newState);
-
-                    if (drawerStateListener != null)
-                        drawerStateListener.onDrawerStateChanged(newState);
-                }
-            };
-
-            drawerLayout.setDrawerListener(actionBarToggle);
-            drawerLayout.setMultipaneSupport(false);
-        }
+        initDrawer();
 
         ViewTreeObserver vto = drawerViewGroup.getViewTreeObserver();
 
@@ -481,6 +426,65 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
                 }
             }
         });
+    }
+
+    public void initDrawer() {
+        if (deviceSupportMultiPane()) {
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN, drawerViewGroup);
+            DrawerLayout.LayoutParams params = new DrawerLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            params.setMargins((int) (320 * displayDensity), 0, 0, 0);
+            contentViewGroup.setLayoutParams(params);
+            drawerLayout.setScrimColor(Color.TRANSPARENT);
+            drawerLayout.openDrawer(drawerViewGroup);
+            drawerLayout.setMultipaneSupport(true);
+            //drawerLayout.requestDisallowInterceptTouchEvent(true);
+        } else {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+
+            // don't use the constructor with toolbar, or onOptionsItemSelected() method will not be called
+            actionBarToggle = new ActionBarDrawerToggle(this, drawerLayout/*, toolbar*/, R.string.nothing, R.string.nothing) {
+
+                public void onDrawerClosed(View view) {
+                    invalidateOptionsMenu();
+
+                    drawerTouchLocked = false;
+
+                    if (drawerStateListener != null)
+                        drawerStateListener.onDrawerClosed(view);
+                }
+
+                public void onDrawerOpened(View drawerView) {
+                    invalidateOptionsMenu();
+
+                    if (drawerStateListener != null)
+                        drawerStateListener.onDrawerOpened(drawerView);
+                }
+
+                @Override
+                public void onDrawerSlide(View drawerView, float slideOffset) {
+                    // if user wants the sliding arrow it compare
+                    if (slidingDrawerEffect)
+                        super.onDrawerSlide(drawerView, slideOffset);
+                    else
+                        super.onDrawerSlide(drawerView, 0);
+
+                    if (drawerStateListener != null)
+                        drawerStateListener.onDrawerSlide(drawerView, slideOffset);
+                }
+
+                @Override
+                public void onDrawerStateChanged(int newState) {
+                    super.onDrawerStateChanged(newState);
+
+                    if (drawerStateListener != null)
+                        drawerStateListener.onDrawerStateChanged(newState);
+                }
+            };
+
+            drawerLayout.setDrawerListener(actionBarToggle);
+            drawerLayout.setMultipaneSupport(false);
+        }
     }
 
     private void initHeaderAndMenu(Bundle savedInstanceState) {
