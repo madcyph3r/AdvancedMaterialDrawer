@@ -35,6 +35,11 @@ public class HeadItem100StaticBackgroundActivity extends MaterialNavigationDrawe
     }
 
     @Override
+    protected boolean finishActivityOnNewIntent() {
+        return false;
+    }
+
+    @Override
     public void init(Bundle savedInstanceState) {
 
         drawer = this;
@@ -53,6 +58,11 @@ public class HeadItem100StaticBackgroundActivity extends MaterialNavigationDrawe
         // set static background
         Drawable background = getResources().getDrawable( R.drawable.mat5 );
         setDrawerHeadItemBackground(background, true);
+    }
+
+    @Override
+    protected int getNewIntentRequestCode(Class clazz) {
+        return 0;
     }
 
     private MaterialHeadItem getHeadItem(int pos) {

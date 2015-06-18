@@ -26,6 +26,11 @@ public class ClosePrevDrawerActivity_Activity extends MaterialNavigationDrawer {
     }
 
     @Override
+    protected int getNewIntentRequestCode(Class clazz) {
+        return 0;
+    }
+
+    @Override
     public int headerType() {
         // set type. you get the available constant from MaterialNavigationDrawer class
         return MaterialNavigationDrawer.DRAWERHEADER_NO_HEADER;

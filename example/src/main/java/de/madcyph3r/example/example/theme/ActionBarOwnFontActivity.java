@@ -28,6 +28,11 @@ public class ActionBarOwnFontActivity extends MaterialNavigationDrawer {
     }
 
     @Override
+    protected boolean finishActivityOnNewIntent() {
+        return false;
+    }
+
+    @Override
     public void init(Bundle savedInstanceState) {
 
         Bundle bundle = new Bundle();
@@ -60,6 +65,11 @@ public class ActionBarOwnFontActivity extends MaterialNavigationDrawer {
         else
             setActionBarTitle("MyTitle"); // not really needed here, because this example has always a current section
 
+    }
+
+    @Override
+    protected int getNewIntentRequestCode(Class clazz) {
+        return 0;
     }
 
     @Override

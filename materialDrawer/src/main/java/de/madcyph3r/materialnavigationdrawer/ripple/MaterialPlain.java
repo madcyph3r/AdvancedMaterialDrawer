@@ -40,7 +40,7 @@ public class MaterialPlain extends FrameLayout {
         a.recycle();
         try {
             if (normal == null) normal = getResources().getDrawable(R.drawable.normal);
-            if (press == null) press = getResources().getDrawable(R.drawable.pressfill);
+            if (press == null) press = getResources().getDrawable(R.drawable.divider);
             setBackground(normal);
             requestLayout();
         } catch (Resources.NotFoundException e) {

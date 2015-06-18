@@ -31,6 +31,16 @@ public class MyThemeActivity extends MaterialNavigationDrawer {
     }
 
     @Override
+    protected boolean finishActivityOnNewIntent() {
+        return false;
+    }
+
+    @Override
+    protected int getNewIntentRequestCode(Class clazz) {
+        return 0;
+    }
+
+    @Override
     public void init(Bundle savedInstanceState) {
 
         Bundle bundle = new Bundle();
@@ -51,6 +61,7 @@ public class MyThemeActivity extends MaterialNavigationDrawer {
         MaterialSection instruction = this.newSection("Instruction", fragmentInstruction , false, menu);
         instruction.setFragmentTitle("My Theme");
         this.newLabel("Label", false, menu);
+        this.newDevisor(menu);
         this.newSection("Section 1", new FragmentDummy(), false, menu).setSectionColor(Color.parseColor("#ff0000"));
         this.newSection("Section 2", new FragmentDummy(), false, menu);
 

@@ -12,6 +12,6 @@
     <dimen name="labelSize">14sp</dimen>
 
     <!-- match_parent = -1dp / wrap_content = -2dp -->
-    <dimen name="drawerWidth">-1dp</dimen>
+    <dimen name="drawerWidth">100dp</dimen>
 
 </resources>

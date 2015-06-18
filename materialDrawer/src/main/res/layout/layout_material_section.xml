@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<de.madcyph3r.materialnavigationdrawer.ripple.MaterialRippleLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/section_ripple"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:mrl_rippleColor="#000000"
+    app:mrl_rippleHover="true"
+    app:mrl_rippleOverlay="true">
+
+    <include layout="@layout/inside_section" />
+</de.madcyph3r.materialnavigationdrawer.ripple.MaterialRippleLayout>

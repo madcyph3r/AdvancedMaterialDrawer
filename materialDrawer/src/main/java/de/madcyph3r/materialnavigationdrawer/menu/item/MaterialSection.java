@@ -219,16 +219,25 @@ public class MaterialSection<Fragment, customTextView extends TextView> implemen
         this.text.setText(title);
     }
 
-    public void setIcon(Drawable icon) {
-        this.icon.setImageDrawable(icon);
-        if (fillIconColor)
-            this.icon.setColorFilter(iconColor);
+    public void setIcon(Drawable drawbleicon) {
+        if (this.icon != null) {
+            this.icon.setImageDrawable(drawbleicon);
+            if (fillIconColor)
+                this.icon.setColorFilter(iconColor);
+
+            this.icon.setVisibility(View.VISIBLE);
+        }
+
     }
 
-    public void setIcon(Bitmap icon) {
-        this.icon.setImageBitmap(icon);
-        if (fillIconColor)
-            this.icon.setColorFilter(iconColor);
+    public void setIcon(Bitmap drawbleicon) {
+        if (this.icon != null) {
+            this.icon.setImageBitmap(drawbleicon);
+            if (fillIconColor)
+                this.icon.setColorFilter(iconColor);
+
+            this.icon.setVisibility(View.VISIBLE);
+        }
     }
 
     public void setTarget(Fragment target) {
