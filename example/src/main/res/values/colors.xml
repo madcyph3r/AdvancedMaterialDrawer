@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="selected">#824986</color>
+    <color name="dividerMyColor">#6d6a69</color>
 </resources>

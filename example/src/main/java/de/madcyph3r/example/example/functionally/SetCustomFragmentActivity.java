@@ -26,6 +26,11 @@ public class SetCustomFragmentActivity extends MaterialNavigationDrawer {
     }
 
     @Override
+    protected boolean finishActivityOnNewIntent() {
+        return false;
+    }
+
+    @Override
     public void init(Bundle savedInstanceState) {
 
         drawer = this;
@@ -59,5 +64,10 @@ public class SetCustomFragmentActivity extends MaterialNavigationDrawer {
 
         // set custom fragment
         this.setCustomFragment(fragmentInstruction, "Custom Fragment Instruction");
+    }
+
+    @Override
+    protected int getNewIntentRequestCode(Class clazz) {
+        return 0;
     }
 }

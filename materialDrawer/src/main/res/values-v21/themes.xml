@@ -17,6 +17,8 @@
         <item name="actionBarOverlay">false</item>
         <item name="actionBarOverlayAlpha">1.0</item>
         <item name="drawerActionBarStyle">@null</item>
+        <item name="dividerStrokeWidth">1dp</item>
+        <item name="dividerColor">@drawable/divider</item>
     </style>
 
     <style name="MaterialNavigationDrawerTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
@@ -35,6 +37,8 @@
         <item name="actionBarOverlay">false</item>
         <item name="actionBarOverlayAlpha">1.0</item>
         <item name="drawerActionBarStyle">@null</item>
+        <item name="dividerStrokeWidth">1dp</item>
+        <item name="dividerColor">@drawable/divider</item>
     </style>
 
     <style name="MaterialNavigationDrawerTheme.Light.DarkActionBar" parent="Theme.AppCompat.Light.NoActionBar">
@@ -55,6 +59,8 @@
         <item name="actionBarOverlay">false</item>
         <item name="actionBarOverlayAlpha">1.0</item>
         <item name="drawerActionBarStyle">@null</item>
+        <item name="dividerStrokeWidth">1dp</item>
+        <item name="dividerColor">@drawable/divider</item>
     </style>
 
     <style name="MaterialNavigationDrawerTheme.Light.TranslucentKitKatStatusBar" parent="MaterialNavigationDrawerTheme.Light" />

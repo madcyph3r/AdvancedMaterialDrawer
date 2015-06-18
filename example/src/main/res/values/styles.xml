@@ -38,6 +38,8 @@
         <item name="sectionStyle">@style/MySectionTheme</item>
         <item name="accountStyle">@style/MyMaterialAccountTheme</item>
         <item name="multipaneSupport">false</item>
+        <item name="dividerStrokeWidth">1dp</item>
+        <item name="dividerColor">@drawable/divider_my_theme</item>
     </style>
 
     <style name="MySectionTheme" >

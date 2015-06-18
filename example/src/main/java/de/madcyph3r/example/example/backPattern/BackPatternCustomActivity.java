@@ -28,6 +28,16 @@ public class BackPatternCustomActivity extends MaterialNavigationDrawer {
     }
 
     @Override
+    protected boolean finishActivityOnNewIntent() {
+        return false;
+    }
+
+    @Override
+    protected int getNewIntentRequestCode(Class clazz) {
+        return 0;
+    }
+
+    @Override
     public void init(Bundle savedInstanceState) {
 
         Bundle bundle = new Bundle();
