@@ -25,7 +25,7 @@ Big thanks to neokree, without him this library would not exist.
 - Toolbar overflow support
 - More: Setting your own Fragment on Start, etc
 
-### Example APK (Lib-Version [current git head]) 
+### Example APK (Lib-Version [current git head, pre preview of 1.2.0]) 
 https://github.com/madcyph3r/AdvancedMaterialDrawer/raw/master/example-release.apk
 
 or on the play store (Lib-Version 1.1.3) 
