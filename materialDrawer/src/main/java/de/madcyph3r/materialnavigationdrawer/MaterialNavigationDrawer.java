@@ -619,7 +619,6 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
                     else
                         addSection((MaterialSection) itemList.get(i));
                 } else if (itemList.get(i) instanceof MaterialCustomSection) {
-                    System.out.println("aaaaaaaaaaaaaa + 300");
                     //MaterialCustomSection section = (MaterialCustomSection) itemList.get(i);
                     /*if (section.isBottom())
                         addBottomSection((MaterialSection) itemList.get(i));
