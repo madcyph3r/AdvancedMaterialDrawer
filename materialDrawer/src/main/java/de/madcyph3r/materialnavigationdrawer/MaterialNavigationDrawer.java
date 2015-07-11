@@ -55,6 +55,7 @@ import de.madcyph3r.materialnavigationdrawer.listener.MaterialHeadItemChangeList
 import de.madcyph3r.materialnavigationdrawer.head.MaterialHeadItem;
 import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionChangeListener;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
+import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialCustomSection;
 import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialDevisor;
 import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialLabel;
 import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
@@ -617,6 +618,13 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
                         addBottomSection((MaterialSection) itemList.get(i));
                     else
                         addSection((MaterialSection) itemList.get(i));
+                } else if (itemList.get(i) instanceof MaterialCustomSection) {
+                    System.out.println("aaaaaaaaaaaaaa + 300");
+                    //MaterialCustomSection section = (MaterialCustomSection) itemList.get(i);
+                    /*if (section.isBottom())
+                        addBottomSection((MaterialSection) itemList.get(i));
+                    else*/
+                    addCutomSection((MaterialCustomSection) itemList.get(i));
                 } else if (itemList.get(i) instanceof MaterialDevisor) {
                     MaterialDevisor devisor = (MaterialDevisor) itemList.get(i);
                     if (devisor.isBottom())
@@ -1117,6 +1125,12 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
         items.addView(section.getView(), params);
     }
 
+    private void addCutomSection(MaterialCustomSection section) {
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (48 * displayDensity));
+        items.addView(section.getView(), params);
+    }
+
+
     private void addBottomSection(MaterialSection section) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (48 * displayDensity));
         bottomSections.addView(section.getView(), params);
@@ -1315,6 +1329,24 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
         return newDevisor(menu, menu.getItems().size());
     }
 
+    // create Custom Section
+    public MaterialCustomSection newCustomSection(int resID, MaterialMenu menu, int position, boolean refreshMenu) {
+        MaterialCustomSection section = new MaterialCustomSection(this, resID);
+        menu.addItem(section, position);
+
+        if (refreshMenu)
+            reloadMenu();
+
+        return section;
+    }
+
+    public MaterialCustomSection newCustomSection(int resID, MaterialMenu menu, boolean refreshMenu) {
+        return newCustomSection(resID, menu, menu.getItems().size(), refreshMenu);
+    }
+
+    public MaterialCustomSection newCustomSection(int resID, MaterialMenu menu) {
+        return newCustomSection(resID, menu, menu.getItems().size(), false);
+    }
 
     // create items for a headItem
     public MaterialSection newSection(String title, Drawable icon, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {

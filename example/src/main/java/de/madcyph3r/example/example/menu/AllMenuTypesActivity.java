@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import de.madcyph3r.example.DummyActivity;
@@ -72,6 +74,8 @@ public class AllMenuTypesActivity extends MaterialNavigationDrawer {
         // section with own in click listener
         this.newLabel("label", false, menu);
 
+        this.newCustomSection(R.layout.custom_section, menu);
+
         MaterialSection sectionListener = this.newSection("On Click listener", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), false, menu);
         sectionListener.setOnClickListener(new MaterialSectionOnClickListener() {
             @Override
@@ -102,4 +106,18 @@ public class AllMenuTypesActivity extends MaterialNavigationDrawer {
         this.addHeadItem(headItem);
 
     }
+
+    // to handle the custom section
+    @Override
+    public void afterInit(Bundle savedInstanceState) {
+        CheckBox cb = (CheckBox)findViewById(R.id.custom_layout_checkBox);
+        cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                Toast.makeText(drawer, "Checked: " + isChecked, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }
