@@ -37,6 +37,11 @@ Other:
 - Many many more: Setting your own Fragment on Start, etc. Play with the example app ;).
 - 
 
+### Live Demo
+```html
+<iframe src="https://appetize.io/embed/dqmyynvjanx9hydtq4a4vjbkzw?device=nexus5&scale=100&autoplay=false&orientation=portrait&deviceColor=black" width="400px" height="795px" frameborder="0" scrolling="no"></iframe>
+```		
+
 ### Example APK (Lib-Version 1.1.4 (13.07.15)) 
 https://github.com/madcyph3r/AdvancedMaterialDrawer/raw/master/example-release.apk
 
