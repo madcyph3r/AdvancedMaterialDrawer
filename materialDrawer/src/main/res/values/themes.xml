@@ -75,7 +75,8 @@
         <item name="sectionColorIcon">#FFF</item>
         <item name="sectionColorText">#FFF</item>
         <item name="sectionColorNotification">#FFF</item>
-        <item name="sectionBackgroundColorPressed">#16FFFFFF</item>
+        <!-- Do not show this color [default] -->
+        <item name="sectionOnPressHighLightColor">#00FFFFFF</item>
         <item name="sectionBackgroundColorSelected">#1AFFFFFF</item>
         <item name="sectionBackgroundColor">#00FFFFFF</item>
         <item name="sectionRippleColor">#fafafa</item>
@@ -85,8 +86,9 @@
         <item name="sectionColorIcon">#000000</item>
         <item name="sectionColorText">#000000</item>
         <item name="sectionColorNotification">#000000</item>
-        <item name="sectionBackgroundColorPressed">#16000000</item>
-        <item name="sectionBackgroundColorSelected">#0A000000</item>
+        <!-- Do not show this color [default] -->
+        <item name="sectionOnPressHighLightColor">#00000000</item>
+        <item name="sectionBackgroundColorSelected">#1A000000</item>
         <item name="sectionBackgroundColor">#00FFFFFF</item>
         <item name="sectionRippleColor">#8C8C8C</item>
     </style>

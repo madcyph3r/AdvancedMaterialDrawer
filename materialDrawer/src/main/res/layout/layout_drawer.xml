@@ -83,6 +83,7 @@
                 android:layout_toStartOf="@+id/second_head_item_photo"
                 android:layout_marginRight="16dp" />
 
+
             <LinearLayout
                 android:id="@+id/items"
                 android:layout_width="match_parent"

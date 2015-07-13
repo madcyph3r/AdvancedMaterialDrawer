@@ -14,6 +14,5 @@ public class DummyActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.dummyactivity);
-
     }
 }

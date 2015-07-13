@@ -28,7 +28,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -108,8 +107,8 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
     private LinearLayout customDrawerHeader;
 
     // global vars view menu
-    private LinearLayout items;
-    private LinearLayout bottomSections;
+    private LinearLayout itemSections;
+    private LinearLayout itemBottomSections;
 
     // global vars headItem
     private List<MaterialHeadItem> headItemManager;
@@ -357,8 +356,8 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
             customDrawerHeader = (LinearLayout) this.findViewById(R.id.drawer_header);
         drawerViewGroup.setBackgroundColor(drawerColor);
         // set items
-        items = (LinearLayout) this.findViewById(R.id.items);
-        bottomSections = (LinearLayout) this.findViewById(R.id.bottom_sections);
+        itemSections = (LinearLayout) this.findViewById(R.id.items);
+        itemBottomSections = (LinearLayout) this.findViewById(R.id.bottom_sections);
     }
 
 
@@ -607,8 +606,8 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
         }
 
         if (loadMenu) {
-            items.removeAllViews();
-            bottomSections.removeAllViews();
+            itemSections.removeAllViews();
+            itemBottomSections.removeAllViews();
             // create Menu
             List<Object> itemList = currentMenu.getItems();
             for (int i = 0; i < itemList.size(); i++) {
@@ -619,11 +618,7 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
                     else
                         addSection((MaterialSection) itemList.get(i));
                 } else if (itemList.get(i) instanceof MaterialCustomSection) {
-                    //MaterialCustomSection section = (MaterialCustomSection) itemList.get(i);
-                    /*if (section.isBottom())
-                        addBottomSection((MaterialSection) itemList.get(i));
-                    else*/
-                    addCutomSection((MaterialCustomSection) itemList.get(i));
+                    addCustomSection((MaterialCustomSection) itemList.get(i));
                 } else if (itemList.get(i) instanceof MaterialDevisor) {
                     MaterialDevisor devisor = (MaterialDevisor) itemList.get(i);
                     if (devisor.isBottom())
@@ -707,8 +702,8 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
 
     private void loadHeadItemMenu() {
         // remove all section views
-        items.removeAllViews();
-        bottomSections.removeAllViews();
+        itemSections.removeAllViews();
+        itemBottomSections.removeAllViews();
 
         // show current menu
         List<Object> sectionList = currentMenu.getItems();
@@ -1111,28 +1106,28 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
 
     private void addLabel(MaterialLabel label) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (48 * displayDensity));
-        items.addView(label.getView(), params);
+        itemSections.addView(label.getView(), params);
     }
 
     private void addBottomLabel(MaterialLabel label) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (48 * displayDensity));
-        bottomSections.addView(label.getView(), params);
+        itemBottomSections.addView(label.getView(), params);
     }
 
     private void addSection(MaterialSection section) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (48 * displayDensity));
-        items.addView(section.getView(), params);
+        itemSections.addView(section.getView(), params);
     }
 
-    private void addCutomSection(MaterialCustomSection section) {
+    private void addCustomSection(MaterialCustomSection section) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (48 * displayDensity));
-        items.addView(section.getView(), params);
+        itemSections.addView(section.getView(), params);
     }
 
 
     private void addBottomSection(MaterialSection section) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (48 * displayDensity));
-        bottomSections.addView(section.getView(), params);
+        itemBottomSections.addView(section.getView(), params);
     }
 
     /**
@@ -1144,10 +1139,16 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
         View bar = new View(this);
         // todo get from theme
 
-        bar.setBackground(dividerColor);
+        if (android.os.Build.VERSION.SDK_INT >= 16){
+            bar.setBackground(dividerColor);
+        }
+        else{
+            bar.setBackgroundDrawable(dividerColor);
+        }
+
         //bar.setBackgroundResource(dividerColor);
         bar.setLayoutParams(separator);
-        items.addView(bar);
+        itemSections.addView(bar);
     }
 
     private void addDevisorBottom() {
@@ -2009,6 +2010,8 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
 
     @Override
     public void onClick(final MaterialSection section, View view) {
+
+
         if (!drawerTouchLocked) {
             if (section != currentSection) {
                 if (section.getTarget() == MaterialSection.TARGET_FRAGMENT) {

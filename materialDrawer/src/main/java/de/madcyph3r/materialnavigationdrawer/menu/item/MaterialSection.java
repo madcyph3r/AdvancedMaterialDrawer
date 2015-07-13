@@ -355,6 +355,8 @@ public class MaterialSection<Fragment, customTextView extends TextView> implemen
 
     @Override
     public void onClick(View v) {
+
+        //isSelected = true;
         //isSelected = true;
         //view.setBackgroundColor(colorSelected);
 
