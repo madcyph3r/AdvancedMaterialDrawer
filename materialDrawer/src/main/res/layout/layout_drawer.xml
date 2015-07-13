@@ -85,7 +85,7 @@
 
 
             <LinearLayout
-                android:id="@+id/items"
+                android:id="@+id/sections"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -95,6 +95,7 @@
                 android:orientation="vertical">
 
             </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/background_gradient"

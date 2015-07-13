@@ -35,8 +35,8 @@ public class MaterialSection<Fragment, customTextView extends TextView> implemen
     private customTextView text;
     private customTextView notifications;
     private ImageView icon;
-    private MaterialSectionOnClickListener listener;
-    private MaterialSectionChangeListener changeListener;
+    private MaterialSectionOnClickListener sectionListener;
+    private MaterialSectionChangeListener sectionChangeListener;
 
     private boolean isSelected;
     private int targetType;
@@ -83,7 +83,7 @@ public class MaterialSection<Fragment, customTextView extends TextView> implemen
     }
 
     @SuppressLint("WrongViewCast")
-    private void init(Context ctx, boolean hasIcon, int target, boolean bottom, MaterialSectionChangeListener changeListener, boolean fullWidthIcon) {
+    private void init(Context ctx, boolean hasIcon, int target, boolean bottom, MaterialSectionChangeListener sectionChangeListener, boolean fullWidthIcon) {
 
         int currentApiVersion = android.os.Build.VERSION.SDK_INT;
         /**
@@ -99,7 +99,7 @@ public class MaterialSection<Fragment, customTextView extends TextView> implemen
          */
         fragmentTitle = null;
 
-        this.changeListener = changeListener;
+        this.sectionChangeListener = sectionChangeListener;
         this.bottom = bottom;
         this.hasIcon = hasIcon;
 
@@ -131,23 +131,23 @@ public class MaterialSection<Fragment, customTextView extends TextView> implemen
         int rippleColor = values.getColor(R.styleable.MaterialSection_sectionRippleColor, 0x16000000);
 
         if (view.findViewById(R.id.section_ripple) instanceof MaterialRippleLayout) {
-            MaterialRippleLayout ilayout = (MaterialRippleLayout) view.findViewById(R.id.section_ripple);
-            ilayout.setRippleColor(rippleColor);
-            ilayout.setOnClickListener(this);
-            ilayout.setOnTouchListener(this);
+            MaterialRippleLayout rippleLayout = (MaterialRippleLayout) view.findViewById(R.id.section_ripple);
+            rippleLayout.setRippleColor(rippleColor);
+            rippleLayout.setOnClickListener(this);
+            rippleLayout.setOnTouchListener(this);
         } else if (view.findViewById(R.id.section_ripple) instanceof MaterialRippleLayoutNineOld) {
-            MaterialRippleLayoutNineOld ilayout = (MaterialRippleLayoutNineOld) view.findViewById(R.id.section_ripple);
-            ilayout.setRippleColor(rippleColor);
-            ilayout.setOnClickListener(this);
-            ilayout.setOnTouchListener(this);
+            MaterialRippleLayoutNineOld rippleLayout = (MaterialRippleLayoutNineOld) view.findViewById(R.id.section_ripple);
+            rippleLayout.setRippleColor(rippleColor);
+            rippleLayout.setOnClickListener(this);
+            rippleLayout.setOnTouchListener(this);
         } else if (view.findViewById(R.id.section_ripple) instanceof MaterialPlain) {
-            MaterialPlain ilayout = (MaterialPlain) view.findViewById(R.id.section_ripple);
-            ilayout.setOnClickListener(this);
-            ilayout.setOnTouchListener(this);
+            MaterialPlain rippleLayout = (MaterialPlain) view.findViewById(R.id.section_ripple);
+            rippleLayout.setOnClickListener(this);
+            rippleLayout.setOnTouchListener(this);
         } else if (view.findViewById(R.id.section_relative_layout) instanceof RelativeLayout) {
-            RelativeLayout ilayout = (RelativeLayout) view.findViewById(R.id.section_relative_layout);
-            ilayout.setOnClickListener(this);
-            ilayout.setOnTouchListener(this);
+            RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.section_relative_layout);
+            relativeLayout.setOnClickListener(this);
+            relativeLayout.setOnTouchListener(this);
         }
 
         //colorPressed = values.getColor(R.styleable.MaterialSection_sectionBackgroundColorPressed, 0x16000000);
@@ -203,7 +203,7 @@ public class MaterialSection<Fragment, customTextView extends TextView> implemen
     }*/
 
     public void setOnClickListener(final MaterialSectionOnClickListener listener) {
-        this.listener = listener;
+        this.sectionListener = listener;
     }
 
     public View getView() {
@@ -356,20 +356,13 @@ public class MaterialSection<Fragment, customTextView extends TextView> implemen
     @Override
     public void onClick(View v) {
 
-        //isSelected = true;
-        //isSelected = true;
-        //view.setBackgroundColor(colorSelected);
+        Log.d("onClick test", "onCLick");
 
-        /*if (hasSectionColor) {
-            text.setTextColor(iconColor);
-        }*/
-
-        if (listener != null) {
+        if (sectionListener != null) {
             final MaterialSection section = this;
-            //view.playSoundEffect(android.view.SoundEffectConstants.CLICK);
-            changeListener.onBeforeChangeSection(this);
-            listener.onClick(section, v);
-            changeListener.onAfterChangeSection(this);
+            sectionChangeListener.onBeforeChangeSection(this);
+            sectionListener.onClick(section, v);
+            sectionChangeListener.onAfterChangeSection(this);
         }
     }
 
@@ -395,17 +388,17 @@ public class MaterialSection<Fragment, customTextView extends TextView> implemen
      */
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        int a = event.getActionMasked();
-        switch (a) {
+        int actionEvent = event.getActionMasked();
+        switch (actionEvent) {
             case MotionEvent.ACTION_DOWN:
                 view.setBackgroundColor(colorOnPressHighlight);
-                return true;
+                return false;
             case MotionEvent.ACTION_CANCEL:
                 if (isSelected)
                     view.setBackgroundColor(colorSelected);
                 else
                     view.setBackgroundColor(colorUnpressed);
-                return true;
+                return false;
             case MotionEvent.ACTION_UP:
                 checkrefresh();
                 return false;

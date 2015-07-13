@@ -356,7 +356,7 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
             customDrawerHeader = (LinearLayout) this.findViewById(R.id.drawer_header);
         drawerViewGroup.setBackgroundColor(drawerColor);
         // set items
-        itemSections = (LinearLayout) this.findViewById(R.id.items);
+        itemSections = (LinearLayout) this.findViewById(R.id.sections);
         itemBottomSections = (LinearLayout) this.findViewById(R.id.bottom_sections);
     }
 
@@ -1404,7 +1404,8 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
 
 
     public MaterialSection newSection(String title, Drawable icon, Intent target, boolean bottom, MaterialMenu menu, int position, boolean refreshMenu) {
-        MaterialSection section = new MaterialSection<Fragment, customTextView>(this, true, MaterialSection.TARGET_ACTIVITY, bottom, this, false);
+        MaterialSection section = new MaterialSection<Fragment, customTextView>(this, true, MaterialSection.TARGET_ACTIVITY, bottom, this, false);;
+
         section.setOnClickListener(this);
         section.setIcon(icon);
         section.setTitle(title);
