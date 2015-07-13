@@ -7,28 +7,40 @@ AdvancedMaterialDrawer
 
 A Gmail-like Material Drawer implementation 
 
-Based on neokree's [MaterialDrawer](https://github.com/neokree/MaterialNavigationDrawer) library.
+Based on neokree's [MaterialDrawer](https://github.com/neokree/MaterialNavigationDrawer) library, but the are not the same. I have made many improvments, changes and added a lot of new feature.
 Big thanks to neokree, without him this library would not exist.
 
 
 ### Main Features:
+Head Item (Account):
 - Unlimited Head-Items (Accounts), tested with 100 Head-Items
-- Every Head-Item can have its own Menu
 - Head-Item listeners for Avatar or Background taps
-- Adding and removing Head-Items and Menu-Items at runtime
-- Own theme
-- Labels
-- Normal Sections (with Fragment/Activty start or own onClick listener)
-- Bottom-Sections
-- Drawer below the toolbar
-- Tablet support
-- Toolbar overflow support
-- More: Setting your own Fragment on Start, etc
+- Adding and removing Head-Items at runtime
+- Every Head-Item can have its own menu
+- Create your own Head-Item style (Custom Head-Item)
+- Or no Head-Item, if you need only the menu
 
-### Example APK (Lib-Version [current git head, pre preview of 1.2.0]) 
+Menu:
+- Menu with unlimit Menu-Items
+- Adding and removing Menu-Items at runtime
+- Available Menu-items:
+  - Labels
+  - Normal Sections (with Fragment/Activty start or own onClick listener)
+  - Bottom-Sections
+  - Custom Sections !!! (add your own section, like a checkbox etc.) see screenshot 2  
+
+Other:
+- Drawer can be over and below the toolbar
+- Create your own theme
+- Tablet support
+- Toolbar overflow support, so a image can be your background. see screenshot 5
+- Many many more: Setting your own Fragment on Start, etc. Play with the example app ;).
+- 
+
+### Example APK (Lib-Version 1.1.4 (13.07.15)) 
 https://github.com/madcyph3r/AdvancedMaterialDrawer/raw/master/example-release.apk
 
-or on the play store (Lib-Version 1.1.3) 
+or on the play store (Lib-Version 1.1.4 (13.07.15)) 
 
 <a href="https://play.google.com/store/apps/details?id=de.madcyph3r.MaterialDrawer">
   <img alt="Android app on Google Play" src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
@@ -41,7 +53,7 @@ repositories {
 }
 
 dependencies {
-    compile 'de.madcyph3r:materialDrawer:1.1.3@aar'
+    compile 'de.madcyph3r:materialDrawer:1.1.4@aar'
 }
 ```
 
