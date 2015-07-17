@@ -148,7 +148,6 @@ Please look in the examples, for the code changes. Then edit your code to the ne
 - A Wiki with some Introduction will come soon.
 
 ### Screenshots
-**Info: The statusbar is now semi-transparent on lollipop with the latest snapshot. New screenshot will come, with the new release.**
 
 <img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_1.png" alt="screenshot" width="150px" height="auto" />
 
