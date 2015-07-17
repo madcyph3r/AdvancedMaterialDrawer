@@ -38,7 +38,7 @@ Menu:
     - with and without icon
     - with notification number
   - Only Icon
-    - an call new fragment, activity or implements own onClick
+    - can call new fragment, activity or implements own onClick
   - Bottom-Sections
     - same as normal section
   - Custom Sections ! (add your own section implementation, like a checkbox etc.) see screenshot 5
