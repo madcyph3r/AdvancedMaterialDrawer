@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<de.madcyph3r.materialnavigationdrawer.ripple.MaterialRippleLayoutNineOld xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/section_ripple"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:mrl_rippleColor="#000000"
+    app:mrl_rippleHover="true"
+    app:mrl_rippleOverlay="true">
+
+
+    <RelativeLayout
+        android:id="@+id/section_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/section_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/sectionIconBannerHeight"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:scaleType="center" />
+
+        <TextView
+            android:id="@+id/section_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/section_notification"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+</de.madcyph3r.materialnavigationdrawer.ripple.MaterialRippleLayoutNineOld>

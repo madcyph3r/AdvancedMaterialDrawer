@@ -25,8 +25,6 @@ public class FragmentInstruction extends Fragment {
                     " Then choose the category and the example, which you want to see.";
         }
 
-
-
         TextView text = new TextView(this.getActivity());
         text.setText(instruction);
         text.setGravity(Gravity.CENTER);

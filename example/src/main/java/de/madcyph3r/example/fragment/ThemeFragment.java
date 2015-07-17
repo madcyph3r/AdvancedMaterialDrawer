@@ -28,12 +28,10 @@ import de.madcyph3r.example.example.theme.DarkThemeActivity;
 import de.madcyph3r.example.example.theme.KitKatTranslucentStatusBarActivity;
 import de.madcyph3r.example.example.theme.LightThemeActivity;
 import de.madcyph3r.example.example.theme.MyThemeActivity;
+import de.madcyph3r.example.example.theme.OnlyIconsActivity;
 import de.madcyph3r.example.example.theme.OwnDrawerWidthActivity;
 import de.madcyph3r.example.example.theme.UniqueToolbarColorActivity;
 
-/**
- * Created by marc on 12.03.2015.
- */
 public class ThemeFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
@@ -62,6 +60,7 @@ public class ThemeFragment extends Fragment {
         content.add(new ExampleData("KitKat Translucent Statusbar", KitKatTranslucentStatusBarActivity.class));
         content.add(new ExampleData("Actionbar Own Font", ActionBarOwnFontActivity.class));
         content.add(new ExampleData("Own Drawer Width", OwnDrawerWidthActivity.class));
+        content.add(new ExampleData("Only Icons Menu", OnlyIconsActivity.class));
 
         final ParallaxRecyclerAdapter<ExampleData> adapter = new ParallaxRecyclerAdapter<>(content);
 

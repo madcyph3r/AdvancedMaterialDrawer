@@ -24,22 +24,11 @@ import de.madcyph3r.example.R;
 import de.madcyph3r.example.data.ExampleData;
 import de.madcyph3r.example.example.drawerTypes.MultiPaneSupportActivity;
 import de.madcyph3r.example.example.drawerTypes.MultiPaneSupportBelowToolbarActivity;
-import de.madcyph3r.example.example.headerTypes.CustomHeaderActivity;
-import de.madcyph3r.example.example.headerTypes.CustomHeaderBelowToolbarActivity;
-import de.madcyph3r.example.example.headerTypes.CustomHeaderCustomHeightActivity;
-import de.madcyph3r.example.example.headerTypes.HeadItemFiveActivity;
-import de.madcyph3r.example.example.headerTypes.HeadItemOneActivity;
 import de.madcyph3r.example.example.headerTypes.HeadItemThreeActivity;
-import de.madcyph3r.example.example.headerTypes.ImageHeaderActivity;
-import de.madcyph3r.example.example.headerTypes.ImageHeaderBelowToolbarActivity;
-import de.madcyph3r.example.example.headerTypes.ImageHeaderCustomHeightActivity;
 import de.madcyph3r.example.example.headerTypes.NoHeaderActivity;
 import de.madcyph3r.example.example.headerTypes.NoHeaderBelowToolbarActivity;
 import de.madcyph3r.example.example.theme.OwnDrawerWidthActivity;
 
-/**
- * Created by marc on 12.03.2015.
- */
 public class DrawerTypesFragment extends Fragment {
 
     private RecyclerView mRecyclerView;

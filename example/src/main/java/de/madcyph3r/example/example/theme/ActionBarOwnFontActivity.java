@@ -11,60 +11,19 @@ import de.madcyph3r.example.R;
 import de.madcyph3r.example.example.FragmentDummy;
 import de.madcyph3r.example.example.FragmentInstruction;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
+import de.madcyph3r.materialnavigationdrawer.activity.MaterialNavNoHeaderActivity;
+import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionChangeListener;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
-import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
+import de.madcyph3r.materialnavigationdrawer.menu.item.section.MaterialItemSection;
+import de.madcyph3r.materialnavigationdrawer.menu.item.section.MaterialItemSectionFragment;
 
-/**
- * Created by marc on 10.03.2015.
- */
-public class ActionBarOwnFontActivity extends MaterialNavigationDrawer {
+public class ActionBarOwnFontActivity extends MaterialNavNoHeaderActivity {
 
     MaterialNavigationDrawer drawer = null;
 
     @Override
-    public int headerType() {
-        // set type. you get the available constant from MaterialNavigationDrawer class
-        return MaterialNavigationDrawer.DRAWERHEADER_NO_HEADER;
-    }
-
-    @Override
     protected boolean finishActivityOnNewIntent() {
         return false;
-    }
-
-    @Override
-    public void init(Bundle savedInstanceState) {
-
-        Bundle bundle = new Bundle();
-        bundle.putString("instruction", "See the actionbar, it has a custom title with a custom font.");
-
-        drawer = this;
-
-        // create menu
-        MaterialMenu menu = new MaterialMenu();
-
-        //create instruction fragment
-        Fragment fragmentInstruction = new FragmentInstruction();
-        fragmentInstruction.setArguments(bundle);
-
-        // create items
-        MaterialSection instruction = this.newSection("Instruction", fragmentInstruction , false, menu);
-        instruction.setFragmentTitle("Actionbar Own Front");
-        this.newDevisor(menu);
-        this.newLabel("Label", false, menu);
-        this.newSection("Section", new FragmentDummy(), false, menu);
-
-        // set this menu
-        this.setCustomMenu(menu);
-    }
-
-    @Override
-    public void afterInit(Bundle savedInstanceState) {
-        if(getCurrentSection() != null)
-            setActionBarTitle(getCurrentSection().getTitle());
-        else
-            setActionBarTitle("MyTitle"); // not really needed here, because this example has always a current section
-
     }
 
     @Override
@@ -73,17 +32,51 @@ public class ActionBarOwnFontActivity extends MaterialNavigationDrawer {
     }
 
     @Override
-    public void onBeforeChangeSection(MaterialSection newSection) {
+    public void init(Bundle savedInstanceState) {
 
+        drawer = this;
+
+        drawer.setSectionChangeListener(new MaterialSectionChangeListener() {
+            @Override
+            public void onBeforeChangeSection(MaterialItemSection newSection) {
+
+            }
+
+            @Override
+            public void onAfterChangeSection(MaterialItemSection newSection) {
+                setActionBarTitle(getCurrentSectionFragment().getTitle());
+            }
+        });
+
+        // information text for the fragment
+        Bundle bundle = new Bundle();
+        bundle.putString("instruction", "See the actionbar, it has a custom title with a custom font.");
+
+        Fragment fragmentInstruction = new FragmentInstruction();
+        fragmentInstruction.setArguments(bundle);
+
+        // create menu
+        MaterialMenu menu = new MaterialMenu();
+        menu.add(new MaterialItemSectionFragment(this, "Instruction", fragmentInstruction, "Actionbar Own Front"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 1", new FragmentDummy(), "Section 1"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 2", new FragmentDummy(), "Section 2"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 3", new FragmentDummy(), "Section 3"));
+
+        // load menu
+        this.loadMenu(menu);
+
+        // load the MaterialItemSectionFragment, from the given startIndex
+        this.loadStartFragmentFromMenu(menu);
     }
 
     @Override
-    public void onAfterChangeSection(MaterialSection newSection) {
-        if(getCurrentSection() == newSection) {
-            // change the actionbar title after every change
-            setActionBarTitle(newSection.getTitle());
-        }
+    public void afterInit(Bundle savedInstanceState) {
+        if(getCurrentSectionFragment() != null)
+            setActionBarTitle(getCurrentSectionFragment().getTitle());
+        else
+            setActionBarTitle("MyTitle"); // not really needed here, because this example has always a current section
     }
+
 
     private void setActionBarTitle(String actionBarTitle) {
         this.getSupportActionBar().setDisplayShowCustomEnabled(true);

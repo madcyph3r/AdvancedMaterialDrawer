@@ -7,18 +7,13 @@ import android.support.v4.app.Fragment;
 import de.madcyph3r.example.example.FragmentDummy;
 import de.madcyph3r.example.example.FragmentInstruction;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
+import de.madcyph3r.materialnavigationdrawer.activity.MaterialNavNoHeaderActivity;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
-import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
+import de.madcyph3r.materialnavigationdrawer.menu.item.section.MaterialItemSectionFragment;
 
-public class NoHeaderActivity extends MaterialNavigationDrawer {
+public class NoHeaderActivity extends MaterialNavNoHeaderActivity {
 
     MaterialNavigationDrawer drawer = null;
-
-    @Override
-    public int headerType() {
-        // set type. you get the available constant from MaterialNavigationDrawer class
-        return MaterialNavigationDrawer.DRAWERHEADER_NO_HEADER;
-    }
 
     @Override
     protected boolean finishActivityOnNewIntent() {
@@ -33,30 +28,33 @@ public class NoHeaderActivity extends MaterialNavigationDrawer {
     @Override
     public void init(Bundle savedInstanceState) {
 
-        Bundle bundle = new Bundle();
-        bundle.putString("instruction", "This example has no header in the drawer. " +
-                "See the method headerType in the source code. And don't forget to call " +
-                "setCustomMenu(), to set your menu.");
-
         drawer = this;
 
-        MaterialMenu menu = new MaterialMenu();
+        // information text for the fragment
+        Bundle bundle = new Bundle();
+        bundle.putString("instruction", "This example has no header in the drawer. "+
+                "Call " +
+                "setCustomMenu(), to set your menu.");
 
-        //create instruction fragment
         Fragment fragmentInstruction = new FragmentInstruction();
         fragmentInstruction.setArguments(bundle);
 
-        // menu items
-        MaterialSection instruction = this.newSection("Instruction", fragmentInstruction , false, menu);
-        instruction.setFragmentTitle("No Header");
-        this.newDevisor(menu);
-        this.newLabel("Label", false, menu);
-        this.newSection("Section", new FragmentDummy(), false, menu);
+        // create menu
+        MaterialMenu menu = new MaterialMenu();
+        menu.add(new MaterialItemSectionFragment(this, "Instruction", fragmentInstruction, "No Header"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 1", new FragmentDummy(), "Section 1"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 2", new FragmentDummy(), "Section 2"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 3", new FragmentDummy(), "Section 3"));
 
-        // set start index
-        menu.setStartIndex(0);
+        // load menu
+        this.loadMenu(menu);
 
-        // set this menu
-        this.setCustomMenu(menu);
+        // load the MaterialItemSectionFragment, from the given startIndex
+        this.loadStartFragmentFromMenu(menu);
+    }
+
+    @Override
+    public void afterInit(Bundle savedInstanceState) {
+
     }
 }

@@ -27,14 +27,7 @@ import de.madcyph3r.example.example.listener.HeadItemOneAvatarOnClickListenerAct
 import de.madcyph3r.example.example.listener.HeadItemOneBackgroundOnClickListenerActivity;
 import de.madcyph3r.example.example.listener.HeadItemThreeChangeListenerActivity;
 import de.madcyph3r.example.example.listener.SectionChangeListenerActivity;
-import de.madcyph3r.example.example.menu.AddRemoveMenuItemsActivity;
-import de.madcyph3r.example.example.menu.AllMenuTypesActivity;
-import de.madcyph3r.example.example.menu.SectionFragmentTitleActivity;
-import de.madcyph3r.example.example.menu.StartSectionActivity;
 
-/**
- * Created by marc on 12.03.2015.
- */
 public class ListenerFragment extends Fragment {
 
     private RecyclerView mRecyclerView;

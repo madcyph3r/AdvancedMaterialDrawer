@@ -26,15 +26,8 @@ import de.madcyph3r.example.example.menu.AddRemoveMenuItemsActivity;
 import de.madcyph3r.example.example.menu.AllMenuTypesActivity;
 import de.madcyph3r.example.example.menu.SectionFragmentTitleActivity;
 import de.madcyph3r.example.example.menu.StartSectionActivity;
-import de.madcyph3r.example.example.theme.ActionBarOverlayActivity;
-import de.madcyph3r.example.example.theme.DarkThemeActivity;
-import de.madcyph3r.example.example.theme.LightThemeActivity;
-import de.madcyph3r.example.example.theme.MyThemeActivity;
-import de.madcyph3r.example.example.theme.UniqueToolbarColorActivity;
+import de.madcyph3r.example.example.theme.OnlyIconsActivity;
 
-/**
- * Created by marc on 12.03.2015.
- */
 public class MenuFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
@@ -59,6 +52,7 @@ public class MenuFragment extends Fragment {
         content.add(new ExampleData("Add And Remove Menu Items At Runtime", AddRemoveMenuItemsActivity.class));
         content.add(new ExampleData("Section With Custom Fragment Title", SectionFragmentTitleActivity.class));
         content.add(new ExampleData("Set Start Section", StartSectionActivity.class));
+        content.add(new ExampleData("Only Icons Menu", OnlyIconsActivity.class));
 
         final ParallaxRecyclerAdapter<ExampleData> adapter = new ParallaxRecyclerAdapter<>(content);
 

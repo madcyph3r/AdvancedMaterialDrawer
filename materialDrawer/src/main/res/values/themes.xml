@@ -20,7 +20,7 @@
         <item name="labelColor">#888888</item>
         <item name="sectionStyle">@style/MaterialSectionTheme</item>
         <!--<item name="subheaderStyle">@style/MaterialSubheaderTheme</item>-->
-        <item name="accountStyle">@style/MaterialAccountTheme</item>
+        <item name="headItemStyle">@style/MaterialHeadItemTheme</item>
         <item name="multipaneSupport">false</item>
         <item name="autoDarkStatusBar">true</item>
         <item name="actionBarOverlay">false</item>
@@ -37,7 +37,7 @@
         <item name="labelColor">#afafaf</item>
         <item name="sectionStyle">@style/MaterialSectionTheme.Light</item>
         <!--<item name="subheaderStyle">@style/MaterialSubheaderTheme.Light</item>-->
-        <item name="accountStyle">@style/MaterialAccountTheme.Light</item>
+        <item name="headItemStyle">@style/MaterialHeadItemTheme.Light</item>
         <item name="multipaneSupport">false</item>
         <item name="autoDarkStatusBar">true</item>
         <item name="actionBarOverlay">false</item>
@@ -55,7 +55,7 @@
         <item name="labelColor">#afafaf</item>
         <item name="drawerColor">#fafafa</item>
         <item name="sectionStyle">@style/MaterialSectionTheme.Light</item>
-        <item name="accountStyle">@style/MaterialAccountTheme.Light</item>
+        <item name="headItemStyle">@style/MaterialHeadItemTheme.Light</item>
         <item name="multipaneSupport">false</item>
         <item name="autoDarkStatusBar">true</item>
         <item name="actionBarOverlay">false</item>
@@ -101,9 +101,9 @@
           <item name="subheaderTitleColor">#000</item>
       </style>-->
 
-    <style name="MaterialAccountTheme">
-        <item name="titleColor">#FFF</item>
-        <item name="subTitleColor">#FFF</item>
+    <style name="MaterialHeadItemTheme">
+        <item name="titleColor">#FFFFFF</item>
+        <item name="subTitleColor">#FFFFFF</item>
         <item name="backgroundGradient">@drawable/black_gradient</item>
     </style>
 
@@ -115,9 +115,9 @@
     </style>
     -->
 
-    <style name="MaterialAccountTheme.Light">
-        <item name="titleColor">#FFF</item>
-        <item name="subTitleColor">#FFF</item>
+    <style name="MaterialHeadItemTheme.Light">
+        <item name="titleColor">#FFFFFF</item>
+        <item name="subTitleColor">#FFFFFF</item>
         <item name="backgroundGradient">@drawable/black_gradient</item>
     </style>
 </resources>

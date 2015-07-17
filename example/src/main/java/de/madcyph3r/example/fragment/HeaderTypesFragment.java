@@ -24,19 +24,14 @@ import de.madcyph3r.example.R;
 import de.madcyph3r.example.data.ExampleData;
 import de.madcyph3r.example.example.headerTypes.CustomHeaderActivity;
 import de.madcyph3r.example.example.headerTypes.CustomHeaderBelowToolbarActivity;
-import de.madcyph3r.example.example.headerTypes.CustomHeaderCustomHeightActivity;
 import de.madcyph3r.example.example.headerTypes.HeadItemFiveActivity;
 import de.madcyph3r.example.example.headerTypes.HeadItemOneActivity;
 import de.madcyph3r.example.example.headerTypes.HeadItemThreeActivity;
 import de.madcyph3r.example.example.headerTypes.ImageHeaderActivity;
 import de.madcyph3r.example.example.headerTypes.ImageHeaderBelowToolbarActivity;
-import de.madcyph3r.example.example.headerTypes.ImageHeaderCustomHeightActivity;
 import de.madcyph3r.example.example.headerTypes.NoHeaderActivity;
 import de.madcyph3r.example.example.headerTypes.NoHeaderBelowToolbarActivity;
 
-/**
- * Created by marc on 12.03.2015.
- */
 public class HeaderTypesFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
@@ -60,10 +55,10 @@ public class HeaderTypesFragment extends Fragment {
         content.add(new ExampleData("No Header Below Toolbar", NoHeaderBelowToolbarActivity.class));
         content.add(new ExampleData("Image Header", ImageHeaderActivity.class));
         content.add(new ExampleData("Image Header Below Toolbar", ImageHeaderBelowToolbarActivity.class));
-        content.add(new ExampleData("Image Header With Custom Height", ImageHeaderCustomHeightActivity.class));
+        //content.add(new ExampleData("Image Header With Custom Height", ImageHeaderCustomHeightActivity.class));
         content.add(new ExampleData("Custom Header", CustomHeaderActivity.class));
         content.add(new ExampleData("Custom Header Below Toolbar", CustomHeaderBelowToolbarActivity.class));
-        content.add(new ExampleData("Custom Header With Custom Height", CustomHeaderCustomHeightActivity.class));
+        //content.add(new ExampleData("Custom Header With Custom Height", CustomHeaderCustomHeightActivity.class));
         content.add(new ExampleData("Head Item Style (One Item)", HeadItemOneActivity.class));
         content.add(new ExampleData("Head Item Style (Three Item)", HeadItemThreeActivity.class));
         content.add(new ExampleData("Head Item Style (Five Item)", HeadItemFiveActivity.class));

@@ -19,11 +19,11 @@
         <ImageView
             android:id="@+id/section_icon"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:scaleType="center" />
+            android:layout_height="@dimen/sectionIconBannerHeight"
+            android:scaleType="centerInside" />
 
         <TextView
             android:id="@+id/section_text"

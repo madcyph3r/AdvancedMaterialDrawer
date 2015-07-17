@@ -4,25 +4,18 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
-import de.madcyph3r.example.R;
 import de.madcyph3r.example.example.FragmentDummy;
 import de.madcyph3r.example.example.FragmentInstruction;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
+import de.madcyph3r.materialnavigationdrawer.activity.MaterialNavNoHeaderActivity;
+import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionChangeListener;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
-import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
+import de.madcyph3r.materialnavigationdrawer.menu.item.section.MaterialItemSection;
+import de.madcyph3r.materialnavigationdrawer.menu.item.section.MaterialItemSectionFragment;
 
-/**
- * Created by marc on 23.02.2015.
- */
-public class SectionChangeListenerActivity extends MaterialNavigationDrawer {
+public class SectionChangeListenerActivity extends MaterialNavNoHeaderActivity {
 
     MaterialNavigationDrawer drawer = null;
-
-    @Override
-    public int headerType() {
-        // set type. you get the available constant from MaterialNavigationDrawer class
-        return MaterialNavigationDrawer.DRAWERHEADER_NO_HEADER;
-    }
 
     @Override
     protected boolean finishActivityOnNewIntent() {
@@ -34,52 +27,56 @@ public class SectionChangeListenerActivity extends MaterialNavigationDrawer {
         return 0;
     }
 
+    private MaterialItemSection tmpSection = null;
+
     @Override
     public void init(Bundle savedInstanceState) {
 
+        drawer = this;
+
+        drawer.setSectionChangeListener(new MaterialSectionChangeListener() {
+            @Override
+            public void onBeforeChangeSection(MaterialItemSection newSection) {
+                // save the current menu, before change. needed for onAfterChangeSection
+                tmpSection = getCurrentSectionFragment();
+                if(getCurrentSectionFragment() != newSection) {
+                    Toast.makeText(drawer, "before change section", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onAfterChangeSection(MaterialItemSection newSection) {
+                // check, if the section really changed
+                if(getCurrentSectionFragment() == newSection && newSection != tmpSection) {
+                    Toast.makeText(drawer, "after change section", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        // information text for the fragment
         Bundle bundle = new Bundle();
         bundle.putString("instruction", "Open the drawer and choose a section. You will get " +
                 "a before and after change toast message.");
 
-        drawer = this;
-
-        // create menu
-        MaterialMenu menu = new MaterialMenu();
-
-        //create instruction fragment
         Fragment fragmentInstruction = new FragmentInstruction();
         fragmentInstruction.setArguments(bundle);
 
-        // menu items
-        MaterialSection instruction = this.newSection("Instruction", fragmentInstruction , false, menu);
-        instruction.setFragmentTitle("Section Change Listener");
-        this.newDevisor(menu);
-        this.newLabel("Label", false, menu);
-        this.newSection("Section", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentDummy(), false, menu);
+        // create menu
+        MaterialMenu menu = new MaterialMenu();
+        menu.add(new MaterialItemSectionFragment(this, "Instruction", fragmentInstruction, "Section Change Listener"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 1", new FragmentDummy(), "Section 1"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 2", new FragmentDummy(), "Section 2"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 3", new FragmentDummy(), "Section 3"));
 
-        // set custom menu
-        this.setCustomMenu(menu);
+        // load menu
+        this.loadMenu(menu);
+
+        // load the MaterialItemSectionFragment, from the given startIndex
+        this.loadStartFragmentFromMenu(menu);
     }
 
-
-    MaterialSection tmpSection = null;
-
-    // before section change listener
     @Override
-    public void onBeforeChangeSection(MaterialSection newSection) {
-        // save the current menu, before change. needed for onAfterChangeSection
-        tmpSection = getCurrentSection();
-        if(getCurrentSection() != newSection) {
-            Toast.makeText(this, "before change section", Toast.LENGTH_SHORT).show();
-        }
-    }
+    public void afterInit(Bundle savedInstanceState) {
 
-    // after section change listener
-    @Override
-    public void onAfterChangeSection(MaterialSection newSection) {
-        // check, if the section really changed
-        if(getCurrentSection() == newSection && newSection != tmpSection) {
-            Toast.makeText(this, "after change section", Toast.LENGTH_SHORT).show();
-        }
     }
 }

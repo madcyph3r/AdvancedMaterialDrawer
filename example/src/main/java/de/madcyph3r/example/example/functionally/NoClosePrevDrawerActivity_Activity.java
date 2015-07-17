@@ -7,19 +7,20 @@ import android.support.v4.app.Fragment;
 import de.madcyph3r.example.example.functionally.noClosePrevDrawerActivity.NoCloseActivity;
 import de.madcyph3r.example.example.FragmentInstruction;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
+import de.madcyph3r.materialnavigationdrawer.activity.MaterialNavNoHeaderActivity;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
-import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
+import de.madcyph3r.materialnavigationdrawer.menu.item.section.MaterialItemSectionActivity;
+import de.madcyph3r.materialnavigationdrawer.menu.item.section.MaterialItemSectionFragment;
+import de.madcyph3r.materialnavigationdrawer.menu.item.style.MaterialItemDevisor;
 
 /**
  * Created by marc on 23.02.2015.
  */
-public class NoClosePrevDrawerActivity_Activity extends MaterialNavigationDrawer {
-
-    // info: see manifest for the dark theme
+public class NoClosePrevDrawerActivity_Activity extends MaterialNavNoHeaderActivity {
 
     MaterialNavigationDrawer drawer = null;
 
-    // Don't close drawer activity
+    // close drawer activity
     @Override
     public boolean finishActivityOnNewIntent() {
         return false;
@@ -31,35 +32,33 @@ public class NoClosePrevDrawerActivity_Activity extends MaterialNavigationDrawer
     }
 
     @Override
-    public int headerType() {
-        // set type. you get the available constant from MaterialNavigationDrawer class
-        return MaterialNavigationDrawer.DRAWERHEADER_NO_HEADER;
-    }
-
-    @Override
     public void init(Bundle savedInstanceState) {
-
-        Bundle bundle = new Bundle();
-        bundle.putString("instruction", "Open the drawer and choose the 'start activity' section. Then press back, " +
-                "you will get back to this activity.");
 
         drawer = this;
 
-        // create menu
-        MaterialMenu menu = new MaterialMenu();
+        // information text for the fragment
+        Bundle bundle = new Bundle();
+        bundle.putString("instruction", "Open the drawer and choose the 'start activity' section. Then press back, \" +\n" +
+                "                \"you will get back to this activity.");
 
-        //create instruction fragment
         Fragment fragmentInstruction = new FragmentInstruction();
         fragmentInstruction.setArguments(bundle);
 
-        // menu items
-        MaterialSection instruction = this.newSection("Instruction", fragmentInstruction , false, menu);
-        instruction.setFragmentTitle("No Close Previous Drawer Activity");
-        this.newDevisor(menu);
-        this.newLabel("Label", false, menu);
-        this.newSection("start activity", new Intent(this, NoCloseActivity.class), false, menu);
+        // create menu
+        MaterialMenu menu = new MaterialMenu();
+        menu.add(new MaterialItemSectionFragment(this, "Instruction", fragmentInstruction, "No Close Previous Drawer Activity"));
+        menu.add(new MaterialItemDevisor());
+        menu.add(new MaterialItemSectionActivity(this, "start Activity", new Intent(this, NoCloseActivity.class)));
 
-        // set custom menu
-        this.setCustomMenu(menu);
+        // load menu
+        this.loadMenu(menu);
+
+        // load first MaterialItemSectionFragment in the menu, because there is no start position
+        this.loadStartFragmentFromMenu(menu);
+    }
+
+    @Override
+    public void afterInit(Bundle savedInstanceState) {
+
     }
 }

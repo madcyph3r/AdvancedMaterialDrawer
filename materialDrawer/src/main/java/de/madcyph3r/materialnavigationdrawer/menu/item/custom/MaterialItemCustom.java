@@ -1,4 +1,4 @@
-package de.madcyph3r.materialnavigationdrawer.menu.item;
+package de.madcyph3r.materialnavigationdrawer.menu.item.custom;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -7,19 +7,15 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import de.madcyph3r.materialnavigationdrawer.R;
-import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionChangeListener;
+import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialMenuItem;
 
-/**
- * Created by marc on 11.07.2015.
- */
-public class MaterialCustomSection {
+public class MaterialItemCustom extends MaterialMenuItem {
 
     private View view;
 
-    public MaterialCustomSection(Context ctx, int resID) {
+    public MaterialItemCustom(Context ctx, int resID) {
         init(ctx, resID);
     }
 

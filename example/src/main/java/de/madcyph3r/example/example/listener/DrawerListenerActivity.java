@@ -6,25 +6,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.Toast;
 
-import de.madcyph3r.example.R;
 import de.madcyph3r.example.example.FragmentDummy;
 import de.madcyph3r.example.example.FragmentInstruction;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
+import de.madcyph3r.materialnavigationdrawer.activity.MaterialNavNoHeaderActivity;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
-import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
+import de.madcyph3r.materialnavigationdrawer.menu.item.section.MaterialItemSectionFragment;
 
-/**
- * Created by marc on 23.02.2015.
- */
-public class DrawerListenerActivity extends MaterialNavigationDrawer {
+public class DrawerListenerActivity extends MaterialNavNoHeaderActivity {
 
     MaterialNavigationDrawer drawer = null;
-
-    @Override
-    public int headerType() {
-        // set type. you get the available constant from MaterialNavigationDrawer class
-        return MaterialNavigationDrawer.DRAWERHEADER_NO_HEADER;
-    }
 
     @Override
     protected boolean finishActivityOnNewIntent() {
@@ -39,28 +30,29 @@ public class DrawerListenerActivity extends MaterialNavigationDrawer {
     @Override
     public void init(Bundle savedInstanceState) {
 
+        drawer = this;
+
+        // information text for the fragment
         Bundle bundle = new Bundle();
         bundle.putString("instruction", "On drawer action, you get a toast message.");
 
-        drawer = this;
-
-        // create menu
-        MaterialMenu menu = new MaterialMenu();
-
-        //create instruction fragment
         Fragment fragmentInstruction = new FragmentInstruction();
         fragmentInstruction.setArguments(bundle);
 
-        // menu items
-        MaterialSection instruction = this.newSection("Instruction", fragmentInstruction , false, menu);
-        instruction.setFragmentTitle("Drawer Listener");
-        this.newDevisor(menu);
-        this.newLabel("Label", false, menu);
-        this.newSection("Section", this.getResources().getDrawable(R.drawable.ic_list_black_36dp), new FragmentDummy(), false, menu);
+        // create menu
+        MaterialMenu menu = new MaterialMenu();
+        menu.add(new MaterialItemSectionFragment(this, "Instruction", fragmentInstruction, "Drawer Listener"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 1", new FragmentDummy(), "Section 1"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 2", new FragmentDummy(), "Section 2"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 3", new FragmentDummy(), "Section 3"));
 
-        // set custom menu
-        this.setCustomMenu(menu);
+        // load menu
+        this.loadMenu(menu);
 
+        // load the MaterialItemSectionFragment, from the given startIndex
+        this.loadStartFragmentFromMenu(menu);
+
+        // the drawer listener
         this.setDrawerStateListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
@@ -84,4 +76,8 @@ public class DrawerListenerActivity extends MaterialNavigationDrawer {
         });
     }
 
+    @Override
+    public void afterInit(Bundle savedInstanceState) {
+
+    }
 }

@@ -10,10 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
-import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
+import de.madcyph3r.materialnavigationdrawer.menu.item.section.MaterialItemSectionFragment;
 
 public class ChildFragment extends Fragment {
 
@@ -45,22 +44,23 @@ public class ChildFragment extends Fragment {
         switch (item.getItemId()) {
             case android.R.id.home:
                 // your back action, here get the last section fragment called
-                if ((drawer.getCurrentSection().getTarget() == MaterialSection.TARGET_FRAGMENT)) {
 
-                    // show the menu button and unlock the drawer
-                    drawer.showActionBarMenuIcon(MaterialNavigationDrawer.ActionBarMenuItem.MENU);
-                    drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+                // show the menu button and unlock the drawer
+                drawer.showActionBarMenuIcon(MaterialNavigationDrawer.ActionBarMenuItem.MENU);
+                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
 
-                    // set the fragment from the selected section
-                    drawer.setCustomFragment(drawer.getCurrentSection().getTargetFragment(), drawer.getCurrentSection().getFragmentTitle());
-                    // normally currentSection gets unselect on setCustomFragment call
-                    // in the next relase, i will add a new method without unselect
-                    drawer.getCurrentSection().select();
+                MaterialItemSectionFragment fragmentSection = drawer.getCurrentSectionFragment();
 
-                    // call on current git head. drawer.getCurrentSection().select(); is not needed
-                    // drawer.setCustomFragment(drawer.getCurrentSection().getTargetFragment(), drawer.getCurrentSection().getFragmentTitle(), true, false);
+                // set the fragment from the selected section
+                drawer.changeFragment(fragmentSection.getFragment(), fragmentSection.getFragmentTitle());
+                // normally currentSection gets unselect on setCustomFragment call
+                // in the next relase, i will add a new method without unselect
+                drawer.getCurrentSectionFragment().select();
 
-                }
+                // call on current git head. drawer.getCurrentSectionFragment().select(); is not needed
+                // drawer.setCustomFragment(drawer.getCurrentSectionFragment().getTargetFragment(), drawer.getCurrentSectionFragment().getFragmentTitle(), true, false);
+
+                // }
                 return true;
         }
 

@@ -1,24 +1,24 @@
 <resources>
 
-    <style name="MultiPaneSupportTheme" parent="MaterialNavigationDrawerTheme">
+    <style name="MultiPaneSupportTheme" parent="MaterialNavigationDrawerTheme.Light">
         <item name="multipaneSupport">true</item>
     </style>
 
-    <style name="MultiPaneBelowToolbarSupportTheme" parent="MaterialNavigationDrawerTheme">
+    <style name="MultiPaneBelowToolbarSupportTheme" parent="MaterialNavigationDrawerTheme.Light">
         <item name="multipaneSupport">true</item>
         <item name="belowToolbar">true</item>
     </style>
 
-    <style name="ActionBarOverlayTheme" parent="MaterialNavigationDrawerTheme">
+    <style name="ActionBarOverlayTheme" parent="MaterialNavigationDrawerTheme.Light">
         <item name="actionBarOverlay">true</item>
         <item name="actionBarOverlayAlpha">0.6</item>
     </style>
 
-    <style name="BelowToolbarTheme" parent="MaterialNavigationDrawerTheme">
+    <style name="BelowToolbarTheme" parent="MaterialNavigationDrawerTheme.Light">
         <item name="belowToolbar">true</item>
     </style>
 
-    <style name="UniqueToolbarColorTheme" parent="MaterialNavigationDrawerTheme">
+    <style name="UniqueToolbarColorTheme" parent="MaterialNavigationDrawerTheme.Light">
     <item name="uniqueToolbarColor">true</item>
     <item name="colorPrimary">#8bc34a</item>
     <item name="autoDarkStatusBar">true</item>
@@ -36,7 +36,7 @@
         <!-- doesn't change the toolbar color on fragment change-->
         <item name="uniqueToolbarColor">false</item>
         <item name="sectionStyle">@style/MySectionTheme</item>
-        <item name="accountStyle">@style/MyMaterialAccountTheme</item>
+        <item name="headItemStyle">@style/MyMaterialHeadItemTheme</item>
         <item name="multipaneSupport">false</item>
         <item name="dividerStrokeWidth">1dp</item>
         <item name="dividerColor">@drawable/divider_my_theme</item>
@@ -52,7 +52,7 @@
         <item name="sectionRippleColor">#f89d54</item>
     </style>
 
-    <style name="MyMaterialAccountTheme">
+    <style name="MyMaterialHeadItemTheme">
         <item name="titleColor">#f9bd80</item>
         <item name="subTitleColor">#f9bd80</item>
         <item name="backgroundGradient">@drawable/red_gradient</item>

@@ -1,4 +1,4 @@
-package de.madcyph3r.materialnavigationdrawer.menu.item;
+package de.madcyph3r.materialnavigationdrawer.menu.item.style;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -8,20 +8,21 @@ import android.view.View;
 import android.widget.TextView;
 
 import de.madcyph3r.materialnavigationdrawer.R;
+import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialMenuItem;
 
 /**
  * Created by marc on 03.03.2015.
  */
-public class MaterialLabel {
+public class MaterialItemLabel extends MaterialMenuItem {
 
     private String label;
     private View view;
     private TextView text;
-    private boolean bottom;
+   // private boolean bottom;
 
-    public MaterialLabel(Context ctx, String label, boolean bottom) {
+    public MaterialItemLabel(Context ctx, String label) {
         this.label = label;
-        this.bottom = bottom;
+ //       setBottom(bottom);
 
         view = LayoutInflater.from(ctx).inflate(R.layout.layout_material_label, null);
         text = (TextView) view.findViewById(R.id.section_label);
@@ -47,13 +48,13 @@ public class MaterialLabel {
         return view;
     }
 
-    public boolean isBottom() {
+    /*public boolean isBottom() {
         return bottom;
     }
 
     public void setBottom(boolean bottom) {
         this.bottom = bottom;
-    }
+    }*/
 
     public TextView getText() {
         return text;

@@ -31,14 +31,11 @@ import de.madcyph3r.example.example.headerTypes.HeadItemOneBelowToolbarActivity;
 import de.madcyph3r.example.example.headerTypes.HeadItemThreeActivity;
 import de.madcyph3r.example.example.headItemTypes.HeadItemFiveDontCloseOnChangeActivity;
 import de.madcyph3r.example.example.headItemTypes.HeadItemFiveExtraMenuActivity;
-import de.madcyph3r.example.example.headItemTypes.HeadItemOneWhiteThemeActivity;
+import de.madcyph3r.example.example.headItemTypes.HeadItemOneBlackThemeActivity;
 import de.madcyph3r.example.example.headItemTypes.HeadItemThreeDontCloseOnChangeActivity;
 import de.madcyph3r.example.example.headItemTypes.HeadItemTwoExtraMenuActivity;
 import de.madcyph3r.example.example.menu.AddRemoveMenuItemsActivity;
 
-/**
- * Created by marc on 12.03.2015.
- */
 public class HeadItemTypesFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
@@ -61,7 +58,7 @@ public class HeadItemTypesFragment extends Fragment {
         final List<ExampleData> content = new ArrayList<>();
         content.add(new ExampleData("One Item Example", HeadItemOneActivity.class));
         content.add(new ExampleData("(One Item) Below Toolbar", HeadItemOneBelowToolbarActivity.class));
-        content.add(new ExampleData("(One Item) White Theme", HeadItemOneWhiteThemeActivity.class));
+        content.add(new ExampleData("(One Item) Black Theme", HeadItemOneBlackThemeActivity.class));
         content.add(new ExampleData("(Three Item)", HeadItemThreeActivity.class));
         content.add(new ExampleData("(Five Item)", HeadItemFiveActivity.class));
         content.add(new ExampleData("(Five Item) With Extra Menu", HeadItemFiveExtraMenuActivity.class));

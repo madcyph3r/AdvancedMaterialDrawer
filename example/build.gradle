@@ -8,8 +8,8 @@ android {
         applicationId "de.madcyph3r.MaterialDrawer"
         minSdkVersion 10
         targetSdkVersion 21
-        versionCode 9
-        versionName "2.2"
+        versionCode 10
+        versionName "2.3"
     }
     buildTypes {
         release {

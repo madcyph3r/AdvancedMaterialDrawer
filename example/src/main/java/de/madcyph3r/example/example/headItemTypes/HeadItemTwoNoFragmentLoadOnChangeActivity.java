@@ -5,8 +5,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.View;
-import android.widget.Toast;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 
@@ -14,24 +12,15 @@ import de.madcyph3r.example.R;
 import de.madcyph3r.example.example.FragmentDummy;
 import de.madcyph3r.example.example.FragmentInstruction;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
+import de.madcyph3r.materialnavigationdrawer.activity.MaterialNavHeadItemActivity;
 import de.madcyph3r.materialnavigationdrawer.head.MaterialHeadItem;
-import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionOnClickListener;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
-import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
+import de.madcyph3r.materialnavigationdrawer.menu.item.section.MaterialItemSectionFragment;
 import de.madcyph3r.materialnavigationdrawer.tools.RoundedCornersDrawable;
 
-/**
- * Created by marc on 23.02.2015.
- */
-public class HeadItemTwoNoFragmentLoadOnChangeActivity extends MaterialNavigationDrawer {
+public class HeadItemTwoNoFragmentLoadOnChangeActivity extends MaterialNavHeadItemActivity {
 
     MaterialNavigationDrawer drawer = null;
-
-    @Override
-    public int headerType() {
-        // set type. you get the available constant from MaterialNavigationDrawer class
-        return MaterialNavigationDrawer.DRAWERHEADER_HEADITEMS;
-    }
 
     @Override
     protected boolean finishActivityOnNewIntent() {
@@ -48,53 +37,39 @@ public class HeadItemTwoNoFragmentLoadOnChangeActivity extends MaterialNavigatio
 
         drawer = this;
 
-        MaterialMenu menu = new MaterialMenu();
-
-        MaterialSection section = this.newSection("Create new Head Item", false, menu);
-        section.setOnClickListener(new MaterialSectionOnClickListener() {
-            @Override
-            public void onClick(MaterialSection section, View view) {
-                Toast.makeText(drawer, "extra menu on click. do something here", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        // set the extra menu
-        drawer.setHeadItemSwitchExtraMenu(menu);
-
-        // set this to true. It show the arrow down button every time, even is only one head item available.
-        // here it is needed, to show the extra menu
-        this.setHeadItemSwitchShowForce(true);
-
         // add head Item (menu will be loaded automatically)
         this.addHeadItem(getHeadItem1());
         this.addHeadItem(getHeadItem2());
 
+        // load menu
+        this.loadMenu(getCurrentHeadItem().getMenu());
+
+        // load the MaterialItemSectionFragment, from the given startIndex
+        this.loadStartFragmentFromMenu(getCurrentHeadItem().getMenu());
     }
 
     private MaterialHeadItem getHeadItem1() {
-        MaterialMenu menu = new MaterialMenu();
 
+        // information text for the fragment
         Bundle bundle = new Bundle();
-        bundle.putString("instruction", "If you change the head item, the fragment doesn't change." +
-                " Useful, if you don't want to replace the current fragment on a new head item.");
+        bundle.putString("instruction", "If you change the head item, the fragment doesn't change.\" +\n" +
+                "                \" Useful, if you don't want to replace the current fragment on a new head item.");
 
-        //create instruction fragment
         Fragment fragmentInstruction = new FragmentInstruction();
         fragmentInstruction.setArguments(bundle);
 
-        // create menu items
-        MaterialSection instruction = this.newSection("Instruction", fragmentInstruction , false, menu);
-        instruction.setFragmentTitle("(Two Items) Fragment Doesn't Change On HeadItem Change");
-        this.newDevisor(menu);
-        this.newLabel("Label", false, menu);
-        this.newSection("Section", new FragmentDummy(), false, menu);
-
-        // use bitmap and make a circle photo
-        final Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.app_drawer_icon);
-        final RoundedCornersDrawable drawableAppIcon = new RoundedCornersDrawable(getResources(), bitmap);
+        // create menu
+        MaterialMenu menu = new MaterialMenu();
+        menu.add(new MaterialItemSectionFragment(this, "Instruction", fragmentInstruction, "Fragment Doesn't Change On HeadItem Change (Two Items)"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 1", new FragmentDummy(), "Section 1"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 2", new FragmentDummy(), "Section 2"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 3", new FragmentDummy(), "Section 3"));
 
         // create Head Item
-        MaterialHeadItem headItem = new MaterialHeadItem(this, "A HeadItem", "A Subtitle", drawableAppIcon, R.drawable.mat5, menu);
+        // use bitmap and make a circle photo
+        final Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.head_item_icon);
+        final RoundedCornersDrawable drawableAppIcon = new RoundedCornersDrawable(getResources(), bitmap);
+        MaterialHeadItem headItem = new MaterialHeadItem(this, "A HeadItem", "A Subtitle", drawableAppIcon, R.drawable.mat1, menu);
 
         // don't change fragment on change
         headItem.setLoadFragmentOnChanged(false);
@@ -102,26 +77,29 @@ public class HeadItemTwoNoFragmentLoadOnChangeActivity extends MaterialNavigatio
         return headItem;
     }
 
-    // create headItem without a menu
+    // head item 2 has no menu You can use this for an avatar click
     private MaterialHeadItem getHeadItem2() {
 
         // create menu
         MaterialMenu menu = new MaterialMenu();
+        menu.add(new MaterialItemSectionFragment(this, "Section 1", new FragmentDummy(), "Section 1"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 2", new FragmentDummy(), "Section 2"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 3", new FragmentDummy(), "Section 3"));
 
-        // create menu items
-        this.newSection("Section 1 (Head 2)", new FragmentDummy(), false, menu);
-        this.newSection("Section 2", new FragmentDummy(), false, menu);
-
-        // create icon
+        // create Head Item
         TextDrawable headPhoto = TextDrawable.builder()
                 .buildRound("B", Color.BLUE);
 
-        // create Head Item
         MaterialHeadItem headItem = new MaterialHeadItem(this, "B HeadItem", "B Subtitle", headPhoto, R.drawable.mat6, menu);
 
         // don't change fragment on change
         headItem.setLoadFragmentOnChanged(false);
 
         return headItem;
+    }
+
+    @Override
+    public void afterInit(Bundle savedInstanceState) {
+
     }
 }

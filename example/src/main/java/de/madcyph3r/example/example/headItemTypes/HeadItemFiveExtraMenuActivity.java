@@ -14,24 +14,18 @@ import de.madcyph3r.example.R;
 import de.madcyph3r.example.example.FragmentDummy;
 import de.madcyph3r.example.example.FragmentInstruction;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
+import de.madcyph3r.materialnavigationdrawer.activity.MaterialNavHeadItemActivity;
 import de.madcyph3r.materialnavigationdrawer.head.MaterialHeadItem;
 import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionOnClickListener;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
-import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
+import de.madcyph3r.materialnavigationdrawer.menu.item.section.MaterialItemSection;
+import de.madcyph3r.materialnavigationdrawer.menu.item.section.MaterialItemSectionFragment;
+import de.madcyph3r.materialnavigationdrawer.menu.item.section.MaterialItemSectionOnClick;
 import de.madcyph3r.materialnavigationdrawer.tools.RoundedCornersDrawable;
 
-/**
- * Created by marc on 23.02.2015.
- */
-public class HeadItemFiveExtraMenuActivity extends MaterialNavigationDrawer {
+public class HeadItemFiveExtraMenuActivity extends MaterialNavHeadItemActivity {
 
     MaterialNavigationDrawer drawer = null;
-
-    @Override
-    public int headerType() {
-        // set type. you get the available constant from MaterialNavigationDrawer class
-        return MaterialNavigationDrawer.DRAWERHEADER_HEADITEMS;
-    }
 
     @Override
     protected boolean finishActivityOnNewIntent() {
@@ -48,118 +42,130 @@ public class HeadItemFiveExtraMenuActivity extends MaterialNavigationDrawer {
 
         drawer = this;
 
-        MaterialMenu menu = new MaterialMenu();
-
-        MaterialSection section = this.newSection("Create new Head Item", false, menu);
-        section.setOnClickListener(new MaterialSectionOnClickListener() {
-            @Override
-            public void onClick(MaterialSection section, View view) {
-                Toast.makeText(drawer, "extra menu on click. do something here", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        // set the extra menu
-        drawer.setHeadItemSwitchExtraMenu(menu);
-
         // add head Item (menu will be loaded automatically)
         this.addHeadItem(getHeadItem1());
         this.addHeadItem(getHeadItem2());
         this.addHeadItem(getHeadItem3());
         this.addHeadItem(getHeadItem4());
         this.addHeadItem(getHeadItem5());
+
+        // load menu
+        this.loadMenu(getCurrentHeadItem().getMenu());
+
+        // load the MaterialItemSectionFragment, from the given startIndex
+        this.loadStartFragmentFromMenu(getCurrentHeadItem().getMenu());
+
+        // create switcher extra menu
+        MaterialItemSectionOnClick section = new MaterialItemSectionOnClick(this, "do something");
+        section.setOnSectionClickListener(new MaterialSectionOnClickListener() {
+            @Override
+            public void onClick(MaterialItemSection section, View view) {
+                Toast.makeText(drawer, " do something here", Toast.LENGTH_LONG).show();
+            }
+        });
+        MaterialMenu menu = new MaterialMenu();
+        menu.add(section);
+
+        // add menu to switcher
+        this.setSwitcherExtraMenu(menu, false);
+
+        // show switch button, even if only one head item
+        this.setSwitchShowForce(true);
+
     }
 
     private MaterialHeadItem getHeadItem1() {
-        MaterialMenu menu = new MaterialMenu();
 
+        // information text for the fragment
         Bundle bundle = new Bundle();
-        bundle.putString("instruction", "This example shows the head item style with five items. " +
-                "The first three head items ar shown with a picture. To get the other head items, " +
-                "press the down arrow button in the header. " +
-                "Under the items, you see the extra menu. " +
-                "See the method headerType in the source code.");
+        bundle.putString("instruction", "This example shows the head item style with five items. \" +\n" +
+                "                \"The first three head items ar shown with a picture. To get the other head items, \" +\n" +
+                "                \"press the down arrow button in the header. \" +\n" +
+                "                \"Under the items, you see the extra menu.");
 
-        //create instruction fragment
         Fragment fragmentInstruction = new FragmentInstruction();
         fragmentInstruction.setArguments(bundle);
 
-        // first section is loaded
-        MaterialSection instruction = this.newSection("Instruction", fragmentInstruction , false, menu);
-        instruction.setFragmentTitle("Head Item Style (Five Items) With Extra Menu");
-        this.newDevisor(menu);
-        this.newLabel("Label", false, menu);
-        this.newSection("Section", new FragmentDummy(), false, menu);
+        // create menu
+        MaterialMenu menu = new MaterialMenu();
+        menu.add(new MaterialItemSectionFragment(this, "Instruction", fragmentInstruction, "Switcher Extra Menu (Five Items)"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 1", new FragmentDummy(), "Section 1"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 2", new FragmentDummy(), "Section 2"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 3", new FragmentDummy(), "Section 3"));
 
-        // use bitmap and make a circle photo
-        final Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.app_drawer_icon);
-        final RoundedCornersDrawable drawableAppIcon = new RoundedCornersDrawable(getResources(), bitmap);
 
         // create Head Item
-        MaterialHeadItem headItem = new MaterialHeadItem(this, "A HeadItem", "A Subtitle", drawableAppIcon, R.drawable.mat5, menu);
+        // use bitmap and make a circle photo
+        final Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.head_item_icon);
+        final RoundedCornersDrawable drawableAppIcon = new RoundedCornersDrawable(getResources(), bitmap);
+        MaterialHeadItem headItem = new MaterialHeadItem(this, "A HeadItem", "A Subtitle", drawableAppIcon, R.drawable.mat1, menu);
+
         return headItem;
     }
 
     private MaterialHeadItem getHeadItem2() {
+
+        // create menu
         MaterialMenu menu = new MaterialMenu();
+        menu.add(new MaterialItemSectionFragment(this, "Section 1 (Head 2)", new FragmentDummy(), "Section 1 (Head 2)"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 2", new FragmentDummy(), "Section 2"));
 
-        // create section
-        this.newSection("Section 1 (Head 2)", new FragmentDummy(), false, menu);
-        this.newSection("Section 2", new FragmentDummy(), false, menu);
-
-        // create icon
+        // create Head Item
         TextDrawable headPhoto = TextDrawable.builder()
                 .buildRound("B", Color.BLUE);
 
-        // create Head Item
         MaterialHeadItem headItem = new MaterialHeadItem(this, "B HeadItem", "B Subtitle", headPhoto, R.drawable.mat6, menu);
+
         return headItem;
     }
 
     private MaterialHeadItem getHeadItem3() {
+
+        // create menu
         MaterialMenu menu = new MaterialMenu();
-
-        // create section
-        this.newSection("Section 1 (Head 3)", new FragmentDummy(), false, menu);
-        this.newSection("Section 2", new FragmentDummy(), false, menu);
-
-        // create icon
-        TextDrawable headPhoto = TextDrawable.builder()
-                .buildRound("C", Color.GRAY);
+        menu.add(new MaterialItemSectionFragment(this, "Section 1 (Head 3)", new FragmentDummy(), "Section 1 (Head 3)"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 2", new FragmentDummy(), "Section 2"));
 
         // create Head Item
+        TextDrawable headPhoto = TextDrawable.builder()
+                .buildRound("C", Color.GRAY);
         MaterialHeadItem headItem = new MaterialHeadItem(this, "C HeadItem", "C Subtitle", headPhoto, R.drawable.mat6, menu);
+
         return headItem;
     }
 
     private MaterialHeadItem getHeadItem4() {
+
+        // create menu
         MaterialMenu menu = new MaterialMenu();
-
-        // create section
-        this.newSection("Section 1 (Head 4)", new FragmentDummy(), false, menu);
-        this.newSection("Section 2", new FragmentDummy(), false, menu);
-
-        // create icon
-        TextDrawable headPhoto = TextDrawable.builder()
-                .buildRound("D", Color.GRAY);
+        menu.add(new MaterialItemSectionFragment(this, "Section 1 (Head 4)", new FragmentDummy(), "Section 1 (Head 4)"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 2", new FragmentDummy(), "Section 2"));
 
         // create Head Item
+        TextDrawable headPhoto = TextDrawable.builder()
+                .buildRound("D", Color.GRAY);
         MaterialHeadItem headItem = new MaterialHeadItem(this, "D HeadItem", "D Subtitle", headPhoto, R.drawable.mat6, menu);
+
         return headItem;
     }
 
     private MaterialHeadItem getHeadItem5() {
+
+        // create menu
         MaterialMenu menu = new MaterialMenu();
-
-        // create menu items
-        this.newSection("Section 1 (Head 5)", new FragmentDummy(), false, menu);
-        this.newSection("Section 2", new FragmentDummy(), false, menu);
-
-        // create icon
-        TextDrawable headPhoto = TextDrawable.builder()
-                .buildRound("E", Color.GRAY);
+        menu.add(new MaterialItemSectionFragment(this, "Section 1 (Head 5)", new FragmentDummy(), "Section 1 (Head 5)"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 2", new FragmentDummy(), "Section 2"));
 
         // create Head Item
+        TextDrawable headPhoto = TextDrawable.builder()
+                .buildRound("E", Color.GRAY);
         MaterialHeadItem headItem = new MaterialHeadItem(this, "E HeadItem", "E Subtitle", headPhoto, R.drawable.mat6, menu);
+
         return headItem;
+    }
+
+    @Override
+    public void afterInit(Bundle savedInstanceState) {
+
     }
 }

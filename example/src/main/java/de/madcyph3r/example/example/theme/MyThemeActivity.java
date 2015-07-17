@@ -10,25 +10,15 @@ import de.madcyph3r.example.R;
 import de.madcyph3r.example.example.FragmentDummy;
 import de.madcyph3r.example.example.FragmentInstruction;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
+import de.madcyph3r.materialnavigationdrawer.activity.MaterialNavHeadItemActivity;
 import de.madcyph3r.materialnavigationdrawer.head.MaterialHeadItem;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
-import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
+import de.madcyph3r.materialnavigationdrawer.menu.item.section.MaterialItemSectionFragment;
 import de.madcyph3r.materialnavigationdrawer.tools.RoundedCornersDrawable;
 
-/**
- * Created by marc on 23.02.2015.
- */
-public class MyThemeActivity extends MaterialNavigationDrawer {
-
-    // info: see manifest and style xml for the theme
+public class MyThemeActivity extends MaterialNavHeadItemActivity {
 
     MaterialNavigationDrawer drawer = null;
-
-    @Override
-    public int headerType() {
-        // set type. you get the available constant from MaterialNavigationDrawer class
-        return MaterialNavigationDrawer.DRAWERHEADER_HEADITEMS;
-    }
 
     @Override
     protected boolean finishActivityOnNewIntent() {
@@ -43,36 +33,41 @@ public class MyThemeActivity extends MaterialNavigationDrawer {
     @Override
     public void init(Bundle savedInstanceState) {
 
+        drawer = this;
+
+        // information text for the fragment
         Bundle bundle = new Bundle();
         bundle.putString("instruction", "This example shows a own theme definition with a head item. The theme is defined in the styles.xml with the " +
                 "name MyOwnTheme. Then it's set to this activity " +
                 "in the AndroidManifest.xml . See android:theme=\"@style/MyOwnTheme\" in the " +
                 "activity tag for this activity. It can set to the application tag, too.");
 
-        drawer = this;
-
-        MaterialMenu menu = new MaterialMenu();
-
-        //create instruction fragment
         Fragment fragmentInstruction = new FragmentInstruction();
         fragmentInstruction.setArguments(bundle);
 
-        // first section is loaded
-        MaterialSection instruction = this.newSection("Instruction", fragmentInstruction , false, menu);
-        instruction.setFragmentTitle("My Theme");
-        this.newLabel("Label", false, menu);
-        this.newDevisor(menu);
-        this.newSection("Section 1", new FragmentDummy(), false, menu).setSectionColor(Color.parseColor("#ff0000"));
-        this.newSection("Section 2", new FragmentDummy(), false, menu);
-
-        // use bitmap and make a circle photo
-        final Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.app_drawer_icon);
-        final RoundedCornersDrawable drawableAppIcon = new RoundedCornersDrawable(getResources(), bitmap);
+        // create menu
+        MaterialMenu menu = new MaterialMenu();
+        menu.add(new MaterialItemSectionFragment(this, "Instruction", fragmentInstruction, "My Theme"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 1", new FragmentDummy(), "Section 1").setSectionColor(Color.parseColor("#ff0000")));
+        menu.add(new MaterialItemSectionFragment(this, "Section 2", new FragmentDummy(), "Section 2"));
+        menu.add(new MaterialItemSectionFragment(this, "Section 3", new FragmentDummy(), "Section 3"));
 
         // create Head Item
-        MaterialHeadItem headItem = new MaterialHeadItem(this, "F HeadItem", "F Subtitle", drawableAppIcon, R.drawable.mat5, menu);
-
-        // add head Item (menu will be loaded automatically)
+        // use bitmap and make a circle photo
+        final Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.head_item_icon);
+        final RoundedCornersDrawable drawableAppIcon = new RoundedCornersDrawable(getResources(), bitmap);
+        MaterialHeadItem headItem = new MaterialHeadItem(this, "My HeadItem", "My Subtitle", drawableAppIcon, R.drawable.mat1, menu);
         this.addHeadItem(headItem);
+
+        // load menu
+        this.loadMenu(menu);
+
+        // load the MaterialItemSectionFragment, from the given startIndex
+        this.loadStartFragmentFromMenu(menu);
+    }
+
+    @Override
+    public void afterInit(Bundle savedInstanceState) {
+
     }
 }

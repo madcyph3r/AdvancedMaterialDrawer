@@ -27,9 +27,6 @@ import de.madcyph3r.example.example.backPattern.BackPatternDefaultActivity;
 import de.madcyph3r.example.example.backPattern.BackPatternLastSectionActivity;
 import de.madcyph3r.example.example.backPattern.BackPatternStartIndexActivity;
 
-/**
- * Created by marc on 12.03.2015.
- */
 public class BackPatternFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
@@ -53,7 +50,7 @@ public class BackPatternFragment extends Fragment {
         content.add(new ExampleData("Custom Back Pattern", BackPatternCustomActivity.class));
         content.add(new ExampleData("Default Back Pattern", BackPatternDefaultActivity.class));
         content.add(new ExampleData("StartIndex Back Pattern", BackPatternStartIndexActivity.class));
-        content.add(new ExampleData("Last Section Back Pattern", BackPatternLastSectionActivity.class));
+        content.add(new ExampleData("Last Section Fragment Back Pattern", BackPatternLastSectionActivity.class));
 
         final ParallaxRecyclerAdapter<ExampleData> adapter = new ParallaxRecyclerAdapter<>(content);
 

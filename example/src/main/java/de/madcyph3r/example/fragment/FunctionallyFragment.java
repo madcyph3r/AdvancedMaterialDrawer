@@ -32,9 +32,6 @@ import de.madcyph3r.example.example.headItemTypes.HeadItemTwoNoFragmentLoadOnCha
 import de.madcyph3r.example.example.headItemTypes.HeadItemTwoOnlyOneHasMenuActivity;
 import de.madcyph3r.example.example.menu.AddRemoveMenuItemsActivity;
 
-/**
- * Created by marc on 12.03.2015.
- */
 public class FunctionallyFragment extends Fragment {
 
     private RecyclerView mRecyclerView;

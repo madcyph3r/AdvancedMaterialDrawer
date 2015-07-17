@@ -7,7 +7,7 @@
         <item name="uniqueToolbarColor">false</item>
         <item name="labelColor">#888888</item>
         <item name="sectionStyle">@style/MaterialSectionTheme</item>
-        <item name="accountStyle">@style/MaterialAccountTheme</item>
+        <item name="headItemStyle">@style/MaterialHeadItemTheme</item>
         <item name="multipaneSupport">false</item>
         <item name="autoDarkStatusBar">true</item>
         <item name="actionBarOverlay">false</item>
@@ -24,7 +24,7 @@
         <item name="labelColor">#afafaf</item>
         <item name="sectionStyle">@style/MaterialSectionTheme.Light</item>
         <!--<item name="subheaderStyle">@style/MaterialSubheaderTheme.Light</item>-->
-        <item name="accountStyle">@style/MaterialAccountTheme.Light</item>
+        <item name="headItemStyle">@style/MaterialHeadItemTheme.Light</item>
         <item name="multipaneSupport">false</item>
         <item name="autoDarkStatusBar">true</item>
         <item name="actionBarOverlay">false</item>
@@ -43,7 +43,7 @@
         <item name="drawerColor">#fafafa</item>
         <item name="sectionStyle">@style/MaterialSectionTheme.Light</item>
         <!--<item name="subheaderStyle">@style/MaterialSubheaderTheme.Light</item>-->
-        <item name="accountStyle">@style/MaterialAccountTheme.Light</item>
+        <item name="headItemStyle">@style/MaterialHeadItemTheme.Light</item>
         <item name="multipaneSupport">false</item>
         <item name="autoDarkStatusBar">true</item>
         <item name="actionBarOverlay">false</item>

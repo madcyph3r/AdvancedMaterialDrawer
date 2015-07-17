@@ -1,7 +1,6 @@
 package de.madcyph3r.example.example.functionally.masterChildNavActivity;
 
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import de.madcyph3r.example.example.functionally.actionBarButtons.FragmentActionBarButtons;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
 
 public class MasterFragment2 extends Fragment {
@@ -35,13 +33,13 @@ public class MasterFragment2 extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawer.setCustomFragment(new ChildFragment2(), "Child Title 2");
+                drawer.changeFragment(new ChildFragment2(), "Child Title 2");
                 // normally currentSection gets unselect on setCustomFragment call
                 // in the next relase, i will add a new method without unselect
-                drawer.getCurrentSection().select();
+                drawer.getCurrentSectionFragment().select();
 
-                // call on current git head. drawer.getCurrentSection().select(); is not needed
-                // drawer.setCustomFragment(drawer.getCurrentSection().getTargetFragment(), drawer.getCurrentSection().getFragmentTitle(), true, false);
+                // call on current git head. drawer.getCurrentSectionFragment().select(); is not needed
+                // drawer.setCustomFragment(drawer.getCurrentSectionFragment().getTargetFragment(), drawer.getCurrentSectionFragment().getFragmentTitle(), true, false);
             }
         });
 

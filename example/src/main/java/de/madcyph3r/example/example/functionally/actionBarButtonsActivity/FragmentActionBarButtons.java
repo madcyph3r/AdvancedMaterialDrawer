@@ -1,4 +1,4 @@
-package de.madcyph3r.example.example.functionally.actionBarButtons;
+package de.madcyph3r.example.example.functionally.actionBarButtonsActivity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -4,33 +4,23 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
-import de.madcyph3r.example.example.FragmentDummy;
 import de.madcyph3r.example.example.FragmentInstruction;
-import de.madcyph3r.example.example.functionally.actionBarButtons.FragmentActionBarButtons;
-import de.madcyph3r.example.R;
+import de.madcyph3r.example.example.functionally.actionBarButtonsActivity.FragmentActionBarButtons;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
-import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionOnClickListener;
+import de.madcyph3r.materialnavigationdrawer.activity.MaterialNavNoHeaderActivity;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
-import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
+import de.madcyph3r.materialnavigationdrawer.menu.item.section.MaterialItemSectionFragment;
+import de.madcyph3r.materialnavigationdrawer.menu.item.style.MaterialItemDevisor;
 
-/**
- * Created by marc on 23.02.2015.
- */
-public class ActionBarButtonsActivity extends MaterialNavigationDrawer {
+public class ActionBarButtonsActivity extends MaterialNavNoHeaderActivity {
+
+    // info: see manifest for the tablet support
 
     MaterialNavigationDrawer drawer = null;
-
-    @Override
-    public int headerType() {
-        // set type. you get the available constant from MaterialNavigationDrawer class
-        return MaterialNavigationDrawer.DRAWERHEADER_NO_HEADER;
-    }
 
     @Override
     protected boolean finishActivityOnNewIntent() {
@@ -45,28 +35,32 @@ public class ActionBarButtonsActivity extends MaterialNavigationDrawer {
     @Override
     public void init(Bundle savedInstanceState) {
 
-        Bundle bundle = new Bundle();
-        bundle.putString("instruction", "Open the drawer and choose the section \"Change Actionbar Buttons Section\". " +
-                "Now you get a view, there you can change the actionbar button.");
-
         drawer = this;
 
-        // create menu
-        MaterialMenu menu = new MaterialMenu();
+        // information text for the fragment
+        Bundle bundle = new Bundle();
+        bundle.putString("instruction", "Open the drawer and choose the section \"Change Actionbar Buttons Section\". \" +\n" +
+                "                \"Now you get a view, there you can change the actionbar button.");
 
-        //create instruction fragment
         Fragment fragmentInstruction = new FragmentInstruction();
         fragmentInstruction.setArguments(bundle);
 
-        // menu items
-        MaterialSection instruction = this.newSection("Instruction", fragmentInstruction , false, menu);
-        instruction.setFragmentTitle("Change/Hide Actionbar Button");
-        this.newDevisor(menu);
-        this.newLabel("Label", false, menu);
-        this.newSection("Change Actionbar Buttons Section", new FragmentActionBarButtons(), false, menu);
+        // create menu
+        MaterialMenu menu = new MaterialMenu();
+        menu.add(new MaterialItemSectionFragment(this, "Instruction", fragmentInstruction, "Change/Hide Actionbar Button"));
+        menu.add(new MaterialItemDevisor());
+        menu.add(new MaterialItemSectionFragment(this, "Change Actionbar Button",  new FragmentActionBarButtons(), "Change Actionbar Button"));
 
+        //load menu
+        this.loadMenu(menu);
 
-        setCustomMenu(menu);
+        // load first MaterialItemSectionFragment in the menu, because there is no start position
+        this.loadStartFragmentFromMenu(menu);
+    }
+
+    @Override
+    public void afterInit(Bundle savedInstanceState) {
+
     }
 
     @TargetApi(11)
@@ -93,5 +87,4 @@ public class ActionBarButtonsActivity extends MaterialNavigationDrawer {
 
         return true;
     }
-
 }

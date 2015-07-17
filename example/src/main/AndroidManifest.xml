@@ -8,14 +8,14 @@
         android:icon="@drawable/app_drawer_icon"
         android:label="@string/app_name"
         tools:replace="android:icon,android:theme"
-        android:theme="@style/MaterialNavigationDrawerTheme" >
+        android:theme="@style/MaterialNavigationDrawerTheme.Light" >
 
         <!-- Main Activity. Use Drawer for the examples with parallax recycleview -->
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:configChanges="keyboardHidden|orientation|screenSize">
-             <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -57,6 +57,9 @@
         <!-- Own Drawer Width -->
         <activity android:name=".example.theme.OwnDrawerWidthActivity">
         </activity>
+        <activity android:name=".example.theme.OnlyIconsActivity"
+            android:theme="@style/BelowToolbarTheme">
+        </activity>
 
         <!-- Drawer Types -->
         <activity android:name=".example.drawerTypes.MultiPaneSupportActivity"
@@ -77,14 +80,10 @@
         <activity android:name=".example.headerTypes.ImageHeaderBelowToolbarActivity"
             android:theme="@style/BelowToolbarTheme">
         </activity>
-        <activity android:name=".example.headerTypes.ImageHeaderCustomHeightActivity">
-        </activity>
         <activity android:name=".example.headerTypes.CustomHeaderActivity">
         </activity>
         <activity android:name=".example.headerTypes.CustomHeaderBelowToolbarActivity"
             android:theme="@style/BelowToolbarTheme">
-        </activity>
-        <activity android:name=".example.headerTypes.CustomHeaderCustomHeightActivity">
         </activity>
         <activity android:name=".example.headerTypes.HeadItemOneActivity">
         </activity>
@@ -105,8 +104,8 @@
         </activity>
         <activity android:name=".example.headItemTypes.HeadItemFiveDontCloseOnChangeActivity">
         </activity>
-        <activity android:name=".example.headItemTypes.HeadItemOneWhiteThemeActivity"
-            android:theme="@style/MaterialNavigationDrawerTheme.Light">
+        <activity android:name=".example.headItemTypes.HeadItemOneBlackThemeActivity"
+            android:theme="@style/MaterialNavigationDrawerTheme">
         </activity>
         <activity android:name=".example.headItemTypes.HeadItemTwoOnlyOneHasMenuActivity">
         </activity>

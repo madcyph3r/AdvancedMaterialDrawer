@@ -2,29 +2,17 @@ package de.madcyph3r.example.example.menu;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.View;
-import android.widget.Toast;
 
-import de.madcyph3r.example.R;
 import de.madcyph3r.example.example.FragmentDummy;
 import de.madcyph3r.example.example.FragmentInstruction;
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
-import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionOnClickListener;
+import de.madcyph3r.materialnavigationdrawer.activity.MaterialNavNoHeaderActivity;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
-import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
+import de.madcyph3r.materialnavigationdrawer.menu.item.section.MaterialItemSectionFragment;
 
-/**
- * Created by marc on 23.02.2015.
- */
-public class SectionFragmentTitleActivity extends MaterialNavigationDrawer {
+public class SectionFragmentTitleActivity extends MaterialNavNoHeaderActivity {
 
     MaterialNavigationDrawer drawer = null;
-
-    @Override
-    public int headerType() {
-        // set type. you get the available constant from MaterialNavigationDrawer class
-        return MaterialNavigationDrawer.DRAWERHEADER_NO_HEADER;
-    }
 
     @Override
     protected boolean finishActivityOnNewIntent() {
@@ -39,26 +27,30 @@ public class SectionFragmentTitleActivity extends MaterialNavigationDrawer {
     @Override
     public void init(Bundle savedInstanceState) {
 
+        drawer = this;
+
+        // information text for the fragment
         Bundle bundle = new Bundle();
         bundle.putString("instruction", "Press on the section 'section title' and see the fragment title bar." +
                 " It has another title.");
 
-        drawer = this;
-
-        final MaterialMenu menu = new MaterialMenu();
-
-        //create instruction fragment
         Fragment fragmentInstruction = new FragmentInstruction();
         fragmentInstruction.setArguments(bundle);
 
-        // create menu items
-        MaterialSection instruction = this.newSection("Instruction", new FragmentInstruction(), false, menu);
-        instruction.setFragmentTitle("Section With Custom Fragment Title");
+        // create menu
+        MaterialMenu menu = new MaterialMenu();
+        menu.add(new MaterialItemSectionFragment(this, "Instruction", fragmentInstruction, "Section With Custom Fragment Title"));
+        menu.add(new MaterialItemSectionFragment(this, "section title", new FragmentDummy(), "Fragment title 1"));
 
-        MaterialSection sectionTitle = this.newSection("section title", new FragmentDummy(), false, menu);
-        sectionTitle.setFragmentTitle("Custom Fragment Title");
+        // load menu
+        this.loadMenu(menu);
 
-        // set menu
-        this.setCustomMenu(menu);
+        // load the MaterialItemSectionFragment, from the given startIndex
+        this.loadStartFragmentFromMenu(menu);
+    }
+
+    @Override
+    public void afterInit(Bundle savedInstanceState) {
+
     }
 }

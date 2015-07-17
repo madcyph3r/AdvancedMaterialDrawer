@@ -3,65 +3,76 @@ package de.madcyph3r.materialnavigationdrawer.menu;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
+import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialMenuItem;
+import de.madcyph3r.materialnavigationdrawer.menu.item.section.MaterialItemSection;
+import de.madcyph3r.materialnavigationdrawer.menu.item.section.MaterialItemSectionFragment;
+import de.madcyph3r.materialnavigationdrawer.menu.item.section.MaterialItemSectionOnClick;
 
 public class MaterialMenu {
 
     public static int SECTION = 0;
     public static int BOTTOM_SECTION = 1;
     public static int DIVISOR = 2;
+    private List<MaterialMenuItem> items;
 
     private int startIndex;
 
     public MaterialMenu() {
         startIndex = -1;
+        items = new ArrayList<MaterialMenuItem>();
     }
 
-    private List<Object> items = new ArrayList<Object>();
+    public MaterialItemSectionFragment getFirstFragmentItem() {
+        for (int i = 0; i < getItems().size(); i++) {
+            if (getItems().get(i) instanceof MaterialItemSectionFragment) {
+                return ((MaterialItemSectionFragment)getItems().get(i));
+            }
+        }
 
-    public List<Object> getItems() {
+        return null;
+    }
+
+    public List<MaterialMenuItem> getItems() {
         return items;
     }
 
-    public void sesetItems(List<Object> items) {
+    /*
+    public void resetItems(List<Object> items) {
         this.items = items;
+    }*/
+
+
+    public void add(MaterialMenuItem materialMenuItem) {
+        items.add(materialMenuItem);
     }
 
-    public void addItem(Object item) {
-        getItems().add(item);
+    public void add(int position, MaterialMenuItem materialMenuItem) {
+        items.add(position, materialMenuItem);
     }
 
-    public void addItem(Object item, int position) {
-        getItems().add(position, item);
+    public void remove(MaterialMenuItem materialMenuItem) {
+        getItems().remove(materialMenuItem);
     }
 
-    public void removeItem(Object item) {
-        getItems().remove(item);
+    public int getPosition(MaterialMenuItem materialMenuItem) {
+        return getItems().indexOf(materialMenuItem);
     }
 
-    public void removeItem(int position) {
-        getItems().remove(position);
-    }
-
-    public int getItemPosition(Object item) {
-        return getItems().indexOf(item);
-    }
-
-    public Object getItem(int position) {
+    public MaterialMenuItem getItem(int position) {
         return getItems().get(position);
     }
 
     // return the real pos int the list, considered devisor and label
-    public int getRealSectionPosition(MaterialSection section) {
+    public int getRealSectionPosition(MaterialItemSection section) {
         return getItems().indexOf(section);
     }
 
     // return position, does not considered devisor and label
-    public int getSectionPosition(MaterialSection section) {
-        //if (section instanceof MaterialSection) {
+    public int getSectionPosition(MaterialItemSection section) {
+        //if (section instanceof MaterialItemSectionOnClick) {
         int pos = 0;
         for (int i = 0; i < getItems().size(); i++) {
-            if (getItems().get(i) instanceof MaterialSection) {
+            if (getItems().get(i) instanceof MaterialItemSection) {
                 if (getItems().get(i) == section) {
                     return pos;
                 }
@@ -69,17 +80,17 @@ public class MaterialMenu {
             }
         }
        /* } else {
-            throw new RuntimeException("Object is not a MaterialSection");
+            throw new RuntimeException("Object is not a MaterialItemSectionOnClick");
         }*/
         return -1;
     }
 
-    public MaterialSection getSection(int position) {
+    public MaterialItemSection getSection(int position) {
         int pos = 0;
         for (int i = 0; i < getItems().size(); i++) {
-            if (getItems().get(i) instanceof MaterialSection) {
+            if (getItems().get(i) instanceof MaterialItemSection) {
                 if (pos == position) {
-                    return (MaterialSection) getItems().get(i);
+                    return (MaterialItemSection) getItems().get(i);
                 }
                 pos++;
             }
@@ -90,7 +101,7 @@ public class MaterialMenu {
     public int getSectionSize() {
         int size = 0;
         for (int i = 0; i < getItems().size(); i++) {
-            if (getItems().get(i) instanceof MaterialSection) {
+            if (getItems().get(i) instanceof MaterialItemSection) {
                 size++;
             }
         }
@@ -105,9 +116,9 @@ public class MaterialMenu {
         this.startIndex = startIndex;
     }
 
-    public MaterialSection getSectionFromRealPosition(int position) {
-        if (getItems().get(position) instanceof MaterialSection) {
-            return (MaterialSection) getItems().get(position);
+    public MaterialItemSectionOnClick getSectionFromRealPosition(int position) {
+        if (getItems().get(position) instanceof MaterialItemSectionOnClick) {
+            return (MaterialItemSectionOnClick) getItems().get(position);
         } else {
             return null;
         }

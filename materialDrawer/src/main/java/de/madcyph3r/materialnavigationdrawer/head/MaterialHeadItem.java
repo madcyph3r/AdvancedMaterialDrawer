@@ -28,6 +28,7 @@ public class MaterialHeadItem {
     private Resources resources;
     private OnHeadItemDataLoaded listenerLoaded;
     private MaterialNavigationDrawer drawer;
+    private MaterialMenu menuBottom;
 
     //public static final int FIRST_HEADITEM = 0;
     public static final int SECOND_HEADITEM = 1;
@@ -35,6 +36,8 @@ public class MaterialHeadItem {
 
     // without background
     public MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, int photoRessourceID) {
+        initVars();
+
         this.title = title;
         this.subTitle = subTitle;
         this.menu = null;
@@ -46,6 +49,8 @@ public class MaterialHeadItem {
     }
 
     public MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, int photoRessourceID, MaterialMenu menu) {
+        initVars();
+
         this.title = title;
         this.subTitle = subTitle;
         this.menu = menu;
@@ -85,6 +90,8 @@ public class MaterialHeadItem {
 
     // with background
     public MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, int photoRessourceID, int backgroundRessourceID) {
+        initVars();
+
         this.title = title;
         this.subTitle = subTitle;
         this.menu = null;
@@ -96,6 +103,8 @@ public class MaterialHeadItem {
     }
 
     public MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, int photoRessourceID, int backgroundRessourceID, MaterialMenu menu) {
+        initVars();
+
         this.title = title;
         this.subTitle = subTitle;
         this.menu = menu;
@@ -106,13 +115,7 @@ public class MaterialHeadItem {
         resizeBackground.execute(backgroundRessourceID);
     }
 
-    /**
-     * Set the startIndex to the menu directly
-     *
-     * @deprecated use {@link #MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, int photoRessourceID, int backgroundRessourceID, MaterialMenu menu)} instead.
-     */
-    @Deprecated
-    public MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, int photoRessourceID, int backgroundRessourceID, MaterialMenu menu, int startIndex) {
+    /*public MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, int photoRessourceID, int backgroundRessourceID, MaterialMenu menu, int startIndex) {
         initVars();
 
         this.title = title;
@@ -125,7 +128,7 @@ public class MaterialHeadItem {
 
         resizeBackground.execute(backgroundRessourceID);
         resizePhoto.execute(photoRessourceID);
-    }
+    }*/
 
     public MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, Drawable photo, int backgroundRessourceID) {
         initVars();
@@ -154,13 +157,8 @@ public class MaterialHeadItem {
         resizeBackground.execute(backgroundRessourceID);
     }
 
-    /**
-     * Set the startIndex to the menu directly
-     *
-     * @deprecated use {@link #MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, Drawable photo, int backgroundRessourceID, MaterialMenu menu)} instead.
-     */
-    @Deprecated
-    public MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, Drawable photo, int backgroundRessourceID, MaterialMenu menu, int startIndex) {
+
+    /*public MaterialHeadItem(MaterialNavigationDrawer drawer, String title, String subTitle, Drawable photo, int backgroundRessourceID, MaterialMenu menu, int startIndex) {
         initVars();
 
         this.title = title;
@@ -176,7 +174,7 @@ public class MaterialHeadItem {
         this.resources = drawer.getResources();
 
         resizeBackground.execute(backgroundRessourceID);
-    }
+    }*/
 
     private void initVars() {
         closeDrawerAvatarOnClick = false;

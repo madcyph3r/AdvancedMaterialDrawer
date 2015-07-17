@@ -6,6 +6,7 @@
     <dimen name="photoMarginTop">16dp</dimen>
 
     <dimen name="sectionIconHeight">24dp</dimen>
+    <dimen name="sectionIconBannerHeight">38dp</dimen>
     <dimen name="sectionIconWidth">24dp</dimen>
     <dimen name="sectionSize">14sp</dimen>
     <dimen name="sectionNotificationSize">14sp</dimen>
