@@ -7,7 +7,7 @@ AdvancedMaterialDrawer
 
 A Gmail-like Material Drawer implementation
 
-Based on neokree's [MaterialDrawer](https://github.com/neokree/MaterialNavigationDrawer) library, but the are not the same. I have made many improvments, changes and added a lot of new feature.
+Based on neokree's [MaterialDrawer](https://github.com/neokree/MaterialNavigationDrawer) library, but they are not the same. I have made many improvments, changes and added a lot of new features.
 Big thanks to neokree, without him this library would not exist.
 
 
