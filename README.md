@@ -150,24 +150,24 @@ Please look in the examples, for the code changes. Then edit your code to the ne
 ### Screenshots
 **Info: The statusbar is now semi-transparent on lollipop with the latest snapshot. New screenshot will come, with the new release.**
 
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_1.png" alt="screenshot" width="200px" height="auto" />
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_1.png" alt="screenshot" width="150px" height="auto" />
 
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_2.png" alt="screenshot" width="200px" height="auto" />
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_2.png" alt="screenshot" width="150px" height="auto" />
 
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_3.png" alt="screenshot" width="200px" height="auto" />
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_3.png" alt="screenshot" width="150px" height="auto" />
 
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_4.png" alt="screenshot" width="200px" height="auto" />
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_4.png" alt="screenshot" width="150px" height="auto" />
 
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_5.png" alt="screenshot" width="200px" height="auto" />
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_5.png" alt="screenshot" width="150px" height="auto" />
 
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_6.png" alt="screenshot" width="200px" height="auto" />
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_6.png" alt="screenshot" width="150px" height="auto" />
 
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_7.png" alt="screenshot" width="200px" height="auto" />
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_7.png" alt="screenshot" width="150px" height="auto" />
 
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_8.png" alt="screenshot" width="200px" height="auto" />
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_8.png" alt="screenshot" width="150px" height="auto" />
 
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_9.png" alt="screenshot" width="200px" height="auto" />
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_9.png" alt="screenshot" width="150px" height="auto" />
 
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_10.png" alt="screenshot" width="200px" height="auto" />
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_10.png" alt="screenshot" width="150px" height="auto" />
 
-<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_11.png" alt="screenshot" width="300px" height="auto" />
+<img src="https://github.com/madcyph3r/AdvancedMaterialDrawer/blob/master/Screenshot_11.png" alt="screenshot" width="150px" height="auto" />
