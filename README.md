@@ -32,9 +32,16 @@ Menu:
 - Only icon menu (screenshot 8)
 - Available Menu-items:
   - Labels
-  - Normal Sections (with Fragment/Activty start or own onClick listener)
+  - Divider
+  - Normal Sections
+    - can call new fragment, activity or implements own onClick
+    - with and without icon
+    - with notification number
+  - Only Icon
+    - an call new fragment, activity or implements own onClick
   - Bottom-Sections
-  - Custom Sections !!! (add your own section, like a checkbox etc.) see screenshot 5
+    - same as normal section
+  - Custom Sections ! (add your own section implementation, like a checkbox etc.) see screenshot 5
 
 Fully themeable (screenshot 11)
 
