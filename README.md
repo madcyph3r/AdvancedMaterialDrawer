@@ -127,7 +127,7 @@ public class HeadItemOneActivity extends MaterialNavHeadItemActivity {
         // load menu
         this.loadMenu(getCurrentHeadItem().getMenu());
 
-        // load the MaterialItemSectionFragment, from the given startIndex
+        // load the first MaterialItemSectionFragment from the menu
         this.loadStartFragmentFromMenu(getCurrentHeadItem().getMenu());
     }
 
