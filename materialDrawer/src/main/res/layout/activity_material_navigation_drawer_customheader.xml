@@ -2,7 +2,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="false">
+    android:fitsSystemWindows="true">
 
     <!-- Framelayout per la visualizzazione -->
     <RelativeLayout
@@ -10,25 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <include layout="@layout/toolbar" />
+
         <View
             android:id="@+id/overlayView"
             android:layout_height="?attr/actionBarSize"
-            android:layout_width="match_parent"
-            android:layout_below="@+id/statusBar" />
+            android:layout_width="match_parent" />
 
         <FrameLayout
             android:id="@+id/frame_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/overlayView" />
-
-        <include layout="@layout/toolbar" />
-
-        <ImageView
-            android:id="@+id/statusBar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/statusMargin"
-            android:background="?attr/colorPrimary" />
 
     </RelativeLayout>
 
