@@ -1,10 +1,12 @@
 package de.madcyph3r.materialnavigationdrawer.menu.item.section;
 
 import android.graphics.drawable.Drawable;
+import android.view.View;
 
 import de.madcyph3r.materialnavigationdrawer.MaterialNavigationDrawer;
+import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionOnClickListener;
 
-public class MaterialItemSectionFragment<Fragment> extends MaterialItemSection {
+public class MaterialItemSectionFragment<Fragment> extends MaterialItemSection implements View.OnTouchListener, View.OnClickListener {
 
     private String fragmentTitle;
     private Fragment fragment;
@@ -59,5 +61,9 @@ public class MaterialItemSectionFragment<Fragment> extends MaterialItemSection {
 
     public void setFragmentTitle(String fragmentTitle) {
         this.fragmentTitle = fragmentTitle;
+    }
+
+    public void setOnSectionClickListener (MaterialSectionOnClickListener sectionListener){
+        super.sectionListener = sectionListener;
     }
 }

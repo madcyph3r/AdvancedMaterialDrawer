@@ -2,7 +2,6 @@ package de.madcyph3r.materialnavigationdrawer.custom;
 
 import android.annotation.TargetApi;
 import android.os.Build;
-import android.support.annotation.DimenRes;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 
@@ -26,7 +25,9 @@ public class DefaultDrawerListener implements DrawerLayout.DrawerListener {
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onDrawerSlide(View drawerView, float slideOffset) {
-        drawerView.setTranslationX(widthdrawer * slideOffset);
+        if (Build.VERSION.SDK_INT >= 11) {
+            drawerView.setTranslationX(widthdrawer * slideOffset);
+        }
     }
 
     /**
